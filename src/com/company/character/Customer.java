@@ -7,7 +7,15 @@ public class Customer extends Character
     boolean takeout;    // 테이크아웃 여부 담는 변수
 
     // 음료 주문하는 메소드(음료, Hot/Ice 옵션, 휘핑, 테이크아웃)
-    
+    public void orderBeverage()
+    {
+        Partimer partimer = new Partimer();     // 유저 객체 생성
+        String userName = partimer.getName();   // 유저 이름 저장
+
+        System.out.println(" 딸랑 ");
+        System.out.printf("%s : 어서오세요");
+
+    }
 
 
     // 자리 줄어드는 메소드

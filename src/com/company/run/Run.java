@@ -43,10 +43,10 @@ public class Run
 
         }while (!check); // 입력받은 이름이 한글이 아니면 반복
 
-        Partimer partimer = new Partimer(); // 유저 객체 생성
-        partimer.setName(userName);         // 입력받은 유저이름 속성에 넣기
+        Partimer.setName(userName);         // 입력받은 유저이름 속성에 넣기
 
         System.out.println(" 어쩌구 저쩌구 스토리 설명 쫓겨난 이유 ");
+
 
         System.out.println();
         System.out.println();
@@ -56,13 +56,13 @@ public class Run
         System.out.println("。　　              。　　 。　        。　　      　　          　 。　.  ");
         System.out.println("       .　　　.　　　　.　    　  三 ඞ;; 　      •  .　　　.　　        .  ");
         System.out.println(". 　。　　　        　      　。　　　　    •　 　     。　　　　•　 　ﾟ　　。");
-        System.out.printf("\t\t。\t\t %s님은 결국 지구로 추방당했습니다 . . .     .          。\n", partimer.getName());
+        System.out.printf("\t\t。\t\t %s님은 결국 지구로 추방당했습니다 . . .     .          。\n", Partimer.getName());
         System.out.println("　　      .　　　.　　　 。                 　　.　　　 　　　 　　.　　　   　");
         System.out.println("。　　 。　.          　　  　.     。　　      　 。　      .  。　　 。　.  ");
 
         System.out.println();
         System.out.println();
-        System.out.printf(" %s님은 오늘부터 카페 아르바이트를 시작했습니다.\n", partimer.getName());
+        System.out.printf(" %s님은 오늘부터 카페 아르바이트를 시작했습니다.\n", Partimer.getName());
         System.out.println(" 아르바이트를 진행하면서 다양한 엔딩을 볼 수 있습니다.");
 
         // 올바른 선택지를 선택할 때까지 반복
@@ -115,11 +115,10 @@ public class Run
         String[] days = {"일","월", "화", "수", "목", "금", "토"};    // 요일 출력하는 배열
                                                                     // 일한날짜%7 연산을 통해서 요일을 구하므로 일요일을 0번째에 배치한다.
 
-        Partimer partimer = new Partimer();                         // 유저 객체 생성
-        partimer.setWorkingDays(partimer.getWorkingDays()+1);       // 하루가 새롭게 시작되므로 지금까지 일한 날짜에 하루를 더해준다.
+        Partimer.setWorkingDays(Partimer.getWorkingDays()+1);       // 하루가 새롭게 시작되므로 지금까지 일한 날짜에 하루를 더해준다.
 
-        int week = (partimer.getWorkingDays()/7)+1;                 // 주차 = 일한날짜/7 + 1
-        String day = days[partimer.getWorkingDays()%7;              // 요일 = 일한날짜%7
+        int week = (Partimer.getWorkingDays()/7)+1;                 // 주차 = 일한날짜/7 + 1
+        String day = days[Partimer.getWorkingDays()%7];             // 요일 = 일한날짜%7
 
         System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
         System.out.printf("=========================     %d주차     %s요일    =========================\n",week,day);
@@ -129,7 +128,16 @@ public class Run
 
         // 랜덤으로 손님 또는 특별 손님 등장시키기.
         Random rd = new Random();
-        rd.nextInt();
+        int randomNum = rd.nextInt(10)+1;   // 1 ~ 10 사이의 랜덤수를 생성
+
+        if(randomNum <=7)  // 1 ~ 7 의 70%의 확률로 일반 손님 방문
+        {
+            comeCustomer();
+        }
+        else // 8~10 의 30% 의 확률로 특별 손님 방문
+        {
+            comeSpecialCustomer();
+        }
 
 
     }//end start()
@@ -142,6 +150,10 @@ public class Run
     }
 
     // 특별 손님 등장 메소드
+    public void comeSpecialCustomer()
+    {
+        System.out.printf(" %d : 어서오세요. \n", Partimer.getName());
+    }
 
     /*
 
