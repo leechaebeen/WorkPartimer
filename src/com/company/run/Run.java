@@ -80,13 +80,16 @@ public class Run
                 //Integer.parseInt(resultStr);
 
 
-                // 자료형 변경 (String → int), 여기서 NumberFormatException 발생
+                // 자료형 변경한 뒤(String → int) int형에 담는다.
                 result = Integer.parseInt(resultStr);
                 check = false;
+                // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다. 
+                // int형으로 변경되지 않는다면 NumberFormatException 발생
             }
-            catch (NumberFormatException e)
+            catch (NumberFormatException e) // NumberFormatException 발생한다면
             {
-                check = true;
+                check = true;   // check 에 true 담아서 다시 반복
+                                // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
             }
 
             if(result < 1 || result > 2 )// 주어진 값 이외의 수를 선택한 경우
@@ -106,13 +109,17 @@ public class Run
     } //end initialRun()
 
 
-    // 게임 시작 메소드
+    // 시작 메소드: 몇주차 며칠인지, 유저의 상태가 어떤지 보여줌. 그리고 손님오는 메소드 또는 특별손님 오는 메소드 호출
     public void start()
     {
-        System.out.println("==== 1일 차 ==== ");
+        System.out.println("==== 1주차 1일 ====");
 
 
     }//end start()
+
+    // 손님 등장 메소드
+
+    // 특별 손님 등장 메소드
 
 
 

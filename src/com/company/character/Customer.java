@@ -6,11 +6,9 @@ public class Customer extends Character
 {
     boolean takeout;    // 테이크아웃 여부 담는 변수
 
-    // 음료 주문하는 메소드
+    // 음료 주문하는 메소드(음료, Hot/Ice 옵션, 휘핑, 테이크아웃)
+    
 
-    // HOT/ ICE 옵션 선택하는 메소드
-
-    // 휘핑크림 추가 선택하는 메소드
 
     // 자리 줄어드는 메소드
 }

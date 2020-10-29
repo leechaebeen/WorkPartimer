@@ -17,7 +17,7 @@ public class PartimerAction
         System.out.println(" 못 해먹겠다... 때려쳐야지. ");
     }
 
-    // 장비 구매 메소드
+    // 장비 구매 시 계산하는 메소드
 
     // 현재 상태 보여주는 메소드
 }
