@@ -1,5 +1,9 @@
 package com.company.beverage;
 
+import com.company.cafe.Cafe;
+
+import java.util.Random;
+
 public class BeverageAction
 {
     // 음료 주문이 랜덤으로 들어오면 그에 해당하는 음료 객체를 생성하는 메소드

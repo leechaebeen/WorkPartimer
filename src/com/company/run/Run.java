@@ -4,6 +4,7 @@ import com.company.beverage.BeverageAction;
 import com.company.cafe.Cafe;
 import com.company.character.Customer;
 import com.company.character.Partimer;
+import com.company.character.SpecialCustomer;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -126,6 +127,8 @@ public class Run
         System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
 
         Cafe.setTodayCustomerNum(0);                // 카페 오픈 전 하루 방문자 수 0으로 초기화
+        //Cafe.setChair(Cafe.);
+
         System.out.println(" 카페를 오픈했습니다. ");
 
         do {
@@ -157,8 +160,12 @@ public class Run
         System.out.printf(" %s : 어서오세요. 그냥손님 \n", Partimer.getName());
         System.out.println();
 
-        Customer customer = new Customer();
-        customer.orderBeverage();
+        Customer customer = new Customer();           // 손님 객체 생성
+        customer.checkTakeout();                      // 주문 전 테이크아웃/매장 확인하는 메소드
+        Beverage beverage = customer.orderBeverage(); // 주문할 음료 객체 생성하는 메소드
+        customer.orderToPartimer(beverage);           // 주문 문구 출력하는 메소드
+
+
 
 
 
@@ -169,8 +176,13 @@ public class Run
     {
         Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum()+1); // 기존의 하루 방문자 수에 하나 더하기
         System.out.printf(" %s : 어서오세요. 특별손님\n", Partimer.getName());
-    }
 
+
+
+    }
+    
+    
+    // 하루하루 점수 계산하는 메소드 - 하루마다/주마다 열람 가능 / 총점은 못봄. 총점에 따라서 엔딩 갈림
 
 
 }
