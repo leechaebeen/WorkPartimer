@@ -1,7 +1,7 @@
 package com.company.run;
-
 import com.company.character.Partimer;
 
+import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -11,7 +11,7 @@ public class Run
     // int result;          → 인스턴스 변수
     // static int result;   → 클래스 변수
 
-    // 게임을 처음 시작하면 등장하는 초기화면 실행하는 메소드
+    // 1.초기화면 실행하는 메소드
     public int initialRun()
     {
         // 반환값을 담을 변수 선언
@@ -109,19 +109,40 @@ public class Run
     } //end initialRun()
 
 
-    // 시작 메소드: 몇주차 며칠인지, 유저의 상태가 어떤지 보여줌. 그리고 손님오는 메소드 또는 특별손님 오는 메소드 호출
+    // 2. 하루 시작 메소드: 몇주차 며칠인지, 유저의 상태가 어떤지 보여줌. 그리고 손님오는 메소드 또는 특별손님 오는 메소드 호출
     public void start()
     {
-        System.out.println("==== 1주차 1일 ====");
+        String[] days = {"일","월", "화", "수", "목", "금", "토"};    // 요일 출력하는 배열
+                                                                    // 일한 날짜%7 연산을 통해서 요일을 구하므로 일요일이 0번째에 위치한다.
+
+        Partimer partimer = new Partimer();                         // 유저 객체 생성
+        partimer.setWorkingDays(partimer.getWorkingDays()+1);       // 일한 날짜에 하루 더하기
+
+        System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
+        System.out.printf("=========================     %d주차     %s요일    =========================\n",partimer.getWorkingDays(),days[partimer.getWorkingDays()%7]);
+        System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
+
+        System.out.println(" 카페를 오픈했습니다. ");
+
+        // 랜덤으로 손님 또는 특별 손님 등장시키기.
+        Random rd = new Random();
+        rd.nextInt();
 
 
     }//end start()
 
     // 손님 등장 메소드
+    public void comeCustomer()
+    {
+        System.out.printf(" %d : 어서오세요. \n", Partimer.getName());
+
+    }
 
     // 특별 손님 등장 메소드
 
+    /*
 
+*/
 
 
 }

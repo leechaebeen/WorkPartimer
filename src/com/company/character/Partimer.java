@@ -12,7 +12,7 @@ public class Partimer extends Character
     private static int mood = 10;       // 기분
     private static int salary = 10;     // 한 주에 받는 급여. 단위는 코인이다.
     private static int property = 0;    // 현재 플레이어가 소유하고 있는 재산
-    private static int workingDays = 1; // 총 근무일자 - 최대 플레이 가능 일자 설정하기
+    private static int workingDays = 0; // 총 근무일자 - 최대 플레이 가능 일자 설정하기, 7일마다 상점 방문 가능
 
 
     // 클래스 외부에서 객체를 생성해 속성에 접근할 수 있도록 getter/setter 생성
@@ -24,5 +24,54 @@ public class Partimer extends Character
     public static void setName(String name)
     {
         Partimer.name = name;
+    }
+    public static int getSkillLevel()
+    {
+        return skillLevel;
+    }
+
+    public static void setSkillLevel(int skillLevel)
+    {
+        Partimer.skillLevel = skillLevel;
+    }
+
+    public static int getMood()
+    {
+        return mood;
+    }
+
+    public static void setMood(int mood)
+    {
+        Partimer.mood = mood;
+    }
+
+    public static int getSalary()
+    {
+        return salary;
+    }
+
+    public static void setSalary(int salary)
+    {
+        Partimer.salary = salary;
+    }
+
+    public static int getProperty()
+    {
+        return property;
+    }
+
+    public static void setProperty(int property)
+    {
+        Partimer.property = property;
+    }
+
+    public static int getWorkingDays()
+    {
+        return workingDays;
+    }
+
+    public static void setWorkingDays(int workingDays)
+    {
+        Partimer.workingDays = workingDays;
     }
 }
