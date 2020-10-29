@@ -18,16 +18,27 @@ public class Main {
 
         do {
             System.out.print(" 이름을 입력해주세요(한글로 입력해주세요) : ");
-            userName = sc.nextLine();        // 유저이름 입력받기
-
-            // 정규표현식 이용해서 한글인지 확인
-            check = Pattern.matches("^[가-힣]*$", userName);
+            userName = sc.nextLine();                                   // 유저이름 입력받기
+            userName = userName.replaceAll(" ", "");    //공백 제거
+            check = Pattern.matches("^[가-힣]*$", userName);      // 정규표현식 이용해서 한글인지 확인
 
         }while (!check); // 입력받은 이름이 한글이 아니면 반복
 
         Partimer partimer = new Partimer(); // 유저 객체 생성
         partimer.setName(userName);         // 입력받은 유저이름 속성에 넣기
 
+        System.out.println();
+        System.out.println();
+        System.out.println(". 　。　　　　•　 　ﾟ　　。. 　。　　　　•　 　ﾟ　　。. 　。　　　　•　 　ﾟ　　。");
+        System.out.println("　　      .　　　.　　　 　　.　　　.       　　.　　　.　　　 　　.　　　   　");
+        System.out.println("。　　              。　　 。　        。　　      　　          　 。　.  ");
+        System.out.println("       .　　　.　　　　.　    　  　 ඞ   　      •  .　　　.　　        .  ");
+        System.out.println(". 　。　　　        　      　。　　　　    •　 　     。　　　　•　 　ﾟ　　。");
+        System.out.printf("\t\t\t\t %s님은 결국 우주로 추방당했습니다 . . .\n", partimer.getName());
+        System.out.println("　　      .　　　.　　　 。                 　　.　　　 　　　 　　.　　　   　");
+        System.out.println("。　　 。　.          　　  　.     。　　      　 。　      .  。　　 。　.  ");
+
+        System.out.println();
         System.out.println();
         System.out.printf(" %s님은 오늘부터 카페 아르바이트를 시작했습니다.\n", partimer.getName());
         System.out.println(" 아르바이트를 진행하면서 다양한 엔딩을 볼 수 있습니다.");
