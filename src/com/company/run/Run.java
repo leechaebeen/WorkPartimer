@@ -113,13 +113,16 @@ public class Run
     public void start()
     {
         String[] days = {"일","월", "화", "수", "목", "금", "토"};    // 요일 출력하는 배열
-                                                                    // 일한 날짜%7 연산을 통해서 요일을 구하므로 일요일이 0번째에 위치한다.
+                                                                    // 일한날짜%7 연산을 통해서 요일을 구하므로 일요일을 0번째에 배치한다.
 
         Partimer partimer = new Partimer();                         // 유저 객체 생성
-        partimer.setWorkingDays(partimer.getWorkingDays()+1);       // 일한 날짜에 하루 더하기
+        partimer.setWorkingDays(partimer.getWorkingDays()+1);       // 하루가 새롭게 시작되므로 지금까지 일한 날짜에 하루를 더해준다.
+
+        int week = (partimer.getWorkingDays()/7)+1;                 // 주차 = 일한날짜/7 + 1
+        String day = days[partimer.getWorkingDays()%7;              // 요일 = 일한날짜%7
 
         System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
-        System.out.printf("=========================     %d주차     %s요일    =========================\n",partimer.getWorkingDays(),days[partimer.getWorkingDays()%7]);
+        System.out.printf("=========================     %d주차     %s요일    =========================\n",week,day);
         System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
 
         System.out.println(" 카페를 오픈했습니다. ");
