@@ -17,7 +17,7 @@ public class Run
         // 반환값을 담을 변수 선언
         // 초기화해야하는 이유  : 지역변수는 자동으로 초기화가 안된다. 클래스 변수와 인스턴스 변수는 자료형에 맞게 기본값으로 초기화된다.
         // → 예측할 수 없는 값을 담는걸 방지하기 위해
-        String resultStr = "";
+        String resultStr;
         int result = 0;
 
         // 스캐너 객체 생성
@@ -98,10 +98,7 @@ public class Run
                 System.out.println(" 올바른 값을 입력해주세요.");
                 check = true;
             }
-            else
-            {
-                check = false;  // 반복문을 빠져나간다.
-            }
+
         }
 
         return result;
@@ -145,14 +142,14 @@ public class Run
     // 손님 등장 메소드
     public void comeCustomer()
     {
-        System.out.printf(" %d : 어서오세요. \n", Partimer.getName());
+        System.out.printf(" %s : 어서오세요. \n", Partimer.getName());
 
     }
 
     // 특별 손님 등장 메소드
     public void comeSpecialCustomer()
     {
-        System.out.printf(" %d : 어서오세요. \n", Partimer.getName());
+        System.out.printf(" %s : 어서오세요. \n", Partimer.getName());
     }
 
     /*
