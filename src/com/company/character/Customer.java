@@ -14,10 +14,10 @@ public class Customer extends Character
     public void checkTakeout()
     {
         Random rd = new Random();
-        int takeout = rd.nextInt(2);      // 0 또는 1의 랜덤값을 변수 takeout 에 저장.
+        int takeout = rd.nextInt(10)+1;      // 1 ~ 10의 랜덤값을 변수 takeout 에 저장.
 
         //테이크 아웃 여부 확인
-        if(takeout == 0)  // 랜덤값이 0 이면 테이크아웃 하지 않는다.
+        if(takeout > 7)  // 랜덤값이 8,9,10 이면 테이크아웃 하지 않는다.
         {
             if(Cafe.getChair()>0)                   // 매장에 자리가 있으면
             {
@@ -31,6 +31,7 @@ public class Customer extends Character
                 return;
             }
         }
+
     } // end checkTakeout()
 
     // 주문할 음료 객체 생성하는 메소드(음료, Hot/Ice 옵션, 휘핑, 테이크아웃)
