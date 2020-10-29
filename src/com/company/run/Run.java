@@ -1,11 +1,15 @@
-package com.company.character;
+package com.company.run;
+
+import com.company.character.Partimer;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class Main {
-
-    public static void main(String[] args)
+// 게임 선택지에 따른 출력을 실행하는 클래스
+public class Run
+{
+    // 게임을 처음 시작하면 등장하는 초기화면
+    public void firstRun()
     {
         // 게임 소개
         System.out.println(" 일해라 알바생 ! ");
@@ -27,6 +31,8 @@ public class Main {
         Partimer partimer = new Partimer(); // 유저 객체 생성
         partimer.setName(userName);         // 입력받은 유저이름 속성에 넣기
 
+        System.out.println(" 어쩌구 저쩌구 스토리 설명 쫓겨난 이유 ");
+
         System.out.println();
         System.out.println();
         System.out.println(". 　。　　　　•　 　ﾟ　　。. 　。　　　　•　 　ﾟ　　。. 　。　　　　•　 　ﾟ　　。");
@@ -43,6 +49,13 @@ public class Main {
         System.out.printf(" %s님은 오늘부터 카페 아르바이트를 시작했습니다.\n", partimer.getName());
         System.out.println(" 아르바이트를 진행하면서 다양한 엔딩을 볼 수 있습니다.");
 
+        // 올바른 선택지를 선택할 때까지 반복
+        while()
+        {
+            System.out.println(" 1. 시작하기  2.처음부터 다시하기 ");
+
+        }
 
     }
+
 }
