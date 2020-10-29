@@ -5,7 +5,7 @@ import com.company.character.Partimer;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-// 게임 선택지에 따른 출력을 실행하는 클래스
+// 선택지에 따른 출력을 실행하는 클래스
 public class Run
 {
     // int result;          → 인스턴스 변수

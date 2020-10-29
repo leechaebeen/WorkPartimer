@@ -4,7 +4,7 @@ import sun.net.www.protocol.http.HttpURLConnection;
 
 public class BeverageAction
 {
-    // 음료 주문이 랜덤으로 들어오면 그에 해당하는 음료 객체를 생성한다.
+    // 음료 주문이 랜덤으로 들어오면 그에 해당하는 음료 객체를 생성하는 메소드
     public void createBeverage(int beverageOrder, boolean iceOption, boolean whippingCream)
     {
         // 음료를 나타내는 상수. 변경하지 못하도록 final 사용
@@ -41,6 +41,12 @@ public class BeverageAction
               default: // 다시 고르도록 돌아가게 하기
                 break;
             }
-    }
+
+    }// end createBeverage()
+
+    // 주문받은 음료에 따라 머그잡/유리컵 줄어드는 메소드
+
+
+
 
 }
