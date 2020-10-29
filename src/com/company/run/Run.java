@@ -11,7 +11,7 @@ public class Run
     // int result;          → 인스턴스 변수
     // static int result;   → 클래스 변수
 
-    // 게임을 처음 시작하면 등장하는 초기화면
+    // 게임을 처음 시작하면 등장하는 초기화면 실행하는 메소드
     public int initialRun()
     {
         // 반환값을 담을 변수 선언
@@ -75,12 +75,14 @@ public class Run
             resultStr = sc.nextLine();
 
             // 입력받은 값이 숫자인지 확인
-            try {
-                Integer.parseInt(resultStr);
-                check = false;
+            try
+            {
+                //Integer.parseInt(resultStr);
+
 
                 // 자료형 변경 (String → int), 여기서 NumberFormatException 발생
                 result = Integer.parseInt(resultStr);
+                check = false;
             }
             catch (NumberFormatException e)
             {
@@ -102,6 +104,15 @@ public class Run
         return result;
 
     } //end initialRun()
+
+
+    // 게임 시작 메소드
+    public void start()
+    {
+        System.out.println("==== 1일 차 ==== ");
+
+
+    }//end start()
 
 
 

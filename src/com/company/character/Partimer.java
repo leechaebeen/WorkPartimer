@@ -12,6 +12,7 @@ public class Partimer extends Character
     private static int mood = 10;       // 기분
     private static int salary = 10;     // 한 주에 받는 급여. 단위는 코인이다.
     private static int property = 0;    // 현재 플레이어가 소유하고 있는 재산
+    private static int workingDays = 1; // 총 근무일자 - 최대 플레이 가능 일자 설정하기
 
 
     // 클래스 외부에서 객체를 생성해 속성에 접근할 수 있도록 getter/setter 생성
