@@ -12,6 +12,14 @@ public class Partimer extends Character
     private static int property = 0;    // 현재 플레이어가 소유하고 있는 재산
 
 
+    // 클래스 외부에서 객체를 생성해 속성에 접근할 수 있도록 getter/setter 생성
+    public static String getName()
+    {
+        return name;
+    }
 
-
+    public static void setName(String name)
+    {
+        Partimer.name = name;
+    }
 }
