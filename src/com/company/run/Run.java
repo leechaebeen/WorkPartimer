@@ -1,5 +1,8 @@
 package com.company.run;
+import com.company.beverage.Beverage;
+import com.company.beverage.BeverageAction;
 import com.company.cafe.Cafe;
+import com.company.character.Customer;
 import com.company.character.Partimer;
 
 import java.util.Random;
@@ -122,6 +125,7 @@ public class Run
         System.out.printf("=========================     %d주차     %s요일    =========================\n",week,day);
         System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
 
+        Cafe.setTodayCustomerNum(0);                // 카페 오픈 전 하루 방문자 수 0으로 초기화
         System.out.println(" 카페를 오픈했습니다. ");
 
         do {
@@ -137,7 +141,10 @@ public class Run
             {
                 comeSpecialCustomer();
             }
-        }while (Cafe.getTodayCustomerNum()<10); // 10명의 손님이 방문하면 하루 일정 끝
+
+            System.out.println("오늘 손님 수 : "+ Cafe.getTodayCustomerNum());
+
+        }while (Cafe.getTodayCustomerNum() < 10); // 10명의 손님이 방문하면 하루 일정 끝
 
 
 
@@ -149,6 +156,11 @@ public class Run
         Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum()+1); // 기존의 하루 방문자 수에 하나 더하기
         System.out.printf(" %s : 어서오세요. 그냥손님 \n", Partimer.getName());
         System.out.println();
+
+        Customer customer = new Customer();
+        customer.orderBeverage();
+
+
 
     }
 

@@ -1,5 +1,7 @@
 package com.company.character;
 
+import com.company.beverage.Beverage;
+import com.company.beverage.BeverageAction;
 import com.company.cafe.Cafe;
 
 import java.util.Random;
@@ -15,7 +17,7 @@ public class Customer extends Character
         String userName = partimer.getName();   // 유저 이름 저장
 
         Random rd = new Random();               // 랜덤 클래스 객체 생성
-        int takeout = rd.nextInt(2);   // 0 또는 1의 랜덤값을 변수 takeout 에 저장.
+        int takeout = rd.nextInt(2);      // 0 또는 1의 랜덤값을 변수 takeout 에 저장.
 
         //테이크 아웃 여부 확인
         if(takeout == 0)  // 랜덤값이 0 이면 테이크아웃 하지 않는다.
@@ -23,17 +25,28 @@ public class Customer extends Character
             if(Cafe.getChair()>0)                   // 매장에 자리가 있으면
             {
                 Cafe.setChair(Cafe.getChair()-1);   // 매장 자리를 하나 줄인다.
-                
-                int iceOption = rd.nextInt(2);// 0 또는 1의 랜덤값을 변수 takeout 에 저장
-
-
             }
             else    // 매장에 자리가 없으면
             {
                 System.out.println(" 매장에 자리가 없어서 나갔다 . . .");
+                System.out.println(" 자리를 늘리던가 해야지 원 . . . ");
+
+                return;
             }
         }
 
+        // Ice or Hot 랜덤 선택
+        int iceOption = rd.nextInt(2);      // 0 또는 1의 랜덤값을 변수 iceOption 에 저장한다.
+
+        // 휘핑크림 유무 랜덤 선택
+        int whippingCream = rd.nextInt(2);  // 0 또는 1의 랜덤값을 변수 whippingCream 에 저장한다.
+
+        // 음료 주문
+        int beverageSel = rd.nextInt(5)+1; // 1 ~ 5 의 랜덤값을 변수 beverage 에 저장한다.
+        BeverageAction beverageAction = new BeverageAction();
+        Beverage beverage = beverageAction.createBeverage(beverageSel, iceOption, whippingCream);
+
+        System.out.println(beverage.getName());
 
     }
 

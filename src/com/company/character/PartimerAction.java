@@ -22,5 +22,4 @@ public class PartimerAction
 
     // 현재 상태 보여주는 메소드
 
-    // 대응하는 메소드
 }
