@@ -24,6 +24,10 @@ public class Run
         Scanner sc = new Scanner(System.in);
 
         // 게임 소개
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
         System.out.println(" 일해라 알바생 ! ");
         System.out.println(" Work! partimer ! ");
         System.out.println();
@@ -32,7 +36,7 @@ public class Run
         boolean check;   // 조건에 맞게 이름 입력했는지 확인할 변수
 
         do {
-            System.out.print(" 이름을 입력해주세요(한글로 입력해주세요) : ");
+            System.out.print(" 이름을 입력해주세요(한글만 가능) : ");
             userName = sc.nextLine();                                   // 유저이름을 입력받고
             userName = userName.replaceAll(" ", "");    // 공백을 제거하고
             check = Pattern.matches("^[가-힣]*$", userName);       // 정규표현식을 이용해서 한글인지 확인한다. 한글인 경우 true 반환
@@ -46,12 +50,13 @@ public class Run
 
         System.out.println();
         System.out.println();
-        System.out.println(". 　。　　　　•　 　ﾟ　　。. 　。　　　　•　 　ﾟ　　。. 　。　　　　•　 　ﾟ　　。");
+        System.out.println(" 　　 。               　.       。　      .         　            。. ");
+        System.out.println(". 　。　　　　•　 　ﾟ　　   　。　　　　•　 　ﾟ　　。. 　。　　　　•　 　 　　。");
         System.out.println("　　      .　　　.　　　 　　.　　　.       　　.　　　.　　　 　　.　　　   　");
         System.out.println("。　　              。　　 。　        。　　      　　          　 。　.  ");
         System.out.println("       .　　　.　　　　.　    　  三 ඞ;; 　      •  .　　　.　　        .  ");
         System.out.println(". 　。　　　        　      　。　　　　    •　 　     。　　　　•　 　ﾟ　　。");
-        System.out.printf("\t\t\t\t %s님은 결국 지구로 추방당했습니다 . . .\n", partimer.getName());
+        System.out.printf("\t\t。\t\t %s님은 결국 지구로 추방당했습니다 . . .     .          。\n", partimer.getName());
         System.out.println("　　      .　　　.　　　 。                 　　.　　　 　　　 　　.　　　   　");
         System.out.println("。　　 。　.          　　  　.     。　　      　 。　      .  。　　 。　.  ");
 
@@ -95,7 +100,10 @@ public class Run
         }
 
         return result;
-    }
+
+    } //end initialRun()
+
+
 
 
 }
