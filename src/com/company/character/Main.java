@@ -29,8 +29,9 @@ public class Main {
         partimer.setName(userName);         // 입력받은 유저이름 속성에 넣기
 
         System.out.println();
-        System.out.println(" 당신은 오늘부터 카페 아르바이트를 시작했습니다.");
+        System.out.printf(" %s님은 오늘부터 카페 아르바이트를 시작했습니다.\n", partimer.getName());
         System.out.println(" 아르바이트를 진행하면서 다양한 엔딩을 볼 수 있습니다.");
-        System.out.println(" 당신은 ");
+
+
     }
 }
