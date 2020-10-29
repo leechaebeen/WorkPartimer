@@ -1,4 +1,5 @@
 package com.company.run;
+import com.company.cafe.Cafe;
 import com.company.character.Partimer;
 
 import java.util.Random;
@@ -123,18 +124,21 @@ public class Run
 
         System.out.println(" 카페를 오픈했습니다. ");
 
-        // 랜덤으로 손님 또는 특별 손님 등장시키기.
-        Random rd = new Random();
-        int randomNum = rd.nextInt(10)+1;   // 1 ~ 10 사이의 랜덤수를 생성
+        do {
+            // 랜덤으로 손님 또는 특별 손님 등장시키기.
+            Random rd = new Random();
+            int randomNum = rd.nextInt(10)+1;   // 1 ~ 10 사이의 랜덤수를 생성
 
-        if(randomNum <=7)  // 1 ~ 7 의 70%의 확률로 일반 손님 방문
-        {
-            comeCustomer();
-        }
-        else // 8~10 의 30% 의 확률로 특별 손님 방문
-        {
-            comeSpecialCustomer();
-        }
+            if(randomNum <=7)  // 1 ~ 7 의 70%의 확률로 일반 손님 방문
+            {
+                comeCustomer();
+            }
+            else // 8~10 의 30% 의 확률로 특별 손님 방문
+            {
+                comeSpecialCustomer();
+            }
+        }while (Cafe.getTodayCustomerNum()<10); // 10명의 손님이 방문하면 하루 일정 끝
+
 
 
     }//end start()
@@ -142,19 +146,19 @@ public class Run
     // 손님 등장 메소드
     public void comeCustomer()
     {
-        System.out.printf(" %s : 어서오세요. \n", Partimer.getName());
+        Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum()+1); // 기존의 하루 방문자 수에 하나 더하기
+        System.out.printf(" %s : 어서오세요. 그냥손님 \n", Partimer.getName());
+        System.out.println();
 
     }
 
     // 특별 손님 등장 메소드
     public void comeSpecialCustomer()
     {
-        System.out.printf(" %s : 어서오세요. \n", Partimer.getName());
+        Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum()+1); // 기존의 하루 방문자 수에 하나 더하기
+        System.out.printf(" %s : 어서오세요. 특별손님\n", Partimer.getName());
     }
 
-    /*
-
-*/
 
 
 }
