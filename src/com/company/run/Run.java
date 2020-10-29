@@ -1,10 +1,8 @@
 package com.company.run;
 import com.company.beverage.Beverage;
-import com.company.beverage.BeverageAction;
 import com.company.cafe.Cafe;
 import com.company.character.Customer;
 import com.company.character.Partimer;
-import com.company.character.SpecialCustomer;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -177,6 +175,7 @@ public class Run
         Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum()+1); // 기존의 하루 방문자 수에 하나 더하기
         System.out.printf(" %s : 어서오세요. 특별손님\n", Partimer.getName());
 
+        // 유형 나누기
 
 
     }

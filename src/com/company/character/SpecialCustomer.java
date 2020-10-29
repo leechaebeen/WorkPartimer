@@ -5,14 +5,17 @@ package com.company.character;
 public class SpecialCustomer extends Customer
 {
     // 주문할 음료 객체 생성하는 메소드
-    @Override
-    public void orderBeverage()
-    {
-        super.orderBeverage();
-    }
+
 
     // 음료 주문하는 말하는 메소드 - 오버라이딩
 
 
-    // 반말하기 - hp - 기분
+    // 유형1 반말하기 - hp - 기분
+
+    // 유형2 시비걸기
+
+    // 유형3 잔 깨기
+
+    // 유형4 아이템 선물 - 저기요 . . . 제가 보이시나요 . . .
+
 }
