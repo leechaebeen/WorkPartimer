@@ -8,9 +8,19 @@ package com.company.character;
 public class Character
 {
     // protected : 상속받은 클래스에서 접근 가능
-    protected int hp; // 캐릭터의 체력
+    protected static int hp; // 캐릭터의 체력
+
+    public static int getHp()
+    {
+        return hp;
+    }
+
+    public static void setHp(int hp)
+    {
+        Character.hp = hp;
+    }
 
     // 유저의 경우 체력이 떨어지면 숙련도가 낮아져 미니게임의 난이도가 높아진다.
-    // 손님의 경우 체력이 떨어지면 가게를 나간다.(테이블 비움)
+    // 손님의 경우 체력이 떨어지면 가게를 나간다.(테이블 비움) ??
     // 특별 손님의 경우
 }

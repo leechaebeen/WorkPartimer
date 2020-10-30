@@ -15,7 +15,7 @@ public class Partimer extends Character
     private static int workingDays = 0; // 총 근무일자 - 최대 플레이 가능 일자 설정하기, 7일마다 상점 방문 가능
 
 
-    // 클래스 외부에서 객체를 생성해 속성에 접근할 수 있도록 getter/setter 생성
+    // 클래스 외부에서 속성에 접근할 수 있도록 getter/setter 생성
     public static String getName()
     {
         return name;

@@ -2,8 +2,12 @@ package com.company.character;
 
 public class PartimerAction
 {
-    // 플레이어 객체 생성
-    Partimer partimer = new Partimer();
+    // 음료 만드는 메소드1 : 제시하는 문자 따라치기
+
+    // 음료 만드는 메소드2 : 레시피 외우기(퀴즈)
+
+    // 음료 만드는 메소드 3 :
+
 
     // 주급받기 메소드
     public void getSalary()
@@ -11,12 +15,6 @@ public class PartimerAction
 
     }
 
-    // 그만두기 메소드
-    public void toQuit()
-    {
-        System.out.println(" 못 해먹겠다... 때려쳐야지. ");
-
-    }
 
     // 장비 구매 시 계산하는 메소드
 
