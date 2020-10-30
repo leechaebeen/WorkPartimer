@@ -56,8 +56,26 @@ public class Ending
 
     // 5. 이도저도 아닌 경우 : 알바생 엔딩
 
+    // 6. 총 손님수/fail 횟수 > 0.5인 경우 : 해고 엔딩
+    public void getFireEnding()
+    {
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println("========================================================================");
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println(" 오늘도 또 실수했다... ");
+        System.out.println();
+        System.out.printf(" %s님은 실수가 잦아 카페에서 해고되었습니다. \n",Partimer.getName());
+        System.out.println();
+        System.out.println();
+        finalEnding();
 
-    // 6. 엔딩
+    }
+
+    // 6. END
     public void finalEnding()
     {
         boolean check =true;    // 반복여부 체크하기 위한 변수

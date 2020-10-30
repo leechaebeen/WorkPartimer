@@ -53,7 +53,7 @@ public class CafeAction
             Ending ending = new Ending();   // 쓰러지는 엔딩
             ending.fallDownEnding();
         }
-        else if(Partimer.getFeeling()==0)       // Mood 가 0이 된다면
+        else if(Partimer.getFeeling()==0)       // feeling 이 0이 된다면
         {
             Ending ending = new Ending();   // 자발적으로 관두는 엔딩
             ending.toQuitEnding();
