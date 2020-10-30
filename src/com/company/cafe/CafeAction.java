@@ -27,7 +27,6 @@ public class CafeAction
         System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
 
         Cafe.setTodayCustomerNum(0);                // 카페 오픈 전 하루 방문자 수 0으로 초기화
-        Partimer.setMood(10);                       // 카페 오픈 전 유저 Mood 10으로 초기화(매일 세팅되는 값은 변하지 않는다.)
         //Cafe.setChair(Cafe.);
 
         System.out.println("                           카페를 오픈했습니다. ");
@@ -68,9 +67,9 @@ public class CafeAction
             System.out.println(" 1. 계속하기 2. 마감하기 ");
             System.out.print(" 선택 : ");
             Scanner sc = new Scanner(System.in);
-            String resultStr = sc.nextLine();   // 유저가 입력한 값을
+            String resultStr = sc.nextLine();   // 유저가 입력한 값을 resultStr 변수에 담는다.
 
-            // 입력받은 값이 숫자인지 확인
+            // 입력받은 값이 숫자 형태인지 확인
             try
             {
                 // 자료형 변경한 뒤(String → int) int형에 담는다.
@@ -91,6 +90,13 @@ public class CafeAction
                 System.out.println(" 올바른 값을 입력해주세요.");
                 check = true;
             }
+            else if(result==1 && Cafe.getTodayCustomerNum() > Partimer.getSkillLevel()) // 계속하기를 선택했는데 숙련도보다 방문한 사람 수가 많으면
+            {
+                System.out.println("========================================================================");
+                System.out.printf("  %s 님의 숙련도가 낮아 더이상 손님을 받을 수 없습니다. \n",Partimer.getName());
+                result = 2;     // 손님을 그만 받는 선택지를 택하고
+                check = false;  // 반복 멈춘다.
+            }
 
         }while (check);
 
@@ -107,16 +113,12 @@ public class CafeAction
 
                 case STOP:
 
-
-
-
-                   /* System.out.println();
                     System.out.println();
-                    System.out.println("☾ ⋆*･ﾟ:⋆*･ﾟ:⠀ ⋆.:･ﾟ .: ⋆*･ﾟ: .⋆⋆*･ﾟ:⋆*･ﾟ:⠀ ⋆.:･ﾟ .: ⋆*･ﾟ: .⋆⋆*･ﾟ:⋆*･ﾟ:⠀ ⋆.:･ﾟ");
-
                     System.out.println();
-                            System.out.println();
-*/
+                    System.out.println(" ☾ ⋆*･ﾟ ⋆*･ﾟ ⋆. ･ﾟ. ⋆ * ･ﾟ. ⋆⋆ *･ﾟ⋆*･ﾟ ⋆ . ･ﾟ .⋆*･ﾟ .⋆ ⋆*･ﾟ ⋆*･ﾟ ⋆･ﾟ");
+                    System.out.println();
+                    System.out.println();
+
                             start();     // 다음날로 시간이 흐른다.
 
                     break;
@@ -185,7 +187,7 @@ public class CafeAction
     }
 
 
-    // 주말 메소드 상점 - 주말 : HP 회복
+    // 주말 메소드 상점 - 주말 : HP 회복 , mood 회복
 
 
     // 하루하루 점수 계산하는 메소드 - 하루마다/주마다 열람 가능 / 누적 총점은 못봄. 총점에 따라서 엔딩 갈림
