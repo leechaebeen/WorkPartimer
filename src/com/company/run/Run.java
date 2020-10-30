@@ -95,9 +95,6 @@ public class Run
             // 입력받은 값이 숫자인지 확인
             try
             {
-                //Integer.parseInt(resultStr);
-
-
                 // 자료형 변경한 뒤(String → int) int형에 담는다.
                 result = Integer.parseInt(resultStr);
                 check = false;

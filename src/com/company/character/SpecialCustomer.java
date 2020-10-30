@@ -17,20 +17,6 @@ public class SpecialCustomer extends Customer
     // 유형1 반말하고 매장에서 먹고가는거 말 안하는 손님 : 유저의 hp 와 mood 가 -1씩 감소한다.
     public void orderTalkDown(Beverage beverage)
     {
-        Partimer.setMood(Partimer.getMood()-1);
-        Partimer.setHp(Partimer.getHp()-1);
-
-        if(Partimer.getHp()==0)             // 만약 유저의 HP 0이 된다면
-        {
-            Ending ending = new Ending();   // 쓰러지는 엔딩
-            ending.fallDownEnding();
-        }
-        else if(Partimer.getMood()==0)       // Mood 가 0이 된다면
-        {
-            Ending ending = new Ending();   // 자발적으로 관두는 엔딩
-            ending.toQuitEnding();
-        }
-
         String iceOption;
         String whippingCream;
         String takeout;
@@ -65,8 +51,11 @@ public class SpecialCustomer extends Customer
             takeout = "";
         }
 
-        System.out.println(" 손님 : " + iceOption + beverage.getName());
+        System.out.println(" 손님 : " + iceOption + beverage.getName()+".");
         System.out.println("       " + whippingCream + takeout );
+
+        Partimer.setMood(Partimer.getMood()-1);
+        Partimer.setHp(Partimer.getHp()-1);
 
     }
 
@@ -74,20 +63,6 @@ public class SpecialCustomer extends Customer
     // 유형2 시비걸기 : 유저의 hp가 1, mood가 2 감소한다.
     public void orderFight(Beverage beverage)
     {
-        Partimer.setHp(Partimer.getHp()-1);
-        Partimer.setMood(Partimer.getMood()-2);
-
-        if(Partimer.getHp()==0)             // 만약 유저의 HP 0이 된다면
-        {
-            Ending ending = new Ending();   // 쓰러지는 엔딩
-            ending.fallDownEnding();
-        }
-        else if(Partimer.getMood()==0)       // Mood 가 0이 된다면
-        {
-            Ending ending = new Ending();   // 자발적으로 관두는 엔딩
-            ending.toQuitEnding();
-        }
-
         String iceOption;
         String whippingCream;
         String takeout;
@@ -115,27 +90,35 @@ public class SpecialCustomer extends Customer
         // 테이크아웃 선택 값에 따라 대사 분기
         if(checkTakeout())  // checkTakeout() 는 테이크아웃하면 true 반환
         {
-            takeout = " 하... 테이크아웃이요.";
+            takeout = " 하... 테이크아웃이요. 그만 좀 물어보세요";
         }
         else    // false 인 경우
         {
-            takeout = "하...먹고 갈거에요";
+            takeout = "하...먹고 갈거에요. 그만 물어보세요.";
         }
 
         System.out.println(" 손님 : " + beverage.getName());
-        System.out.println("            .");
-        System.out.println("            .");
-        System.out.println("            .");
-        System.out.println(" %s님은 ICE/HOT 옵션을 물어봤습니다. ");
+        System.out.println();
+        System.out.println("         .");
+        System.out.println("         .");
+        System.out.println("         .");
+        System.out.println();
+        System.out.printf(" %s님은 ICE/HOT 옵션을 물어봤습니다.\n", Partimer.getName());
         System.out.println();
         System.out.println(" 손님 : " + iceOption);
         System.out.println();
-        System.out.println(" %s님은 휘핑크림을 추가하는지 물어봤습니다. ");
+        System.out.printf(" %s님은 휘핑크림을 추가하는지 물어봤습니다.\n", Partimer.getName());
         System.out.println();
         System.out.println(" 손님 : " + whippingCream);
         System.out.println();
-        System.out.println(" %s님은 테이크아웃 여부를 물어봤습니다. ");
+        System.out.printf(" %s님은 테이크아웃 여부를 물어봤습니다.\n",Partimer.getName());
+        System.out.println();
         System.out.println(" 손님 : " + takeout);
+        System.out.println();
+
+        Partimer.setHp(Partimer.getHp()-1);
+        Partimer.setMood(Partimer.getMood()-2);
+
 
     }
     
@@ -156,14 +139,14 @@ public class SpecialCustomer extends Customer
     }
 
     // 유형5 의문의 아이템 선물
-    public void orderToPartimer4()
+    public void orderPresent()
     {
         boolean check = true;   // 반복 여부 체크하기 위한 변수
         int result = 0;         // 선택값을 비교하기 위한 변수
 
-        System.out.println(" ＿人人人人人人人人＿ ");
-        System.out.println("＞　  안녕하세요!   ＜");
-        System.out.println("￣^Y^Y^Y^Y^Y^Y^Y￣ ");
+        System.out.println("      ＿人人人人人人人人＿ ");
+        System.out.println("      ＞　안녕하십니까!  ＜");
+        System.out.println("      ￣^Y^Y^Y^Y^Y^Y^Y￣ ");
 
         System.out.println();
         System.out.println("========================================================================");
@@ -172,7 +155,6 @@ public class SpecialCustomer extends Customer
 
         while(check) // check 는 위에서 입력받은 유저이름이 한글인걸 확인했기 때문에 true 인 상황이다.
                 {
-                    System.out.println("------------------------------------------------------------------------");
                     System.out.println(" 1.오른손 선택 2.왼손 선택");
                     System.out.println("------------------------------------------------------------------------");
                     System.out.print(" 선택 : ");
@@ -194,16 +176,29 @@ public class SpecialCustomer extends Customer
 
                         if(result == randomNum)                 // 선택한 값과 랜덤값이 같다면
                         {
-                            Partimer.setMood(Partimer.getMood()+1); // 현재 mood에서 1 증가
+                            if(Partimer.getMood()!=Partimer.getSetMood()) // 현재 mood 가 최대 mood 가 아니라면
+                            {
+                                Partimer.setMood(Partimer.getMood()+1); // 현재 mood에서 1 증가
+                            }
+
                             System.out.println("========================================================================");
                             System.out.printf(" %s님의 mood 가 1 회복되었습니다.\n",Partimer.getName());
                             System.out.printf(" 현재 %s님의 mood : %d\n", Partimer.getName(), Partimer.getMood());
+                            System.out.println("========================================================================");
+                            System.out.println();
                         }
                         else if(result != randomNum)            // 선택한 값과 랜덤값이 다르다면
                         {
-                            Partimer.setHp(Partimer.getHp());   // 현재 hp 에서 1 증가
+                            if(Partimer.getHp()!=Partimer.getSetHp()) // 현재 hp 가 최대 hp 가 아니라면
+                            {
+                                Partimer.setHp(Partimer.getHp());         // 현재 hp 에서 1 증가
+                            }
+
+                            System.out.println("========================================================================");
                             System.out.printf(" %s님의 hp 가 1 회복되었습니다.\n",Partimer.getName());
                             System.out.printf(" 현재 %s님의 hp : %d\n", Partimer.getName(), Partimer.getHp());
+                            System.out.println("========================================================================");
+                            System.out.println();
                         }
                     }
                     catch (NumberFormatException e) // NumberFormatException 발생한다면
@@ -222,9 +217,11 @@ public class SpecialCustomer extends Customer
                 }
 
 
-        System.out.println(" ＿人人人人人人人人＿ ");
-        System.out.println("＞　  선물입니다!   ＜");
-        System.out.println("￣^Y^Y^Y^Y^Y^Y^Y￣ ");
+        System.out.println("      ＿人人人人人人人人＿ ");
+        System.out.println("      ＞  안녕히 계세요! ＜");
+        System.out.println("      ￣^Y^Y^Y^Y^Y^Y^Y￣ ");
+        System.out.println();
+
 
 
     }

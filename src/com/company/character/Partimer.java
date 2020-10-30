@@ -9,7 +9,7 @@ public class Partimer extends Character
     // static : 유저는 한 명이니까 프로그램이 종료될 때까지 값이 계속 유지되도록하기 위해서 사용
     private static String name;         // 유저에게 입력받은 이름
 
-    private static int skillLevel = 3;  // 현재 숙련도 : 하루에 처리할 수 있는 손님 수 , 일주일에 1 씩 증가
+    private static int skillLevel = 3;  // 현재 숙련도 : 하루에 등장하는 손님 수 , 일주일에 1 씩 증가
 
     private static int mood = 10;       // 현재 기분 : 한 주가 지날 때마다 세팅된 기분값으로 초기화
     private static int setMood = 10;    // 세팅된 기분 : 아이템 사용하면 증가 가능

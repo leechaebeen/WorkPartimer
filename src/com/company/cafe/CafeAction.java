@@ -4,6 +4,7 @@ import com.company.beverage.Beverage;
 import com.company.character.Customer;
 import com.company.character.Partimer;
 import com.company.character.SpecialCustomer;
+import com.company.run.Ending;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -27,7 +28,7 @@ public class CafeAction
         System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
 
         Cafe.setTodayCustomerNum(0);                // 카페 오픈 전 하루 방문자 수 0으로 초기화
-        //Cafe.setChair(Cafe.);
+        Cafe.setChair(Cafe.getSetChair());          // 카페 오픈 전 자리를 세팅된 자리값으로 초기화
 
         System.out.println("                           카페를 오픈했습니다. ");
 
@@ -39,9 +40,23 @@ public class CafeAction
     // 카페 운영하면서 손님 받는 메소드
     public void business()
     {
+
         boolean check;      // 장사 계속 할지말지 반복여부 체크하는 변수
         int result = 0;     // 주어진 값(1.장사 계속 2.장사 마감) 외의 수를 입력했는지 비교할 때 사용할 변수
         String[] nums = {"첫", "두", "세", "네", "다섯", "여섯", "일곱", "여덟", "아홉", "열"}; // 손님수 표현하기 위한 배열
+
+        // 유저 상태 체크
+        if(Partimer.getHp()==0)             // 만약 유저의 HP 0이 된다면
+        {
+            Ending ending = new Ending();   // 쓰러지는 엔딩
+            ending.fallDownEnding();
+        }
+        else if(Partimer.getMood()==0)       // Mood 가 0이 된다면
+        {
+            Ending ending = new Ending();   // 자발적으로 관두는 엔딩
+            ending.toQuitEnding();
+        }
+
 
         System.out.println("------------------------------------------------------------------------");
         System.out.println("                           " + nums[Cafe.getTodayCustomerNum()] + "번째 손님이 등장했습니다.");
@@ -49,13 +64,13 @@ public class CafeAction
 
         // 랜덤으로 손님 또는 특별 손님 등장시키기.
         Random rd = new Random();
-        int randomNum = rd.nextInt(10)+1;   // 1 ~ 10 사이의 랜덤수를 생성
+        int randomNum = rd.nextInt(10)+1;   // 1 ~ 10 사이의 랜덤값을 생성
 
-        if(randomNum <=7)  // 1 ~ 7 의 70%의 확률로 일반 손님 방문
+        if(randomNum <=7)  // 랜덤값이 1 ~ 7 인 경우 일반 손님 방문
         {
             comeCustomer();
         }
-        else // 8~10 의 30% 의 확률로 특별 손님 방문
+        else if( 8 <= randomNum && randomNum <=10 ) // 랜덤값이 8,9, 10인 경우 특별 손님 방문
         {
             comeSpecialCustomer();
         }
@@ -84,16 +99,16 @@ public class CafeAction
                 // result = 0; 으로 초기화된 상태이므로 아래 if문 내부까지 실행하고 반복된다.
             }
 
-            if(result < 1 || result > 2 )// 주어진 값 이외의 수를 선택한 경우
+            if(result < 1 || result > 3 )// 주어진 값 이외의 수를 선택한 경우
             {
                 System.out.println("========================================================================");
                 System.out.println(" 올바른 값을 입력해주세요.");
                 check = true;
             }
-            else if(result==1 && Cafe.getTodayCustomerNum() > Partimer.getSkillLevel()) // 계속하기를 선택했는데 숙련도보다 방문한 사람 수가 많으면
+            else if(result==1 && Cafe.getTodayCustomerNum() == Partimer.getSkillLevel()) // 계속하기를 선택했는데 숙련도와 방문한 손님 수가 같으면
             {
                 System.out.println("========================================================================");
-                System.out.printf("  %s 님의 숙련도가 낮아 더이상 손님을 받을 수 없습니다. \n",Partimer.getName());
+                System.out.printf("  %s님의 숙련도가 낮아 더이상 손님을 받을 수 없습니다. \n",Partimer.getName());
                 result = 2;     // 손님을 그만 받는 선택지를 택하고
                 check = false;  // 반복 멈춘다.
             }
@@ -117,7 +132,7 @@ public class CafeAction
 
                     System.out.println();
                     System.out.println();
-                    System.out.println(" ☾ ⋆*･ﾟ ⋆*･ﾟ ⋆. ･ﾟ. ⋆ * ･ﾟ. ⋆⋆ *･ﾟ⋆*･ﾟ ⋆ . ･ﾟ .⋆*･ﾟ .⋆ ⋆*･ﾟ ⋆*･ﾟ ⋆･ﾟ");
+                    System.out.println(" ☾ ⋆*･ﾟ ⋆*･ﾟ ⋆. ･ﾟ. ⋆ * ･ﾟ. ⋆⋆ *･ﾟ⋆*･ﾟ ⋆ . ･ﾟ .⋆*･ﾟ .⋆ ⋆*･ﾟ ⋆*･ﾟ ⋆･ﾟ⋆ *･ﾟ ⋆･ﾟ");
                     System.out.println();
                     System.out.println();
                     start();
@@ -142,10 +157,22 @@ public class CafeAction
         System.out.println();
 
         Customer customer = new Customer();           // 손님 객체 생성
-        Beverage beverage = customer.orderBeverage(); // 주문할 음료 객체 생성
-        customer.orderToPartimer(beverage);           // 손님이 음료 주문
 
-        System.out.println();
+        // 매장에 자리가 있는지 확인
+        if(Cafe.getChair()==0)    // 매장에 자리가 없으면
+        {
+            System.out.println(" 매장에 자리가 없어서 손님이 나갔다 . . .");
+            System.out.println(" 자리를 늘리던가 해야지 원 . . . ");
+        }
+        else
+        {
+            Cafe.setChair(Cafe.getChair()-1);   // 매장 자리를 하나 줄인다.
+
+            Beverage beverage = customer.orderBeverage(); // 주문할 음료 객체 생성
+            customer.orderToPartimer(beverage);           // 손님이 음료 주문
+
+            System.out.println();
+        }
 
         // 음료 만들기 - PartimerAction 에 메소드 정의하기
 
@@ -159,36 +186,50 @@ public class CafeAction
         Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum()+1); // 기존의 하루 방문자 수에 하나 더하기
         Cafe.setTotalCustomerNum(Cafe.getTotalCustomerNum()+1); // 기존의 총 방문자 수에 한명 더하기
 
-        System.out.println();
-
-        SpecialCustomer specialCustomer = new SpecialCustomer(); // 특별 손님 객체 생성
-        Beverage beverage = specialCustomer.orderBeverage();     // 주문할 음료 객체 생성
-        specialCustomer.orderToPartimer(beverage);               // 손님이 음료 주문
-
-        // 유형 나누기
-        Random rd = new Random();
-        int typeNum = rd.nextInt(4)+1; //1~4 랜덤값 반환해서 typeNum 변수에 저장
-
-        switch(typeNum)
+        // 매장에 자리가 있는지 확인
+        if(Cafe.getChair()==0)    // 매장에 자리가 없으면
         {
-            case 1: // final 상수로 바꾸기
+            System.out.println(" 매장에 자리가 없어서 손님이 나갔다 . . .");
+            System.out.println(" 자리를 늘리던가 해야지 원 . . . ");
+        }
+        else
+        {
+            Cafe.setChair(Cafe.getChair()-1);   // 매장 자리를 하나 줄인다.
 
-                break;
+            SpecialCustomer specialCustomer = new SpecialCustomer(); // 특별 손님 객체 생성
+            Beverage beverage = specialCustomer.orderBeverage();     // 주문할 음료 객체 생성
 
-            case 2:
+            System.out.println();
+            
+            // 음료 주문 유형 랜덤으로 실행하기
+            Random rd = new Random();
+            int typeNum = rd.nextInt(5)+1; //1~5 랜덤값 반환해서 typeNum 변수에 저장
 
-                break;
+            switch(typeNum)
+            {
+                case 1: specialCustomer.orderTalkDown(beverage);    // 반말하는 손님 
+                    break;
 
-            case 3:
+                case 2: specialCustomer.orderFight(beverage);       // 시비거는 손님
+                    break;
 
-                break;
+                case 3:
 
-            case 4:
+                    break;
 
-                break;
+                case 4:
+
+                    break;
+
+                case 5: specialCustomer.orderPresent();             // 선물주는 손님
+                    break;
+
+            }
+
 
         }
 
+        
     }
 
 

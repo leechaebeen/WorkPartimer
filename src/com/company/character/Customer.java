@@ -21,15 +21,6 @@ public class Customer extends Character
         if(takeout > 7)  // 랜덤값이 8,9,10 이면 테이크아웃 하지 않는다.
         {
             checkTakeout = false;
-            if(Cafe.getChair()>0)                   // 매장에 자리가 있으면
-            {
-                Cafe.setChair(Cafe.getChair()-1);   // 매장 자리를 하나 줄인다.
-            }
-            else    // 매장에 자리가 없으면
-            {
-                System.out.println(" 매장에 자리가 없어서 손님이 나갔다 . . .");
-                System.out.println(" 자리를 늘리던가 해야지 원 . . . ");
-            }
         }
 
         return checkTakeout;
@@ -51,6 +42,7 @@ public class Customer extends Character
         int beverageSel = rd.nextInt(5)+1; // 1 ~ 5 의 랜덤값을 변수 beverage 에 저장한다.
         BeverageAction beverageAction = new BeverageAction();
         Beverage beverage = beverageAction.createBeverage(beverageSel, iceOption, whippingCream);   // 음료 객체 생성
+
 
         return beverage;
 
