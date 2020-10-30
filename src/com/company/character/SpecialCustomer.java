@@ -202,6 +202,8 @@ public class SpecialCustomer extends Customer
                         else if(result != randomNum)            // 선택한 값과 랜덤값이 다르다면
                         {
                             Partimer.setHp(Partimer.getHp());   // 현재 hp 에서 1 증가
+                            System.out.printf(" %s님의 hp 가 1 회복되었습니다.\n",Partimer.getName());
+                            System.out.printf(" 현재 %s님의 hp : %d\n", Partimer.getName(), Partimer.getHp());
                         }
                     }
                     catch (NumberFormatException e) // NumberFormatException 발생한다면

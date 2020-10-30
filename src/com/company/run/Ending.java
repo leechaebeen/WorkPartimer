@@ -33,8 +33,10 @@ public class Ending
 
     // 4. n주차 지나고 코인 일정 수준 이상 : 사장 엔딩
 
+    // 5. 이도저도 아닌 경우 : 알바생 엔딩
 
-    // 5. 엔딩
+
+    // 6. 엔딩
     public void finalEnding()
     {
         System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");

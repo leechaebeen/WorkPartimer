@@ -59,18 +59,24 @@ public class Run
 
         System.out.println(" 어쩌구 저쩌구 스토리 설명 쫓겨난 이유 ");
 
+        System.out.println();
+        System.out.println();
 
-        System.out.println();
-        System.out.println();
-        System.out.println(" 　　 。               　.       。　      .         　            。. ");
-        System.out.println(". 　。　　　　•　 　ﾟ　　   　。　　　　•　 　ﾟ　　。. 　。　　　　•　 　 　　。");
-        System.out.println("　　      .　　　.　　　 　　.　　　.       　　.　　　.　　　 　　.　　　   　");
-        System.out.println("。　　              。　　 。　        。　　      　　          　 。　.  ");
-        System.out.println("       .　　　.　　　　.　    　  三 ඞ;; 　      •  .　　　.　　        .  ");
-        System.out.println(". 　。　　　        　      　。　　　　    •　 　     。　　　　•　 　ﾟ　　。");
+        System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.     ");
+        System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
+        System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。    ");
+        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
+        System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
+        System.out.println("　 　　　　　　。　　　　       　三 ඞ;;   　  　ﾟ　　　.　 　　　　　　　　.");
+        System.out.println(". 　。　　　        　      　。　　　　    •　 　        　　　     　　");
         System.out.printf("\t\t。\t\t %s님은 결국 지구로 추방당했습니다 . . .     .          。\n", Partimer.getName());
-        System.out.println("　　      .　　　.　　　 。                 　　.　　　 　　　 　　.　　　   　");
-        System.out.println("。　　 。　.          　　  　.     。　　      　 。　      .  。　　 。　.  ");
+        System.out.println(",　　　　　　　　　.　 .　　　　　　　　.");
+        System.out.println("　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
+        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.");
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
 
         System.out.println();
         System.out.println();
