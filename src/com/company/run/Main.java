@@ -1,5 +1,7 @@
 package com.company.run;
 
+import com.company.cafe.CafeAction;
+
 public class Main {
 
     public static void main(String[] args)
@@ -11,17 +13,19 @@ public class Main {
         int initialSel = run.initialRun();  // 초기화면 실행하면 유저의 선택값 반환한다.
                                             // (1.시작하기 2.다시 시작하기)
 
+        CafeAction cafeAction = new CafeAction(); // Cafe 객체 생성
+
 
         while(true)
         {
-            switch(initialSel)              // 유저의 선택값에 따라 분기 처리 
+            switch(initialSel)              // 유저의 선택값에 따라 분기 처리
             {
                 case  START:                // 1. 시작하기를 선택한 경우
-                    run.start();
+                    cafeAction.start();
                     break;
 
                 case INITIAL_RUN :          // 2. 다시 시작하기를 선택한 경우
-                    run.initialRun();
+                    initialSel = run.initialRun();
                     break;
             }
 
