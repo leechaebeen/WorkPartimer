@@ -30,12 +30,20 @@ public class Run
         // 게임 소개
         System.out.println();
         System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println(" 일해라 알바생 ! ");
-        System.out.println(" Work! partimer ! ");
-        System.out.println();
 
+
+        System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
+        System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
+        System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
+        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
+        System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
+        System.out.println("　 　　　　　　。　　　　   　Work! partimer ! 　　ﾟ　　　.　 　　　　　　　　.");
+        System.out.println(",　　　　　　　　　.　 .　　　　　　　　.");
+        System.out.println("　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
+        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.");
+        System.out.println();
+        System.out.println();
+        System.out.println();
 
         String userName; // 유저이름을 저장할 변수
         boolean check;   // 조건에 맞게 이름 입력했는지 확인할 변수

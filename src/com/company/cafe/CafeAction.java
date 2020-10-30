@@ -101,11 +101,23 @@ public class CafeAction
         {
             switch(result)
             {
-                case KEEP : business();
+                case KEEP : business(); // 손님 계속 받는다
 
                     break;
 
-                case STOP: start();
+                case STOP:
+
+
+
+
+                   /* System.out.println();
+                    System.out.println();
+                    System.out.println("☾ ⋆*･ﾟ:⋆*･ﾟ:⠀ ⋆.:･ﾟ .: ⋆*･ﾟ: .⋆⋆*･ﾟ:⋆*･ﾟ:⠀ ⋆.:･ﾟ .: ⋆*･ﾟ: .⋆⋆*･ﾟ:⋆*･ﾟ:⠀ ⋆.:･ﾟ");
+
+                    System.out.println();
+                            System.out.println();
+*/
+                            start();     // 다음날로 시간이 흐른다.
 
                     break;
             }
