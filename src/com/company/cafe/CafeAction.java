@@ -3,6 +3,7 @@ package com.company.cafe;
 import com.company.beverage.Beverage;
 import com.company.character.Customer;
 import com.company.character.Partimer;
+import com.company.character.PartimerAction;
 import com.company.character.SpecialCustomer;
 import com.company.run.Ending;
 
@@ -28,10 +29,12 @@ public class CafeAction
         System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
 
         Cafe.setTodayCustomerNum(0);                // 카페 오픈 전 하루 방문자 수 0으로 초기화
-        Cafe.setChair(Cafe.getSetChair());          // 카페 오픈 전 자리를 세팅된 자리값으로 초기화
+        Cafe.setChair(Cafe.getSetChair());          // 카페 오픈 전 자리를 세팅된 값으로 초기화
+        Cafe.setCup(Cafe.getSetCup());              // 카페 오픈 전 유리컵을 세팅된 값으로 초기화
+        Cafe.setMug(Cafe.getSetMug());              // 카페 오픈 전 머그잔을 세팅된 값으로 초기화
 
         System.out.println();
-        System.out.println("                           카페를 오픈했습니다. ");
+        System.out.println("                         ✨ 카페를 오픈했습니다 ✨ ");
         System.out.println();
 
         business(); // 카페 운영하면서 손님 받는 메소드
@@ -66,20 +69,21 @@ public class CafeAction
 
         // 랜덤으로 손님 또는 특별 손님 등장시키기.
         Random rd = new Random();
-        int randomNum = rd.nextInt(10)+1;   // 1 ~ 10 사이의 랜덤값을 생성
+        int randomNum = rd.nextInt(10)+1;   // 1 ~ 10 사이의 랜덤값을 생성한다.
 
-        if(randomNum <=7)  // 랜덤값이 1 ~ 7 인 경우 일반 손님 방문
+        if(randomNum <=7)  // 랜덤값이 1 ~ 7 인 경우 일반 손님이 방문한다.
         {
-            comeCustomer();
+            comeCustomer(); // 음료 객체 생성하고, 손님이 주문하고, 음료 만든다.
         }
-        else if( 8 <= randomNum && randomNum <=10 ) // 랜덤값이 8,9, 10인 경우 특별 손님 방문
+        else if( 8 <= randomNum && randomNum <=10 ) // 랜덤값이 8,9, 10인 경우 특별 손님이 방문한다.
         {
-            comeSpecialCustomer();
+            comeSpecialCustomer(); // 음료 객체 생성하고, 손님이 주문하고, 음료 만든다.
         }
+
+
 
         do {
 
-            System.out.println("------------------------------------------------------------------------");
             System.out.println(" 다음 손님을 받을까요? ");
             System.out.println(" 1. 계속하기 2. 마감하기 3.아이템 사용하기");
             System.out.print(" 선택 : ");
@@ -150,7 +154,7 @@ public class CafeAction
 
     }// end business()
 
-    // 손님 등장 메소드
+    // 일반손님 등장 메소드
     public void comeCustomer()
     {
         Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum()+1); // 기존의 하루 방문자 수에 한명 더하기
@@ -160,6 +164,9 @@ public class CafeAction
 
         Customer customer = new Customer();           // 손님 객체 생성
 
+        //test
+        System.out.println("자리수 : " + Cafe.getChair());
+
         // 매장에 자리가 있는지 확인
         if(Cafe.getChair()==0)    // 매장에 자리가 없으면
         {
@@ -168,15 +175,26 @@ public class CafeAction
         }
         else
         {
-            Cafe.setChair(Cafe.getChair()-1);   // 매장 자리를 하나 줄인다.
-
             Beverage beverage = customer.orderBeverage(); // 주문할 음료 객체 생성
             customer.orderToPartimer(beverage);           // 손님이 음료 주문
 
-            System.out.println();
-        }
+            PartimerAction partimerAction = new PartimerAction(); // 유저 액션 객체 생성
+            boolean result = partimerAction.makeBeverage(beverage);       // 음료 만들기 수행하고 결과를 반환한다.
 
-        // 음료 만들기 - PartimerAction 에 메소드 정의하기
+            if(result == false)     // 음료 실패했을 경우
+            {
+                System.out.println("------------------------------------------------------------------------");
+                System.out.println("                            음료 만들기 실패 ! ");
+                System.out.println("------------------------------------------------------------------------");
+            }
+            else
+            {
+                System.out.println("------------------------------------------------------------------------");
+                System.out.println("                          ✨ 음료 만들기 성공 ✨  ");
+                System.out.println("------------------------------------------------------------------------");
+            }
+
+        }
 
     }
 
@@ -196,8 +214,6 @@ public class CafeAction
         }
         else
         {
-            Cafe.setChair(Cafe.getChair()-1);   // 매장 자리를 하나 줄인다.
-
             SpecialCustomer specialCustomer = new SpecialCustomer(); // 특별 손님 객체 생성
             Beverage beverage = specialCustomer.orderBeverage();     // 주문할 음료 객체 생성
 
@@ -215,12 +231,10 @@ public class CafeAction
                 case 2: specialCustomer.orderFight(beverage);       // 시비거는 손님
                     break;
 
-                case 3:
-
+                case 3: specialCustomer.orderFalseReligion();       // 도를 아십니까 손님
                     break;
 
-                case 4:
-
+                case 4: specialCustomer.orderWrong();               // 잘못찾아온 손님
                     break;
 
                 case 5: specialCustomer.orderPresent();             // 선물주는 손님
@@ -228,6 +242,29 @@ public class CafeAction
 
             }
 
+            if(typeNum == 1 ||typeNum == 2)  // 음료를 주문하는 특별손님의 경우에만
+            {
+                // 유저가 음료 만들기
+                PartimerAction partimerAction = new PartimerAction();   // 유저 액션 객체 생성
+
+                boolean result = partimerAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
+
+                if(result == false)     // 음료 실패했을 경우
+                {
+                    // 음료 실패 반응 보이기
+                    System.out.println("------------------------------------------------------------------------");
+                    System.out.println("                            음료 만들기 실패 ! ");
+                    System.out.println("------------------------------------------------------------------------");
+
+                    Partimer.setFailNum(Partimer.getFailNum()+1);   // 실패 횟수 1 증가
+                }
+                else
+                {
+                    System.out.println("------------------------------------------------------------------------");
+                    System.out.println("                          ✨ 음료 만들기 성공 ✨  ");
+                    System.out.println("------------------------------------------------------------------------");
+                }
+            }
 
         }
 

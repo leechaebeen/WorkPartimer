@@ -7,7 +7,7 @@ import com.company.cafe.Cafe;
 import java.util.Random;
 
 // Character 클래스를 상속받아 hp 속성 사용 가능
-// 손님 고유의 속성과 기능을 추가한 클래스이다.
+// 일반 손님 고유의 속성과 기능을 추가한 클래스이다.
 public class Customer extends Character
 {
     // 음료 주문 전 테이크아웃 확인
@@ -43,7 +43,6 @@ public class Customer extends Character
         BeverageAction beverageAction = new BeverageAction();
         Beverage beverage = beverageAction.createBeverage(beverageSel, iceOption, whippingCream);   // 음료 객체 생성
 
-
         return beverage;
 
     }// end orderBeverage()
@@ -54,6 +53,9 @@ public class Customer extends Character
         String iceOption;
         String whippingCream;
         String takeout;
+
+        //test
+        System.out.println("자리수 : " + Cafe.getChair());
 
         // ICE / HOT 선택값에 따라 대사 분기할 수 있도록 변수에 담기
         if(beverage.getIceOption()==0)  // 0이면 HOT
@@ -68,11 +70,11 @@ public class Customer extends Character
         // 휘핑 선택
         if(beverage.getWhippingCream()==0) // 0 이면 휘핑크림 X
         {
-            whippingCream = "휘핑크림 추가할게요.";
+            whippingCream = "";
         }
         else // 1 이면 휘핑크림 O
         {
-            whippingCream = "";
+            whippingCream = "휘핑크림 추가할게요.";
         }
 
         // 테이크아웃
@@ -83,13 +85,34 @@ public class Customer extends Character
         else
         {
             takeout = " 먹고 갈거에요.";
+
+            Cafe.setChair(Cafe.getChair()-1);// 매장 자리를 하나 줄인다.
+            // 자리와, 유리잔 또는 머그잔 감소시키기. 0이면 테이크아웃잔 에 준다고 양해구하기
+
         }
 
         System.out.println(" 손님 : " + iceOption + beverage.getName() + " 주세요.");
         System.out.println("       " + whippingCream + takeout );
 
-    }
+        if(!checkTakeout()) // 매장에서 먹고 간다면
+        {
+            Cafe.setChair(Cafe.getChair()-1);// 매장 자리를 하나 줄인다.
 
-    // 음료 잘못 나왔을 때 반응
+            // 유리잔 또는 머그잔 감소시키기.
+            if(beverage.getIceOption()==0 && Cafe.getMug() !=0 ) // 뜨거운 음료이고 머그잔이 있으면
+            {
+                Cafe.setMug(Cafe.getMug() - 1); // 머그잔 1 감소
+            }
+            else if(beverage.getIceOption()==1 && Cafe.getCup() != 0) // 차가운 음료이고 유리잔이 있으면
+            {
+                Cafe.setCup(Cafe.getCup() - 1); // 유리잔 1 감소
+            }
+            else    // 뜨거운 음료인데 머그잔이 없거나 차가운 음료인데 유리잔이 없으면 유저 체력 1 감소
+            {
+              Partimer.setHp(Partimer.getHp() - 1);
+            }
+        }
+
+    }
 
 }

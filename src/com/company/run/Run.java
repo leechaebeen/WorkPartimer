@@ -1,10 +1,5 @@
 package com.company.run;
-import com.company.beverage.Beverage;
-import com.company.cafe.Cafe;
-import com.company.cafe.CafeAction;
-import com.company.character.Customer;
 import com.company.character.Partimer;
-import com.company.character.SpecialCustomer;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
