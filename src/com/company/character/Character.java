@@ -8,7 +8,8 @@ package com.company.character;
 public class Character
 {
     // protected : 상속받은 클래스에서 접근 가능
-    protected static int hp; // 캐릭터의 체력
+    protected static int hp = 10;    // 현재 캐릭터의 체력
+    protected static int setHp = 10; // 세팅된 캐릭터의 체력 : 아이템을 통해 변경 가능
 
     public static int getHp()
     {
@@ -18,6 +19,16 @@ public class Character
     public static void setHp(int hp)
     {
         Character.hp = hp;
+    }
+
+    public static int getSetHp()
+    {
+        return setHp;
+    }
+
+    public static void setSetHp(int setHp)
+    {
+        Character.setHp = setHp;
     }
 
     // 유저의 경우 체력이 떨어지면 숙련도가 낮아져 미니게임의 난이도가 높아진다.

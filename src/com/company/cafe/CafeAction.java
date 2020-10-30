@@ -19,7 +19,7 @@ public class CafeAction
 
         Partimer.setWorkingDays(Partimer.getWorkingDays() + 1);       // 하루가 새롭게 시작되므로 지금까지 일한 날짜에 하루를 더해준다.
 
-        int week = (Partimer.getWorkingDays() / 7) + 1;                 // 주차 = 일한날짜/7 + 1
+        int week = (Partimer.getWorkingDays() / 7) + 1;               // 주차 = 일한날짜/7 + 1
         String day = days[Partimer.getWorkingDays() % 7];             // 요일 = 일한날짜%7
 
         System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
@@ -64,7 +64,7 @@ public class CafeAction
 
             System.out.println("------------------------------------------------------------------------");
             System.out.println(" 다음 손님을 받을까요? ");
-            System.out.println(" 1. 계속하기 2. 마감하기 ");
+            System.out.println(" 1. 계속하기 2. 마감하기 3.아이템 사용하기");
             System.out.print(" 선택 : ");
             Scanner sc = new Scanner(System.in);
             String resultStr = sc.nextLine();   // 유저가 입력한 값을 resultStr 변수에 담는다.
@@ -81,7 +81,7 @@ public class CafeAction
             catch (NumberFormatException e) // NumberFormatException 발생한다면
             {
                 check = true;   // check 에 true 담아서 다시 반복
-                // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+                // result = 0; 으로 초기화된 상태이므로 아래 if문 내부까지 실행하고 반복된다.
             }
 
             if(result < 1 || result > 2 )// 주어진 값 이외의 수를 선택한 경우
@@ -102,24 +102,29 @@ public class CafeAction
 
         final int KEEP = 1; // 하루 손님 계속 받는 선택지
         final int STOP = 2; // 하루 손님 그만받는 선택지
+        final int ITEM = 3; // 아이템 사용하는 선택지
 
         while(true)
         {
             switch(result)
             {
-                case KEEP : business(); // 손님 계속 받는다
+                case KEEP : // 손님 계속 받는다
+                    business();
 
                     break;
 
-                case STOP:
+                case STOP: // 다음날로 시간이 흐른다.
 
                     System.out.println();
                     System.out.println();
                     System.out.println(" ☾ ⋆*･ﾟ ⋆*･ﾟ ⋆. ･ﾟ. ⋆ * ･ﾟ. ⋆⋆ *･ﾟ⋆*･ﾟ ⋆ . ･ﾟ .⋆*･ﾟ .⋆ ⋆*･ﾟ ⋆*･ﾟ ⋆･ﾟ");
                     System.out.println();
                     System.out.println();
+                    start();
 
-                            start();     // 다음날로 시간이 흐른다.
+                    break;
+                    
+                case ITEM : // 아이템을 사용할 수 있는 공간으로 이동한다.
 
                     break;
             }

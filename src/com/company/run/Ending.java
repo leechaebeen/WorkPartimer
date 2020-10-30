@@ -5,14 +5,14 @@ public class Ending
     // 1. HP == 0 엔딩 : 쓰러짐 엔딩
     public void fallDownEnding()
     {
-        System.out.println(" 으아아아 ㅇㅏ");
-        System.out.println("　　　　　　   ㅇ");
-        System.out.println("　　　　　　　    ⋌");
-        System.out.println("　　　　　　　　   　 ㅇ");
-        System.out.println("　 　　　　　　　      ㅜ");
-        System.out.println("　　　　　　　　　　  　　 .");
-        System.out.println("　　　　　　　　　　　   　 .");
-        System.out.println("　　　　　　　　　　　　　    .");
+        System.out.println(" 으 아 아 아 ㅇㅏ");
+        System.out.println("　　　　　　      ㅇ");
+        System.out.println("　　　　　         ⋌");
+        System.out.println("　　　　 　　   　     ㅇ");
+        System.out.println("　 　 　　　　          ㅜ");
+        System.out.println("　　　　　　　　　  　　     .");
+        System.out.println("　 　　　　　　　　　   　      .");
+        System.out.println(" 　 　　　　　　　　　　　         .");
 
         System.out.println();
         System.out.println(" %s님은 고된 노동과 스트레스를 견디지 못하고 쓰러졌습니다.");

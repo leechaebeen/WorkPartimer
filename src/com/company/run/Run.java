@@ -31,7 +31,6 @@ public class Run
         System.out.println();
         System.out.println();
 
-
         System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
         System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
         System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");

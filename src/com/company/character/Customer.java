@@ -98,5 +98,6 @@ public class Customer extends Character
 
     }
 
+    // 음료 잘못 나왔을 때 반응
 
 }
