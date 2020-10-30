@@ -9,6 +9,13 @@ public class Ending
     // 1. HP == 0 엔딩 : 쓰러짐 엔딩
     public void fallDownEnding()
     {
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println("========================================================================");
+        System.out.println();
+        System.out.println();
+        System.out.println();
         System.out.println(" 으 아 아 아 ㅇㅏ");
         System.out.println("　　　　　　       ㅇ");
         System.out.println("　　　　　          ⋌");
@@ -32,6 +39,9 @@ public class Ending
         System.out.println();
         System.out.println();
         System.out.println("========================================================================");
+        System.out.println();
+        System.out.println();
+        System.out.println();
         System.out.println(" 더러워서 못 해먹겠다... 때려쳐야지. ");
         System.out.println();
         System.out.printf(" %s님은 스트레스를 견디지 못하고 자발적으로 카페를 떠났습니다.\n", Partimer.getName());
@@ -65,6 +75,15 @@ public class Ending
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.");
         System.out.println();
         System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
 
         while(check) // check 는 위에서 입력받은 유저이름이 한글인걸 확인했기 때문에 true 인 상황이다.
         {

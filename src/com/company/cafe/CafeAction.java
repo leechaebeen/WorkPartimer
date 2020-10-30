@@ -30,7 +30,9 @@ public class CafeAction
         Cafe.setTodayCustomerNum(0);                // 카페 오픈 전 하루 방문자 수 0으로 초기화
         Cafe.setChair(Cafe.getSetChair());          // 카페 오픈 전 자리를 세팅된 자리값으로 초기화
 
+        System.out.println();
         System.out.println("                           카페를 오픈했습니다. ");
+        System.out.println();
 
         business(); // 카페 운영하면서 손님 받는 메소드
 
@@ -51,7 +53,7 @@ public class CafeAction
             Ending ending = new Ending();   // 쓰러지는 엔딩
             ending.fallDownEnding();
         }
-        else if(Partimer.getMood()==0)       // Mood 가 0이 된다면
+        else if(Partimer.getFeeling()==0)       // Mood 가 0이 된다면
         {
             Ending ending = new Ending();   // 자발적으로 관두는 엔딩
             ending.toQuitEnding();

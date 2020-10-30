@@ -1,7 +1,7 @@
 package com.company.character;
 
 import com.company.beverage.Beverage;
-import com.company.run.Ending;
+import com.sun.org.apache.xml.internal.utils.SystemIDResolver;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -54,7 +54,7 @@ public class SpecialCustomer extends Customer
         System.out.println(" 손님 : " + iceOption + beverage.getName()+".");
         System.out.println("       " + whippingCream + takeout );
 
-        Partimer.setMood(Partimer.getMood()-1);
+        Partimer.setFeeling(Partimer.getFeeling()-1);
         Partimer.setHp(Partimer.getHp()-1);
 
     }
@@ -117,8 +117,7 @@ public class SpecialCustomer extends Customer
         System.out.println();
 
         Partimer.setHp(Partimer.getHp()-1);
-        Partimer.setMood(Partimer.getMood()-2);
-
+        Partimer.setFeeling(Partimer.getFeeling()-2);
 
     }
     
@@ -135,6 +134,7 @@ public class SpecialCustomer extends Customer
     // 유형4 잘못찾아옴
     public void orderWrong()
     {
+        System.out.println(" 손님 : 여기 빙수 파나요 ? " );
 
     }
 
@@ -144,9 +144,10 @@ public class SpecialCustomer extends Customer
         boolean check = true;   // 반복 여부 체크하기 위한 변수
         int result = 0;         // 선택값을 비교하기 위한 변수
 
-        System.out.println("      ＿人人人人人人人人＿ ");
-        System.out.println("      ＞　안녕하십니까!  ＜");
-        System.out.println("      ￣^Y^Y^Y^Y^Y^Y^Y￣ ");
+        System.out.println(" 손님 :     ＿人人人人人人人人＿ ");
+        System.out.println("           ＞　안녕하십니까!  ＜");
+        System.out.println("           ￣^Y^Y^Y^Y^Y^Y^Y￣ ");
+
 
         System.out.println();
         System.out.println("========================================================================");
@@ -176,14 +177,14 @@ public class SpecialCustomer extends Customer
 
                         if(result == randomNum)                 // 선택한 값과 랜덤값이 같다면
                         {
-                            if(Partimer.getMood()!=Partimer.getSetMood()) // 현재 mood 가 최대 mood 가 아니라면
+                            if(Partimer.getFeeling()!=Partimer.getSetFeeling()) // 현재 mood 가 최대 mood 가 아니라면
                             {
-                                Partimer.setMood(Partimer.getMood()+1); // 현재 mood에서 1 증가
+                                Partimer.setFeeling(Partimer.getFeeling()+1); // 현재 mood에서 1 증가
                             }
 
                             System.out.println("========================================================================");
-                            System.out.printf(" %s님의 mood 가 1 회복되었습니다.\n",Partimer.getName());
-                            System.out.printf(" 현재 %s님의 mood : %d\n", Partimer.getName(), Partimer.getMood());
+                            System.out.printf(" %s님의 feeling 이 1 회복되었습니다.\n",Partimer.getName());
+                            System.out.printf(" 현재 %s님의 feeling : %d\n", Partimer.getName(), Partimer.getFeeling());
                             System.out.println("========================================================================");
                             System.out.println();
                         }
@@ -217,9 +218,9 @@ public class SpecialCustomer extends Customer
                 }
 
 
-        System.out.println("      ＿人人人人人人人人＿ ");
-        System.out.println("      ＞  안녕히 계세요! ＜");
-        System.out.println("      ￣^Y^Y^Y^Y^Y^Y^Y￣ ");
+        System.out.println(" 손님 :     ＿人人人人人人人人＿ ");
+        System.out.println("           ＞  안녕히 계세요! ＜");
+        System.out.println("           ￣^Y^Y^Y^Y^Y^Y^Y￣ ");
         System.out.println();
 
 

@@ -67,9 +67,9 @@ public class Run
         System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。    ");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
-        System.out.println("　 　　　　　　。　　　　       　三 ඞ;;   　  　ﾟ　　　.　 　　　　　　　　.");
-        System.out.println(". 　。　　　        　      　。　　　　    •　 　        　　　     　　");
-        System.out.printf("\t\t。\t\t %s님은 결국 지구로 추방당했습니다 . . .     .          。\n", Partimer.getName());
+        System.out.println("　 　　　　　　。　　　 。      　三 ඞ;;   　  　ﾟ　　　.　 　　　　　　　　.");
+        System.out.println(". 　。　　　        　    　。　　　　      •　 　        　　　     　　");
+        System.out.printf("\t\t。\t\t\t %s님은 결국 추방당했습니다 . . .     .          。\n", Partimer.getName());
         System.out.println(",　　　　　　　　　.　 .　　　　　　　　.");
         System.out.println("　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.");

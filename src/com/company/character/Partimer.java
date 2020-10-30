@@ -11,11 +11,13 @@ public class Partimer extends Character
 
     private static int skillLevel = 3;  // 현재 숙련도 : 하루에 등장하는 손님 수 , 일주일에 1 씩 증가
 
-    private static int mood = 10;       // 현재 기분 : 한 주가 지날 때마다 세팅된 기분값으로 초기화
-    private static int setMood = 10;    // 세팅된 기분 : 아이템 사용하면 증가 가능
+    private static int feeling = 10;       // 현재 기분 값: 한 주가 지날 때마다 세팅된 기분값으로 초기화
+    private static int setFeeling = 10;    // 세팅된 기분 값 : 아이템 사용하면 증가 가능
 
     private static int salary = 10;     // 한 주에 받는 급여. 단위는 코인이다.
     private static int property = 0;    // 유저가 소유하고 있는 총 재산
+
+    private static int failNum = 0;     // 음료 제조 실패 총 횟수
 
 
     private static int workingDays = 0; // 총 근무일자 : 7일마다 상점 방문 가능 / 최대 플레이 가능 일자 설정하기,
@@ -41,14 +43,14 @@ public class Partimer extends Character
         Partimer.skillLevel = skillLevel;
     }
 
-    public static int getMood()
+    public static int getFeeling()
     {
-        return mood;
+        return feeling;
     }
 
-    public static void setMood(int mood)
+    public static void setFeeling(int feeling)
     {
-        Partimer.mood = mood;
+        Partimer.feeling = feeling;
     }
 
     public static int getSalary()
@@ -81,13 +83,23 @@ public class Partimer extends Character
         Partimer.workingDays = workingDays;
     }
 
-    public static int getSetMood()
+    public static int getSetFeeling()
     {
-        return setMood;
+        return setFeeling;
     }
 
-    public static void setSetMood(int setMood)
+    public static void setSetFeeling(int setFeeling)
     {
-        Partimer.setMood = setMood;
+        Partimer.setFeeling = setFeeling;
+    }
+
+    public static int getFailNum()
+    {
+        return failNum;
+    }
+
+    public static void setFailNum(int failNum)
+    {
+        Partimer.failNum = failNum;
     }
 }
