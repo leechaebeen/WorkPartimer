@@ -16,17 +16,26 @@ public class Ending
         System.out.println();
         System.out.println();
         System.out.println();
-        System.out.println(" 으 아 아 아 ㅇㅏ");
-        System.out.println("　　　　　　       ㅇ");
-        System.out.println("　　　　　          ⋌");
-        System.out.println("　　　　 　　   　      ㅇ");
-        System.out.println("　 　 　　　　           ㅜ");
-        System.out.println("　　　　　　　　　  　　     .");
-        System.out.println("　 　　　　　　　　　   　      .");
-        System.out.println(" 　 　　　　　　　　　　　         .");
+        System.out.println("\t\t\t\t 으 아 아 아 ㅇㅏ");
+        System.out.println("\t\t\t\t　　　　　　       ㅇ");
+        System.out.println("\t\t\t\t　　　　　          ⋌");
+        System.out.println("\t\t\t\t　　　　 　　   　      ㅇ");
+        System.out.println("\t\t\t\t　 　 　　　　           ㅜ");
+        System.out.println("\t\t\t\t　　　　　　　　　  　　     .");
+        System.out.println("\t\t\t\t　 　　　　　　　　　   　      .");
+        System.out.println("\t\t\t\t 　 　　　　　　　　　　　         .");
+        System.out.println("\t\t\t\t 　 　　　　　　　　　　　             ඞ");
 
         System.out.println();
-        System.out.printf(" %s님은 고된 노동과 스트레스를 견디지 못하고 쓰러졌습니다.\n",Partimer.getName());
+        System.out.println();
+
+        System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
+        System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
+        System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
+        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
+        System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
+        System.out.printf("\t\t %s님은 고된 노동과 스트레스를 견디지 못하고 쓰러졌습니다.\n",Partimer.getName());
+        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println();
         finalEnding();
     }
@@ -42,10 +51,18 @@ public class Ending
         System.out.println();
         System.out.println();
         System.out.println();
-        System.out.println(" 더러워서 못 해먹겠다... 때려쳐야지. ");
+        System.out.println("\t\t\t\t 더러워서 못 해먹겠다... 때려쳐야지. ");
+
         System.out.println();
-        System.out.printf(" %s님은 스트레스를 견디지 못하고 자발적으로 카페를 떠났습니다.\n", Partimer.getName());
         System.out.println();
+
+        System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
+        System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
+        System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
+        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
+        System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
+        System.out.printf("\t\t %s님은 스트레스를 견디지 못하고 자발적으로 카페를 떠났습니다.\n", Partimer.getName());
+        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println();
         finalEnding();
 
@@ -66,9 +83,18 @@ public class Ending
         System.out.println();
         System.out.println();
         System.out.println();
-        System.out.println(" 오늘도 또 실수했다... ");
+        System.out.println("\t\t\t\t 오늘도 또 실수했다... ");
+
         System.out.println();
-        System.out.printf(" %s님은 실수가 잦아 카페에서 해고되었습니다. \n",Partimer.getName());
+        System.out.println();
+
+        System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
+        System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
+        System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
+        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
+        System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
+        System.out.printf("\t\t %s님은 실수가 잦아 카페에서 해고되었습니다. \n",Partimer.getName());
+        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println();
         System.out.println();
         finalEnding();
@@ -81,11 +107,8 @@ public class Ending
         boolean check =true;    // 반복여부 체크하기 위한 변수
         String resultStr;
         int result = 0;
-        
-        System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
-        System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
-        System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
-        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
+
+
         System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
         System.out.println("　 　　　　　　。　　　　　　　　- End - 　　ﾟ　　　.　　　　　　　　　　　　　　.");
         System.out.println(",　　　　　　　　　.　 .　　　　　　　　.");

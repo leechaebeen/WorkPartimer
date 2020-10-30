@@ -34,7 +34,7 @@ public class SpecialCustomer extends Customer
             iceOption = " 차가운걸로. ";
         }
 
-        // 휘핑 선택값에 따라 대사 분기
+        // 휘핑크림 선택값에 따라 대사 분기
         if(beverage.getWhippingCream()==0) // 0 이면 휘핑크림 X
         {
             whippingCream = "휘핑크림.";
@@ -181,8 +181,10 @@ public class SpecialCustomer extends Customer
         String resultStr;
         int result = 0 ;
 
-        System.out.println(" 손님 : ..." );
-        System.out.println("       얼굴에 복이 많아요. ");
+        System.out.println(" 손님 : 얼굴에 복이 많으세요. ");
+        System.out.println("              :  ");
+        System.out.println("              :  ");
+        System.out.println();
 
         while(check)
         {

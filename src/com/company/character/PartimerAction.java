@@ -107,6 +107,7 @@ public class PartimerAction
         } else    // 일치하지 않으면
         {
             Partimer.setFailNum(Partimer.getFailNum() + 1);   // 음료제조 실패 횟수 1 증가
+            Partimer.setHp(Partimer.getHp() - 1 );            // 유저 체력 1 감소
         }
 
         return result;
@@ -168,6 +169,7 @@ public class PartimerAction
                         System.out.println(" 오답입니다. ");
 
                         Partimer.setFailNum(Partimer.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
+                        Partimer.setHp(Partimer.getHp() - 1 );            // 유저 체력 1 감소
                         return false;
                     }
                 }
@@ -178,6 +180,7 @@ public class PartimerAction
                         System.out.println("------------------------------------------------------------------------");
                         System.out.println(" 오답입니다. ");
                         Partimer.setFailNum(Partimer.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
+                        Partimer.setHp(Partimer.getHp() - 1 );            // 유저 체력 1 감소
                         return false;
                     }
                     else
@@ -237,6 +240,7 @@ public class PartimerAction
                         System.out.println(" 오답입니다. ");
 
                         Partimer.setFailNum(Partimer.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
+                        Partimer.setHp(Partimer.getHp() - 1 );            // 유저 체력 1 감소
                         return false;
                     }
                 } else // HOT 이라면
@@ -246,6 +250,7 @@ public class PartimerAction
                         System.out.println("------------------------------------------------------------------------");
                         System.out.println(" 오답입니다. ");
                         Partimer.setFailNum(Partimer.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
+                        Partimer.setHp(Partimer.getHp() - 1 );            // 유저 체력 1 감소
 
                         return false;
                     } else
@@ -306,6 +311,7 @@ public class PartimerAction
                             System.out.println(" 오답입니다. ");
 
                             Partimer.setFailNum(Partimer.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
+                            Partimer.setHp(Partimer.getHp() - 1 );            // 유저 체력 1 감소
                             return false;
                         }
                     } else // 휘핑크림 올라가지 않는다면
@@ -315,6 +321,7 @@ public class PartimerAction
                             System.out.println("------------------------------------------------------------------------");
                             System.out.println(" 오답입니다. ");
                             Partimer.setFailNum(Partimer.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
+                            Partimer.setHp(Partimer.getHp() - 1 );            // 유저 체력 1 감소
                             return false;
 
                         } else
