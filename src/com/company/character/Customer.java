@@ -78,23 +78,20 @@ public class Customer extends Character
         }
 
         // 테이크아웃
-        if(checkTakeout())  // checkTakeout() 는 테이크아웃하면 true 반환
+        boolean checkTakeout = checkTakeout();
+        if(checkTakeout)  // checkTakeout() 는 테이크아웃하면 true 반환
         {
             takeout = " 가지고 갈거에요.";
         }
         else
         {
             takeout = " 먹고 갈거에요.";
-
-            Cafe.setChair(Cafe.getChair()-1);// 매장 자리를 하나 줄인다.
-            // 자리와, 유리잔 또는 머그잔 감소시키기. 0이면 테이크아웃잔 에 준다고 양해구하기
-
         }
 
         System.out.println(" 손님 : " + iceOption + beverage.getName() + " 주세요.");
         System.out.println("       " + whippingCream + takeout );
 
-        if(!checkTakeout()) // 매장에서 먹고 간다면
+        if(!checkTakeout) // 매장에서 먹고 간다면
         {
             Cafe.setChair(Cafe.getChair()-1);// 매장 자리를 하나 줄인다.
 

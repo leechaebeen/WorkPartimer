@@ -45,7 +45,9 @@ public class SpecialCustomer extends Customer
         }
 
         // 테이크아웃 선택 값에 따라 대사 분기
-        if(checkTakeout())  // checkTakeout() 는 테이크아웃하면 true 반환
+        boolean checkTakeout = checkTakeout();
+
+        if(checkTakeout)  // checkTakeout() 는 테이크아웃하면 true 반환
         {
             takeout = " 테이크아웃.";
         }
@@ -60,7 +62,7 @@ public class SpecialCustomer extends Customer
         Partimer.setFeeling(Partimer.getFeeling()-1);
         Partimer.setHp(Partimer.getHp()-1);
 
-        if(!checkTakeout()) // 매장에서 먹고 간다면
+        if(!checkTakeout) // 매장에서 먹고 간다면
         {
             Cafe.setChair(Cafe.getChair()-1);// 매장 자리를 하나 줄인다.
 
@@ -114,17 +116,15 @@ public class SpecialCustomer extends Customer
         }
 
         // 테이크아웃 선택 값에 따라 대사 분기
-        if(checkTakeout())  // checkTakeout() 는 테이크아웃하면 true 반환
+        boolean checkTakeout = checkTakeout();
+
+        if(checkTakeout)  // checkTakeout() 는 테이크아웃하면 true 반환
         {
             takeout = " 하... 테이크아웃이요. 그만 좀 물어보세요";
         }
         else    // false 인 경우
         {
             takeout = "하...먹고 갈거에요. 그만 물어보세요.";
-
-            Cafe.setChair(Cafe.getChair()-1);// 매장 자리를 하나 줄인다.
-            // 유리잔 또는 머그잔 감소시키기. 0이면 테이크아웃잔 에 준다고 양해구하기
-
         }
 
         System.out.println(" 손님 : " + beverage.getName());
@@ -149,7 +149,7 @@ public class SpecialCustomer extends Customer
         Partimer.setHp(Partimer.getHp()-1);
         Partimer.setFeeling(Partimer.getFeeling()-2);
 
-        if(!checkTakeout()) // 매장에서 먹고 간다면
+        if(!checkTakeout) // 매장에서 먹고 간다면
         {
             Cafe.setChair(Cafe.getChair()-1);// 매장 자리를 하나 줄인다.
 
