@@ -1,17 +1,15 @@
 package com.company.cafe;
 
-import com.company.beverage.Beverage;
 import com.company.character.*;
 import com.company.run.Ending;
 import com.company.run.Run;
 
-import javax.lang.model.util.ElementScanner6;
 import java.util.Random;
 import java.util.Scanner;
 
+// 게임의 메인 흐름을 담은 클래스
 public class CafeAction
 {
-
     // 하루 시작 메소드: 몇주차 며칠인지 보여줌
     public void start()
     {
@@ -62,9 +60,6 @@ public class CafeAction
     // 카페 운영하면서 손님 받는 메소드
     public void business()
     {
-
-        boolean check;      // 장사 계속 할지말지 반복여부 체크하는 변수
-        int result = 0;     // 주어진 값(1.장사 계속 2.장사 마감) 외의 수를 입력했는지 비교할 때 사용할 변수
         String[] nums = {"첫", "두", "세", "네", "다섯", "여섯", "일곱", "여덟", "아홉", "열"}; // 손님수 표현하기 위한 배열
 
         // 유저 상태 체크
@@ -79,7 +74,6 @@ public class CafeAction
             ending.toQuitEnding();
         }
 
-
         System.out.println("------------------------------------------------------------------------");
         System.out.println("                        " + nums[Cafe.getTodayCustomerNum()] + "번째 손님이 등장했습니다.");
         System.out.println("------------------------------------------------------------------------");
@@ -88,22 +82,33 @@ public class CafeAction
         Random rd = new Random();
         int randomNum = rd.nextInt(10)+1;   // 1 ~ 10 사이의 랜덤값을 생성한다.
 
+        Run run = new Run();    // 실행 객체 생성
+
         if(randomNum <=7)  // 랜덤값이 1 ~ 7 인 경우 일반 손님이 방문한다.
         {
-            comeCustomer(); // 음료 객체 생성하고, 손님이 주문하고, 음료 만든다.
+            run.comeCustomer(); // 음료 객체 생성하고, 손님이 주문하고, 음료 만든다.
         }
         else if(randomNum==8||randomNum==9) // 랜덤값이 8,9인 경우 특별 손님이 방문한다.
         {
-            comeSpecialCustomer(); // 음료 객체 생성하고, 손님이 주문하고, 음료 만든다.
+            run.comeSpecialCustomer(); // 음료 객체 생성하고, 손님이 주문하고, 음료 만든다.
         }
         else // 랜덤값이 10인 경우 특별 손님이 방문한다.
         {
-            comeSecretCustomer();   // 음료 객체 생성하고, 손님이 주문하고, 유저가 음료 만든다.
+            run.comeSecretCustomer();   // 음료 객체 생성하고, 손님이 주문하고, 유저가 음료 만든다.
         }
+
+        selBusiness();  // 선택지 호출
+
+    }// end business()
+
+    public void selBusiness()
+    {
+        boolean check;      // 장사 계속 할지말지 반복여부 체크하는 변수
+        int result = 0;     // 주어진 값(1.장사 계속 2.장사 마감) 외의 수를 입력했는지 비교할 때 사용할 변수
 
         final int KEEP = 1; // 하루 손님 계속 받는 선택지
         final int STOP = 2; // 하루 손님 그만받는 선택지
-        final int ITEM = 3; // 아이템 사용하는 선택지 
+        final int ITEM = 3; // 아이템 사용하는 선택지
 
         do {
 
@@ -164,132 +169,14 @@ public class CafeAction
                     start();
 
                     break;
-                    
-                case ITEM : // 아이템 사용 메소드
+
+                case ITEM : // 보유한 아이템 보여주는 메소드 호출
+                    Run run = new Run();
+                    run.myItem();
                     break;
             }
         }
-
-
-    }// end business()
-
-    // 일반손님 등장 메소드
-    public void comeCustomer()
-    {
-        Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum()+1); // 기존의 하루 방문자 수에 한명 더하기
-        Cafe.setTotalCustomerNum(Cafe.getTotalCustomerNum()+1); // 기존의 총 방문자 수에 한명 더하기
-
-        System.out.println();
-
-        Customer customer = new Customer();           // 손님 객체 생성
-
-        Beverage beverage = customer.orderBeverage(); // 주문할 음료 객체 생성
-        customer.orderToPartimer(beverage);           // 손님이 음료 주문
-
-        PartimerAction partimerAction = new PartimerAction();   // 유저 액션 객체 생성
-        boolean result = partimerAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
-        partimerAction.makeBeverageResult(result);              // 결과에 따른 출력
-
     }
-
-    // 특별 손님 등장 메소드
-    public void comeSpecialCustomer()
-    {
-        final int TALK_DOWN = 1;        // 반말하는 유형
-        final int FIGHT = 2;            // 시비거는 유형
-        final int FALSE_RELIGION = 3;   // 사이비 유형
-        final int WRONG = 4;            // 잘못 찾아온 유형
-        final int PRESENT = 5;          // 선물주는 유형
-
-        Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum()+1); // 기존의 하루 방문자 수에 하나 더하기
-        Cafe.setTotalCustomerNum(Cafe.getTotalCustomerNum()+1); // 기존의 총 방문자 수에 한명 더하기
-
-        SpecialCustomer specialCustomer = new SpecialCustomer(); // 특별 손님 객체 생성
-        Beverage beverage = specialCustomer.orderBeverage();     // 주문할 음료 객체 생성
-
-        System.out.println();
-
-        // 음료 주문 유형 랜덤으로 실행하기
-        Random rd = new Random();
-        int typeNum = rd.nextInt(5)+1; //1~5 랜덤값 반환해서 typeNum 변수에 저장
-
-        switch(typeNum)
-        {
-            case TALK_DOWN : specialCustomer.orderTalkDown(beverage);// 반말하는 손님
-                break;
-
-            case FIGHT: specialCustomer.orderFight(beverage);       // 시비거는 손님
-                break;
-
-            case FALSE_RELIGION: specialCustomer.orderFalseReligion();// 사이비 손님
-                break;
-
-            case WRONG: specialCustomer.orderWrong();                 // 잘못찾아온 손님
-                break;
-
-            case PRESENT: specialCustomer.orderPresent();             // 선물주는 손님
-                break;
-
-        }
-
-        if(typeNum == 1 ||typeNum == 2)  // 음료를 주문하는 특별손님의 경우에만
-        {
-            // 유저가 음료 만들기
-            PartimerAction partimerAction = new PartimerAction();   // 유저 액션 객체 생성
-            boolean result = partimerAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
-            partimerAction.makeBeverageResult(result);              // 결과에 따른 출력
-        }
-    }
-
-    // 비밀 손님 등장 메소드
-    public void comeSecretCustomer()
-    {
-        final int COMMON = 1;           // 일반 손님 유형
-        final int TALK_DOWN = 2;        // 반말하는 유형
-        final int FIGHT = 3;            // 시비거는 유형
-
-        System.out.println("비밀 손님 등장!");
-
-        Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum()+1); // 기존의 하루 방문자 수에 하나 더하기
-        Cafe.setTotalCustomerNum(Cafe.getTotalCustomerNum()+1); // 기존의 총 방문자 수에 한명 더하기
-
-        // 매장에 자리가 있는지 확인
-        if(Cafe.getChair()==0)    // 매장에 자리가 없으면 손님이 나간다.
-        {
-            System.out.println(" 매장에 자리가 없어서 손님이 나갔다 . . .");
-            System.out.println(" 자리를 늘리던가 해야지 원 . . . ");
-        }
-        else
-        {
-            SecretCustomer secretCustomer = new SecretCustomer();  // 비밀 손님 객체 생성
-            Beverage beverage = secretCustomer.orderBeverage();    // 주문할 음료 객체 생성
-
-            System.out.println();
-
-            // 음료 주문 유형 랜덤으로 실행하기
-            Random rd = new Random();
-            int typeNum = rd.nextInt(3)+1; //1~3 랜덤값 반환해서 typeNum 변수에 저장
-
-            switch(typeNum)
-            {
-                case COMMON: secretCustomer.orderToPartimer(beverage);   // 일반 손님
-                    break;
-
-                case TALK_DOWN: secretCustomer.orderTalkDown(beverage);    // 반말하는 손님
-                    break;
-
-                case FIGHT: secretCustomer.orderFight(beverage);       // 시비거는 손님
-                    break;
-            }
-
-            // 유저가 음료 만들기
-            PartimerAction partimerAction = new PartimerAction();   // 유저 액션 객체 생성
-            boolean result = partimerAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
-            partimerAction.makeBeverageResult(result);              // 결과에 따른 출력
-        }
-
-    }
-
 
     // 주말 초기화면  메소드(정보 확인 가능, 상점 이용 가능, 아이템 사용 가능)
     public void weekendInfo()

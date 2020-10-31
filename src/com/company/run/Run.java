@@ -1,11 +1,14 @@
 package com.company.run;
-import java.net.ServerSocket;
+import.java.util.Scanner
+import java.util.Random;
 import java.util.Scanner;
 
+import com.company.beverage.Beverage;
 import com.company.cafe.Cafe;
 import com.company.cafe.CafeAction;
 import com.company.cafe.Item;
-import com.company.character.Partimer;
+import com.company.character.*;
+
 import java.util.regex.Pattern;
 
 // 선택지에 따른 출력을 실행하는 클래스
@@ -118,6 +121,125 @@ public class Run
 
     } //end initialRun()
 
+// 손님 등장 메소드
+
+    // 일반손님 등장 메소드
+    public void comeCustomer()
+    {
+        Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum()+1); // 기존의 하루 방문자 수에 한명 더하기
+        Cafe.setTotalCustomerNum(Cafe.getTotalCustomerNum()+1); // 기존의 총 방문자 수에 한명 더하기
+
+        System.out.println();
+
+        Customer customer = new Customer();           // 손님 객체 생성
+
+        Beverage beverage = customer.orderBeverage(); // 주문할 음료 객체 생성
+        customer.orderToPartimer(beverage);           // 손님이 음료 주문
+
+        PartimerAction partimerAction = new PartimerAction();   // 유저 액션 객체 생성
+        boolean result = partimerAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
+        partimerAction.makeBeverageResult(result);              // 결과에 따른 출력
+
+    }
+
+    // 특별 손님 등장 메소드
+    public void comeSpecialCustomer()
+    {
+        final int TALK_DOWN = 1;        // 반말하는 유형
+        final int FIGHT = 2;            // 시비거는 유형
+        final int FALSE_RELIGION = 3;   // 사이비 유형
+        final int WRONG = 4;            // 잘못 찾아온 유형
+        final int PRESENT = 5;          // 선물주는 유형
+
+        Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum()+1); // 기존의 하루 방문자 수에 하나 더하기
+        Cafe.setTotalCustomerNum(Cafe.getTotalCustomerNum()+1); // 기존의 총 방문자 수에 한명 더하기
+
+        SpecialCustomer specialCustomer = new SpecialCustomer(); // 특별 손님 객체 생성
+        Beverage beverage = specialCustomer.orderBeverage();     // 주문할 음료 객체 생성
+
+        System.out.println();
+
+        // 음료 주문 유형 랜덤으로 실행하기
+        Random rd = new Random();
+        int typeNum = rd.nextInt(5)+1; //1~5 랜덤값 반환해서 typeNum 변수에 저장
+
+        switch(typeNum)
+        {
+            case TALK_DOWN : specialCustomer.orderTalkDown(beverage);// 반말하는 손님
+                break;
+
+            case FIGHT: specialCustomer.orderFight(beverage);       // 시비거는 손님
+                break;
+
+            case FALSE_RELIGION: specialCustomer.orderFalseReligion();// 사이비 손님
+                break;
+
+            case WRONG: specialCustomer.orderWrong();                 // 잘못찾아온 손님
+                break;
+
+            case PRESENT: specialCustomer.orderPresent();             // 선물주는 손님
+                break;
+
+        }
+
+        if(typeNum == 1 ||typeNum == 2)  // 음료를 주문하는 특별손님의 경우에만
+        {
+            // 유저가 음료 만들기
+            PartimerAction partimerAction = new PartimerAction();   // 유저 액션 객체 생성
+            boolean result = partimerAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
+            partimerAction.makeBeverageResult(result);              // 결과에 따른 출력
+        }
+    }
+
+    // 비밀 손님 등장 메소드
+    public void comeSecretCustomer()
+    {
+        final int COMMON = 1;           // 일반 손님 유형
+        final int TALK_DOWN = 2;        // 반말하는 유형
+        final int FIGHT = 3;            // 시비거는 유형
+
+        System.out.println("비밀 손님 등장!");
+
+        Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum()+1); // 기존의 하루 방문자 수에 하나 더하기
+        Cafe.setTotalCustomerNum(Cafe.getTotalCustomerNum()+1); // 기존의 총 방문자 수에 한명 더하기
+
+        // 매장에 자리가 있는지 확인
+        if(Cafe.getChair()==0)    // 매장에 자리가 없으면 손님이 나간다.
+        {
+            System.out.println(" 매장에 자리가 없어서 손님이 나갔다 . . .");
+            System.out.println(" 자리를 늘리던가 해야지 원 . . . ");
+        }
+        else
+        {
+            SecretCustomer secretCustomer = new SecretCustomer();  // 비밀 손님 객체 생성
+            Beverage beverage = secretCustomer.orderBeverage();    // 주문할 음료 객체 생성
+
+            System.out.println();
+
+            // 음료 주문 유형 랜덤으로 실행하기
+            Random rd = new Random();
+            int typeNum = rd.nextInt(3)+1; //1~3 랜덤값 반환해서 typeNum 변수에 저장
+
+            switch(typeNum)
+            {
+                case COMMON: secretCustomer.orderToPartimer(beverage);   // 일반 손님
+                    break;
+
+                case TALK_DOWN: secretCustomer.orderTalkDown(beverage);    // 반말하는 손님
+                    break;
+
+                case FIGHT: secretCustomer.orderFight(beverage);       // 시비거는 손님
+                    break;
+            }
+
+            // 유저가 음료 만들기
+            PartimerAction partimerAction = new PartimerAction();   // 유저 액션 객체 생성
+            boolean result = partimerAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
+            partimerAction.makeBeverageResult(result);              // 결과에 따른 출력
+        }
+
+    }
+
 // 주말 정보확인 메소드 ---------------------------------------------------------------------------------------------------
 
     // 정보 확인 메소드 1.내 정보 확인 2.카페 정보 확인
@@ -129,12 +251,13 @@ public class Run
 
         final int MY_INFO = 1;
         final int CAFE_INFO = 2;
-        final int EXIT = 3;
+        final int MY_ITEM =3;
+        final int EXIT = 4;
 
         while(check)
         {
             System.out.println("========================================================================");
-            System.out.printf(" 1. %s님의 정보 보기  2.카페정보 보기 3.이전 화면 \n", Partimer.getName());
+            System.out.printf(" 1. %s님의 정보 보기  2.카페 정보 보기 3.보유 아이템 확인 4.이전 화면 \n", Partimer.getName());
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
             Scanner sc = new Scanner(System.in);
@@ -174,6 +297,9 @@ public class Run
 
             case  CAFE_INFO: cafeInfo(); // 카페 정보 확인
 
+                break;
+
+            case MY_ITEM:   // 보유 아이템 확인
                 break;
 
             case EXIT:  cafeAction.weekend();   // 주말 초기화면 호출
@@ -295,7 +421,7 @@ public class Run
             case  BUY_ITEM: buyItem(); // 아이템 구입
                 break;
 
-            case  MY_ITEM:      // 보유 아이템 정보 보기
+            case  MY_ITEM: myItem();    // 보유 아이템 정보 보기
                 break;
 
             case EXIT:  cafeAction.weekend();   // 주말 초기화면 호출
@@ -1229,44 +1355,203 @@ public class Run
             final int QUIT_ENDING = 2;      // 그만두는 엔딩
             final int SCOUT_ENDING = 3;     // 스카웃 엔딩
             final int BOSS_ENDING = 4;      // 사장 엔딩
-            final int PARTIMER_ENDING = 5;  // 알바 엔딩
-            final int GET_FIRE_ENDING = 6;  // 해고 엔딩
+            final int GET_FIRE_ENDING = 5;  // 해고 엔딩
+            final int PARTIMER_ENDING = 6;  // 알바 엔딩
+
 
             System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
             System.out.println("=========================       공개된 엔딩      =========================");
             System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
+            System.out.println();
 
-            for (int i = 0; i < endings.length ; i++)
+            for (int i = 0; i < endings.length; i++)
             {
-                if(endings[i]!=0)
+                if (endings[i] == FALL_DOWN_ENDING)
                 {
-                    switch(endings[i])
-                    {
-                        case FALL_DOWN_ENDING: // final 상수로 바꾸기
-                            break;
-
-                        case QUIT_ENDING:
-                            break;
-
-                        case SCOUT_ENDING:
-                            break;
-
-                        case BOSS_ENDING:
-                            break;
-
-                        case PARTIMER_ENDING:
-                            break;
-
-                        case GET_FIRE_ENDING:
-                            break;
-                    }
+                    System.out.printf(" 과로 엔딩 : %s님은 고된 노동에 시달리다 쓰러졌습니다. \n", Partimer.getName());
+                    System.out.println("------------------------------------------------------------------------");
+                    System.out.println(" ✨ 과로 엔딩 tip ✨ ");
+                    System.out.println("    체력이 0 이 되면 과로 엔딩의 조건이 달성됩니다. ");
+                    System.out.println("    아이템을 적절히 이용해서 체력을 관리해주세요 ! ");
                 }
+                else
+                {
+                    System.out.println(" ??? 엔딩 : 공개되지 않은 엔딩입니다.");
+                }
+                System.out.println("------------------------------------------------------------------------");
+
+                if(endings[i] == QUIT_ENDING)
+                {
+                    System.out.printf(" 사표 엔딩 : %s님은 극심한 스트레스를 견디지 못해 카페를 떠났습니다. \n", Partimer.getName());
+                    System.out.println("------------------------------------------------------------------------");
+                    System.out.println(" ✨ 사표 엔딩 tip ✨ ");
+                    System.out.println("    인내력이 0 이 되면 사표 엔딩의 조건이 달성됩니다. ");
+                    System.out.println("    아이템을 이용해서 체력과 인내력을 관리해주세요 ! ");
+                }
+                else
+                {
+                    System.out.println(" ??? 엔딩 : 공개되지 않은 엔딩입니다.");
+                }
+                System.out.println("------------------------------------------------------------------------");
+
+                if(endings[i] == SCOUT_ENDING)
+                {
+                    System.out.println(" 스카우트 엔딩 : 종종 방문하던 특이한 손님 일부는 몰래 방문한 인근 카페 사장이었습니다.");
+                    System.out.printf("                %s님을 시험하고 눈여겨본 사장은 %s님을 스카웃했습니다. \n",Partimer.getName());
+                    System.out.println("------------------------------------------------------------------------");
+                    System.out.println(" ✨ 스카우트 엔딩 tip ✨ ");
+                    System.out.println("    숙련도가 @@@ 이상이고 비밀 손님의 방문이 @@회 이상이면");
+                    System.out.println("    스카우트 엔딩의 조건이 달성됩니다. ");
+                }
+                else
+                {
+                    System.out.println(" ??? 엔딩 : 공개되지 않은 엔딩입니다.");
+                }
+                System.out.println("------------------------------------------------------------------------");
+
+                if(endings[i] == BOSS_ENDING)
+                {
+                    System.out.printf(" 사장 엔딩 : 코인을 아끼며 열심히 일한 %s님은 모은 코인으로 카페를 차렸습니다.\n", Partimer.getName());
+                    System.out.printf("            %s님은 더이상 알바생이 아닙니다.\n", Partimer.getName());
+                    System.out.println("------------------------------------------------------------------------");
+                    System.out.println(" ✨ 사장 엔딩 tip ✨ ");
+                    System.out.println("    보유하고 있는 코인이 50개 이상이면 사장 엔딩의 조건이 달성됩니다.");
+                }
+                else
+                {
+                    System.out.println(" ??? 엔딩 : 공개되지 않은 엔딩입니다.");
+                }
+                System.out.println("------------------------------------------------------------------------");
+
+                if(endings[i] == GET_FIRE_ENDING)
+                {
+                    System.out.printf(" 해고 엔딩 : %s님은 음료를 잘 제조하지 못해서 해고되었습니다.\n", Partimer.getName());
+                    System.out.printf("            괜찮습니다 카페는 많으니까요... 힘내세요! \n", Partimer.getName());
+                    System.out.println("------------------------------------------------------------------------");
+                    System.out.println(" ✨ 해고 엔딩 tip ✨ ");
+                    System.out.println("    음료제조 성공 횟수 ÷ 실패 횟수가 1보다 작아지면 엔딩의 조건이 달성됩니다.");
+                }
+                else
+                {
+                    System.out.println(" ??? 엔딩 : 공개되지 않은 엔딩입니다.");
+                }
+                System.out.println("------------------------------------------------------------------------");
+
+
+                if(endings[i] == PARTIMER_ENDING)
+                {
+                    System.out.printf(" 알바 엔딩 : %s님은 카페 아르바이트를 능숙하게 해내고 있습니다.\n", Partimer.getName());
+                    System.out.println("------------------------------------------------------------------------");
+                    System.out.println(" ✨ 알바 엔딩 tip ✨ ");
+                    System.out.println("    나머지 엔딩에 해당하지 않으면 알바 엔딩의 조건이 달성됩니다.");
+                    System.out.println("    그만큼 적성에 잘 맞는거겠죠?  ");
+                }
+                else
+                {
+                    System.out.println(" ??? 엔딩 : 공개되지 않은 엔딩입니다.");
+                }
+                System.out.println("------------------------------------------------------------------------");
             }
         }
 
+        CafeAction cafeAction = new CafeAction();
+        cafeAction.weekend();  // 이전으로
 
+    }//end openEnding()
+
+    public void myItem()// 보유한 소비 아이템 확인하는 메소드
+    {
+        System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
+        System.out.println("=========================    보유한 소비 아이템    =========================");
+        System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
+        System.out.println();
+        System.out.println(" 케이크 : 체력을 2 회복합니다.");
+        System.out.println(" 샌드위치 : 체력을 4 회복합니다.");
+        System.out.println(" 초콜릿 : 인내력을 2 회복합니다.");
+        System.out.println(" 마카롱 : 인내력을 4 회복합니다. ");
+        System.out.println();
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println();
+        System.out.printf(" 케이크   : %d개\n", Item.getCake());
+        System.out.printf(" 샌드위치 : %d개\n", Item.getSandwich());
+        System.out.printf(" 초콜릿   : %d개\n", Item.getChoco());
+        System.out.printf(" 마카롱   : %d개\n", Item.getMacaron());
+        System.out.println();
+        System.out.println("========================================================================");
+
+        useItem();  // 아이템 사용 메소드
     }
 
+    public void useItem()// 아이템 사용 메소드
+    {
+        boolean check = true;   // 반복여부 체크하는 변수
+        String resultStr;       // 사용자의 선택값을 담을 변수
+        int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
+
+        while(check)
+        {
+            System.out.println(" 사용할 아이템을 골라주세요.");
+            System.out.println(" 1.케이크  2.샌드위치  3.초콜릿  4.마카롱  5.사용안함");
+            System.out.println("------------------------------------------------------------------------");
+            Scanner sc = new Scanner(System.in);
+            System.out.print(" 선택 : ");
+            resultStr = sc.nextLine();
+
+            // 입력받은 값이 숫자인지 확인
+            try
+            {
+              // 자료형 변경한 뒤(String → int) int형에 담는다.
+              result = Integer.parseInt(resultStr);
+              check = false;
+              // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
+              // int형으로 변경되지 않는다면 NumberFormatException 발생
+            }
+            catch (NumberFormatException e) // NumberFormatException 발생한다면
+            {
+              check = true;   // check 에 true 담아서 다시 반복
+              // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+            }
+
+            if(result < 1 || result > 5 )// 주어진 값 이외의 수를 선택한 경우
+            {
+              System.out.println("========================================================================");
+              System.out.println(" 올바른 값을 입력해주세요.");
+              check = true;
+            }
+
+        }// end while
+
+        final int CAKE = 1;
+        final int SANDWICH = 2;
+        final int CHOCO = 3;
+        final int MACARON = 4;
+        final int EXIT = 5;
+        switch (result)
+        {
+            case CAKE:
+
+                break;
+
+            case SANDWICH:
+
+                break;
+
+            case CHOCO:
+
+                break;
+
+            case MACARON:
+
+                break;
+
+            case EXIT:  // 이전으로
+                CafeAction cafeAction = new CafeAction();
+                cafeAction.selBusiness();
+                break;
+
+        }
+
+    }
 
 }// end class
 

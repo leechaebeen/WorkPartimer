@@ -16,8 +16,8 @@ public class Ending
     private final int QUIT_ENDING = 2;      // 그만두는 엔딩
     private final int SCOUT_ENDING = 3;     // 스카웃 엔딩
     private final int BOSS_ENDING = 4;      // 사장 엔딩
-    private final int PARTIMER_ENDING = 5;  // 알바 엔딩
-    private final int GET_FIRE_ENDING = 6;  // 해고 엔딩
+    private final int GET_FIRE_ENDING = 5;  // 해고 엔딩
+    private final int PARTIMER_ENDING = 6;  // 알바 엔딩
 
     // 1. HP == 0 엔딩 : 쓰러짐 엔딩
     public void fallDownEnding()
@@ -58,14 +58,14 @@ public class Ending
         System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
-        System.out.printf("\t\t %s님은 고된 노동과 스트레스를 견디지 못하고 쓰러졌습니다.\n",Partimer.getName());
+        System.out.printf("\t\t %s님은 고된 노동을 견디지 못하고 쓰러졌습니다.\n",Partimer.getName());
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println();
         finalEnding();
     }
 
 
-    // 2. Mood == 0 엔딩 : 자발적 퇴사 엔딩
+    // 2. Feeling == 0 엔딩 : 자발적 퇴사 엔딩
     public void toQuitEnding()
     {
         // 엔딩 저장
@@ -134,22 +134,7 @@ public class Ending
 
     }
 
-    // 5. 이도저도 아닌 경우 : 알바생 엔딩
-    public void partimerEnding()
-    {
-        // 엔딩 저장
-        int[] endings = Partimer.getEndings();
-
-        for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼
-        {
-            if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
-            {
-                endings[i] = PARTIMER_ENDING;
-            }
-        }
-    }
-
-    // 6. 총 손님수/fail 횟수 > 0.5인 경우 : 해고 엔딩
+    // 5. 총 손님수/fail 횟수 > 0.5인 경우 : 해고 엔딩
     public void getFireEnding()
     {
         // 엔딩 저장
@@ -186,6 +171,22 @@ public class Ending
         System.out.println();
         finalEnding();
 
+    }
+
+
+    // 6. 이도저도 아닌 경우 : 알바생 엔딩
+    public void partimerEnding()
+    {
+        // 엔딩 저장
+        int[] endings = Partimer.getEndings();
+
+        for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼
+        {
+            if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
+            {
+                endings[i] = PARTIMER_ENDING;
+            }
+        }
     }
 
     // 7. END
