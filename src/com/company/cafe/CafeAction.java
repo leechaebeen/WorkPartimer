@@ -102,11 +102,12 @@ public class CafeAction
 
         final int KEEP = 1; // 하루 손님 계속 받는 선택지
         final int STOP = 2; // 하루 손님 그만받는 선택지
+        final int ITEM = 3; // 아이템 사용하는 선택지 
 
         do {
 
             System.out.println(" 다음 손님을 받을까요? ");
-            System.out.println(" 1. 계속하기 2. 마감하기 ");
+            System.out.println(" 1. 계속하기 2. 마감하기 3.아이템 사용");
 
             System.out.print(" 선택 : ");
             Scanner sc = new Scanner(System.in);
@@ -127,7 +128,7 @@ public class CafeAction
                 // result = 0; 으로 초기화된 상태이므로 아래 if문 내부까지 실행하고 반복된다.
             }
 
-            if(result < 1 || result >2)// 주어진 값 이외의 수를 선택한 경우
+            if(result < 1 || result >3)// 주어진 값 이외의 수를 선택한 경우
             {
                 System.out.println("========================================================================");
                 System.out.println(" 올바른 값을 입력해주세요.");
@@ -161,6 +162,9 @@ public class CafeAction
                     System.out.println();
                     start();
 
+                    break;
+                    
+                case ITEM : // 아이템 사용 메소드
                     break;
             }
         }
@@ -301,6 +305,16 @@ public class CafeAction
 
         // 숙련도 업데이트
 
+        // 급여 코인 제공 (조건 : 음료 제조 성공 횟수/주차가 숙련도와 같거나 높아야 한다.)
+        if(Partimer.getSuccessNum()/week >= Partimer.getSkillLevel())
+        {
+            Partimer.setProperty(Partimer.getProperty() + Partimer.getSalary());
+            // 전재산 = 현재 전재산 + 제공받는 급여코인
+            System.out.println("------------------------------------------------------------------------");
+            System.out.printf(" 급여로 %d코인을 획득했습니다.\n", Partimer.getSalary());
+
+        }
+
         // 체력, 인내력 설정값으로 초기화
         Partimer.setHp(Partimer.getSetHp());
         Partimer.setFeeling(Partimer.getSetFeeling());
@@ -313,6 +327,7 @@ public class CafeAction
         System.out.printf(" 현재까지 방문한 손님 수 : %d \n", Cafe.getTotalCustomerNum());
         System.out.printf(" 음료제조에 성공한 횟수 : %d \n", Partimer.getSuccessNum());
         System.out.printf(" 음료제조에 실패한 횟수 : %d \n", Partimer.getFailNum());
+        System.out.printf(" 보유한 코인 : \n", Partimer.getProperty());
         //System.out.println(" 비밀 손님 방문 여부 : ");
         System.out.println();
 
@@ -324,7 +339,7 @@ public class CafeAction
         while(check)
         {
             System.out.println("========================================================================");
-            System.out.println(" 1. 정보 확인  2.상점가기 3.모은 엔딩 확인 4.지나가기");
+            System.out.println(" 1. 정보 확인  2.상점가기  3.모은 엔딩 확인  4.지나가기");
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
             Scanner sc = new Scanner(System.in);
@@ -377,8 +392,6 @@ public class CafeAction
                 break;
         }
     }
-
-
 
     // 점수 계산하는 메소드 - 주마다 열람 가능 / 누적 총점은 못봄. 총점에 따라서 엔딩 갈림
 }

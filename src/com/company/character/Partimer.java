@@ -7,27 +7,31 @@ import com.company.run.Ending;
 // 유저 고유의 속성을 추가한 클래스
 public class Partimer extends Character
 {
-    // private : 이 클래스의 메소드를 통해서만 변경 가능하도록 하기 위해서 사용
-    // static : 유저는 한 명이니까 프로그램이 종료될 때까지 값이 계속 유지되도록하기 위해서 사용
-
     private static String name;         // 유저에게 입력받은 이름
-
     private static int skillLevel = 3;  // 현재 숙련도 : 하루에 등장하는 손님 수 , 일주일에 1 씩 증가(아직 설정 X)
 
-    protected static int hp = 10;    // 현재 캐릭터의 체력
-    protected static int setHp = 10; // 세팅된 캐릭터의 체력 : 아이템을 통해 변경 가능(아직 구현X)
+    // 현재 캐릭터의 능력치 :  한 주가 지날 때마다 세팅된 값으로 초기화. 첫 주는 초기화 되지 않으므로 각각 10으로 초기화.
+    protected static int hp = 10;           // 현재 체력
+    private static int feeling = 10;        // 현재 인내력
 
-    private static int feeling = 10;       // 현재 인내력 값: 한 주가 지날 때마다 세팅된 기분값으로 초기화(아직 설정X)
-    private static int setFeeling = 10;    // 세팅된 인내력 값 : 아이템 사용하면 증가 가능
+    // 캐릭터의 능력치 세팅값 : 아이템을 구입해 증가시킬 수 있다.
+    protected static int setHp = 10;        // 세팅된 초기 체력값
+    private static int setFeeling = 10;     // 세팅된 초기 인내력값
 
-    private static int salary = 10;     // 한 주에 받는 급여. 단위는 코인이다.
-    private static int property;        // 유저가 소유하고 있는 총 재산
+    // 코인 관련 변수
+    private static int property;                  // 유저가 소유하고 있는 총 재산
+    private static int salary = skillLevel*2;     // 한 주에 받는 급여. 단위는 코인이다.
+                                                  // 특정 조건을 만족하면 숙련도 두 배만큼의 코인을 받는다.
+                                                  // (조건 : 음료 제조 성공 횟수/주차가 숙련도와 같거나 높아야 한다.)
 
+    // 음료 제조 관련 변수
     private static int failNum;     // 음료 제조 실패 총 횟수
     private static int successNum;  // 음료 제조 성공 총 횟수
 
-    private static int workingDays; // 총 근무일자 : 7일마다 상점 방문 가능(아직 구현X) / 최대 플레이 가능 일자 설정하기(아직 설정X)
+    // 근무 일자 변수
+    private static int workingDays; // 총 근무일자 : 주말마다 상점 방문 가능/ 최대 플레이 가능 일자 설정하기(아직 설정X)
 
+    // 어떻게 저장하지..??
     public static int[] getEndings = new int[Ending.getEndingTypeNum()]; // 모은 엔딩 저장하는 배열.
 
 
