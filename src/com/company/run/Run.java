@@ -1,5 +1,4 @@
 package com.company.run;
-import.java.util.Scanner
 import java.util.Random;
 import java.util.Scanner;
 
@@ -1528,8 +1527,7 @@ public class Run
         final int EXIT = 5;
         switch (result)
         {
-            case CAKE:
-
+            case CAKE:  // 케이크 사용한 경우
                 break;
 
             case SANDWICH:
@@ -1548,10 +1546,289 @@ public class Run
                 CafeAction cafeAction = new CafeAction();
                 cafeAction.selBusiness();
                 break;
-
         }
 
+    } // end useItem()
+
+    public void useCake()
+    {
+        boolean check = true;   // 반복여부 체크하는 변수
+        String resultStr;       // 사용자의 선택값을 담을 변수
+        int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
+
+        if(Item.getCake() > 0)  // 보유한 케이크 수가 0보다 크다면
+        {
+            Item.setCake(Item.getCake() - 1);           // 보유한 개수에서 하나 감소
+            Partimer.setHp(Partimer.getHp() + 2 );   // 현재 체력에서 2 회복
+
+            System.out.println("========================================================================");
+            System.out.println(" 케이크를 사용했습니다.");
+            System.out.println(" 체력이 2 회복되었습니다.");
+            System.out.printf(" 보유 케이크     : %d개 \n", Item.getCake());
+            System.out.printf(" 현재 체력 : %d\n", Partimer.getHp());
+            System.out.println("========================================================================");
+
+            final int REUSE = 1;   // 재사용
+            final int EXIT = 2;         // 이전으로
+
+            while(check)
+            {
+                System.out.println(" 1.재사용(동일 아이템) 2.이전으로");
+                System.out.println("------------------------------------------------------------------------");
+                Scanner sc = new Scanner(System.in);
+                System.out.print(" 선택 : ");
+                resultStr = sc.nextLine();
+
+                // 입력받은 값이 숫자인지 확인
+                try
+                {
+                    // 자료형 변경한 뒤(String → int) int형에 담는다.
+                    result = Integer.parseInt(resultStr);
+                    check = false;
+                    // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
+                    // int형으로 변경되지 않는다면 NumberFormatException 발생
+                }
+                catch (NumberFormatException e) // NumberFormatException 발생한다면
+                {
+                    check = true;   // check 에 true 담아서 다시 반복
+                    // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+                }
+
+                if(result < 1 || result > 2 )// 주어진 값 이외의 수를 선택한 경우
+                {
+                    System.out.println("========================================================================");
+                    System.out.println(" 올바른 값을 입력해주세요.");
+                    check = true;
+                }
+
+                switch(result)
+                {
+                    case REUSE: useCake();   // 재사용
+                        break;
+
+                    case EXIT: useItem(); // 이전으로
+                        break;
+                }
+            }
+        }
+        else
+        {
+            System.out.println(" 보유한 케이크가 없습니다.");
+            System.out.println("========================================================================");
+            useItem(); // 이전으로
+
+        }
     }
+
+    public void useSandwich()
+    {
+        boolean check = true;   // 반복여부 체크하는 변수
+        String resultStr;       // 사용자의 선택값을 담을 변수
+        int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
+
+        if(Item.getSandwich() > 0)  // 보유한 샌드위치 수가 0보다 크다면
+        {
+            Item.setSandwich(Item.getSandwich() - 1);        // 보유한 개수에서 하나 감소
+            Partimer.setHp(Partimer.getHp() + 4 );           // 현재 체력에서 4 회복
+
+            System.out.println("========================================================================");
+            System.out.println(" 샌드위치를 사용했습니다.");
+            System.out.println(" 체력이 4 회복되었습니다.");
+            System.out.printf(" 보유 샌드위치     : %d개 \n", Item.getSandwich());
+            System.out.printf(" 현재 체력 : %d\n", Partimer.getHp());
+            System.out.println("========================================================================");
+
+            final int REUSE = 1;   // 재사용
+            final int EXIT = 2;    // 이전으로
+
+            while(check)
+            {
+                System.out.println(" 1.재사용(동일 아이템) 2.이전으로");
+                System.out.println("------------------------------------------------------------------------");
+                Scanner sc = new Scanner(System.in);
+                System.out.print(" 선택 : ");
+                resultStr = sc.nextLine();
+
+                // 입력받은 값이 숫자인지 확인
+                try
+                {
+                    // 자료형 변경한 뒤(String → int) int형에 담는다.
+                    result = Integer.parseInt(resultStr);
+                    check = false;
+                    // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
+                    // int형으로 변경되지 않는다면 NumberFormatException 발생
+                }
+                catch (NumberFormatException e) // NumberFormatException 발생한다면
+                {
+                    check = true;   // check 에 true 담아서 다시 반복
+                    // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+                }
+
+                if(result < 1 || result > 2 )// 주어진 값 이외의 수를 선택한 경우
+                {
+                    System.out.println("========================================================================");
+                    System.out.println(" 올바른 값을 입력해주세요.");
+                    check = true;
+                }
+
+                switch(result)
+                {
+                    case REUSE: useSandwich();   // 재사용
+                        break;
+
+                    case EXIT: useItem(); // 이전으로
+                        break;
+                }
+            }
+        }
+        else
+        {
+            System.out.println(" 보유한 샌드위치가 없습니다.");
+            System.out.println("========================================================================");
+            useItem(); // 이전으로
+        }
+    }
+
+    public void useChoco()
+    {
+        boolean check = true;   // 반복여부 체크하는 변수
+        String resultStr;       // 사용자의 선택값을 담을 변수
+        int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
+
+        if(Item.getChoco() > 0)  // 보유한 초콜릿 수가 0보다 크다면
+        {
+            Item.setChoco(Item.getChoco() - 1);                 // 보유한 개수에서 하나 감소
+            Partimer.setFeeling(Partimer.getFeeling() + 2 );    // 현재 인내력에서 2 회복
+
+            System.out.println("========================================================================");
+            System.out.println(" 초콜릿을 사용했습니다.");
+            System.out.println(" 인내력이 2 회복되었습니다.");
+            System.out.printf(" 보유 초콜릿  : %d개 \n", Item.getChoco());
+            System.out.printf(" 현재 인내력  : %d\n", Partimer.getFeeling());
+            System.out.println("========================================================================");
+
+            final int REUSE = 1;   // 재사용
+            final int EXIT = 2;    // 이전으로
+
+            while(check)
+            {
+                System.out.println(" 1.재사용(동일 아이템) 2.이전으로");
+                System.out.println("------------------------------------------------------------------------");
+                Scanner sc = new Scanner(System.in);
+                System.out.print(" 선택 : ");
+                resultStr = sc.nextLine();
+
+                // 입력받은 값이 숫자인지 확인
+                try
+                {
+                    // 자료형 변경한 뒤(String → int) int형에 담는다.
+                    result = Integer.parseInt(resultStr);
+                    check = false;
+                    // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
+                    // int형으로 변경되지 않는다면 NumberFormatException 발생
+                }
+                catch (NumberFormatException e) // NumberFormatException 발생한다면
+                {
+                    check = true;   // check 에 true 담아서 다시 반복
+                    // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+                }
+
+                if(result < 1 || result > 2 )// 주어진 값 이외의 수를 선택한 경우
+                {
+                    System.out.println("========================================================================");
+                    System.out.println(" 올바른 값을 입력해주세요.");
+                    check = true;
+                }
+
+                switch(result)
+                {
+                    case REUSE: useChoco();   // 재사용
+                        break;
+
+                    case EXIT: useItem(); // 이전으로
+                        break;
+                }
+            }
+        }
+        else
+        {
+            System.out.println(" 보유한 초콜릿이 없습니다.");
+            System.out.println("========================================================================");
+            useItem(); // 이전으로
+        }
+    }
+
+    public void useMacaron()
+    {
+        boolean check = true;   // 반복여부 체크하는 변수
+        String resultStr;       // 사용자의 선택값을 담을 변수
+        int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
+
+        if(Item.getMacaron() > 0)  // 보유한 마카롱 수가 0보다 크다면
+        {
+            Item.setMacaron(Item.getMacaron() - 1);             // 보유한 개수에서 하나 감소
+            Partimer.setFeeling(Partimer.getFeeling() + 4 );    // 현재 인내력에서 4 회복
+
+            System.out.println("========================================================================");
+            System.out.println(" 마카롱을 사용했습니다.");
+            System.out.println(" 인내력이 4 회복되었습니다.");
+            System.out.printf(" 보유 마카롱  : %d개 \n", Item.getMacaron());
+            System.out.printf(" 현재 인내력  : %d\n", Partimer.getFeeling());
+            System.out.println("========================================================================");
+
+            final int REUSE = 1;   // 재사용
+            final int EXIT = 2;    // 이전으로
+
+            while(check)
+            {
+                System.out.println(" 1.재사용(동일 아이템) 2.이전으로");
+                System.out.println("------------------------------------------------------------------------");
+                Scanner sc = new Scanner(System.in);
+                System.out.print(" 선택 : ");
+                resultStr = sc.nextLine();
+
+                // 입력받은 값이 숫자인지 확인
+                try
+                {
+                    // 자료형 변경한 뒤(String → int) int형에 담는다.
+                    result = Integer.parseInt(resultStr);
+                    check = false;
+                    // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
+                    // int형으로 변경되지 않는다면 NumberFormatException 발생
+                }
+                catch (NumberFormatException e) // NumberFormatException 발생한다면
+                {
+                    check = true;   // check 에 true 담아서 다시 반복
+                    // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+                }
+
+                if(result < 1 || result > 2 )// 주어진 값 이외의 수를 선택한 경우
+                {
+                    System.out.println("========================================================================");
+                    System.out.println(" 올바른 값을 입력해주세요.");
+                    check = true;
+                }
+
+                switch(result)
+                {
+                    case REUSE: useMacaron();   // 재사용
+                        break;
+
+                    case EXIT: useItem(); // 이전으로
+                        break;
+                }
+            }
+        }
+        else
+        {
+            System.out.println(" 보유한 마카롱이 없습니다.");
+            System.out.println("========================================================================");
+            useItem(); // 이전으로
+        }
+    }
+
+
+
 
 }// end class
 
