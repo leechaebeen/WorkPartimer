@@ -132,7 +132,7 @@ public class PartimerAction
         System.out.println("------------------------------------------------------------------------");
         System.out.println("                            음료 만들기 ");
         System.out.println("------------------------------------------------------------------------");
-        System.out.println(" 하단에 제시된 퀴즈를 맞혀1주세요. ");
+        System.out.println(" 하단에 제시된 퀴즈를 맞혀주세요. ");
         System.out.println();
 
         // 퀴즈 1 : 우유 들어가는 음료인지

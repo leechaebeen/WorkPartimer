@@ -184,20 +184,20 @@ public class Run
     {
         int week = (Partimer.getWorkingDays() / 7) + 1;               // 주차 = 일한날짜/7 + 1
         System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
-        System.out.printf("==========================      %d주차   정보     =========================\n", week);
+        System.out.printf("==========================     %d주차   정보      =========================\n", week);
         System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
         System.out.println();
         System.out.println(" 설정값 : 최대 능력치입니다. 아이템을 통해 증가시킬 수 있습니다.");
         System.out.println("         능력치는 주말마다 설정값으로 초기화됩니다. ");
         System.out.println("------------------------------------------------------------------------");
-        System.out.printf(" %s님의 인내력 : %d\n",Partimer.getSetFeeling());
-        System.out.printf(" %s님의 체력 : %d\n", Partimer.getSetHp());
-        System.out.println("========================================================================");
+        System.out.printf(" %s님의 인내력 : %d\n",Partimer.getName(), Partimer.getSetFeeling());
+        System.out.printf(" %s님의 체력 : %d\n", Partimer.getName(), Partimer.getSetHp());
+        System.out.println("------------------------------------------------------------------------");
         System.out.println(" 숙련도 : 음료 제조 성공 확률과 카페 운영 기간을 고려하여 ");
         System.out.println("         주말마다 숙련도가 업데이트됩니다.");
         System.out.println("------------------------------------------------------------------------");
-        System.out.printf(" %s님의 숙련도 : %d\n ", Partimer.getSkillLevel());
-        System.out.println("------------------------------------------------------------------------");
+        System.out.printf(" %s님의 숙련도 : %d\n ", Partimer.getName(),Partimer.getSkillLevel());
+        System.out.println("========================================================================");
 
         boolean check = true;   // 반복여부 체크하는 변수
         String resultStr;       // 사용자의 선택값을 담을 변수
@@ -207,7 +207,7 @@ public class Run
 
         while(check)
         {
-            System.out.println(" 1.나가기");
+            System.out.println(" 1.이전으로");
             System.out.println("------------------------------------------------------------------------");
             Scanner sc = new Scanner(System.in);
             System.out.print(" 선택 : ");
@@ -256,20 +256,19 @@ public class Run
         System.out.println("       매장에서 음료를 마시길 원하는 손님은 의자가 없으면 카페를 나갑니다.");
         System.out.println("       아이템 구매를 통해 의자의 수를 늘릴 수 있습니다. ");
         System.out.println("------------------------------------------------------------------------");
-        System.out.printf(" 의자의 수 : %d\n", Cafe.getSetChair());
-        System.out.println("========================================================================");
         System.out.println(" 유리잔 : 매장 내 취식하는 손님이 차가운 음료를 마실 경우 사용하는 잔입니다. ");
         System.out.println("         알맞은 잔이 없을 경우 컴플레인이 들어오고, 유저의 인내력이 1 감소합니다. ");
         System.out.println("         아이템 구매를 통해 유리잔의 수를 늘릴 수 있습니다. ");
         System.out.println("------------------------------------------------------------------------");
-        System.out.printf(" 유리잔의 수 : %d\n ", Cafe.getSetCup());
-        System.out.println("========================================================================");
         System.out.println(" 머그잔 : 매장 내 취식하는 손님이 따뜻한 음료를 마실 경우 사용하는 잔입니다. ");
         System.out.println("         알맞은 잔이 없을 경우 컴플레인이 들어오고, 유저의 인내력이 1 감소합니다. ");
         System.out.println("         아이템 구매를 통해 머그잔의 수를 늘릴 수 있습니다. ");
         System.out.println("------------------------------------------------------------------------");
+        System.out.printf(" 의자의 수   : %d\n", Cafe.getSetChair());
+        System.out.printf(" 유리잔의 수 : %d\n ", Cafe.getSetCup());
         System.out.printf(" 머그잔의 수 : %d\n ", Cafe.getSetMug());
         System.out.println("========================================================================");
+        System.out.println();
 
         boolean check = true;   // 반복여부 체크하는 변수
         String resultStr;       // 사용자의 선택값을 담을 변수
@@ -279,7 +278,7 @@ public class Run
 
         while(check)
         {
-            System.out.println(" 1.나가기");
+            System.out.println(" 1.이전으로");
             System.out.println("------------------------------------------------------------------------");
             Scanner sc = new Scanner(System.in);
             System.out.print(" 선택 : ");
@@ -300,7 +299,7 @@ public class Run
                 // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
             }
 
-            if(result != 1)// 주어진 값 이외의 수를 선택한 경우
+            if(result<1||result>1)// 주어진 값 이외의 수를 선택한 경우
             {
                 System.out.println("========================================================================");
                 System.out.println(" 올바른 값을 입력해주세요.");

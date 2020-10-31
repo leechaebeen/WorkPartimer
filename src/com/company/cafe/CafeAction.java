@@ -5,6 +5,7 @@ import com.company.character.*;
 import com.company.run.Ending;
 import com.company.run.Run;
 
+import javax.lang.model.util.ElementScanner6;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -14,39 +15,43 @@ public class CafeAction
     // 하루 시작 메소드: 몇주차 며칠인지 보여줌
     public void start()
     {
-        String[] days = {"일", "월", "화", "수", "목", "금", "토"};    // 요일 출력하는 배열
-        // 일한날짜%7 연산을 통해서 요일을 구하므로 일요일을 0번째에 배치한다.
+        String[] days = {"월", "화", "수", "목","금","토"};    // 카페 운영하는 요일 출력하는 배열.
+        // 게임을 시작할 때 일한 일수가 1 증가하면서 월요일이 된다.
+        // 1%6 == 1 화
+        // 2%6 == 2 수
+        // 3%6 == 3 목
+        // 4%6 == 4 금
+        // 5%6 == 5 토
+        // 6%6 == 0 월
+        int week = (Partimer.getWorkingDays() / 6) + 1;   // 첫 주(월~금)는 연산결과가 0이 되므로 1을 더해준다.
+        String day = days[Partimer.getWorkingDays() % 6]; // 요일 = 일한날짜%5
 
-        Partimer.setWorkingDays(Partimer.getWorkingDays() + 1);       // 하루가 새롭게 시작되므로 지금까지 일한 날짜에 하루를 더해준다.
-
-        int week = (Partimer.getWorkingDays() / 7) + 1;               // 주차 = 일한날짜/7 + 1
-        String day = days[Partimer.getWorkingDays() % 7];             // 요일 = 일한날짜%7
-
-        System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
-        System.out.printf("=========================     %d주차     %s요일    =========================\n", week, day);
-        System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
-
-        Cafe.setTodayCustomerNum(0);                // 하루 방문자 수 0으로 초기화
-        Cafe.setChair(Cafe.getSetChair());          // 자리를 세팅된 값으로 초기화
-        Cafe.setCup(Cafe.getSetCup());              // 유리컵을 세팅된 값으로 초기화
-        Cafe.setMug(Cafe.getSetMug());              // 머그잔을 세팅된 값으로 초기화
-
-
-        if(days.equals("토"))    // 토요일이라면
+        if(!day.equals("토"))    // 평일이라면
         {
-            System.out.println();
-            System.out.println("                         ✨ 주말이 되었습니다 ✨ ");
-            System.out.println();
-            Partimer.setWorkingDays(Partimer.getWorkingDays() + 1); // 일요일 지나가도록 하루 추가
+            Partimer.setWorkingDays(Partimer.getWorkingDays() + 1);  // 지금까지 일한 일수에 하루를 더해준다.
 
-            weekend();  // 주말 메소드
-        }
-        else
-        {
+            Cafe.setTodayCustomerNum(0);                // 하루 방문자 수 0으로 초기화
+            Cafe.setChair(Cafe.getSetChair());          // 자리를 세팅된 값으로 초기화
+            Cafe.setCup(Cafe.getSetCup());              // 유리컵을 세팅된 값으로 초기화
+            Cafe.setMug(Cafe.getSetMug());              // 머그잔을 세팅된 값으로 초기화
+
+            System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
+            System.out.printf("=========================     %d주차     %s요일    =========================\n", week, day);
+            System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
             System.out.println();
             System.out.println("                         ✨ 카페를 열었습니다 ✨ ");
             System.out.println();
             business(); // 카페 운영하면서 손님 받는 메소드
+        }
+        else    // 토요일이라면
+        {
+            System.out.println();
+            System.out.println("                         ✨ 주말이 되었습니다 ✨ ");
+            System.out.println();
+            System.out.println();
+
+            weekend();  // 주말 메소드
+
         }
 
 
@@ -122,7 +127,7 @@ public class CafeAction
                 // result = 0; 으로 초기화된 상태이므로 아래 if문 내부까지 실행하고 반복된다.
             }
 
-            if(result != KEEP || result != STOP)// 주어진 값 이외의 수를 선택한 경우
+            if(result < 1 || result >2)// 주어진 값 이외의 수를 선택한 경우
             {
                 System.out.println("========================================================================");
                 System.out.println(" 올바른 값을 입력해주세요.");
@@ -285,11 +290,14 @@ public class CafeAction
     public void weekend()
     {
         boolean check = true;   // 반복여부 체크하는 변수
-        int week = (Partimer.getWorkingDays() / 7) + 1;               // 주차 = 일한날짜/7 + 1
+        int week = (Partimer.getWorkingDays() /6) + 1;
+        // 토요일이 될 때 주차를 계산하면(일한 일수/요일배열 길이) 한 주 적게 나오기 때문에 1을 더해준다.
+        /* 첫번째 토요일 : 5/6 == 0
+           두번째 토요일 : 11/6 == 1
+        */
 
         String resultStr;       // 사용자의 선택값을 담을 변수(1. 정보 확인  2.상점가기 3.모은 엔딩 확인)
         int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
-
 
         // 숙련도 업데이트
 
@@ -299,12 +307,12 @@ public class CafeAction
 
 
         System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
-        System.out.printf("=========================          %d주차         =========================\n", week);
+        System.out.printf("=========================       %d주차 정산       =========================\n", week);
         System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
 
-        System.out.println(" 방문한 총 손님 수 : ");
-        System.out.println(" 음료제조에 성공한 횟수 : ");
-        System.out.println(" 음료제조에 실패한 횟수 : ");
+        System.out.printf(" 현재까지 방문한 손님 수 : %d \n", Cafe.getTotalCustomerNum());
+        System.out.printf(" 음료제조에 성공한 횟수 : %d \n", Partimer.getSuccessNum());
+        System.out.printf(" 음료제조에 실패한 횟수 : %d \n", Partimer.getFailNum());
         //System.out.println(" 비밀 손님 방문 여부 : ");
 
         final int INFO = 1;     //1. 정보 확인 - 1.내 정보 확인 2.카페 정보 확인 3.이전 화면
@@ -362,7 +370,9 @@ public class CafeAction
 
             break;
 
-            case SKIP : start();    // 지나가기 : 다음날 카페 오픈하기
+            case SKIP : // 지나가기 : 다음날 카페 오픈하기
+                Partimer.setWorkingDays(Partimer.getWorkingDays() + 1); // 주말이 지나도록 하루를 더한다. 토→월로 요일 변경 
+                start();
                 break;
         }
     }
