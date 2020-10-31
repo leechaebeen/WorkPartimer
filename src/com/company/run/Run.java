@@ -250,13 +250,12 @@ public class Run
 
         final int MY_INFO = 1;
         final int CAFE_INFO = 2;
-        final int MY_ITEM =3;
-        final int EXIT = 4;
+        final int EXIT = 3;
 
         while(check)
         {
             System.out.println("========================================================================");
-            System.out.printf(" 1. %s님의 정보 보기  2.카페 정보 보기 3.보유 아이템 확인 4.이전 화면 \n", Partimer.getName());
+            System.out.printf(" 1. %s님의 정보 보기  2.카페 정보 보기 3.이전으로 \n", Partimer.getName());
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
             Scanner sc = new Scanner(System.in);
@@ -277,7 +276,7 @@ public class Run
                 // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
             }
 
-            if(result < 1 || result > 3 )// 주어진 값 이외의 수를 선택한 경우
+            if(result < 1 || result > 4 )// 주어진 값 이외의 수를 선택한 경우
             {
                 System.out.println("========================================================================");
                 System.out.println(" 올바른 값을 입력해주세요.");
@@ -298,10 +297,7 @@ public class Run
 
                 break;
 
-            case MY_ITEM: myItem();  // 보유 아이템 확인
-                break;
-
-            case EXIT:  cafeAction.weekend();   // 주말 초기화면 호출
+            case EXIT:  cafeAction.weekendInfo();   // 주말 초기화면 호출
                 break;
         }
 
@@ -370,7 +366,7 @@ public class Run
 // 주말 상점가기 메소드----------------------------------------------------------------------------------------------------------
 
     // 상점가기 메소드 1.아이템 구입 2.보유 아이템 3.이전 화면
-    public void goShop()
+    /*public void goShop()
     {
         boolean check = true;   // 반복여부 체크하는 변수
         String resultStr;       // 사용자의 선택값을 담을 변수(1. 정보 확인  2.상점가기 3.모은 엔딩 확인)
@@ -427,9 +423,9 @@ public class Run
                 break;
         }
 
-    }
+    }*/
 
-    public void buyItem()   // 아이템 구입하기
+    public void goShop()   // 아이템 구입하기
     {
         System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
         System.out.println("==========================     아이템  구매      ==========================");
@@ -506,8 +502,8 @@ public class Run
         final int FEELING = 5;  // 인내력 늘리기
         final int EXIT = 6;
 
-        // 아이템 객체 생성
-        Item item = new Item();
+        Item item = new Item(); // 아이템 객체 생성
+        Cafe cafe = new Cafe(); // 카페 객체 생성
 
         while(check)
         {
@@ -515,12 +511,24 @@ public class Run
             System.out.println("==========================    영구 아이템 구매    ==========================");
             System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
             System.out.println();
+            System.out.println("                             ✨ 현재 보유 정보 ✨");
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println();
+            System.out.printf(" 의자         : %d개\n", cafe.getSetChair());
+            System.out.printf(" 유리잔       : %d개\n", cafe.getSetCup());
+            System.out.printf(" 머그잔       : %d개\n", cafe.getSetMug());
+            System.out.printf(" 체력 최댓값   : %d개\n", Partimer.getSetHp());
+            System.out.printf(" 인내력 최댓값 : %d개\n", Partimer.getSetFeeling());
+            System.out.println();
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println();
             System.out.printf(" 1.의자 구매         (- %d코인)\n", item.getChairPrice());
             System.out.printf(" 2.유리잔 구매       (- %d코인)\n", item.getCupPrice());
             System.out.printf(" 3.머그잔 구매       (- %d코인)\n", item.getMugPrice());
-            System.out.printf(" 4.체력 +2          (- %d코인)\n", item.getHpPrice());
-            System.out.printf(" 5.인내력 +2        (- %d코인)\n", item.getFeelingPrice());
+            System.out.printf(" 4.체력 최댓값 +2    (- %d코인)\n", item.getHpPrice());
+            System.out.printf(" 5.인내력 최댓값 +2  (- %d코인)\n", item.getFeelingPrice());
             System.out.println(" 6.이전으로");
+            System.out.println();
             System.out.println("========================================================================");
             Scanner sc = new Scanner(System.in);
             System.out.print(" 선택 : ");
@@ -569,7 +577,7 @@ public class Run
 
                 break;
 
-            case EXIT : buyItem();   // 이전으로
+            case EXIT : goShop();   // 이전으로
                 break;
 
         }
@@ -983,11 +991,23 @@ public class Run
             System.out.println("==========================    소비 아이템 구매    ==========================");
             System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
             System.out.println();
+            System.out.println("                             ✨ 현재 보유 정보 ✨");
+            System.out.println();
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println();
+            System.out.printf(" 케이크   : %d개\n");
+            System.out.printf(" 샌드위치 : %d개\n");
+            System.out.printf(" 초콜릿   : %d개\n");
+            System.out.printf(" 마카롱   : %d개\n");
+            System.out.println();
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println();
             System.out.printf(" 1.케이크 구매         (- %d코인\n)", item.getCakePrice());
             System.out.printf(" 2.샌드위치 구매       (- %d코인)\n", item.getSandwichPrice());
             System.out.printf(" 3.초콜릿 구매         (- %d코인)\n", item.getChocoPrice());
             System.out.printf(" 4.마카롱 구매         (- %d코인)\n", item.getMacaronPrice());
             System.out.println(" 5.이전으로");
+            System.out.println();
             System.out.println("========================================================================");
             Scanner sc = new Scanner(System.in);
             System.out.print(" 선택 : ");
@@ -1029,7 +1049,7 @@ public class Run
             case MACARON: buyMacaron();     // 마카롱 구매
                 break;
 
-            case EXIT: buyItem();   // 이전으로
+            case EXIT: goShop();   // 이전으로
                 break;
 
         }
@@ -1340,6 +1360,7 @@ public class Run
     public void openEnding()
     {
         int[] endings = Partimer.getEndings();  // 공개된 엔딩 유형 저장한 배열 불러오기
+
         if(endings[0]==0)                       // 첫번째 배열 칸이 0 이면 공개된 엔딩이 없다는 뜻이다.
         {
             System.out.println("========================================================================");
@@ -1356,99 +1377,86 @@ public class Run
             final int GET_FIRE_ENDING = 5;  // 해고 엔딩
             final int PARTIMER_ENDING = 6;  // 알바 엔딩
 
-
             System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
             System.out.println("=========================       공개된 엔딩      =========================");
             System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
             System.out.println();
 
-            for (int i = 0; i < endings.length; i++)
+            //for (int i = 0; i < endings.length; i++) 0부터 배열의 길이까지 반복해서 확인한다.
+            for (int ending : endings)
             {
-                if (endings[i] == FALL_DOWN_ENDING)
+                if (ending == FALL_DOWN_ENDING)
                 {
                     System.out.printf(" 과로 엔딩 : %s님은 고된 노동에 시달리다 쓰러졌습니다. \n", Partimer.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 과로 엔딩 tip ✨ ");
                     System.out.println("    체력이 0 이 되면 과로 엔딩의 조건이 달성됩니다. ");
                     System.out.println("    아이템을 적절히 이용해서 체력을 관리해주세요 ! ");
-                }
-                else
+                } else
                 {
                     System.out.println(" ??? 엔딩 : 공개되지 않은 엔딩입니다.");
                 }
-                System.out.println("------------------------------------------------------------------------");
 
-                if(endings[i] == QUIT_ENDING)
+                if (ending == QUIT_ENDING)
                 {
                     System.out.printf(" 사표 엔딩 : %s님은 극심한 스트레스를 견디지 못해 카페를 떠났습니다. \n", Partimer.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 사표 엔딩 tip ✨ ");
                     System.out.println("    인내력이 0 이 되면 사표 엔딩의 조건이 달성됩니다. ");
                     System.out.println("    아이템을 이용해서 체력과 인내력을 관리해주세요 ! ");
-                }
-                else
+                } else
                 {
                     System.out.println(" ??? 엔딩 : 공개되지 않은 엔딩입니다.");
                 }
-                System.out.println("------------------------------------------------------------------------");
 
-                if(endings[i] == SCOUT_ENDING)
+                if (ending == SCOUT_ENDING)
                 {
                     System.out.println(" 스카우트 엔딩 : 종종 방문하던 특이한 손님 일부는 몰래 방문한 인근 카페 사장이었습니다.");
-                    System.out.printf("                %s님을 시험하고 눈여겨본 사장은 %s님을 스카웃했습니다. \n",Partimer.getName());
+                    System.out.printf("                %s님을 시험하고 눈여겨본 사장은 %s님을 스카웃했습니다. \n", Partimer.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 스카우트 엔딩 tip ✨ ");
                     System.out.println("    숙련도가 @@@ 이상이고 비밀 손님의 방문이 @@회 이상이면");
                     System.out.println("    스카우트 엔딩의 조건이 달성됩니다. ");
-                }
-                else
+                } else
                 {
                     System.out.println(" ??? 엔딩 : 공개되지 않은 엔딩입니다.");
                 }
-                System.out.println("------------------------------------------------------------------------");
 
-                if(endings[i] == BOSS_ENDING)
+                if (ending == BOSS_ENDING)
                 {
                     System.out.printf(" 사장 엔딩 : 코인을 아끼며 열심히 일한 %s님은 모은 코인으로 카페를 차렸습니다.\n", Partimer.getName());
                     System.out.printf("            %s님은 더이상 알바생이 아닙니다.\n", Partimer.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 사장 엔딩 tip ✨ ");
                     System.out.println("    보유하고 있는 코인이 50개 이상이면 사장 엔딩의 조건이 달성됩니다.");
-                }
-                else
+                } else
                 {
                     System.out.println(" ??? 엔딩 : 공개되지 않은 엔딩입니다.");
                 }
-                System.out.println("------------------------------------------------------------------------");
 
-                if(endings[i] == GET_FIRE_ENDING)
+                if (ending == GET_FIRE_ENDING)
                 {
                     System.out.printf(" 해고 엔딩 : %s님은 음료를 잘 제조하지 못해서 해고되었습니다.\n", Partimer.getName());
                     System.out.printf("            괜찮습니다 카페는 많으니까요... 힘내세요! \n", Partimer.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 해고 엔딩 tip ✨ ");
                     System.out.println("    음료제조 성공 횟수 ÷ 실패 횟수가 1보다 작아지면 엔딩의 조건이 달성됩니다.");
-                }
-                else
+                } else
                 {
                     System.out.println(" ??? 엔딩 : 공개되지 않은 엔딩입니다.");
                 }
-                System.out.println("------------------------------------------------------------------------");
 
-
-                if(endings[i] == PARTIMER_ENDING)
+                if (ending == PARTIMER_ENDING)
                 {
                     System.out.printf(" 알바 엔딩 : %s님은 카페 아르바이트를 능숙하게 해내고 있습니다.\n", Partimer.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 알바 엔딩 tip ✨ ");
                     System.out.println("    나머지 엔딩에 해당하지 않으면 알바 엔딩의 조건이 달성됩니다.");
                     System.out.println("    그만큼 적성에 잘 맞는거겠죠?  ");
-                }
-                else
+                } else
                 {
                     System.out.println(" ??? 엔딩 : 공개되지 않은 엔딩입니다.");
                 }
-                System.out.println("------------------------------------------------------------------------");
             }
         }
 
@@ -1490,7 +1498,6 @@ public class Run
 
         while(check)
         {
-            System.out.println(" ※ 주말에는 체력과 인내력이 최댓값으로 초기화됩니다 ※ ");
             System.out.println(" 사용할 아이템을 골라주세요.");
             System.out.println(" 1.케이크  2.샌드위치  3.초콜릿  4.마카롱  5.사용안함");
             System.out.println("------------------------------------------------------------------------");
