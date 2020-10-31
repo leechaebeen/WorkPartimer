@@ -249,7 +249,7 @@ public class Run
         while(check)
         {
             System.out.println("========================================================================");
-            System.out.printf(" 1.아이템 구입  2.보유 아이템  3.이전 화면 \n", Partimer.getName());
+            System.out.println(" 1.아이템 구입  2.보유 아이템  3.이전 화면 ");
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
             Scanner sc = new Scanner(System.in);
@@ -313,7 +313,7 @@ public class Run
         while(check)
         {
             System.out.println("========================================================================");
-            System.out.printf(" 1.영구 아이템  2.소모 아이템  3.이전 화면 \n", Partimer.getName());
+            System.out.println(" 1.영구 아이템  2.소모 아이템  3.이전 화면 ");
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
             Scanner sc = new Scanner(System.in);
@@ -343,14 +343,12 @@ public class Run
 
         }
 
-        CafeAction cafeAction = new CafeAction();
-
         switch(result)
         {
-            case  PERMANENT_ITEM: buyPermanentItem(); // 아이템 구입
+            case  PERMANENT_ITEM: buyPermanentItem();   //  영구 아이템 구입
                 break;
 
-            case  CONSUMABLE_ITEM:      // 보유 아이템 정보 보기
+            case  CONSUMABLE_ITEM: buyConsumableItem(); // 소모 아이템 구입
                 break;
 
             case EXIT:  goShop();   // 상점 초기화면 호출
@@ -358,6 +356,8 @@ public class Run
         }
 
     }
+
+// 영구 아이템 구매 메소드 ------------------------------------------------------------------------------------------------
 
     public void buyPermanentItem()
     {
@@ -383,7 +383,7 @@ public class Run
             System.out.printf(" 3.머그잔 구매       (- %d코인)\n", item.getMugPrice());
             System.out.printf(" 4.체력 +2          (- %d코인)\n", item.getHpPrice());
             System.out.printf(" 5.인내력 +2        (- %d코인)\n", item.getFeelingPrice());
-            System.out.printf(" 6.이전으로");
+            System.out.println(" 6.이전으로");
             System.out.println("========================================================================");
             Scanner sc = new Scanner(System.in);
             System.out.print(" 선택 : ");
@@ -436,8 +436,6 @@ public class Run
                 break;
 
         }
-
-
 
     }// end buyPermanentItem
 
@@ -830,6 +828,382 @@ public class Run
         }
 
     }// end buyFeeling()
+
+// 소모 아이템 구매 메소드 ------------------------------------------------------------------------------------------------
+    public void buyConsumableItem()
+    {
+        boolean check = true;   // 반복여부 체크하는 변수
+        String resultStr;       // 사용자의 선택값을 담을 변수
+        int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
+
+        final int CAKE = 1;     // 체력 2 회복
+        final int SANDWICH = 2; // 체력 4 회복
+        final int CHOCO = 3;    // 인내력 2 회복
+        final int MACARON = 4;  // 인내력 4 회복
+        final int EXIT = 5;     // 이전으로
+
+        // 아이템 객체 생성
+        Item item = new Item();
+
+        while (check)
+        {
+
+            System.out.printf(" 1.케이크 구매         (- %d코인\n)", item.getCakePrice());
+            System.out.printf(" 2.샌드위치 구매       (- %d코인)\n", item.getSandwichPrice());
+            System.out.printf(" 3.초콜릿 구매         (- %d코인)\n", item.getChocoPrice());
+            System.out.printf(" 4.마카롱 구매         (- %d코인)\n", item.getMacaronPrice());
+            System.out.println(" 5.이전으로");
+            System.out.println("========================================================================");
+            Scanner sc = new Scanner(System.in);
+            System.out.print(" 선택 : ");
+            resultStr = sc.nextLine();
+
+            // 입력받은 값이 숫자인지 확인
+            try
+            {
+                // 자료형 변경한 뒤(String → int) int형에 담는다.
+                result = Integer.parseInt(resultStr);
+                check = false;
+                // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
+                // int형으로 변경되지 않는다면 NumberFormatException 발생
+            } catch (NumberFormatException e) // NumberFormatException 발생한다면
+            {
+                check = true;   // check 에 true 담아서 다시 반복
+                // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+            }
+
+            if (result < 1 || result > 6)// 주어진 값 이외의 수를 선택한 경우
+            {
+                System.out.println("========================================================================");
+                System.out.println(" 올바른 값을 입력해주세요.");
+                check = true;
+            }
+        }
+
+        switch (result)
+        {
+            case CAKE:  buyCake();           // 케이크 구매
+                break;
+
+            case SANDWICH: buySandwich();   // 샌드위치 구매
+                break;
+
+            case CHOCO: buyChoco();         // 초콜릿 구매
+                break;
+
+            case MACARON: buyMacaron();     // 마카롱 구매
+                break;
+
+            case EXIT: goShop();            // 상점 초기화면 호출
+                break;
+
+        }
+    }
+
+    // 케이크 구매 메소드
+    public void buyCake()
+    {
+        boolean check = true;   // 반복여부 체크하는 변수
+        String resultStr;       // 사용자의 선택값을 담을 변수
+        int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
+
+        // 아이템 객체 생성
+        Item item = new Item();
+
+        if(Partimer.getProperty() >= item.getCakePrice())  // 체력 증가 가격보다 보유한 코인이 많거나 같으면
+        {
+            Partimer.setProperty(Partimer.getProperty() - item.getCakePrice());    // 계산하고
+            Item.setCake(Item.getCake()+1); // 보유한 개수에 추가
+
+            System.out.println("========================================================================");
+            System.out.printf(" %d 코인을 사용했습니다.\n", item.getCakePrice());
+            System.out.printf(" 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.printf(" 보유 케이크     : %d개 \n", Item.getCake() );
+            System.out.println("========================================================================");
+
+            final int REPURCHASE = 1;   // 재구매
+            final int EXIT = 2;         // 이전으로
+
+            while(check)
+            {
+                System.out.println("========================================================================");
+                System.out.println(" 1.재구매(동일 아이템) 2.이전으로");
+                System.out.println("------------------------------------------------------------------------");
+                Scanner sc = new Scanner(System.in);
+                System.out.print(" 선택 : ");
+                resultStr = sc.nextLine();
+
+                // 입력받은 값이 숫자인지 확인
+                try
+                {
+                    // 자료형 변경한 뒤(String → int) int형에 담는다.
+                    result = Integer.parseInt(resultStr);
+                    check = false;
+                    // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
+                    // int형으로 변경되지 않는다면 NumberFormatException 발생
+                }
+                catch (NumberFormatException e) // NumberFormatException 발생한다면
+                {
+                    check = true;   // check 에 true 담아서 다시 반복
+                    // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+                }
+
+                if(result < 1 || result > 2 )// 주어진 값 이외의 수를 선택한 경우
+                {
+                    System.out.println("========================================================================");
+                    System.out.println(" 올바른 값을 입력해주세요.");
+                    check = true;
+                }
+
+                switch(result)
+                {
+                    case REPURCHASE: buyCake();   // 재구매
+                        break;
+
+                    case EXIT: buyPermanentItem(); // 이전으로
+                        break;
+                }
+            }
+        }
+        else
+        {
+            System.out.println("========================================================================");
+            System.out.println(" 보유한 코인으로 케이크를 구매할 수 없습니다.");
+            System.out.printf(" 현재 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.println("========================================================================");
+            buyPermanentItem(); // 이전으로
+        }
+
+    }// end buyCake()
+
+    // 샌드위치 구매 메소드
+    public void buySandwich()
+    {
+        boolean check = true;   // 반복여부 체크하는 변수
+        String resultStr;       // 사용자의 선택값을 담을 변수
+        int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
+
+        // 아이템 객체 생성
+        Item item = new Item();
+
+        if(Partimer.getProperty() >= item.getSandwichPrice())  // 체력 증가 가격보다 보유한 코인이 많거나 같으면
+        {
+            Partimer.setProperty(Partimer.getProperty() - item.getSandwichPrice());    // 계산하고
+            Item.setSandwich(Item.getSandwich()+1); // 보유한 개수에 추가
+
+            System.out.println("========================================================================");
+            System.out.printf(" %d 코인을 사용했습니다.\n", item.getSandwichPrice());
+            System.out.printf(" 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.printf(" 보유 케이크     : %d개 \n", Item.getSandwich() );
+            System.out.println("========================================================================");
+
+            final int REPURCHASE = 1;   // 재구매
+            final int EXIT = 2;         // 이전으로
+
+            while(check)
+            {
+                System.out.println("========================================================================");
+                System.out.println(" 1.재구매(동일 아이템) 2.이전으로");
+                System.out.println("------------------------------------------------------------------------");
+                Scanner sc = new Scanner(System.in);
+                System.out.print(" 선택 : ");
+                resultStr = sc.nextLine();
+
+                // 입력받은 값이 숫자인지 확인
+                try
+                {
+                    // 자료형 변경한 뒤(String → int) int형에 담는다.
+                    result = Integer.parseInt(resultStr);
+                    check = false;
+                    // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
+                    // int형으로 변경되지 않는다면 NumberFormatException 발생
+                }
+                catch (NumberFormatException e) // NumberFormatException 발생한다면
+                {
+                    check = true;   // check 에 true 담아서 다시 반복
+                    // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+                }
+
+                if(result < 1 || result > 2 )// 주어진 값 이외의 수를 선택한 경우
+                {
+                    System.out.println("========================================================================");
+                    System.out.println(" 올바른 값을 입력해주세요.");
+                    check = true;
+                }
+
+                switch(result)
+                {
+                    case REPURCHASE: buySandwich();   // 재구매
+                        break;
+
+                    case EXIT: buyPermanentItem(); // 이전으로
+                        break;
+                }
+            }
+        }
+        else
+        {
+            System.out.println("========================================================================");
+            System.out.println(" 보유한 코인으로 샌드위치를 구매할 수 없습니다.");
+            System.out.printf(" 현재 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.println("========================================================================");
+            buyPermanentItem(); // 이전으로
+        }
+
+    }// end buySandwich()
+
+    // 초콜릿 구매 메소드
+    public void buyChoco()
+    {
+        boolean check = true;   // 반복여부 체크하는 변수
+        String resultStr;       // 사용자의 선택값을 담을 변수
+        int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
+
+        // 아이템 객체 생성
+        Item item = new Item();
+
+        if(Partimer.getProperty() >= item.getChocoPrice())  // 체력 증가 가격보다 보유한 코인이 많거나 같으면
+        {
+            Partimer.setProperty(Partimer.getProperty() - item.getChocoPrice());    // 계산하고
+            Item.setChoco(Item.getChoco()+1); // 보유한 개수에 추가
+
+            System.out.println("========================================================================");
+            System.out.printf(" %d 코인을 사용했습니다.\n", item.getChocoPrice());
+            System.out.printf(" 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.printf(" 보유 케이크     : %d개 \n", Item.getChoco() );
+            System.out.println("========================================================================");
+
+            final int REPURCHASE = 1;   // 재구매
+            final int EXIT = 2;         // 이전으로
+
+            while(check)
+            {
+                System.out.println("========================================================================");
+                System.out.println(" 1.재구매(동일 아이템) 2.이전으로");
+                System.out.println("------------------------------------------------------------------------");
+                Scanner sc = new Scanner(System.in);
+                System.out.print(" 선택 : ");
+                resultStr = sc.nextLine();
+
+                // 입력받은 값이 숫자인지 확인
+                try
+                {
+                    // 자료형 변경한 뒤(String → int) int형에 담는다.
+                    result = Integer.parseInt(resultStr);
+                    check = false;
+                    // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
+                    // int형으로 변경되지 않는다면 NumberFormatException 발생
+                }
+                catch (NumberFormatException e) // NumberFormatException 발생한다면
+                {
+                    check = true;   // check 에 true 담아서 다시 반복
+                    // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+                }
+
+                if(result < 1 || result > 2 )// 주어진 값 이외의 수를 선택한 경우
+                {
+                    System.out.println("========================================================================");
+                    System.out.println(" 올바른 값을 입력해주세요.");
+                    check = true;
+                }
+
+                switch(result)
+                {
+                    case REPURCHASE: buyChoco();   // 재구매
+                        break;
+
+                    case EXIT: buyPermanentItem(); // 이전으로
+                        break;
+                }
+            }
+        }
+        else
+        {
+            System.out.println("========================================================================");
+            System.out.println(" 보유한 코인으로 초콜릿을 구매할 수 없습니다.");
+            System.out.printf(" 현재 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.println("========================================================================");
+            buyPermanentItem(); // 이전으로
+        }
+
+    }// end buyChoco()
+
+    // 마카롱 구매 메소드
+    public void buyMacaron()
+    {
+        boolean check = true;   // 반복여부 체크하는 변수
+        String resultStr;       // 사용자의 선택값을 담을 변수
+        int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
+
+        // 아이템 객체 생성
+        Item item = new Item();
+
+        if(Partimer.getProperty() >= item.getMacaronPrice())  // 체력 증가 가격보다 보유한 코인이 많거나 같으면
+        {
+            Partimer.setProperty(Partimer.getProperty() - item.getMacaronPrice());    // 계산하고
+            Item.setMacaron(Item.getMacaron()+1); // 보유한 개수에 추가
+
+            System.out.println("========================================================================");
+            System.out.printf(" %d 코인을 사용했습니다.\n", item.getMacaronPrice());
+            System.out.printf(" 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.printf(" 보유 케이크     : %d개 \n", Item.getMacaron() );
+            System.out.println("========================================================================");
+
+            final int REPURCHASE = 1;   // 재구매
+            final int EXIT = 2;         // 이전으로
+
+            while(check)
+            {
+                System.out.println("========================================================================");
+                System.out.println(" 1.재구매(동일 아이템) 2.이전으로");
+                System.out.println("------------------------------------------------------------------------");
+                Scanner sc = new Scanner(System.in);
+                System.out.print(" 선택 : ");
+                resultStr = sc.nextLine();
+
+                // 입력받은 값이 숫자인지 확인
+                try
+                {
+                    // 자료형 변경한 뒤(String → int) int형에 담는다.
+                    result = Integer.parseInt(resultStr);
+                    check = false;
+                    // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
+                    // int형으로 변경되지 않는다면 NumberFormatException 발생
+                }
+                catch (NumberFormatException e) // NumberFormatException 발생한다면
+                {
+                    check = true;   // check 에 true 담아서 다시 반복
+                    // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+                }
+
+                if(result < 1 || result > 2 )// 주어진 값 이외의 수를 선택한 경우
+                {
+                    System.out.println("========================================================================");
+                    System.out.println(" 올바른 값을 입력해주세요.");
+                    check = true;
+                }
+
+                switch(result)
+                {
+                    case REPURCHASE: buyMacaron();   // 재구매
+                        break;
+
+                    case EXIT: buyPermanentItem(); // 이전으로
+                        break;
+                }
+            }
+        }
+        else
+        {
+            System.out.println("========================================================================");
+            System.out.println(" 보유한 코인으로 마카롱을 구매할 수 없습니다.");
+            System.out.printf(" 현재 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.println("========================================================================");
+            buyPermanentItem(); // 이전으로
+        }
+
+    }// end buyMacaron()
+    
 
 
 }// end class
