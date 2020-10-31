@@ -14,15 +14,12 @@ public class SpecialCustomer extends Customer
     // 주문할 음료 객체 생성하는 메소드 orderBeverage() - 상속받음
 
     // 음료 주문하는 메소드
-    // 유형1 반말하고 매장에서 먹고가는거 말 안하는 손님 : 유저의 hp 와 feeling 이 -1씩 감소한다.
+    // 유형1 반말하고 매장에서 먹고가는거 말 안하는 손님 : 유저의 체력과 인내력이 -1씩 감소한다.
     public void orderTalkDown(Beverage beverage)
     {
         String iceOption;
         String whippingCream;
         String takeout;
-
-        //test
-        System.out.println("자리수 : " + Cafe.getChair());
 
         // ICE / HOT 선택값에 따라 대사 분기
         if(beverage.getIceOption()==0)  // 0이면 HOT
@@ -61,10 +58,30 @@ public class SpecialCustomer extends Customer
 
         Partimer.setFeeling(Partimer.getFeeling()-1);
         Partimer.setHp(Partimer.getHp()-1);
+        System.out.println("========================================================================");
+        System.out.println(" 손님이 반말로 주문하였습니다. ");
+        System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", Partimer.getName());
+        System.out.printf(" %s님의 인내력이 1 소모되었습니다.\n", Partimer.getName());
+        System.out.printf(" 현재 %s님의 체력 : %d\n", Partimer.getName(), Partimer.getHp());
+        System.out.printf(" 현재 %s님의 인내력 : %d\n", Partimer.getName(), Partimer.getFeeling());
+        System.out.println("========================================================================");
+
 
         if(!checkTakeout) // 매장에서 먹고 간다면
         {
-            Cafe.setChair(Cafe.getChair()-1);// 매장 자리를 하나 줄인다.
+            // 매장에 자리가 있는지 확인
+            if(Cafe.getChair()==0)    // 매장에 자리가 없으면 손님이 나간다.
+            {
+                System.out.println("========================================================================");
+                System.out.println(" 매장에 자리가 없어서 손님이 나갔습니다. ");
+                System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", Partimer.getName());
+                System.out.printf(" 현재 %s님의 체력 : %d\n", Partimer.getName(), Partimer.getHp());
+                System.out.println("========================================================================");
+            }
+            else
+            {
+                Cafe.setChair(Cafe.getChair()-1);// 매장 자리를 하나 줄인다.
+            }
 
             // 유리잔 또는 머그잔 감소시키기.
             if(beverage.getIceOption()==0 && Cafe.getMug() !=0 ) // 뜨거운 음료이고 머그잔이 있으면
@@ -83,14 +100,9 @@ public class SpecialCustomer extends Customer
     }
 
 
-    // 유형2 시비걸기 : 유저의 hp가 1, feeling이 2 감소한다.
+    // 유형2 시비걸기 : 유저의 체력이 1, 인내력이 2 감소한다.
     public void orderFight(Beverage beverage)
     {
-
-        //test
-        System.out.println("자리수 : " + Cafe.getChair());
-
-
         String iceOption;
         String whippingCream;
         String takeout;
@@ -149,9 +161,30 @@ public class SpecialCustomer extends Customer
         Partimer.setHp(Partimer.getHp()-1);
         Partimer.setFeeling(Partimer.getFeeling()-2);
 
+        System.out.println("========================================================================");
+        System.out.println(" 손님이 짜증을 내며 주문했습니다. ");
+        System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", Partimer.getName());
+        System.out.printf(" %s님의 인내력이 2 소모되었습니다.\n", Partimer.getName());
+        System.out.printf(" 현재 %s님의 체력 : %d\n", Partimer.getName(), Partimer.getHp());
+        System.out.printf(" 현재 %s님의 인내력 : %d\n", Partimer.getName(), Partimer.getFeeling());
+        System.out.println("========================================================================");
+
+
         if(!checkTakeout) // 매장에서 먹고 간다면
         {
-            Cafe.setChair(Cafe.getChair()-1);// 매장 자리를 하나 줄인다.
+            // 매장에 자리가 있는지 확인
+            if(Cafe.getChair()==0)    // 매장에 자리가 없으면 손님이 나간다.
+            {
+                System.out.println("========================================================================");
+                System.out.println(" 매장에 자리가 없어서 손님이 나갔습니다. ");
+                System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", Partimer.getName());
+                System.out.printf(" 현재 %s님의 체력 : %d\n", Partimer.getName(), Partimer.getHp());
+                System.out.println("========================================================================");
+            }
+            else
+            {
+                Cafe.setChair(Cafe.getChair()-1);// 매장 자리를 하나 줄인다.
+            }
 
             // 유리잔 또는 머그잔 감소시키기.
             if(beverage.getIceOption()==0 && Cafe.getMug() !=0 ) // 뜨거운 음료이고 머그잔이 있으면
@@ -173,10 +206,6 @@ public class SpecialCustomer extends Customer
     // 유형3 도를 믿으시나요 : 내보낸 경우 feeling -1 , 얘기 듣는 경우 hp,feeling 1씩 감소
     public void orderFalseReligion()
     {
-        //test
-        System.out.println("자리수 : " + Cafe.getChair());
-
-
         boolean check = true;
         String resultStr;
         int result = 0 ;
@@ -204,16 +233,26 @@ public class SpecialCustomer extends Customer
                     // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                     // int형으로 변경되지 않는다면 NumberFormatException 발생
 
-                    if(result == 1) // 내보낸 경우 feeling 1 감소
+                    if(result == 1) // 내보낸 경우 인내력 1 감소
                     {
                         Partimer.setFeeling(Partimer.getFeeling()-1);
+                        System.out.println("========================================================================");
+                        System.out.println(" 사이비 손님이 찾아왔습니다. ");
+                        System.out.printf(" %s님의 인내력이 1 소모되었습니다.\n", Partimer.getName());
+                        System.out.printf(" 현재 %s님의 인내력 : %d\n", Partimer.getName(), Partimer.getFeeling());
+                        System.out.println("========================================================================");
                     }
-                    else // 얘기를 들어본 경우 hp 와 feeling 1 씩 감소
+                    else // 얘기를 들어본 경우 체력과 인내력 1 씩 감소
                     {
-                        System.out.println(" ... ...사이비였다. ");
-                        System.out.println("------------------------------------------------------------------------");
                         Partimer.setHp(Partimer.getHp()-1);
                         Partimer.setFeeling(Partimer.getFeeling()-1);
+                        System.out.println("========================================================================");
+                        System.out.println(" 이야기를 듣고보니 사이비 손님이었습니다. 시간낭비였습니다 ! ");
+                        System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", Partimer.getName());
+                        System.out.printf(" %s님의 인내력이 1 소모되었습니다.\n", Partimer.getName());
+                        System.out.printf(" 현재 %s님의 체력 : %d\n", Partimer.getName(), Partimer.getHp());
+                        System.out.printf(" 현재 %s님의 인내력 : %d\n", Partimer.getName(), Partimer.getFeeling());
+                        System.out.println("========================================================================");
                     }
 
                 }
@@ -238,9 +277,6 @@ public class SpecialCustomer extends Customer
     // 유형4 잘못찾아옴
     public void orderWrong()
     {
-        //test
-        System.out.println("자리수 : " + Cafe.getChair());
-
         String[] menus = {"냉면", "떡볶이", "치킨", "회", "오므라이스", "커리"} ;  // 잘못찾아온 손님이 찾을 메뉴 목록
 
         Random rd = new Random();
@@ -256,9 +292,6 @@ public class SpecialCustomer extends Customer
     // 유형5 의문의 아이템 선물
     public void orderPresent()
     {
-        //test
-        System.out.println("자리수 : " + Cafe.getChair());
-
         boolean check = true;   // 반복 여부 체크하기 위한 변수
         int result = 0;         // 선택값을 비교하기 위한 변수
 

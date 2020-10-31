@@ -1,7 +1,6 @@
 package com.company.character;
 
 import com.company.beverage.Beverage;
-
 import java.util.Random;
 import java.util.Scanner;
 
@@ -133,7 +132,7 @@ public class PartimerAction
         System.out.println("------------------------------------------------------------------------");
         System.out.println("                            음료 만들기 ");
         System.out.println("------------------------------------------------------------------------");
-        System.out.println(" 하단에 제시된 퀴즈를 맞춰주세요. ");
+        System.out.println(" 하단에 제시된 퀴즈를 맞혀1주세요. ");
         System.out.println();
 
         // 퀴즈 1 : 우유 들어가는 음료인지
@@ -357,6 +356,27 @@ public class PartimerAction
 
     // 음료 만드는 메소드 3 :
 
+
+    // 음료 제조 결과 출력하는 메소드
+    public void makeBeverageResult(boolean result)
+    {
+        if(result == false)     // 음료 실패했을 경우
+        {
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println("                            음료 만들기 실패 ! ");
+            System.out.println("------------------------------------------------------------------------");
+            System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", Partimer.getName());
+            System.out.printf(" 현재 %s님의 체력 : %d\n", Partimer.getName(), Partimer.getHp());
+            System.out.println("========================================================================");
+        }
+        else
+        {
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println("                          ✨ 음료 만들기 성공 ✨  ");
+            System.out.println("------------------------------------------------------------------------");
+        }
+
+    }
 
     // 주급받기 메소드
 

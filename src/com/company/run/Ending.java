@@ -6,9 +6,14 @@ import java.util.Scanner;
 
 public class Ending
 {
+    private static int endingTypeNum = 6;
+
     // 1. HP == 0 엔딩 : 쓰러짐 엔딩
     public void fallDownEnding()
     {
+        // 엔딩 저장
+
+
         System.out.println();
         System.out.println();
         System.out.println();
@@ -67,7 +72,7 @@ public class Ending
         finalEnding();
 
     }
-    // 3. n주차 지나고 HP, Mood,숙련도 일정 수준 이상 : 캐스팅 엔딩
+    // 3. n주차 지나고 숙련도 일정 수준 이상, secret 손님 방문 n회 이상 : 캐스팅 엔딩
 
     // 4. n주차 지나고 코인 일정 수준 이상 : 사장 엔딩
 
@@ -101,7 +106,7 @@ public class Ending
 
     }
 
-    // 6. END
+    // 7. END
     public void finalEnding()
     {
         boolean check =true;    // 반복여부 체크하기 위한 변수
@@ -180,4 +185,13 @@ public class Ending
 
     }
 
+    public static int getEndingTypeNum()
+    {
+        return endingTypeNum;
+    }
+
+    public static void setEndingTypeNum(int endingTypeNum)
+    {
+        Ending.endingTypeNum = endingTypeNum;
+    }
 }

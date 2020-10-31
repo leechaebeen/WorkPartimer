@@ -1,7 +1,9 @@
 package com.company.run;
-import com.company.character.Partimer;
-
 import java.util.Scanner;
+
+import com.company.cafe.Cafe;
+import com.company.cafe.CafeAction;
+import com.company.character.Partimer;
 import java.util.regex.Pattern;
 
 // 선택지에 따른 출력을 실행하는 클래스
@@ -113,6 +115,202 @@ public class Run
         return result;
 
     } //end initialRun()
+
+
+
+
+
+    // 정보 확인 메소드 1.내 정보 확인 2.카페 정보 확인
+    public void info()
+    {
+        boolean check = true;   // 반복여부 체크하는 변수
+        String resultStr;       // 사용자의 선택값을 담을 변수(1. 정보 확인  2.상점가기 3.모은 엔딩 확인)
+        int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
+
+        final int MY_INFO = 1;
+        final int CAFE_INFO = 2;
+        final int EXIT = 3;
+
+        while(check)
+        {
+            System.out.println("========================================================================");
+            System.out.printf(" 1. %s님의 정보 보기  2.카페정보 보기 3.뒤로가기 \n", Partimer.getName());
+            System.out.println("------------------------------------------------------------------------");
+            System.out.print(" 선택 : ");
+            Scanner sc = new Scanner(System.in);
+            resultStr = sc.nextLine();
+
+            // 입력받은 값이 숫자인지 확인
+            try
+            {
+                // 자료형 변경한 뒤(String → int) int형에 담는다.
+                result = Integer.parseInt(resultStr);
+                check = false;
+                // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
+                // int형으로 변경되지 않는다면 NumberFormatException 발생
+            }
+            catch (NumberFormatException e) // NumberFormatException 발생한다면
+            {
+                check = true;   // check 에 true 담아서 다시 반복
+                // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+            }
+
+            if(result < 1 || result > 3 )// 주어진 값 이외의 수를 선택한 경우
+            {
+                System.out.println("========================================================================");
+                System.out.println(" 올바른 값을 입력해주세요.");
+                check = true;
+            }
+
+        }
+
+        CafeAction cafeAction = new CafeAction();
+
+        switch(result)
+        {
+            case  MY_INFO: myInfo();    // 내 정보 확인
+
+                break;
+
+            case  CAFE_INFO: cafeInfo(); // 카페 정보 확인
+
+                break;
+
+            case EXIT:  cafeAction.weekend();   // 주말 초기화면 호출
+                break;
+        }
+
+    }
+
+    public void myInfo()// 내 정보 확인
+    {
+        int week = (Partimer.getWorkingDays() / 7) + 1;               // 주차 = 일한날짜/7 + 1
+        System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
+        System.out.printf("==========================      %d주차   정보     =========================\n", week);
+        System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
+        System.out.println();
+        System.out.println(" 설정값 : 최대 능력치입니다. 아이템을 통해 증가시킬 수 있습니다.");
+        System.out.println("         능력치는 주말마다 설정값으로 초기화됩니다. ");
+        System.out.println("------------------------------------------------------------------------");
+        System.out.printf(" %s님의 인내력 : %d\n",Partimer.getSetFeeling());
+        System.out.printf(" %s님의 체력 : %d\n", Partimer.getSetHp());
+        System.out.println("========================================================================");
+        System.out.println(" 숙련도 : 음료 제조 성공 확률과 카페 운영 기간을 고려하여 ");
+        System.out.println("         주말마다 숙련도가 업데이트됩니다.");
+        System.out.println("------------------------------------------------------------------------");
+        System.out.printf(" %s님의 숙련도 : %d\n ", Partimer.getSkillLevel());
+        System.out.println("------------------------------------------------------------------------");
+
+        boolean check = true;   // 반복여부 체크하는 변수
+        String resultStr;       // 사용자의 선택값을 담을 변수
+        int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
+
+        final int EXIT = 1;
+
+        while(check)
+        {
+            System.out.println(" 1.나가기");
+            System.out.println("------------------------------------------------------------------------");
+            Scanner sc = new Scanner(System.in);
+            System.out.print(" 선택 : ");
+            resultStr = sc.nextLine();
+
+            // 입력받은 값이 숫자인지 확인
+            try
+            {
+              // 자료형 변경한 뒤(String → int) int형에 담는다.
+              result = Integer.parseInt(resultStr);
+              check = false;
+              // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
+              // int형으로 변경되지 않는다면 NumberFormatException 발생
+            }
+            catch (NumberFormatException e) // NumberFormatException 발생한다면
+            {
+              check = true;   // check 에 true 담아서 다시 반복
+              // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+            }
+
+            if(result != 1)// 주어진 값 이외의 수를 선택한 경우
+            {
+              System.out.println("========================================================================");
+              System.out.println(" 올바른 값을 입력해주세요.");
+              check = true;
+            }
+
+        }
+
+        switch(result)
+        {
+          case  EXIT: info(); // 이전 화면으로 나가기
+          break;
+        }
+
+    }// end myInfo()
+
+    public void cafeInfo()  // 카페 정보
+    {
+        int week = (Partimer.getWorkingDays() / 7) + 1;               // 주차 = 일한날짜/7 + 1
+        System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
+        System.out.printf("==========================    %d주차  카페 정보    =========================\n", week);
+        System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
+        System.out.println();
+        System.out.println(" 의자 : 카페에 존재하는 의자의 수입니다. 매장에서 음료를 마시는 한 명의 손님이 하나의 의자를 차지합니다.");
+        System.out.println("       매장에서 음료를 마시길 원하는 손님은 의자가 없으면 카페를 나갑니다.");
+        System.out.println("       아이템을 통해 의자의 수를 늘릴 수 있습니다. 의자는 설정된 값으로 매일 초기화됩니다.");
+        System.out.println("------------------------------------------------------------------------");
+        System.out.printf(" 의자의 수 : %d\n", Cafe.getSetChair());
+        System.out.println("========================================================================");
+        System.out.println(" 유리컵 : 매장 내 취식하는 손님이 차가운 음료를 마실 경우 사용하는 잔입니다. ");
+        System.out.println("         알맞은 잔이 없을 경우 유저의 체력이 1 감소합니다. ");
+        System.out.println("------------------------------------------------------------------------");
+        System.out.printf(" %s님의 숙련도 : %d\n ", Partimer.getSkillLevel());
+        System.out.println("------------------------------------------------------------------------");
+
+        boolean check = true;   // 반복여부 체크하는 변수
+        String resultStr;       // 사용자의 선택값을 담을 변수
+        int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
+
+        final int EXIT = 1;
+
+        while(check)
+        {
+            System.out.println(" 1.나가기");
+            System.out.println("------------------------------------------------------------------------");
+            Scanner sc = new Scanner(System.in);
+            System.out.print(" 선택 : ");
+            resultStr = sc.nextLine();
+
+            // 입력받은 값이 숫자인지 확인
+            try
+            {
+                // 자료형 변경한 뒤(String → int) int형에 담는다.
+                result = Integer.parseInt(resultStr);
+                check = false;
+                // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
+                // int형으로 변경되지 않는다면 NumberFormatException 발생
+            }
+            catch (NumberFormatException e) // NumberFormatException 발생한다면
+            {
+                check = true;   // check 에 true 담아서 다시 반복
+                // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+            }
+
+            if(result != 1)// 주어진 값 이외의 수를 선택한 경우
+            {
+                System.out.println("========================================================================");
+                System.out.println(" 올바른 값을 입력해주세요.");
+                check = true;
+            }
+
+        }
+
+        switch(result)
+        {
+            case  EXIT: info(); // 이전 화면으로 나가기
+                break;
+        }
+    }
+
 
 
 }

@@ -1,5 +1,7 @@
 package com.company.character;
 
+import com.company.run.Ending;
+
 // 게임에 등장하는 캐릭터들(유저, 손님)의 가장 기본이 되는 속성을 담은 클래스
 // Character 클래스를 상속받아 hp 속성 사용가능
 // 유저 고유의 속성을 추가한 클래스
@@ -25,6 +27,11 @@ public class Partimer extends Character
     private static int successNum;  // 음료 제조 성공 총 횟수
 
     private static int workingDays; // 총 근무일자 : 7일마다 상점 방문 가능(아직 구현X) / 최대 플레이 가능 일자 설정하기(아직 설정X)
+
+    public static int[] getEndings = new int[Ending.getEndingTypeNum()]; // 모은 엔딩 저장하는 배열.
+
+
+
 
 
     // 클래스 외부에서 속성에 접근할 수 있도록 getter/setter 생성
@@ -133,5 +140,15 @@ public class Partimer extends Character
     public static void setSuccessNum(int successNum)
     {
         Partimer.successNum = successNum;
+    }
+
+    public static int[] getGetEndings()
+    {
+        return getEndings;
+    }
+
+    public static void setGetEndings(int[] getEndings)
+    {
+        Partimer.getEndings = getEndings;
     }
 }

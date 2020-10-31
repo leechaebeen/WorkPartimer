@@ -12,7 +12,7 @@ import java.util.Random;
 // default : class 앞에 접근제한자가 없는 형태. 동일한 패키지에서만 객체를 생성할 수 있음.
 public class Character
 {
-
+    private String name;
 
 
 }
