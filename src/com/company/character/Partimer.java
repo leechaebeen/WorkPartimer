@@ -8,7 +8,7 @@ import com.company.run.Ending;
 public class Partimer extends Character
 {
     private static String name;         // 유저에게 입력받은 이름
-    private static int skillLevel = 3;  // 현재 숙련도 : 하루에 등장하는 손님 수 , 일주일에 1 씩 증가(아직 설정 X)
+    private static int skillLevel = 1;  // 현재 숙련도 : 하루에 등장하는 손님 수 , 일주일에 1 씩 증가(아직 설정 X)
 
     // 현재 캐릭터의 능력치 :  한 주가 지날 때마다 세팅된 값으로 초기화. 첫 주는 초기화 되지 않으므로 각각 10으로 초기화.
     protected static int hp = 10;           // 현재 체력

@@ -1,4 +1,5 @@
 package com.company.run;
+import java.net.ServerSocket;
 import java.util.Scanner;
 
 import com.company.cafe.Cafe;
@@ -188,17 +189,20 @@ public class Run
         System.out.printf("==========================     %d주차   정보      =========================\n", week);
         System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
         System.out.println();
-        System.out.println(" 설정값 : 최대 능력치입니다. 아이템을 통해 증가시킬 수 있습니다.");
-        System.out.println("         능력치는 주말마다 설정값으로 초기화됩니다. ");
+        System.out.println(" 설정값 : 체력, 인내력의 최대치입니다. 아이템을 통해 증가시킬 수 있습니다.");
+        System.out.println("         체력과 인내력은 주말마다 설정값으로 초기화됩니다. ");
+        System.out.println();
         System.out.println("------------------------------------------------------------------------");
-        System.out.printf(" %s님의 인내력 : %d\n",Partimer.getName(), Partimer.getSetFeeling());
-        System.out.printf(" %s님의 체력 : %d\n", Partimer.getName(), Partimer.getSetHp());
-        System.out.println("------------------------------------------------------------------------");
+        System.out.println();
         System.out.println(" 숙련도 : 음료 제조 성공 확률과 카페 운영 기간을 고려하여 ");
         System.out.println("         주말마다 숙련도가 업데이트됩니다.");
+        System.out.println();
         System.out.println("------------------------------------------------------------------------");
+        System.out.println();
+        System.out.printf(" %s님의 체력 : %d\n", Partimer.getName(), Partimer.getSetHp());
+        System.out.printf(" %s님의 인내력 : %d\n",Partimer.getName(), Partimer.getSetFeeling());
         System.out.printf(" %s님의 숙련도 : %d\n ", Partimer.getName(),Partimer.getSkillLevel());
-        System.out.println("========================================================================");
+        System.out.println();
 
         info(); // 이전으로
 
@@ -214,19 +218,24 @@ public class Run
         System.out.println(" 의자 : 카페에 존재하는 의자의 수입니다. 의자는 설정된 값으로 매일 초기화됩니다. ");
         System.out.println("       매장에서 음료를 마시길 원하는 손님은 의자가 없으면 카페를 나갑니다.");
         System.out.println("       아이템 구매를 통해 의자의 수를 늘릴 수 있습니다. ");
+        System.out.println();
         System.out.println("------------------------------------------------------------------------");
+        System.out.println();
         System.out.println(" 유리잔 : 매장 내 취식하는 손님이 차가운 음료를 마실 경우 사용하는 잔입니다. ");
         System.out.println("         알맞은 잔이 없을 경우 컴플레인이 들어오고, 유저의 인내력이 1 감소합니다. ");
         System.out.println("         아이템 구매를 통해 유리잔의 수를 늘릴 수 있습니다. ");
+        System.out.println();
         System.out.println("------------------------------------------------------------------------");
+        System.out.println();
         System.out.println(" 머그잔 : 매장 내 취식하는 손님이 따뜻한 음료를 마실 경우 사용하는 잔입니다. ");
         System.out.println("         알맞은 잔이 없을 경우 컴플레인이 들어오고, 유저의 인내력이 1 감소합니다. ");
         System.out.println("         아이템 구매를 통해 머그잔의 수를 늘릴 수 있습니다. ");
-        System.out.println("------------------------------------------------------------------------");
-        System.out.printf(" 의자의 수   : %d\n", Cafe.getSetChair());
-        System.out.printf(" 유리잔의 수 : %d\n ", Cafe.getSetCup());
-        System.out.printf(" 머그잔의 수 : %d\n ", Cafe.getSetMug());
+        System.out.println();
         System.out.println("========================================================================");
+        System.out.println();
+        System.out.printf(" 의자의 수    : %d\n", Cafe.getSetChair());
+        System.out.printf(" 유리잔의 수  : %d\n ", Cafe.getSetCup());
+        System.out.printf(" 머그잔의 수  : %d\n ", Cafe.getSetMug());
         System.out.println();
 
         info(); // 이전으로
@@ -377,8 +386,11 @@ public class Run
 
         while(check)
         {
-
-            System.out.printf(" 1.의자 구매         (- %d코인\n)", item.getChairPrice());
+            System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
+            System.out.println("==========================    영구 아이템 구매    ==========================");
+            System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
+            System.out.println();
+            System.out.printf(" 1.의자 구매         (- %d코인)\n", item.getChairPrice());
             System.out.printf(" 2.유리잔 구매       (- %d코인)\n", item.getCupPrice());
             System.out.printf(" 3.머그잔 구매       (- %d코인)\n", item.getMugPrice());
             System.out.printf(" 4.체력 +2          (- %d코인)\n", item.getHpPrice());
@@ -432,7 +444,7 @@ public class Run
 
                 break;
 
-            case EXIT : goShop();   // 상점 초기화면 호출
+            case EXIT : buyItem();   // 이전으로
                 break;
 
         }
@@ -465,7 +477,6 @@ public class Run
 
             while(check)
             {
-                System.out.println("========================================================================");
                 System.out.println(" 1.재구매(동일 아이템) 2.이전으로");
                 System.out.println("------------------------------------------------------------------------");
                 Scanner sc = new Scanner(System.in);
@@ -543,7 +554,6 @@ public class Run
 
             while(check)
             {
-                System.out.println("========================================================================");
                 System.out.println(" 1.재구매(동일 아이템) 2.이전으로");
                 System.out.println("------------------------------------------------------------------------");
                 Scanner sc = new Scanner(System.in);
@@ -621,7 +631,6 @@ public class Run
 
             while(check)
             {
-                System.out.println("========================================================================");
                 System.out.println(" 1.재구매(동일 아이템) 2.이전으로");
                 System.out.println("------------------------------------------------------------------------");
                 Scanner sc = new Scanner(System.in);
@@ -699,7 +708,6 @@ public class Run
 
             while(check)
             {
-                System.out.println("========================================================================");
                 System.out.println(" 1.재구매(동일 아이템) 2.이전으로");
                 System.out.println("------------------------------------------------------------------------");
                 Scanner sc = new Scanner(System.in);
@@ -764,7 +772,7 @@ public class Run
         if(Partimer.getProperty() >= item.getFeelingPrice())  // 체력 증가 가격보다 보유한 코인이 많거나 같으면
         {
             Partimer.setProperty(Partimer.getProperty() - item.getFeelingPrice());    // 계산하고
-            Partimer.setSetHp(Partimer.getSetFeeling()+1); // 체력 설정값 추가
+            Partimer.setSetFeeling(Partimer.getSetFeeling()+1); // 인내력 설정값 추가
 
             System.out.println("========================================================================");
             System.out.printf(" %d 코인을 사용했습니다.\n", item.getFeelingPrice());
@@ -777,7 +785,6 @@ public class Run
 
             while(check)
             {
-                System.out.println("========================================================================");
                 System.out.println(" 1.재구매(동일 아이템) 2.이전으로");
                 System.out.println("------------------------------------------------------------------------");
                 Scanner sc = new Scanner(System.in);
@@ -847,7 +854,10 @@ public class Run
 
         while (check)
         {
-
+            System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
+            System.out.println("==========================    소비 아이템 구매    ==========================");
+            System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
+            System.out.println();
             System.out.printf(" 1.케이크 구매         (- %d코인\n)", item.getCakePrice());
             System.out.printf(" 2.샌드위치 구매       (- %d코인)\n", item.getSandwichPrice());
             System.out.printf(" 3.초콜릿 구매         (- %d코인)\n", item.getChocoPrice());
@@ -894,7 +904,7 @@ public class Run
             case MACARON: buyMacaron();     // 마카롱 구매
                 break;
 
-            case EXIT: goShop();            // 상점 초기화면 호출
+            case EXIT: buyItem();   // 이전으로
                 break;
 
         }
@@ -926,7 +936,6 @@ public class Run
 
             while(check)
             {
-                System.out.println("========================================================================");
                 System.out.println(" 1.재구매(동일 아이템) 2.이전으로");
                 System.out.println("------------------------------------------------------------------------");
                 Scanner sc = new Scanner(System.in);
@@ -1002,7 +1011,6 @@ public class Run
 
             while(check)
             {
-                System.out.println("========================================================================");
                 System.out.println(" 1.재구매(동일 아이템) 2.이전으로");
                 System.out.println("------------------------------------------------------------------------");
                 Scanner sc = new Scanner(System.in);
@@ -1078,7 +1086,6 @@ public class Run
 
             while(check)
             {
-                System.out.println("========================================================================");
                 System.out.println(" 1.재구매(동일 아이템) 2.이전으로");
                 System.out.println("------------------------------------------------------------------------");
                 Scanner sc = new Scanner(System.in);
@@ -1154,7 +1161,6 @@ public class Run
 
             while(check)
             {
-                System.out.println("========================================================================");
                 System.out.println(" 1.재구매(동일 아이템) 2.이전으로");
                 System.out.println("------------------------------------------------------------------------");
                 Scanner sc = new Scanner(System.in);

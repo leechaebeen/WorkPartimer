@@ -49,8 +49,9 @@ public class CafeAction
             System.out.println("                         ✨ 주말이 되었습니다 ✨ ");
             System.out.println();
             System.out.println();
+            System.out.println();
 
-            weekend();  // 주말 메소드
+            weekendInfo();  // 주말에 한 주의 카페 운영을 정산하는 메소드
 
         }
 
@@ -291,17 +292,13 @@ public class CafeAction
 
 
     // 주말 초기화면  메소드(정보 확인 가능, 상점 이용 가능, 아이템 사용 가능)
-    public void weekend()
+    public void weekendInfo()
     {
-        boolean check = true;   // 반복여부 체크하는 변수
         int week = (Partimer.getWorkingDays() /6) + 1;
         // 토요일이 될 때 주차를 계산하면(일한 일수/요일배열 길이) 한 주 적게 나오기 때문에 1을 더해준다.
         /* 첫번째 토요일 : 5/6 == 0
            두번째 토요일 : 11/6 == 1
         */
-
-        String resultStr;       // 사용자의 선택값을 담을 변수(1. 정보 확인  2.상점가기 3.모은 엔딩 확인)
-        int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
 
         // 숙련도 업데이트
 
@@ -310,8 +307,19 @@ public class CafeAction
         {
             Partimer.setProperty(Partimer.getProperty() + Partimer.getSalary());
             // 전재산 = 현재 전재산 + 제공받는 급여코인
-            System.out.println("------------------------------------------------------------------------");
-            System.out.printf(" 급여로 %d코인을 획득했습니다.\n", Partimer.getSalary());
+            System.out.println();
+            System.out.printf("                         ✨ 급여로 %d코인을 획득했습니다 ✨\n", Partimer.getSalary());
+            System.out.println();
+            System.out.println();
+
+        }
+        else
+        {
+            System.out.println();
+            System.out.println("                         코인을 획득하지 못했습니다! ");
+            System.out.println("                          더 열심히 일해야합니다 ");
+            System.out.println();
+            System.out.println();
 
         }
 
@@ -327,9 +335,19 @@ public class CafeAction
         System.out.printf(" 현재까지 방문한 손님 수 : %d \n", Cafe.getTotalCustomerNum());
         System.out.printf(" 음료제조에 성공한 횟수 : %d \n", Partimer.getSuccessNum());
         System.out.printf(" 음료제조에 실패한 횟수 : %d \n", Partimer.getFailNum());
-        System.out.printf(" 보유한 코인 : \n", Partimer.getProperty());
+        System.out.printf(" 보유한 코인 : %d\n", Partimer.getProperty());
         //System.out.println(" 비밀 손님 방문 여부 : ");
         System.out.println();
+
+        weekend(); // 주말 선택지 호출
+
+    }
+
+    public void weekend()
+    {
+        boolean check = true;   // 반복여부 체크하는 변수
+        String resultStr;       // 사용자의 선택값을 담을 변수(1. 정보 확인  2.상점가기 3.모은 엔딩 확인)
+        int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
 
         final int INFO = 1;     //1. 정보 확인 - 1.내 정보 확인 2.카페 정보 확인 3.이전 화면
         final int SHOP = 2;     //2. 상점가기 - 1.아이템 구입 2.보유 아이템 3.이전 화면
@@ -348,23 +366,23 @@ public class CafeAction
             // 입력받은 값이 숫자인지 확인
             try
             {
-              // 자료형 변경한 뒤(String → int) int형에 담는다.
-              result = Integer.parseInt(resultStr);
-              check = false;
-              // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
-              // int형으로 변경되지 않는다면 NumberFormatException 발생
+                // 자료형 변경한 뒤(String → int) int형에 담는다.
+                result = Integer.parseInt(resultStr);
+                check = false;
+                // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
+                // int형으로 변경되지 않는다면 NumberFormatException 발생
             }
             catch (NumberFormatException e) // NumberFormatException 발생한다면
             {
-              check = true;   // check 에 true 담아서 다시 반복
-              // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+                check = true;   // check 에 true 담아서 다시 반복
+                // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
             }
 
             if(result < 1 || result > 4 )// 주어진 값 이외의 수를 선택한 경우
             {
-              System.out.println("========================================================================");
-              System.out.println(" 올바른 값을 입력해주세요.");
-              check = true;
+                System.out.println("========================================================================");
+                System.out.println(" 올바른 값을 입력해주세요.");
+                check = true;
             }
 
         }
@@ -376,15 +394,15 @@ public class CafeAction
         {
             case  INFO: run.info();     // 1. 정보 확인
 
-            break;
+                break;
 
             case  SHOP: run.goShop();   // 2. 상점 가기
 
-            break;
+                break;
 
             case  ENDING:
 
-            break;
+                break;
 
             case SKIP : // 지나가기 : 다음날 카페 오픈하기
                 Partimer.setWorkingDays(Partimer.getWorkingDays() + 1); // 주말이 지나도록 하루를 더한다. 토→월로 요일 변경

@@ -34,11 +34,11 @@ public class SpecialCustomer extends Customer
         // 휘핑크림 선택값에 따라 대사 분기
         if(beverage.getWhippingCream()==0) // 0 이면 휘핑크림 X
         {
-            whippingCream = "휘핑크림.";
+            whippingCream = "";
         }
         else // 1 이면 휘핑크림 O
         {
-            whippingCream = "";
+            whippingCream = "휘핑크림.";
         }
 
         // 테이크아웃 선택 값에 따라 대사 분기
