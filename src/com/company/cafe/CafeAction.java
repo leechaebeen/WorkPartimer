@@ -245,7 +245,7 @@ public class CafeAction
         while(check)
         {
             System.out.println("========================================================================");
-            System.out.println(" 1. 정보 확인  2.상점가기  3.공개된 엔딩 확인  4.지나가기");
+            System.out.println(" 1. 정보 확인  2.상점가기  3.공개된 엔딩 확인  4. 주말 지나가기");
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
             Scanner sc = new Scanner(System.in);

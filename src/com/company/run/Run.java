@@ -255,7 +255,7 @@ public class Run
         while(check)
         {
             System.out.println("========================================================================");
-            System.out.printf(" 1. %s님의 정보 보기  2.카페 정보 보기 3.이전으로 \n", Partimer.getName());
+            System.out.printf(" 1. %s님의 정보 보기  2.카페 정보 보기  3.이전으로 \n", Partimer.getName());
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
             Scanner sc = new Scanner(System.in);
@@ -297,7 +297,7 @@ public class Run
 
                 break;
 
-            case EXIT:  cafeAction.weekendInfo();   // 주말 초기화면 호출
+            case EXIT:  cafeAction.weekend();   // 주말 초기화면 호출
                 break;
         }
 
@@ -481,7 +481,9 @@ public class Run
             case  CONSUMABLE_ITEM: buyConsumableItem(); // 소모 아이템 구입
                 break;
 
-            case EXIT:  goShop();   // 상점 초기화면 호출
+            case EXIT:
+                CafeAction cafeAction = new CafeAction();
+                cafeAction.weekend();   // 상점 초기화면 호출
                 break;
         }
 
@@ -982,8 +984,7 @@ public class Run
         final int MACARON = 4;  // 인내력 4 회복
         final int EXIT = 5;     // 이전으로
 
-        // 아이템 객체 생성
-        Item item = new Item();
+        Item item = new Item();// 아이템 객체 생성
 
         while (check)
         {
@@ -995,14 +996,14 @@ public class Run
             System.out.println();
             System.out.println("------------------------------------------------------------------------");
             System.out.println();
-            System.out.printf(" 케이크   : %d개\n");
-            System.out.printf(" 샌드위치 : %d개\n");
-            System.out.printf(" 초콜릿   : %d개\n");
-            System.out.printf(" 마카롱   : %d개\n");
+            System.out.printf(" 케이크   : %d개\n", item.getCake());
+            System.out.printf(" 샌드위치 : %d개\n", item.getSandwich());
+            System.out.printf(" 초콜릿   : %d개\n", item.getChoco());
+            System.out.printf(" 마카롱   : %d개\n", item.getMacaron());
             System.out.println();
             System.out.println("------------------------------------------------------------------------");
             System.out.println();
-            System.out.printf(" 1.케이크 구매         (- %d코인\n)", item.getCakePrice());
+            System.out.printf(" 1.케이크 구매         (- %d코인)\n", item.getCakePrice());
             System.out.printf(" 2.샌드위치 구매       (- %d코인)\n", item.getSandwichPrice());
             System.out.printf(" 3.초콜릿 구매         (- %d코인)\n", item.getChocoPrice());
             System.out.printf(" 4.마카롱 구매         (- %d코인)\n", item.getMacaronPrice());
@@ -1125,7 +1126,7 @@ public class Run
             System.out.println(" 보유한 코인으로 케이크를 구매할 수 없습니다.");
             System.out.printf(" 현재 보유 코인      : %d코인\n", Partimer.getProperty());
             System.out.println("========================================================================");
-            buyPermanentItem(); // 이전으로
+            buyConsumableItem(); // 이전으로
         }
 
     }// end buyCake()
@@ -1200,7 +1201,7 @@ public class Run
             System.out.println(" 보유한 코인으로 샌드위치를 구매할 수 없습니다.");
             System.out.printf(" 현재 보유 코인      : %d코인\n", Partimer.getProperty());
             System.out.println("========================================================================");
-            buyPermanentItem(); // 이전으로
+            buyConsumableItem(); // 이전으로
         }
 
     }// end buySandwich()
@@ -1275,7 +1276,7 @@ public class Run
             System.out.println(" 보유한 코인으로 초콜릿을 구매할 수 없습니다.");
             System.out.printf(" 현재 보유 코인      : %d코인\n", Partimer.getProperty());
             System.out.println("========================================================================");
-            buyPermanentItem(); // 이전으로
+            buyConsumableItem(); // 이전으로
         }
 
     }// end buyChoco()
@@ -1350,7 +1351,7 @@ public class Run
             System.out.println(" 보유한 코인으로 마카롱을 구매할 수 없습니다.");
             System.out.printf(" 현재 보유 코인      : %d코인\n", Partimer.getProperty());
             System.out.println("========================================================================");
-            buyPermanentItem(); // 이전으로
+            buyConsumableItem(); // 이전으로
         }
 
     }// end buyMacaron()
