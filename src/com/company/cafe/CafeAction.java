@@ -114,6 +114,7 @@ public class CafeAction
 
             System.out.println(" 다음 손님을 받을까요? ");
             System.out.println(" 1. 계속하기 2. 마감하기 3.아이템 사용");
+            System.out.println("------------------------------------------------------------------------");
 
             System.out.print(" 선택 : ");
             Scanner sc = new Scanner(System.in);

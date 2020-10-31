@@ -298,7 +298,7 @@ public class Run
 
                 break;
 
-            case MY_ITEM:   // 보유 아이템 확인
+            case MY_ITEM: myItem();  // 보유 아이템 확인
                 break;
 
             case EXIT:  cafeAction.weekend();   // 주말 초기화면 호출
@@ -1344,7 +1344,6 @@ public class Run
         {
             System.out.println("========================================================================");
             System.out.println(" 현재 공개된 엔딩이 없습니다.");
-            System.out.println("========================================================================");
             CafeAction cafeAction = new CafeAction();
             cafeAction.weekend(); // 이전으로
         }
@@ -1458,6 +1457,8 @@ public class Run
 
     }//end openEnding()
 
+
+// 소비 아이템 사용 -----------------------------------------------------------------------------------------------------------
     public void myItem()// 보유한 소비 아이템 확인하는 메소드
     {
         System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
@@ -1489,6 +1490,7 @@ public class Run
 
         while(check)
         {
+            System.out.println(" ※ 주말에는 체력과 인내력이 최댓값으로 초기화됩니다 ※ ");
             System.out.println(" 사용할 아이템을 골라주세요.");
             System.out.println(" 1.케이크  2.샌드위치  3.초콜릿  4.마카롱  5.사용안함");
             System.out.println("------------------------------------------------------------------------");
@@ -1527,19 +1529,16 @@ public class Run
         final int EXIT = 5;
         switch (result)
         {
-            case CAKE:  // 케이크 사용한 경우
+            case CAKE: useCake();           // 케이크 사용
                 break;
 
-            case SANDWICH:
-
+            case SANDWICH: useSandwich();   // 샌드위치 사용
                 break;
 
-            case CHOCO:
-
+            case CHOCO: useChoco();         // 초콜릿 사용
                 break;
 
-            case MACARON:
-
+            case MACARON: useMacaron();     // 마카롱 사용
                 break;
 
             case EXIT:  // 이전으로
