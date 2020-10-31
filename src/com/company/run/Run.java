@@ -17,7 +17,7 @@ public class Run
     // static int result;   → 클래스 변수
 
     // 1.초기화면 실행하는 메소드
-    public int initialRun()
+    public void initialRun()
     {
         // 반환값을 담을 변수 선언
         // 초기화해야하는 이유  : 지역변수는 자동으로 초기화가 안된다. 클래스 변수와 인스턴스 변수는 자료형에 맞게 기본값으로 초기화된다.
@@ -116,7 +116,25 @@ public class Run
             }
         }
 
-        return result;
+        final int START = 1;                // 게임 시작
+        final int INITIAL_RUN = 2;          // 초기화면 실행
+
+        CafeAction cafeAction = new CafeAction(); // Cafe 객체 생성
+
+        while(true)
+        {
+            switch(result)              // 유저의 선택값에 따라 분기 처리
+            {
+                case  START:             // 1. 시작하기를 선택한 경우
+                    cafeAction.start();
+                    break;
+
+                case INITIAL_RUN :       // 2. 다시 시작하기를 선택한 경우
+                    initialRun();
+                    break;
+            }
+
+        }
 
     } //end initialRun()
 
@@ -996,10 +1014,10 @@ public class Run
             System.out.println();
             System.out.println("------------------------------------------------------------------------");
             System.out.println();
-            System.out.printf(" 케이크   : %d개\n", item.getCake());
-            System.out.printf(" 샌드위치 : %d개\n", item.getSandwich());
-            System.out.printf(" 초콜릿   : %d개\n", item.getChoco());
-            System.out.printf(" 마카롱   : %d개\n", item.getMacaron());
+            System.out.printf(" 케이크   : %d개 ( 체력을 2 회복시킨다. )\n", item.getCake());
+            System.out.printf(" 샌드위치 : %d개 ( 체력을 4 회복시킨다. )\n", item.getSandwich());
+            System.out.printf(" 초콜릿   : %d개 ( 인내력을 2 회복시킨다. )\n", item.getChoco());
+            System.out.printf(" 마카롱   : %d개 ( 인내력을 4 회복시킨다. )\n", item.getMacaron());
             System.out.println();
             System.out.println("------------------------------------------------------------------------");
             System.out.println();
@@ -1383,9 +1401,14 @@ public class Run
             System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
             System.out.println();
 
+            int cnt = 0;
             //for (int i = 0; i < endings.length; i++) 0부터 배열의 길이까지 반복해서 확인한다.
             for (int ending : endings)
             {
+                if(ending == 0) // 비어있는 칸이면
+                {
+                    cnt++;      // cnt 변수를 1씩 증가시킨다.
+                }
                 if (ending == FALL_DOWN_ENDING)
                 {
                     System.out.printf(" 과로 엔딩 : %s님은 고된 노동에 시달리다 쓰러졌습니다. \n", Partimer.getName());
@@ -1393,9 +1416,6 @@ public class Run
                     System.out.println(" ✨ 과로 엔딩 tip ✨ ");
                     System.out.println("    체력이 0 이 되면 과로 엔딩의 조건이 달성됩니다. ");
                     System.out.println("    아이템을 적절히 이용해서 체력을 관리해주세요 ! ");
-                } else
-                {
-                    System.out.println(" ??? 엔딩 : 공개되지 않은 엔딩입니다.");
                 }
 
                 if (ending == QUIT_ENDING)
@@ -1405,9 +1425,6 @@ public class Run
                     System.out.println(" ✨ 사표 엔딩 tip ✨ ");
                     System.out.println("    인내력이 0 이 되면 사표 엔딩의 조건이 달성됩니다. ");
                     System.out.println("    아이템을 이용해서 체력과 인내력을 관리해주세요 ! ");
-                } else
-                {
-                    System.out.println(" ??? 엔딩 : 공개되지 않은 엔딩입니다.");
                 }
 
                 if (ending == SCOUT_ENDING)
@@ -1418,9 +1435,6 @@ public class Run
                     System.out.println(" ✨ 스카우트 엔딩 tip ✨ ");
                     System.out.println("    숙련도가 @@@ 이상이고 비밀 손님의 방문이 @@회 이상이면");
                     System.out.println("    스카우트 엔딩의 조건이 달성됩니다. ");
-                } else
-                {
-                    System.out.println(" ??? 엔딩 : 공개되지 않은 엔딩입니다.");
                 }
 
                 if (ending == BOSS_ENDING)
@@ -1430,9 +1444,6 @@ public class Run
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 사장 엔딩 tip ✨ ");
                     System.out.println("    보유하고 있는 코인이 50개 이상이면 사장 엔딩의 조건이 달성됩니다.");
-                } else
-                {
-                    System.out.println(" ??? 엔딩 : 공개되지 않은 엔딩입니다.");
                 }
 
                 if (ending == GET_FIRE_ENDING)
@@ -1442,11 +1453,7 @@ public class Run
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 해고 엔딩 tip ✨ ");
                     System.out.println("    음료제조 성공 횟수 ÷ 실패 횟수가 1보다 작아지면 엔딩의 조건이 달성됩니다.");
-                } else
-                {
-                    System.out.println(" ??? 엔딩 : 공개되지 않은 엔딩입니다.");
                 }
-
                 if (ending == PARTIMER_ENDING)
                 {
                     System.out.printf(" 알바 엔딩 : %s님은 카페 아르바이트를 능숙하게 해내고 있습니다.\n", Partimer.getName());
@@ -1454,10 +1461,9 @@ public class Run
                     System.out.println(" ✨ 알바 엔딩 tip ✨ ");
                     System.out.println("    나머지 엔딩에 해당하지 않으면 알바 엔딩의 조건이 달성됩니다.");
                     System.out.println("    그만큼 적성에 잘 맞는거겠죠?  ");
-                } else
-                {
-                    System.out.println(" ??? 엔딩 : 공개되지 않은 엔딩입니다.");
                 }
+                
+                System.out.printf(" 아직 공개되지 않은 엔딩이 \n개 남아있습니다 !", cnt);
             }
         }
 

@@ -1,5 +1,8 @@
 package com.company.run;
 
+import com.company.cafe.Cafe;
+import com.company.cafe.CafeAction;
+import com.company.cafe.Item;
 import com.company.character.Partimer;
 
 import java.util.Scanner;
@@ -248,23 +251,52 @@ public class Ending
 
         }
 
-        	final int STOP = 1;  // 다시 처음부터 시작하는 선택지
-            final int RESTART = 2;     // 프로그램 종료하는 선택지
+        final int STOP = 1;     // 프로그램 종료하는 선택지
+        final int RESTART = 2;  // 다시 시작하는 선택지
 
-            while(true)
+        while(true)
+        {
+            switch(result)
             {
-                switch(result)
-                {
-                    case STOP : // 프로그램 종료
-                        System.exit(0);
-                        break;
+                case STOP : // 프로그램 종료
+                    System.exit(0);
+                    break;
 
-                    case RESTART: // 다시 시작하기
-                        Run run = new Run();
-                        run.initialRun();// result =
-                        break;
-                }
+                case RESTART: // 다시 시작하기
+                    reset();  // 이전 플레이의 모든 세팅값 리셋하는 메소드
+                    Run run = new Run();
+                    run.initialRun();
+                    break;
             }
+        }
+
+    }
+
+    // 이전 플레이의 모든 값 리셋
+    public void reset()
+    {
+        // 유저 관련
+        Partimer.setSetHp(5);
+        Partimer.setSetFeeling(5);
+        Partimer.setHp(5);
+        Partimer.setFeeling(5);
+        Partimer.setProperty(0);
+        Partimer.setSkillLevel(1);
+        Partimer.setWorkingDays(0);
+        Partimer.setSuccessNum(0);
+        Partimer.setFailNum(0);
+
+        // 아이템 관련
+        Item.setCake(0);
+        Item.setSandwich(0);
+        Item.setChoco(0);
+        Item.setMacaron(0);
+
+        // 카페 관련
+        Cafe.setTotalCustomerNum(0);
+        Cafe.setSetChair(2);
+        Cafe.setSetCup(1);
+        Cafe.setSetMug(1);
 
     }
 

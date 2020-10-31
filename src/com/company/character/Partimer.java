@@ -11,12 +11,12 @@ public class Partimer extends Character
     private static int skillLevel = 1;  // 현재 숙련도 : 하루에 등장하는 손님 수 , 일주일에 1 씩 증가(아직 설정 X)
 
     // 현재 캐릭터의 능력치 :  한 주가 지날 때마다 세팅된 값으로 초기화. 첫 주는 초기화 되지 않으므로 각각 10으로 초기화.
-    protected static int hp = 10;           // 현재 체력
-    private static int feeling = 10;        // 현재 인내력
+    protected static int hp = 5;           // 현재 체력
+    private static int feeling = 5;        // 현재 인내력
 
     // 캐릭터의 능력치 세팅값 : 아이템을 구입해 증가시킬 수 있다.
-    protected static int setHp = 10;        // 세팅된 초기 체력값
-    private static int setFeeling = 10;     // 세팅된 초기 인내력값
+    protected static int setHp = 5;        // 세팅된 초기 체력값
+    private static int setFeeling = 5;     // 세팅된 초기 인내력값
 
     // 코인 관련 변수
     private static int property;                  // 유저가 소유하고 있는 총 재산
