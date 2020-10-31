@@ -74,8 +74,6 @@ public class SpecialCustomer extends Customer
             {
                 System.out.println("========================================================================");
                 System.out.println(" 매장에 자리가 없어서 손님이 나갔습니다. ");
-                System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", Partimer.getName());
-                System.out.printf(" 현재 %s님의 체력 : %d\n", Partimer.getName(), Partimer.getHp());
                 System.out.println("========================================================================");
             }
             else
@@ -92,9 +90,14 @@ public class SpecialCustomer extends Customer
             {
                 Cafe.setCup(Cafe.getCup() - 1); // 유리잔 1 감소
             }
-            else    // 뜨거운 음료인데 머그잔이 없거나 차가운 음료인데 유리잔이 없으면 유저 체력 1 감소
+            else    // 뜨거운 음료인데 머그잔이 없거나 차가운 음료인데 유리잔이 없으면 유저 인내력 1 감소
             {
                 Partimer.setHp(Partimer.getHp() - 1);
+                System.out.println("========================================================================");
+                System.out.println(" 매장에 잔이 모자라 일회용 컵을 사용했습니다. 컴플레인이 들어왔습니다. ");
+                System.out.printf(" %s님의 인내력이 1 감소합니다.\n", Partimer.getName());
+                System.out.printf(" 현재 %s님의 인내력 : %d\n", Partimer.getName(), Partimer.getFeeling());
+                System.out.println("========================================================================");
             }
         }
     }
@@ -177,8 +180,6 @@ public class SpecialCustomer extends Customer
             {
                 System.out.println("========================================================================");
                 System.out.println(" 매장에 자리가 없어서 손님이 나갔습니다. ");
-                System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", Partimer.getName());
-                System.out.printf(" 현재 %s님의 체력 : %d\n", Partimer.getName(), Partimer.getHp());
                 System.out.println("========================================================================");
             }
             else
@@ -195,9 +196,14 @@ public class SpecialCustomer extends Customer
             {
                 Cafe.setCup(Cafe.getCup() - 1); // 유리잔 1 감소
             }
-            else    // 뜨거운 음료인데 머그잔이 없거나 차가운 음료인데 유리잔이 없으면 유저 체력 1 감소
+            else    // 뜨거운 음료인데 머그잔이 없거나 차가운 음료인데 유리잔이 없으면 유저 인내력 1 감소
             {
                 Partimer.setHp(Partimer.getHp() - 1);
+                System.out.println("========================================================================");
+                System.out.println(" 매장에 잔이 모자라 일회용 컵을 사용했습니다. 컴플레인이 들어왔습니다. ");
+                System.out.printf(" %s님의 인내력이 1 감소합니다.\n", Partimer.getName());
+                System.out.printf(" 현재 %s님의 인내력 : %d\n", Partimer.getName(), Partimer.getFeeling());
+                System.out.println("========================================================================");
             }
         }
 

@@ -307,7 +307,7 @@ public class CafeAction
         System.out.println(" 음료제조에 실패한 횟수 : ");
         //System.out.println(" 비밀 손님 방문 여부 : ");
 
-        final int INFO = 1;     //1. 정보 확인 - 1.내 정보 확인 2.카페 정보 확인
+        final int INFO = 1;     //1. 정보 확인 - 1.내 정보 확인 2.카페 정보 확인 3.이전 화면
         final int SHOP = 2;     //2. 상점가기 - 1.아이템 구입 2.아이템 사용
         final int ENDING = 3;   //3. 모은 엔딩 확인
         final int SKIP = 4;     //4. 지나가기

@@ -95,8 +95,6 @@ public class Customer
             {
                 System.out.println("========================================================================");
                 System.out.println(" 매장에 자리가 없어서 손님이 나갔습니다. ");
-                System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", Partimer.getName());
-                System.out.printf(" 현재 %s님의 체력 : %d\n", Partimer.getName(), Partimer.getHp());
                 System.out.println("========================================================================");
             }
             else
