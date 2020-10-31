@@ -309,14 +309,15 @@ public class CafeAction
         System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
         System.out.printf("=========================       %d주차 정산       =========================\n", week);
         System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
-
+        System.out.println();
         System.out.printf(" 현재까지 방문한 손님 수 : %d \n", Cafe.getTotalCustomerNum());
         System.out.printf(" 음료제조에 성공한 횟수 : %d \n", Partimer.getSuccessNum());
         System.out.printf(" 음료제조에 실패한 횟수 : %d \n", Partimer.getFailNum());
         //System.out.println(" 비밀 손님 방문 여부 : ");
+        System.out.println();
 
         final int INFO = 1;     //1. 정보 확인 - 1.내 정보 확인 2.카페 정보 확인 3.이전 화면
-        final int SHOP = 2;     //2. 상점가기 - 1.아이템 구입 2.아이템 사용
+        final int SHOP = 2;     //2. 상점가기 - 1.아이템 구입 2.보유 아이템 3.이전 화면
         final int ENDING = 3;   //3. 모은 엔딩 확인
         final int SKIP = 4;     //4. 지나가기
 
@@ -358,11 +359,11 @@ public class CafeAction
         System.out.println();
         switch(result)
         {
-            case  INFO: run.info();
+            case  INFO: run.info();     // 1. 정보 확인
 
             break;
 
-            case  SHOP: //
+            case  SHOP: run.goShop();   // 2. 상점 가기
 
             break;
 
@@ -371,7 +372,7 @@ public class CafeAction
             break;
 
             case SKIP : // 지나가기 : 다음날 카페 오픈하기
-                Partimer.setWorkingDays(Partimer.getWorkingDays() + 1); // 주말이 지나도록 하루를 더한다. 토→월로 요일 변경 
+                Partimer.setWorkingDays(Partimer.getWorkingDays() + 1); // 주말이 지나도록 하루를 더한다. 토→월로 요일 변경
                 start();
                 break;
         }
