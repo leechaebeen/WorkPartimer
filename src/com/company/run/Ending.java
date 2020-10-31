@@ -7,12 +7,31 @@ import java.util.Scanner;
 public class Ending
 {
     private static int endingTypeNum = 6;
+    // static 이어야하는 이유 :
+    // Partimer 클래스의 모은 엔딩 유형을 저장하는 배열이 static 변수라서
+    // 배열 초기화할 때 길이를 나타내는 변수도 static 이어야한다.
+    // → private static int[] endings = new int[Ending.getEndingTypeNum()];
+
+    private final int FALL_DOWN_ENDING = 1; // 쓰러지는 엔딩
+    private final int QUIT_ENDING = 2;      // 그만두는 엔딩
+    private final int SCOUT_ENDING = 3;     // 스카웃 엔딩
+    private final int BOSS_ENDING = 4;      // 사장 엔딩
+    private final int PARTIMER_ENDING = 5;  // 알바 엔딩
+    private final int GET_FIRE_ENDING = 6;  // 해고 엔딩
 
     // 1. HP == 0 엔딩 : 쓰러짐 엔딩
     public void fallDownEnding()
     {
         // 엔딩 저장
+        int[] endings = Partimer.getEndings();
 
+        for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼 반복해서
+        {
+            if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
+            {
+                endings[i] = FALL_DOWN_ENDING;  // 엔딩 유형을 저장한다.
+            }
+        }
 
         System.out.println();
         System.out.println();
@@ -49,6 +68,17 @@ public class Ending
     // 2. Mood == 0 엔딩 : 자발적 퇴사 엔딩
     public void toQuitEnding()
     {
+        // 엔딩 저장
+        int[] endings = Partimer.getEndings();
+
+        for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼
+        {
+            if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
+            {
+                endings[i] = QUIT_ENDING;
+            }
+        }
+
         System.out.println();
         System.out.println();
         System.out.println();
@@ -72,15 +102,67 @@ public class Ending
         finalEnding();
 
     }
-    // 3. n주차 지나고 숙련도 일정 수준 이상, secret 손님 방문 n회 이상 : 캐스팅 엔딩
+    // 3. n주차 지나고 숙련도 일정 수준 이상, secret 손님 방문 n회 이상 : 스카웃 엔딩
+    public void scoutEnding()
+    {
+        // 엔딩 저장
+        int[] endings = Partimer.getEndings();
+
+        for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼
+        {
+            if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
+            {
+                endings[i] = SCOUT_ENDING;
+            }
+        }
+
+    }
 
     // 4. n주차 지나고 코인 일정 수준 이상 : 사장 엔딩
+    public void bossEnding()
+    {
+        // 엔딩 저장
+        int[] endings = Partimer.getEndings();
+
+        for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼
+        {
+            if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
+            {
+                endings[i] = BOSS_ENDING;
+            }
+        }
+
+    }
 
     // 5. 이도저도 아닌 경우 : 알바생 엔딩
+    public void partimerEnding()
+    {
+        // 엔딩 저장
+        int[] endings = Partimer.getEndings();
+
+        for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼
+        {
+            if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
+            {
+                endings[i] = PARTIMER_ENDING;
+            }
+        }
+    }
 
     // 6. 총 손님수/fail 횟수 > 0.5인 경우 : 해고 엔딩
     public void getFireEnding()
     {
+        // 엔딩 저장
+        int[] endings = Partimer.getEndings();
+
+        for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼
+        {
+            if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
+            {
+                endings[i] = GET_FIRE_ENDING;
+            }
+        }
+
         System.out.println();
         System.out.println();
         System.out.println();

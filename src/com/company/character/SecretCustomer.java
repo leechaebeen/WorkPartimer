@@ -11,6 +11,8 @@ public class SecretCustomer extends SpecialCustomer
     {
         super.orderTalkDown(beverage);
         SecretCustomer.setCount(SecretCustomer.getCount() + 1);
+
+        System.out.println(" 비밀손님  ");
     }
 
     @Override
@@ -18,6 +20,8 @@ public class SecretCustomer extends SpecialCustomer
     {
         super.orderFight(beverage);
         SecretCustomer.setCount(SecretCustomer.getCount() + 1);
+
+        System.out.println(" 비밀손님  ");
     }
 
     @Override
@@ -25,6 +29,8 @@ public class SecretCustomer extends SpecialCustomer
     {
         super.orderToPartimer(beverage);
         SecretCustomer.setCount(SecretCustomer.getCount() + 1);
+
+        System.out.println(" 비밀손님  ");
     }
 
     // 외부에서 속성 값에 접근할 수 있도록 getter/setter 생성

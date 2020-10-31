@@ -272,13 +272,13 @@ public class CafeAction
 
             switch(typeNum)
             {
-                case 1: secretCustomer.orderToPartimer(beverage);   // 일반 손님
+                case COMMON: secretCustomer.orderToPartimer(beverage);   // 일반 손님
                     break;
 
-                case 2: secretCustomer.orderTalkDown(beverage);    // 반말하는 손님
+                case TALK_DOWN: secretCustomer.orderTalkDown(beverage);    // 반말하는 손님
                     break;
 
-                case 3: secretCustomer.orderFight(beverage);       // 시비거는 손님
+                case FIGHT: secretCustomer.orderFight(beverage);       // 시비거는 손님
                     break;
             }
 
@@ -357,7 +357,7 @@ public class CafeAction
         while(check)
         {
             System.out.println("========================================================================");
-            System.out.println(" 1. 정보 확인  2.상점가기  3.모은 엔딩 확인  4.지나가기");
+            System.out.println(" 1. 정보 확인  2.상점가기  3.공개된 엔딩 확인  4.지나가기");
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
             Scanner sc = new Scanner(System.in);
@@ -400,7 +400,7 @@ public class CafeAction
 
                 break;
 
-            case  ENDING:
+            case  ENDING: run.openEnding();// 3.공개된 엔딩 확인
 
                 break;
 

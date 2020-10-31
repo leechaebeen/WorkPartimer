@@ -31,8 +31,7 @@ public class Partimer extends Character
     // 근무 일자 변수
     private static int workingDays; // 총 근무일자 : 주말마다 상점 방문 가능/ 최대 플레이 가능 일자 설정하기(아직 설정X)
 
-    // 어떻게 저장하지..??
-    public static int[] getEndings = new int[Ending.getEndingTypeNum()]; // 모은 엔딩 저장하는 배열.
+    private static int[] endings = new int[Ending.getEndingTypeNum()]; // 모은 엔딩 저장하는 배열.
 
 
 
@@ -146,13 +145,13 @@ public class Partimer extends Character
         Partimer.successNum = successNum;
     }
 
-    public static int[] getGetEndings()
+    public static int[] getEndings()
     {
-        return getEndings;
+        return endings;
     }
 
-    public static void setGetEndings(int[] getEndings)
+    public static void setEndings(int[] endings)
     {
-        Partimer.getEndings = getEndings;
+        Partimer.endings = endings;
     }
 }

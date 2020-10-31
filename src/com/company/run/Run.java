@@ -1209,7 +1209,63 @@ public class Run
         }
 
     }// end buyMacaron()
-    
+
+// 공개된 엔딩 확인하기 ---------------------------------------------------------------------------------------------------
+
+    public void openEnding()
+    {
+        int[] endings = Partimer.getEndings();  // 공개된 엔딩 유형 저장한 배열 불러오기
+        if(endings[0]==0)                       // 첫번째 배열 칸이 0 이면 공개된 엔딩이 없다는 뜻이다.
+        {
+            System.out.println("========================================================================");
+            System.out.println(" 현재 공개된 엔딩이 없습니다.");
+            System.out.println("========================================================================");
+            CafeAction cafeAction = new CafeAction();
+            cafeAction.weekend(); // 이전으로
+        }
+        else    // 공개된 엔딩이 있으면
+        {
+            final int FALL_DOWN_ENDING = 1; // 쓰러지는 엔딩
+            final int QUIT_ENDING = 2;      // 그만두는 엔딩
+            final int SCOUT_ENDING = 3;     // 스카웃 엔딩
+            final int BOSS_ENDING = 4;      // 사장 엔딩
+            final int PARTIMER_ENDING = 5;  // 알바 엔딩
+            final int GET_FIRE_ENDING = 6;  // 해고 엔딩
+
+            System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
+            System.out.println("=========================       공개된 엔딩      =========================");
+            System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
+
+            for (int i = 0; i < endings.length ; i++)
+            {
+                if(endings[i]!=0)
+                {
+                    switch(endings[i])
+                    {
+                        case FALL_DOWN_ENDING: // final 상수로 바꾸기
+                            break;
+
+                        case QUIT_ENDING:
+                            break;
+
+                        case SCOUT_ENDING:
+                            break;
+
+                        case BOSS_ENDING:
+                            break;
+
+                        case PARTIMER_ENDING:
+                            break;
+
+                        case GET_FIRE_ENDING:
+                            break;
+                    }
+                }
+            }
+        }
+
+
+    }
 
 
 }// end class
