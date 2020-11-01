@@ -128,11 +128,11 @@ public class SecretCustomer extends SpecialCustomer
 
         if(checkTakeout)  // checkTakeout() 는 테이크아웃하면 true 반환
         {
-            takeout = " 하... 테이크아웃이요.";
+            takeout = " 테이크아웃이요.";
         }
         else    // false 인 경우
         {
-            takeout = "하...먹고 갈거에요.";
+            takeout = " 먹고 갈거에요.";
         }
 
         System.out.println(" 손님 : " + beverage.getName());

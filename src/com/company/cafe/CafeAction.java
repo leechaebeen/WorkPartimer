@@ -46,7 +46,6 @@ public class CafeAction
             System.out.println();
             System.out.println("                         ✨ 주말이 되었습니다 ✨ ");
             System.out.println();
-            System.out.println();
 
             weekendInfo();  // 주말에 한 주의 카페 운영을 정산하는 메소드
 
@@ -186,15 +185,23 @@ public class CafeAction
         {
             Partimer.setProperty(Partimer.getProperty() + Partimer.getSalary());
             // 전재산 = 현재 전재산 + 제공받는 급여코인
-            System.out.println();
-            System.out.printf("                         ✨ %d코인을 획득했습니다 ✨\n", Partimer.getSalary());
+            System.out.printf("                        ✨ %d코인을 획득했습니다 ✨\n", Partimer.getSalary());
             System.out.println();
 
         }
         else
         {
+            System.out.println("                     코인을 획득하지 못했습니다! ");
             System.out.println();
-            System.out.println("                       코인을 획득하지 못했습니다! ");
+
+        }
+
+        // 숙련도 업데이트
+        // 누적 음료 제조 성공 횟수가 숙련도(하루 최대 방문자 수)*4보다 크거나 같으면
+        if(Partimer.getSkillLevel()*4 <= Partimer.getSuccessNum())
+        {
+            Partimer.setSkillLevel(Partimer.getSkillLevel()+1);// 숙련도 1 증가
+            System.out.println("                      ✨ 숙련도가 1 증가했습니다 ✨");
             System.out.println();
 
         }
@@ -202,17 +209,9 @@ public class CafeAction
         // 체력, 인내력 설정값으로 초기화
         Partimer.setHp(Partimer.getSetHp());
         Partimer.setFeeling(Partimer.getSetFeeling());
-        System.out.println();
         System.out.println("                    ✨ 체력과 인내력을 회복했습니다 ✨");
         System.out.println();
         System.out.println();
-
-        // 숙련도 업데이트
-        // 누적 음료 제조 성공 횟수가 숙련도(하루 최대 방문자 수)*4보다 크면
-        if(Partimer.getSkillLevel()*4 < Partimer.getSuccessNum())
-        {
-            Partimer.setSkillLevel(Partimer.getSkillLevel()+1);// 숙련도 1 증가
-        }
 
 
         System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");

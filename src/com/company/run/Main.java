@@ -1,7 +1,5 @@
 package com.company.run;
 
-import com.company.cafe.CafeAction;
-
 // 게임의 최초 실행 기능을 담은 클래스
 public class Main
 {

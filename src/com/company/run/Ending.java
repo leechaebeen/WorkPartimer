@@ -13,7 +13,7 @@ public class Ending
     // static 이어야하는 이유 :
     // Partimer 클래스의 모은 엔딩 유형을 저장하는 배열이 static 변수라서
     // 배열 초기화할 때 길이를 나타내는 변수도 static 이어야한다.
-    // → private static int[] endings = new int[Ending.getEndingTypeNum()];
+    // → private static int[] endings = new int[Ending.getEndingTypeNum()-1];
 
     private final int FALL_DOWN_ENDING = 1; // 과로 엔딩
     private final int QUIT_ENDING = 2;      // 퇴사 엔딩
@@ -25,14 +25,39 @@ public class Ending
     // 1. 과로 엔딩 : 유저의 체력이 0이 되면 (호출 완료)
     public void fallDownEnding()
     {
-        // 엔딩 저장
-        int[] endings = Partimer.getEndings();
+        int[] endings = Partimer.getEndings();   // 공개된 엔딩 유형 저장할 배열 호출해서 변수에 담기
+        boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
-        for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼 반복해서
+        // 배열에 중복되는 값 있는지 검사
+        for (int i = 0; i < endings.length; i++)        // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
         {
-            if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
+            for (int j = 0; j < endings.length; j++)    // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
             {
-                endings[i] = FALL_DOWN_ENDING;  // 엔딩 유형을 저장한다.
+                if(endings[i] == endings[j])    // 중복되는 값이 있다면
+                {
+                    flag = false;                // flag 에 false 대입
+                }
+            }
+        }
+        /*
+        i 가 0 일때 j 가 0부터 5까지 증가하면서 6번 반복하여 비교한다.
+        i 가 1 일때 j 가 0부터 5까지 증가하면서 6번 반복하여 비교한다.
+        i 가 2 일때 j 가 0부터 5까지 증가하면서 6번 반복하여 비교한다.
+        i 가 3 일때 j 가 0부터 5까지 증가하면서 6번 반복하여 비교한다.
+        i 가 4 일때 j 가 0부터 5까지 증가하면서 6번 반복하여 비교한다.
+        i 가 5 일때 j 가 0부터 5까지 증가하면서 6번 반복하여 비교한다.
+        */
+
+        // 중복되는 값이 없다면
+        if(flag) // flag 가 true 일 때(== 중복되는 값이 없다면) 조건문 실행
+        {
+            for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼 반복해서
+            {
+                if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
+                {
+                    endings[i] = FALL_DOWN_ENDING;  // 엔딩 유형을 저장한다.
+                    break;                          // 그리고 반복문을 빠져나온다.
+                }
             }
         }
 
@@ -59,7 +84,7 @@ public class Ending
         System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
-        System.out.printf("\t\t %s님은 고된 노동을 견디지 못하고 쓰러졌습니다.\n",Partimer.getName());
+        System.out.printf("\t\t\t\t %s님은 고된 노동을 견디지 못하고 쓰러졌습니다.\n",Partimer.getName());
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println();
         finalEnding();
@@ -71,14 +96,33 @@ public class Ending
     {
         // 엔딩 저장
         int[] endings = Partimer.getEndings();
+        boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
-        for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼 반복해서
+        // 배열에 중복되는 값 있는지 검사
+        for (int i = 0; i < endings.length; i++)        // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
         {
-            if(endings[i] == 0)                     // 비어있는 배열 칸에(비어있는 배열 칸은 0으로 초기화된다.)
+            for (int j = 0; j < endings.length; j++)    // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
             {
-                endings[i] = QUIT_ENDING;           // 엔딩 유형을 저장한다.
+                if(endings[i] == endings[j])    // 중복되는 값이 있다면
+                {
+                    flag = false;                // flag 에 false 대입
+                }
             }
         }
+
+        // 중복되는 값이 없다면
+        if(flag) // flag 가 true 일 때(== 중복되는 값이 없다면) 조건문 실행
+        {
+            for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼 반복해서
+            {
+                if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
+                {
+                    endings[i] = FALL_DOWN_ENDING;  // 엔딩 유형을 저장한다.
+                    break;                          // 그리고 반복문을 빠져나온다.
+                }
+            }
+        }
+
 
         System.out.println();
         System.out.println();
@@ -108,12 +152,30 @@ public class Ending
     {
         // 엔딩 저장
         int[] endings = Partimer.getEndings();
+        boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
-        for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼 반복해서
+        // 배열에 중복되는 값 있는지 검사
+        for (int i = 0; i < endings.length; i++)        // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
         {
-            if(endings[i] == 0)                     // 비어있는 배열 칸에(비어있는 배열 칸은 0으로 초기화된다.)
+            for (int j = 0; j < endings.length; j++)    // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
             {
-                endings[i] = SCOUT_ENDING;          // 엔딩 유형을 저장한다.
+                if(endings[i] == endings[j])    // 중복되는 값이 있다면
+                {
+                    flag = false;                // flag 에 false 대입
+                }
+            }
+        }
+
+        // 중복되는 값이 없다면
+        if(flag) // flag 가 true 일 때(== 중복되는 값이 없다면) 조건문 실행
+        {
+            for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼 반복해서
+            {
+                if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
+                {
+                    endings[i] = FALL_DOWN_ENDING;  // 엔딩 유형을 저장한다.
+                    break;                          // 그리고 반복문을 빠져나온다.
+                }
             }
         }
 
@@ -145,14 +207,33 @@ public class Ending
     {
         // 엔딩 저장
         int[] endings = Partimer.getEndings();
+        boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
-        for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼 반복해서
+        // 배열에 중복되는 값 있는지 검사
+        for (int i = 0; i < endings.length; i++)        // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
         {
-            if(endings[i] == 0)                     // 비어있는 배열 칸에(비어있는 배열 칸은 0으로 초기화된다.)
+            for (int j = 0; j < endings.length; j++)    // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
             {
-                endings[i] = BOSS_ENDING;           // 엔딩 유형을 저장한다.
+                if(endings[i] == endings[j])    // 중복되는 값이 있다면
+                {
+                    flag = false;                // flag 에 false 대입
+                }
             }
         }
+
+        // 중복되는 값이 없다면
+        if(flag) // flag 가 true 일 때(== 중복되는 값이 없다면) 조건문 실행
+        {
+            for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼 반복해서
+            {
+                if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
+                {
+                    endings[i] = FALL_DOWN_ENDING;  // 엔딩 유형을 저장한다.
+                    break;                          // 그리고 반복문을 빠져나온다.
+                }
+            }
+        }
+
 
         System.out.println();
         System.out.println();
@@ -179,12 +260,30 @@ public class Ending
     {
         // 엔딩 저장
         int[] endings = Partimer.getEndings();
+        boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
-        for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼 반복해서
+        // 배열에 중복되는 값 있는지 검사
+        for (int i = 0; i < endings.length; i++)        // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
         {
-            if(endings[i] == 0)                     // 비어있는 배열 칸에(비어있는 배열 칸은 0으로 초기화된다.)
+            for (int j = 0; j < endings.length; j++)    // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
             {
-                endings[i] = GET_FIRE_ENDING;       // 엔딩 유형을 저장한다.
+                if(endings[i] == endings[j])    // 중복되는 값이 있다면
+                {
+                    flag = false;                // flag 에 false 대입
+                }
+            }
+        }
+
+        // 중복되는 값이 없다면
+        if(flag) // flag 가 true 일 때(== 중복되는 값이 없다면) 조건문 실행
+        {
+            for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼 반복해서
+            {
+                if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
+                {
+                    endings[i] = FALL_DOWN_ENDING;  // 엔딩 유형을 저장한다.
+                    break;                          // 그리고 반복문을 빠져나온다.
+                }
             }
         }
 
@@ -194,20 +293,15 @@ public class Ending
         System.out.println();
         System.out.println();
         System.out.println();
-        System.out.println("\t\t\t\t 오늘도 또 실수했다... ");
-
-        System.out.println();
-        System.out.println();
 
         System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
         System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
         System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
-        System.out.printf("\t\t %s님은 음료를 제조하지 못해서 해고되었습니다.\n", Partimer.getName());
-        System.out.printf("\t\t 괜찮습니다 카페는 많으니까요... 힘내세요! \n", Partimer.getName());
+        System.out.printf("\t\t\t\t %s님은 제조 실수가 잦아서 해고되었습니다.\n", Partimer.getName());
+        System.out.printf("\t\t\t\t 괜찮습니다. 카페는 많으니까요... 힘내세요! \n", Partimer.getName());
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
-        System.out.println();
         System.out.println();
         finalEnding();
 
@@ -219,14 +313,33 @@ public class Ending
     {
         // 엔딩 저장
         int[] endings = Partimer.getEndings();
+        boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
-        for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼 반복한다.
+        // 배열에 중복되는 값 있는지 검사
+        for (int i = 0; i < endings.length; i++)        // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
         {
-            if(endings[i] == 0)                     // 비어있는 배열 칸에(비어있는 배열 칸은 0으로 초기화된다.)
+            for (int j = 0; j < endings.length; j++)    // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
             {
-                endings[i] = PARTIMER_ENDING;       // 엔딩 유형을 저장한다.
+                if(endings[i] == endings[j])    // 중복되는 값이 있다면
+                {
+                    flag = false;                // flag 에 false 대입
+                }
             }
         }
+
+        // 중복되는 값이 없다면
+        if(flag) // flag 가 true 일 때(== 중복되는 값이 없다면) 조건문 실행
+        {
+            for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼 반복해서
+            {
+                if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
+                {
+                    endings[i] = FALL_DOWN_ENDING;  // 엔딩 유형을 저장한다.
+                    break;                          // 그리고 반복문을 빠져나온다.
+                }
+            }
+        }
+
 
         System.out.println();
         System.out.println();
