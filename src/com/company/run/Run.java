@@ -1422,6 +1422,7 @@ public class Run<endings>
                     System.out.println(" ✨ 과로 엔딩 tip ✨ ");
                     System.out.println("    체력이 0 이 되면 과로 엔딩의 조건이 달성됩니다. ");
                     System.out.println("    아이템을 적절히 이용해서 체력을 관리해주세요 ! ");
+                    System.out.println("------------------------------------------------------------------------");
                 }
 
                 if (endingType == QUIT_ENDING)
@@ -1431,6 +1432,7 @@ public class Run<endings>
                     System.out.println(" ✨ 사표 엔딩 tip ✨ ");
                     System.out.println("    인내력이 0 이 되면 사표 엔딩의 조건이 달성됩니다. ");
                     System.out.println("    아이템을 이용해서 체력과 인내력을 관리해주세요 ! ");
+                    System.out.println("------------------------------------------------------------------------");
                 }
 
                 if (endingType == SCOUT_ENDING)
@@ -1439,8 +1441,8 @@ public class Run<endings>
                     System.out.printf("                %s님을 시험하고 눈여겨본 사장은 %s님을 스카웃했습니다. \n", Partimer.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 이직 엔딩 tip ✨ ");
-                    System.out.println("    숙련도가 4이상 이고 비밀 손님의 방문이 4회 이상이면");
-                    System.out.println("    이직 엔딩의 조건이 달성됩니다. ");
+                    System.out.println("    숙련도가 4이상 이고 비밀 손님의 방문이 4회 이상이면 이직 엔딩의 조건이 달성됩니다. ");
+                    System.out.println("------------------------------------------------------------------------");
                 }
 
                 if (endingType == BOSS_ENDING)
@@ -1451,6 +1453,7 @@ public class Run<endings>
                     System.out.println(" ✨ 사장 엔딩 tip ✨ ");
                     System.out.println("    보유하고 있는 코인이 10개 이상이고 ");
                     System.out.println("    방문한 손님 수가 30명 이상이면 사장 엔딩의 조건이 달성됩니다.");
+                    System.out.println("------------------------------------------------------------------------");
                 }
 
                 if (endingType == GET_FIRE_ENDING)
@@ -1460,6 +1463,7 @@ public class Run<endings>
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 해고 엔딩 tip ✨ ");
                     System.out.println("    음료제조 성공 횟수보다 실패 횟수가 많아지면 엔딩의 조건이 달성됩니다.");
+                    System.out.println("------------------------------------------------------------------------");
                 }
                 if (endingType == PARTIMER_ENDING)
                 {
@@ -1468,11 +1472,11 @@ public class Run<endings>
                     System.out.println(" ✨ 알바 엔딩 tip ✨ ");
                     System.out.println("    나머지 엔딩에 해당하지 않으면 알바 엔딩의 조건이 달성됩니다.");
                     System.out.println("    그만큼 잘 맞는다는거겠죠?  ");
+                    System.out.println("------------------------------------------------------------------------");
                 }
                 
             }
 
-            System.out.println("------------------------------------------------------------------------");
             System.out.printf(" 아직 공개되지 않은 엔딩이 %d개 남아있습니다 !\n", cnt);
         }
 

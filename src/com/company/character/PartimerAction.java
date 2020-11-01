@@ -48,7 +48,7 @@ public class PartimerAction
 
         System.out.println();
         System.out.println("------------------------------------------------------------------------");
-        System.out.println("                            음료 만들기 ");
+        System.out.println("                             음료 만들기 ");
         System.out.println("------------------------------------------------------------------------");
         System.out.println(" 하단에 제시된 문자를 동일하게 타이핑해주세요. ");
         System.out.println();

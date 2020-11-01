@@ -358,7 +358,7 @@ public class SpecialCustomer extends Customer
                 {
                     if (Partimer.getHp() != Partimer.getSetHp()) // 현재 hp 가 최대 hp 가 아니라면
                     {
-                        Partimer.setHp(Partimer.getHp());         // 현재 hp 에서 1 증가
+                        Partimer.setHp(Partimer.getHp() + 1);         // 현재 hp 에서 1 증가
                         System.out.println("========================================================================");
                         System.out.printf(" %s님의 체력이 1 회복되었습니다.\n", Partimer.getName());
                         System.out.printf(" 현재 %s님의 체력 : %d\n", Partimer.getName(), Partimer.getHp());
