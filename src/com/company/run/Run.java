@@ -1402,14 +1402,15 @@ public class Run<endings>
                     cnt += 1;      // cnt 변수를 1씩 증가시킨다.
                 }
             }
-            // test
-            System.out.println(cnt);
 
             // test
-            for (int i = 0; i < endings.length; i++)
-            {
-                System.out.println(endings[i]);
-            }
+            //System.out.println(cnt);
+
+            // test
+            //for (int i = 0; i < endings.length; i++)
+            //{
+            // System.out.println(endings[i]);
+            //}
 
 
             // for(대입받을 변수 정의 : 배열)
