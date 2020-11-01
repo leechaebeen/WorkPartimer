@@ -47,7 +47,6 @@ public class CafeAction
             System.out.println("                         ✨ 주말이 되었습니다 ✨ ");
             System.out.println();
             System.out.println();
-            System.out.println();
 
             weekendInfo();  // 주말에 한 주의 카페 운영을 정산하는 메소드
 
@@ -61,18 +60,6 @@ public class CafeAction
     public void business()
     {
         String[] nums = {"첫", "두", "세", "네", "다섯", "여섯", "일곱", "여덟", "아홉", "열"}; // 손님수 표현하기 위한 배열
-
-        // 유저 상태 체크
-        if(Partimer.getHp()==0)             // 만약 유저의 HP 0이 된다면
-        {
-            Ending ending = new Ending();   // 쓰러지는 엔딩
-            ending.fallDownEnding();
-        }
-        else if(Partimer.getFeeling()==0)       // feeling 이 0이 된다면
-        {
-            Ending ending = new Ending();   // 자발적으로 관두는 엔딩
-            ending.toQuitEnding();
-        }
 
         System.out.println("------------------------------------------------------------------------");
         System.out.println("                        " + nums[Cafe.getTodayCustomerNum()] + "번째 손님이 등장했습니다.");
@@ -196,17 +183,14 @@ public class CafeAction
             Partimer.setProperty(Partimer.getProperty() + Partimer.getSalary());
             // 전재산 = 현재 전재산 + 제공받는 급여코인
             System.out.println();
-            System.out.printf("                         ✨ 급여로 %d코인을 획득했습니다 ✨\n", Partimer.getSalary());
-            System.out.println();
+            System.out.printf("                         ✨ %d코인을 획득했습니다 ✨\n", Partimer.getSalary());
             System.out.println();
 
         }
         else
         {
             System.out.println();
-            System.out.println("                         코인을 획득하지 못했습니다! ");
-            System.out.println("                          더 열심히 일해야합니다 ");
-            System.out.println();
+            System.out.println("                       코인을 획득하지 못했습니다! ");
             System.out.println();
 
         }
@@ -214,6 +198,11 @@ public class CafeAction
         // 체력, 인내력 설정값으로 초기화
         Partimer.setHp(Partimer.getSetHp());
         Partimer.setFeeling(Partimer.getSetFeeling());
+        System.out.println();
+        System.out.println("                    ✨ 체력과 인내력을 회복했습니다 ✨");
+        System.out.println();
+        System.out.println();
+
 
 
         System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");

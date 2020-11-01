@@ -88,7 +88,7 @@ public class Run
         while(check) // check 는 위에서 입력받은 유저이름이 한글인걸 확인했기 때문에 true 인 상황이다.
         {
             System.out.println("========================================================================");
-            System.out.println(" 1. 시작하기  2.처음부터 다시하기 ");
+            System.out.println(" 1. 시작하기  2.이름 다시 설정하기 ");
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
             resultStr = sc.nextLine();
@@ -156,6 +156,11 @@ public class Run
         PartimerAction partimerAction = new PartimerAction();   // 유저 액션 객체 생성
         boolean result = partimerAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
         partimerAction.makeBeverageResult(result);              // 결과에 따른 출력
+        if(Partimer.getHp()==0)             // 만약 유저의 HP 0이 된다면
+        {
+            Ending ending = new Ending();   // 쓰러지는 엔딩
+            ending.fallDownEnding();
+        }
 
     }
 
@@ -206,6 +211,17 @@ public class Run
             boolean result = partimerAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
             partimerAction.makeBeverageResult(result);              // 결과에 따른 출력
         }
+
+        Ending ending = new Ending();       // 엔딩 객체 생성
+        if(Partimer.getHp()==0)             // 만약 유저의 체력이 0이 된다면
+        {
+            ending.fallDownEnding();        //  쓰러지는 엔딩 실행
+        }
+        else if(Partimer.getFeeling() == 0) // 만약 유저의 인내력이 0이 된다면
+        {
+            ending.toQuitEnding();          // 그만두는 엔딩 실행
+        }
+
     }
 
     // 비밀 손님 등장 메소드
@@ -253,6 +269,17 @@ public class Run
             PartimerAction partimerAction = new PartimerAction();   // 유저 액션 객체 생성
             boolean result = partimerAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
             partimerAction.makeBeverageResult(result);              // 결과에 따른 출력
+
+            Ending ending = new Ending();       // 엔딩 객체 생성
+            if(Partimer.getHp()==0)             // 만약 유저의 체력이 0이 된다면
+            {
+                ending.fallDownEnding();        //  쓰러지는 엔딩 실행
+            }
+            else if(Partimer.getFeeling() == 0) // 만약 유저의 인내력이 0이 된다면
+            {
+                ending.toQuitEnding();          // 그만두는 엔딩 실행
+            }
+
         }
 
     }
@@ -1143,7 +1170,7 @@ public class Run
             System.out.println("========================================================================");
             System.out.println(" 보유한 코인으로 케이크를 구매할 수 없습니다.");
             System.out.printf(" 현재 보유 코인      : %d코인\n", Partimer.getProperty());
-            System.out.println("========================================================================");
+            System.out.println();
             buyConsumableItem(); // 이전으로
         }
 
@@ -1218,7 +1245,7 @@ public class Run
             System.out.println("========================================================================");
             System.out.println(" 보유한 코인으로 샌드위치를 구매할 수 없습니다.");
             System.out.printf(" 현재 보유 코인      : %d코인\n", Partimer.getProperty());
-            System.out.println("========================================================================");
+            System.out.println();
             buyConsumableItem(); // 이전으로
         }
 
@@ -1293,7 +1320,7 @@ public class Run
             System.out.println("========================================================================");
             System.out.println(" 보유한 코인으로 초콜릿을 구매할 수 없습니다.");
             System.out.printf(" 현재 보유 코인      : %d코인\n", Partimer.getProperty());
-            System.out.println("========================================================================");
+            System.out.println();
             buyConsumableItem(); // 이전으로
         }
 
@@ -1368,7 +1395,7 @@ public class Run
             System.out.println("========================================================================");
             System.out.println(" 보유한 코인으로 마카롱을 구매할 수 없습니다.");
             System.out.printf(" 현재 보유 코인      : %d코인\n", Partimer.getProperty());
-            System.out.println("========================================================================");
+            System.out.println();
             buyConsumableItem(); // 이전으로
         }
 
@@ -1401,70 +1428,85 @@ public class Run
             System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
             System.out.println();
 
-            int cnt = 0;
+            int cnt = 0;    // 공개되지 않은 엔딩의 수를 세기 위한 변수
+            for (int i = 0; i < endings.length; i++)    // 엔딩 유형을 담아둔 배열의 길이만큼 반복한다.
+            {
+                if(endings[i] == 0) // 비어있는 칸이면
+                {
+                    cnt = cnt++;      // cnt 변수를 1씩 증가시킨다.
+                }
+            }
+
             //for (int i = 0; i < endings.length; i++) 0부터 배열의 길이까지 반복해서 확인한다.
             for (int ending : endings)
             {
-                if(ending == 0) // 비어있는 칸이면
-                {
-                    cnt++;      // cnt 변수를 1씩 증가시킨다.
-                }
                 if (ending == FALL_DOWN_ENDING)
                 {
-                    System.out.printf(" 과로 엔딩 : %s님은 고된 노동에 시달리다 쓰러졌습니다. \n", Partimer.getName());
+                    System.out.printf(" [과로 엔딩] %s님은 고된 노동에 시달리다 쓰러졌습니다. \n", Partimer.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 과로 엔딩 tip ✨ ");
                     System.out.println("    체력이 0 이 되면 과로 엔딩의 조건이 달성됩니다. ");
                     System.out.println("    아이템을 적절히 이용해서 체력을 관리해주세요 ! ");
+
+                    break;
                 }
 
                 if (ending == QUIT_ENDING)
                 {
-                    System.out.printf(" 사표 엔딩 : %s님은 극심한 스트레스를 견디지 못해 카페를 떠났습니다. \n", Partimer.getName());
+                    System.out.printf(" [사표 엔딩] %s님은 극심한 스트레스를 견디지 못해 카페를 떠났습니다. \n", Partimer.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 사표 엔딩 tip ✨ ");
                     System.out.println("    인내력이 0 이 되면 사표 엔딩의 조건이 달성됩니다. ");
                     System.out.println("    아이템을 이용해서 체력과 인내력을 관리해주세요 ! ");
+                    break;
                 }
 
                 if (ending == SCOUT_ENDING)
                 {
-                    System.out.println(" 스카우트 엔딩 : 종종 방문하던 특이한 손님 일부는 몰래 방문한 인근 카페 사장이었습니다.");
+                    System.out.println(" [이직 엔딩] 종종 방문하던 특이한 손님 일부는 몰래 방문한 인근 카페 사장이었습니다.");
                     System.out.printf("                %s님을 시험하고 눈여겨본 사장은 %s님을 스카웃했습니다. \n", Partimer.getName());
                     System.out.println("------------------------------------------------------------------------");
-                    System.out.println(" ✨ 스카우트 엔딩 tip ✨ ");
+                    System.out.println(" ✨ 이직 엔딩 tip ✨ ");
                     System.out.println("    숙련도가 @@@ 이상이고 비밀 손님의 방문이 @@회 이상이면");
-                    System.out.println("    스카우트 엔딩의 조건이 달성됩니다. ");
+                    System.out.println("    이직 엔딩의 조건이 달성됩니다. ");
+                    break;
                 }
 
                 if (ending == BOSS_ENDING)
                 {
-                    System.out.printf(" 사장 엔딩 : 코인을 아끼며 열심히 일한 %s님은 모은 코인으로 카페를 차렸습니다.\n", Partimer.getName());
+                    System.out.printf(" [사장 엔딩] 코인을 아끼며 열심히 일한 %s님은 모은 코인으로 카페를 차렸습니다.\n", Partimer.getName());
                     System.out.printf("            %s님은 더이상 알바생이 아닙니다.\n", Partimer.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 사장 엔딩 tip ✨ ");
-                    System.out.println("    보유하고 있는 코인이 50개 이상이면 사장 엔딩의 조건이 달성됩니다.");
+                    System.out.println("    보유하고 있는 코인이 30개 이상이고 ");
+                    System.out.println("    방문 손님 수가 n명 이상이면 사장 엔딩의 조건이 달성됩니다.");
+                    break;
                 }
 
                 if (ending == GET_FIRE_ENDING)
                 {
-                    System.out.printf(" 해고 엔딩 : %s님은 음료를 잘 제조하지 못해서 해고되었습니다.\n", Partimer.getName());
+                    System.out.printf(" [해고 엔딩] %s님은 음료를 잘 제조하지 못해서 해고되었습니다.\n", Partimer.getName());
                     System.out.printf("            괜찮습니다 카페는 많으니까요... 힘내세요! \n", Partimer.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 해고 엔딩 tip ✨ ");
                     System.out.println("    음료제조 성공 횟수 ÷ 실패 횟수가 1보다 작아지면 엔딩의 조건이 달성됩니다.");
+                    break;
                 }
                 if (ending == PARTIMER_ENDING)
                 {
-                    System.out.printf(" 알바 엔딩 : %s님은 카페 아르바이트를 능숙하게 해내고 있습니다.\n", Partimer.getName());
+                    System.out.printf(" [알바 엔딩] %s님은 카페 아르바이트를 능숙하게 해내고 있습니다.\n", Partimer.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 알바 엔딩 tip ✨ ");
                     System.out.println("    나머지 엔딩에 해당하지 않으면 알바 엔딩의 조건이 달성됩니다.");
                     System.out.println("    그만큼 적성에 잘 맞는거겠죠?  ");
+                    break;
                 }
                 
-                System.out.printf(" 아직 공개되지 않은 엔딩이 \n개 남아있습니다 !", cnt);
             }
+
+            System.out.println();
+            System.out.println("------------------------------------------------------------------------");
+            System.out.printf(" 아직 공개되지 않은 엔딩이 %d개 남아있습니다 !\n", cnt);
         }
 
         CafeAction cafeAction = new CafeAction();
@@ -1506,7 +1548,7 @@ public class Run
         while(check)
         {
             System.out.println(" 사용할 아이템을 골라주세요.");
-            System.out.println(" 1.케이크  2.샌드위치  3.초콜릿  4.마카롱  5.사용안함");
+            System.out.println(" 1.케이크  2.샌드위치  3.초콜릿  4.마카롱  5.이전으로");
             System.out.println("------------------------------------------------------------------------");
             Scanner sc = new Scanner(System.in);
             System.out.print(" 선택 : ");
@@ -1577,8 +1619,8 @@ public class Run
             System.out.println("========================================================================");
             System.out.println(" 케이크를 사용했습니다.");
             System.out.println(" 체력이 2 회복되었습니다.");
-            System.out.printf(" 보유 케이크     : %d개 \n", Item.getCake());
-            System.out.printf(" 현재 체력 : %d\n", Partimer.getHp());
+            System.out.printf(" 보유 케이크   : %d개 \n", Item.getCake());
+            System.out.printf(" 현재 체력     : %d\n", Partimer.getHp());
             System.out.println("========================================================================");
 
             final int REUSE = 1;   // 재사용
@@ -1647,8 +1689,8 @@ public class Run
             System.out.println("========================================================================");
             System.out.println(" 샌드위치를 사용했습니다.");
             System.out.println(" 체력이 4 회복되었습니다.");
-            System.out.printf(" 보유 샌드위치     : %d개 \n", Item.getSandwich());
-            System.out.printf(" 현재 체력 : %d\n", Partimer.getHp());
+            System.out.printf(" 보유 샌드위치   : %d개 \n", Item.getSandwich());
+            System.out.printf(" 현재 체력      : %d\n", Partimer.getHp());
             System.out.println("========================================================================");
 
             final int REUSE = 1;   // 재사용
@@ -1716,8 +1758,8 @@ public class Run
             System.out.println("========================================================================");
             System.out.println(" 초콜릿을 사용했습니다.");
             System.out.println(" 인내력이 2 회복되었습니다.");
-            System.out.printf(" 보유 초콜릿  : %d개 \n", Item.getChoco());
-            System.out.printf(" 현재 인내력  : %d\n", Partimer.getFeeling());
+            System.out.printf(" 보유 초콜릿   : %d개 \n", Item.getChoco());
+            System.out.printf(" 현재 인내력   : %d\n", Partimer.getFeeling());
             System.out.println("========================================================================");
 
             final int REUSE = 1;   // 재사용

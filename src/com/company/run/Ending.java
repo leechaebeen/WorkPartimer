@@ -39,8 +39,6 @@ public class Ending
         System.out.println();
         System.out.println();
         System.out.println();
-        System.out.println("========================================================================");
-        System.out.println();
         System.out.println();
         System.out.println();
         System.out.println("\t\t\t\t 으 아 아 아 ㅇㅏ");
@@ -85,7 +83,6 @@ public class Ending
         System.out.println();
         System.out.println();
         System.out.println();
-        System.out.println("========================================================================");
         System.out.println();
         System.out.println();
         System.out.println();
@@ -154,7 +151,6 @@ public class Ending
         System.out.println();
         System.out.println();
         System.out.println();
-        System.out.println("========================================================================");
         System.out.println();
         System.out.println();
         System.out.println();

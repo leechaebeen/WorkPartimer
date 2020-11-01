@@ -3,6 +3,7 @@ package com.company.character;
 import com.company.beverage.Beverage;
 import com.company.beverage.BeverageAction;
 import com.company.cafe.Cafe;
+import com.company.run.Ending;
 
 import java.util.Random;
 
@@ -119,6 +120,12 @@ public class Customer
                 System.out.printf(" %s님의 인내력이 1 감소합니다.\n", Partimer.getName());
                 System.out.printf(" 현재 %s님의 인내력 : %d\n", Partimer.getName(), Partimer.getFeeling());
                 System.out.println("========================================================================");
+                // 유저 상태 체크
+                if(Partimer.getFeeling()==0)       // 인내력이 이 0이 된다면
+                {
+                    Ending ending = new Ending();   // 자발적으로 관두는 엔딩
+                    ending.toQuitEnding();
+                }
             }
         }
 
