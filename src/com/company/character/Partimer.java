@@ -2,10 +2,8 @@ package com.company.character;
 
 import com.company.run.Ending;
 
-// 게임에 등장하는 캐릭터들(유저, 손님)의 가장 기본이 되는 속성을 담은 클래스
-// Character 클래스를 상속받아 hp 속성 사용가능
-// 유저 고유의 속성을 추가한 클래스
-public class Partimer extends Character
+// 게임을 진행하는 유저의 속성을 담은 클래스
+public class Partimer
 {
     private static String name;         // 유저에게 입력받은 이름
     private static int skillLevel = 1;  // 현재 숙련도 : 하루에 등장하는 손님 수 , 일주일에 1 씩 증가(아직 설정 X)

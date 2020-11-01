@@ -14,7 +14,7 @@ public class Cafe
     private static int setMug = 1;          // 설정되어 있는 머그잔 수
     private static int setChair = 2;        // 설정되어 있는 의자 수
 
-    // getter/setter
+    // 외부에서 속성에 접근할 수 있도록 getter/setter 생성
     public static int getCup()
     {
         return cup;

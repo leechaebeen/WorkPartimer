@@ -96,8 +96,9 @@ public class Run
             // 입력받은 값이 숫자인지 확인
             try
             {
+                // 입력받은 값의 공백을 제거하고
                 // 자료형 변경한 뒤(String → int) int형에 담는다.
-                result = Integer.parseInt(resultStr);
+                result = Integer.parseInt(resultStr.replace(" ",""));
                 check = false;
                 // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다. 
                 // int형으로 변경되지 않는다면 NumberFormatException 발생
@@ -156,9 +157,10 @@ public class Run
         PartimerAction partimerAction = new PartimerAction();   // 유저 액션 객체 생성
         boolean result = partimerAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
         partimerAction.makeBeverageResult(result);              // 결과에 따른 출력
-        if(Partimer.getHp()==0)             // 만약 유저의 HP 0이 된다면
+        
+        if(Partimer.getHp()==0)             // 만약 유저의 체력이 0이 된다면
         {
-            Ending ending = new Ending();   // 쓰러지는 엔딩
+            Ending ending = new Ending();   // 쓰러지는 엔딩 실행
             ending.fallDownEnding();
         }
 
@@ -309,8 +311,9 @@ public class Run
             // 입력받은 값이 숫자인지 확인
             try
             {
+                // 입력받은 값의 공백을 제거하고
                 // 자료형 변경한 뒤(String → int) int형에 담는다.
-                result = Integer.parseInt(resultStr);
+                result = Integer.parseInt(resultStr.replace(" ",""));
                 check = false;
                 // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                 // int형으로 변경되지 않는다면 NumberFormatException 발생
@@ -400,75 +403,15 @@ public class Run
         System.out.println("========================================================================");
         System.out.println();
         System.out.printf(" 의자의 수    : %d\n", Cafe.getSetChair());
-        System.out.printf(" 유리잔의 수  : %d\n ", Cafe.getSetCup());
-        System.out.printf(" 머그잔의 수  : %d\n ", Cafe.getSetMug());
+        System.out.printf(" 유리잔의 수  : %d\n", Cafe.getSetCup());
+        System.out.printf(" 머그잔의 수  : %d\n", Cafe.getSetMug());
         System.out.println();
 
         info(); // 이전으로
 
     }
 
-// 주말 상점가기 메소드----------------------------------------------------------------------------------------------------------
-
-    // 상점가기 메소드 1.아이템 구입 2.보유 아이템 3.이전 화면
-    /*public void goShop()
-    {
-        boolean check = true;   // 반복여부 체크하는 변수
-        String resultStr;       // 사용자의 선택값을 담을 변수(1. 정보 확인  2.상점가기 3.모은 엔딩 확인)
-        int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
-
-        final int BUY_ITEM = 1;
-        final int MY_ITEM = 2;
-        final int EXIT = 3;
-
-        while(check)
-        {
-            System.out.println("========================================================================");
-            System.out.println(" 1.아이템 구입  2.보유 아이템  3.이전 화면 ");
-            System.out.println("------------------------------------------------------------------------");
-            System.out.print(" 선택 : ");
-            Scanner sc = new Scanner(System.in);
-            resultStr = sc.nextLine();
-
-            // 입력받은 값이 숫자인지 확인
-            try
-            {
-                // 자료형 변경한 뒤(String → int) int형에 담는다.
-                result = Integer.parseInt(resultStr);
-                check = false;
-                // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
-                // int형으로 변경되지 않는다면 NumberFormatException 발생
-            }
-            catch (NumberFormatException e) // NumberFormatException 발생한다면
-            {
-                check = true;   // check 에 true 담아서 다시 반복
-                // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
-            }
-
-            if(result < 1 || result > 3 )// 주어진 값 이외의 수를 선택한 경우
-            {
-                System.out.println("========================================================================");
-                System.out.println(" 올바른 값을 입력해주세요.");
-                check = true;
-            }
-
-        }
-
-        CafeAction cafeAction = new CafeAction();
-
-        switch(result)
-        {
-            case  BUY_ITEM: buyItem(); // 아이템 구입
-                break;
-
-            case  MY_ITEM: myItem();    // 보유 아이템 정보 보기
-                break;
-
-            case EXIT:  cafeAction.weekend();   // 주말 초기화면 호출
-                break;
-        }
-
-    }*/
+// 주말 상점 메소드----------------------------------------------------------------------------------------------------------
 
     public void goShop()   // 아이템 구입하기
     {
@@ -497,8 +440,9 @@ public class Run
             // 입력받은 값이 숫자인지 확인
             try
             {
+                // 입력받은 값의 공백을 제거하고
                 // 자료형 변경한 뒤(String → int) int형에 담는다.
-                result = Integer.parseInt(resultStr);
+                result = Integer.parseInt(resultStr.replace(" ",""));
                 check = false;
                 // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                 // int형으로 변경되지 않는다면 NumberFormatException 발생
@@ -584,8 +528,9 @@ public class Run
             // 입력받은 값이 숫자인지 확인
             try
             {
+              // 입력받은 값의 공백을 제거하고
               // 자료형 변경한 뒤(String → int) int형에 담는다.
-              result = Integer.parseInt(resultStr);
+              result = Integer.parseInt(resultStr.replace(" ",""));
               check = false;
               // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
               // int형으로 변경되지 않는다면 NumberFormatException 발생
@@ -666,8 +611,9 @@ public class Run
                 // 입력받은 값이 숫자인지 확인
                 try
                 {
+                    // 입력받은 값의 공백을 제거하고
                     // 자료형 변경한 뒤(String → int) int형에 담는다.
-                    result = Integer.parseInt(resultStr);
+                    result = Integer.parseInt(resultStr.replace(" ",""));
                     check = false;
                     // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                     // int형으로 변경되지 않는다면 NumberFormatException 발생
@@ -743,8 +689,9 @@ public class Run
                 // 입력받은 값이 숫자인지 확인
                 try
                 {
+                    // 입력받은 값의 공백을 제거하고
                     // 자료형 변경한 뒤(String → int) int형에 담는다.
-                    result = Integer.parseInt(resultStr);
+                    result = Integer.parseInt(resultStr.replace(" ",""));
                     check = false;
                     // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                     // int형으로 변경되지 않는다면 NumberFormatException 발생
@@ -752,7 +699,7 @@ public class Run
                 catch (NumberFormatException e) // NumberFormatException 발생한다면
                 {
                     check = true;   // check 에 true 담아서 다시 반복
-                    // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+                    // result = 0; 으로 초기화된 상태이므로 하단 if문 내부까지 실행하고 반복된다.
                 }
 
                 if(result < 1 || result > 2 )// 주어진 값 이외의 수를 선택한 경우
@@ -820,8 +767,9 @@ public class Run
                 // 입력받은 값이 숫자인지 확인
                 try
                 {
+                    // 입력받은 값의 공백을 제거하고
                     // 자료형 변경한 뒤(String → int) int형에 담는다.
-                    result = Integer.parseInt(resultStr);
+                    result = Integer.parseInt(resultStr.replace(" ",""));
                     check = false;
                     // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                     // int형으로 변경되지 않는다면 NumberFormatException 발생
@@ -897,8 +845,9 @@ public class Run
                 // 입력받은 값이 숫자인지 확인
                 try
                 {
+                    // 입력받은 값의 공백을 제거하고
                     // 자료형 변경한 뒤(String → int) int형에 담는다.
-                    result = Integer.parseInt(resultStr);
+                    result = Integer.parseInt(resultStr.replace(" ",""));
                     check = false;
                     // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                     // int형으로 변경되지 않는다면 NumberFormatException 발생
@@ -974,8 +923,9 @@ public class Run
                 // 입력받은 값이 숫자인지 확인
                 try
                 {
+                    // 입력받은 값의 공백을 제거하고
                     // 자료형 변경한 뒤(String → int) int형에 담는다.
-                    result = Integer.parseInt(resultStr);
+                    result = Integer.parseInt(resultStr.replace(" ",""));
                     check = false;
                     // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                     // int형으로 변경되지 않는다면 NumberFormatException 발생
@@ -1062,8 +1012,9 @@ public class Run
             // 입력받은 값이 숫자인지 확인
             try
             {
+                // 입력받은 값의 공백을 제거하고
                 // 자료형 변경한 뒤(String → int) int형에 담는다.
-                result = Integer.parseInt(resultStr);
+                result = Integer.parseInt(resultStr.replace(" ",""));
                 check = false;
                 // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                 // int형으로 변경되지 않는다면 NumberFormatException 발생
@@ -1136,8 +1087,9 @@ public class Run
                 // 입력받은 값이 숫자인지 확인
                 try
                 {
+                    // 입력받은 값의 공백을 제거하고
                     // 자료형 변경한 뒤(String → int) int형에 담는다.
-                    result = Integer.parseInt(resultStr);
+                    result = Integer.parseInt(resultStr.replace(" ",""));
                     check = false;
                     // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                     // int형으로 변경되지 않는다면 NumberFormatException 발생
@@ -1211,8 +1163,9 @@ public class Run
                 // 입력받은 값이 숫자인지 확인
                 try
                 {
+                    // 입력받은 값의 공백을 제거하고
                     // 자료형 변경한 뒤(String → int) int형에 담는다.
-                    result = Integer.parseInt(resultStr);
+                    result = Integer.parseInt(resultStr.replace(" ",""));
                     check = false;
                     // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                     // int형으로 변경되지 않는다면 NumberFormatException 발생
@@ -1261,10 +1214,10 @@ public class Run
         // 아이템 객체 생성
         Item item = new Item();
 
-        if(Partimer.getProperty() >= item.getChocoPrice())  // 체력 증가 가격보다 보유한 코인이 많거나 같으면
+        if(Partimer.getProperty() >= item.getChocoPrice())  // 초콜릿 가격보다 보유한 코인이 많거나 같으면
         {
             Partimer.setProperty(Partimer.getProperty() - item.getChocoPrice());    // 계산하고
-            Item.setChoco(Item.getChoco()+1); // 보유한 개수에 추가
+            Item.setChoco(Item.getChoco()+1); // 보유한 초콜릿 개수 1 증가
 
             System.out.println("========================================================================");
             System.out.printf(" %d 코인을 사용했습니다.\n", item.getChocoPrice());
@@ -1286,8 +1239,9 @@ public class Run
                 // 입력받은 값이 숫자인지 확인
                 try
                 {
+                    // 입력받은 값의 공백을 제거하고
                     // 자료형 변경한 뒤(String → int) int형에 담는다.
-                    result = Integer.parseInt(resultStr);
+                    result = Integer.parseInt(resultStr.replace(" ",""));
                     check = false;
                     // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                     // int형으로 변경되지 않는다면 NumberFormatException 발생
@@ -1361,8 +1315,9 @@ public class Run
                 // 입력받은 값이 숫자인지 확인
                 try
                 {
+                    // 입력받은 값의 공백을 제거하고
                     // 자료형 변경한 뒤(String → int) int형에 담는다.
-                    result = Integer.parseInt(resultStr);
+                    result = Integer.parseInt(resultStr.replace(" ",""));
                     check = false;
                     // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                     // int형으로 변경되지 않는다면 NumberFormatException 발생
@@ -1557,8 +1512,9 @@ public class Run
             // 입력받은 값이 숫자인지 확인
             try
             {
+              // 입력받은 값의 공백을 제거하고
               // 자료형 변경한 뒤(String → int) int형에 담는다.
-              result = Integer.parseInt(resultStr);
+              result = Integer.parseInt(resultStr.replace(" ",""));
               check = false;
               // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
               // int형으로 변경되지 않는다면 NumberFormatException 발생
@@ -1637,8 +1593,9 @@ public class Run
                 // 입력받은 값이 숫자인지 확인
                 try
                 {
+                    // 입력받은 값의 공백을 제거하고
                     // 자료형 변경한 뒤(String → int) int형에 담는다.
-                    result = Integer.parseInt(resultStr);
+                    result = Integer.parseInt(resultStr.replace(" ",""));
                     check = false;
                     // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                     // int형으로 변경되지 않는다면 NumberFormatException 발생
@@ -1707,8 +1664,9 @@ public class Run
                 // 입력받은 값이 숫자인지 확인
                 try
                 {
+                    // 입력받은 값의 공백을 제거하고
                     // 자료형 변경한 뒤(String → int) int형에 담는다.
-                    result = Integer.parseInt(resultStr);
+                    result = Integer.parseInt(resultStr.replace(" ",""));
                     check = false;
                     // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                     // int형으로 변경되지 않는다면 NumberFormatException 발생
@@ -1776,8 +1734,9 @@ public class Run
                 // 입력받은 값이 숫자인지 확인
                 try
                 {
+                    // 입력받은 값의 공백을 제거하고
                     // 자료형 변경한 뒤(String → int) int형에 담는다.
-                    result = Integer.parseInt(resultStr);
+                    result = Integer.parseInt(resultStr.replace(" ",""));
                     check = false;
                     // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                     // int형으로 변경되지 않는다면 NumberFormatException 발생
@@ -1845,8 +1804,9 @@ public class Run
                 // 입력받은 값이 숫자인지 확인
                 try
                 {
+                    // 입력받은 값의 공백을 제거하고
                     // 자료형 변경한 뒤(String → int) int형에 담는다.
-                    result = Integer.parseInt(resultStr);
+                    result = Integer.parseInt(resultStr.replace(" ",""));
                     check = false;
                     // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                     // int형으로 변경되지 않는다면 NumberFormatException 발생
@@ -1881,7 +1841,6 @@ public class Run
             useItem(); // 이전으로
         }
     }
-
 
 
 

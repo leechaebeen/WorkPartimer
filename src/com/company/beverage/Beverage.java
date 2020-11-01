@@ -25,8 +25,7 @@ public class Beverage
         this.name = name;
     }
 
-    // getter/setter
-
+    // 외부에서 속성에 접근할 수 있도록 getter/setter 생성
     public boolean isMilk()
     {
         return milk;

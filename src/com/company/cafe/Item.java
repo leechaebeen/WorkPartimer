@@ -22,7 +22,7 @@ public class Item
     private static int macaron;
 
 
-    // getter / setter
+    // 외부에서 속성에 접근할 수 있도록 getter/setter 생성
     public int getChairPrice()
     {
         return chairPrice;

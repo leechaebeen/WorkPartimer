@@ -52,5 +52,4 @@ public class BeverageAction
 
     }// end createBeverage()
 
-    // 주문받은 음료에 따라 머그잡/유리컵 줄어드는 메소드
 }

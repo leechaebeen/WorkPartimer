@@ -7,7 +7,7 @@ import com.company.run.Ending;
 
 import java.util.Random;
 
-// 게임에 등장하는 캐릭터들(유저, 손님)의 가장 기본이 되는 속성을 담은 클래스.
+// 게임에 등장하는 손님의 가장 기본이 되는 기능을 담은 클래스.
 // 이 클래스를 상속받는 클래스가 존재한다.
 public class Customer
 {

@@ -84,7 +84,7 @@ public class PartimerAction
         Scanner sc = new Scanner(System.in);
         String inputStr = sc.nextLine();
 
-        inputStr = inputStr.replaceAll(" ", ""); // 입력받은 문자열 공백 제거
+        inputStr = inputStr.replace(" ", ""); // 입력받은 문자열 공백 제거
 
         // stringbuffer → String으로
         String sbStr = sb.toString();
@@ -149,10 +149,11 @@ public class PartimerAction
             // 입력받은 값이 숫자인지 확인
             try
             {
+                // 입력받은 값의 공백을 제거하고
                 // 자료형 변경한 뒤(String → int) int형에 담는다.
                 // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                 // int형으로 변경되지 않는다면 NumberFormatException 발생
-                quizResult = Integer.parseInt(resultStr);
+                quizResult = Integer.parseInt(resultStr.replace(" ",""));
                 check = false;
 
                 if (ismilk) // 우유가 들어갔다면
@@ -221,10 +222,11 @@ public class PartimerAction
             // 입력받은 값이 숫자인지 확인
             try
             {
+                // 입력받은 값의 공백을 제거하고
                 // 자료형 변경한 뒤(String → int) int형에 담는다.
                 // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                 // int형으로 변경되지 않는다면 NumberFormatException 발생
-                quizResult = Integer.parseInt(resultStr);
+                quizResult = Integer.parseInt(resultStr.replaceAll(" ",""));
                 check = false;
 
                 if (iceOption == 1) // ICE 라면
@@ -259,7 +261,6 @@ public class PartimerAction
                     }
                 }
 
-
             } catch (NumberFormatException e) // NumberFormatException 발생한다면
             {
                 check = true;   // check 에 true 담아서 다시 반복
@@ -289,10 +290,11 @@ public class PartimerAction
                 // 입력받은 값이 숫자인지 확인
                 try
                 {
+                    // 입력받은 값의 공백을 제거하고
                     // 자료형 변경한 뒤(String → int) int형에 담는다.
                     // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                     // int형으로 변경되지 않는다면 NumberFormatException 발생
-                    quizResult = Integer.parseInt(resultStr);
+                    quizResult = Integer.parseInt(resultStr.replace(" ",""));
                     check = false;
 
                     if (whippingCream == 1) // 휘핑크림 올라간다면
@@ -377,13 +379,5 @@ public class PartimerAction
         }
 
     }
-
-    // 주급받기 메소드
-
-
-    // 장비 구매 시 계산하는 메소드
-
-    // 현재 상태 보여주는 메소드
-
 
 }// end class

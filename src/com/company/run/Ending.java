@@ -226,8 +226,9 @@ public class Ending
             // 입력받은 값이 숫자인지 확인
             try
             {
+                // 입력받은 값의 공백을 제거하고
                 // 자료형 변경한 뒤(String → int) int형에 담는다.
-                result = Integer.parseInt(resultStr);
+                result = Integer.parseInt(resultStr.replace(" ",""));
                 check = false;
                 // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                 // int형으로 변경되지 않는다면 NumberFormatException 발생
