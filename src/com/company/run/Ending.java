@@ -104,7 +104,8 @@ public class Ending
         {
             if (ending == QUIT_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
             {
-                flag = false;                    // flag 에 false 대입
+                flag = false;            // flag 에 false 대입하고
+                break;                   // 반복문 빠져나온다.
             }
         }
 
@@ -216,7 +217,8 @@ public class Ending
         {
             if (ending == BOSS_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
             {
-                flag = false;                    // flag 에 false 대입
+                flag = false;                    // flag 에 false 대입하고
+                break;                           // 반복문 빠져나온다.
             }
         }
         // 중복되는 값이 없다면
@@ -227,7 +229,7 @@ public class Ending
                 if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
                 {
                     endings[i] = BOSS_ENDING;  // 엔딩 유형을 저장한다.
-                    break;                          // 그리고 반복문을 빠져나온다.
+                    break;                     // 그리고 반복문을 빠져나온다.
                 }
             }
         }
@@ -268,7 +270,8 @@ public class Ending
         {
             if (ending == GET_FIRE_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
             {
-                flag = false;                    // flag 에 false 대입
+                flag = false;                // flag 에 false 대입하고
+                break;                       // 반복문 빠져나온다
             }
         }
 
@@ -321,7 +324,8 @@ public class Ending
         {
             if (ending == PARTIMER_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
             {
-                flag = false;                // flag 에 false 대입
+                flag = false;                // flag 에 false 대입하고
+                break;                       // 반복문 빠져나오기 
             }
         }
 
