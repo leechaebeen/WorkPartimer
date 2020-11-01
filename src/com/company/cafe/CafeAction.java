@@ -82,10 +82,6 @@ public class CafeAction
         {
             run.comeSecretCustomer();   // 음료 객체 생성하고, 손님이 주문하고, 유저가 음료 만든다.
 
-            // 이직 엔딩 조건 확인
-
-
-
         }
 
         selBusiness();  // 선택지 호출

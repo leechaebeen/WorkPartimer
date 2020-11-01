@@ -241,8 +241,6 @@ public class Run<endings>
         final int TALK_DOWN = 2;        // 반말하는 유형
         final int FIGHT = 3;            // 시비거는 유형
 
-        System.out.println("비밀 손님 등장!");
-
         Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum()+1); // 기존의 하루 방문자 수에 하나 더하기
         Cafe.setTotalCustomerNum(Cafe.getTotalCustomerNum()+1); // 기존의 총 방문자 수에 한명 더하기
 
@@ -1441,7 +1439,7 @@ public class Run<endings>
                     System.out.printf("                %s님을 시험하고 눈여겨본 사장은 %s님을 스카웃했습니다. \n", Partimer.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 이직 엔딩 tip ✨ ");
-                    System.out.println("    숙련도가 @@@ 이상이고 비밀 손님의 방문이 @@회 이상이면");
+                    System.out.println("    숙련도가 4이상 이고 비밀 손님의 방문이 4회 이상이면");
                     System.out.println("    이직 엔딩의 조건이 달성됩니다. ");
                 }
 

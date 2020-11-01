@@ -29,24 +29,13 @@ public class Ending
         boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
         // 배열에 중복되는 값 있는지 검사
-        for (int i = 0; i < endings.length; i++)        // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
+        for (int i = 0; i < endings.length; i++) // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
         {
-            for (int j = 0; j < endings.length; j++)    // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
+            if(endings[i] == FALL_DOWN_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
             {
-                if(endings[i] == endings[j])    // 중복되는 값이 있다면
-                {
-                    flag = false;                // flag 에 false 대입
-                }
+                flag = false;                    // flag 에 false 대입
             }
         }
-        /*
-        i 가 0 일때 j 가 0부터 5까지 증가하면서 6번 반복하여 비교한다.
-        i 가 1 일때 j 가 0부터 5까지 증가하면서 6번 반복하여 비교한다.
-        i 가 2 일때 j 가 0부터 5까지 증가하면서 6번 반복하여 비교한다.
-        i 가 3 일때 j 가 0부터 5까지 증가하면서 6번 반복하여 비교한다.
-        i 가 4 일때 j 가 0부터 5까지 증가하면서 6번 반복하여 비교한다.
-        i 가 5 일때 j 가 0부터 5까지 증가하면서 6번 반복하여 비교한다.
-        */
 
         // 중복되는 값이 없다면
         if(flag) // flag 가 true 일 때(== 중복되는 값이 없다면) 조건문 실행
@@ -99,14 +88,11 @@ public class Ending
         boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
         // 배열에 중복되는 값 있는지 검사
-        for (int i = 0; i < endings.length; i++)        // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
+        for (int i = 0; i < endings.length; i++) // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
         {
-            for (int j = 0; j < endings.length; j++)    // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
+            if(endings[i] == QUIT_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
             {
-                if(endings[i] == endings[j])    // 중복되는 값이 있다면
-                {
-                    flag = false;                // flag 에 false 대입
-                }
+                flag = false;                    // flag 에 false 대입
             }
         }
 
@@ -117,8 +103,8 @@ public class Ending
             {
                 if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
                 {
-                    endings[i] = FALL_DOWN_ENDING;  // 엔딩 유형을 저장한다.
-                    break;                          // 그리고 반복문을 빠져나온다.
+                    endings[i] = QUIT_ENDING;  // 엔딩 유형을 저장한다.
+                    break;                     // 그리고 반복문을 빠져나온다.
                 }
             }
         }
@@ -155,14 +141,11 @@ public class Ending
         boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
         // 배열에 중복되는 값 있는지 검사
-        for (int i = 0; i < endings.length; i++)        // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
+        for (int i = 0; i < endings.length; i++) // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
         {
-            for (int j = 0; j < endings.length; j++)    // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
+            if(endings[i] == SCOUT_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
             {
-                if(endings[i] == endings[j])    // 중복되는 값이 있다면
-                {
-                    flag = false;                // flag 에 false 대입
-                }
+                flag = false;                    // flag 에 false 대입
             }
         }
 
@@ -173,7 +156,7 @@ public class Ending
             {
                 if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
                 {
-                    endings[i] = FALL_DOWN_ENDING;  // 엔딩 유형을 저장한다.
+                    endings[i] = SCOUT_ENDING;      // 엔딩 유형을 저장한다.
                     break;                          // 그리고 반복문을 빠져나온다.
                 }
             }
@@ -210,17 +193,13 @@ public class Ending
         boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
         // 배열에 중복되는 값 있는지 검사
-        for (int i = 0; i < endings.length; i++)        // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
+        for (int i = 0; i < endings.length; i++) // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
         {
-            for (int j = 0; j < endings.length; j++)    // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
+            if(endings[i] == BOSS_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
             {
-                if(endings[i] == endings[j])    // 중복되는 값이 있다면
-                {
-                    flag = false;                // flag 에 false 대입
-                }
+                flag = false;                    // flag 에 false 대입
             }
         }
-
         // 중복되는 값이 없다면
         if(flag) // flag 가 true 일 때(== 중복되는 값이 없다면) 조건문 실행
         {
@@ -228,7 +207,7 @@ public class Ending
             {
                 if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
                 {
-                    endings[i] = FALL_DOWN_ENDING;  // 엔딩 유형을 저장한다.
+                    endings[i] = BOSS_ENDING;  // 엔딩 유형을 저장한다.
                     break;                          // 그리고 반복문을 빠져나온다.
                 }
             }
@@ -263,14 +242,11 @@ public class Ending
         boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
         // 배열에 중복되는 값 있는지 검사
-        for (int i = 0; i < endings.length; i++)        // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
+        for (int i = 0; i < endings.length; i++) // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
         {
-            for (int j = 0; j < endings.length; j++)    // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
+            if(endings[i] == GET_FIRE_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
             {
-                if(endings[i] == endings[j])    // 중복되는 값이 있다면
-                {
-                    flag = false;                // flag 에 false 대입
-                }
+                flag = false;                    // flag 에 false 대입
             }
         }
 
@@ -281,7 +257,7 @@ public class Ending
             {
                 if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
                 {
-                    endings[i] = FALL_DOWN_ENDING;  // 엔딩 유형을 저장한다.
+                    endings[i] = GET_FIRE_ENDING;  // 엔딩 유형을 저장한다.
                     break;                          // 그리고 반복문을 빠져나온다.
                 }
             }
@@ -316,14 +292,11 @@ public class Ending
         boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
         // 배열에 중복되는 값 있는지 검사
-        for (int i = 0; i < endings.length; i++)        // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
+        for (int i = 0; i < endings.length; i++) // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
         {
-            for (int j = 0; j < endings.length; j++)    // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
+            if(endings[i] == PARTIMER_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
             {
-                if(endings[i] == endings[j])    // 중복되는 값이 있다면
-                {
-                    flag = false;                // flag 에 false 대입
-                }
+                flag = false;                    // flag 에 false 대입
             }
         }
 
@@ -334,7 +307,7 @@ public class Ending
             {
                 if(endings[i] == 0) // 배열 칸 비어있는 곳에(비어있는 배열 칸은 0으로 초기화된다.)
                 {
-                    endings[i] = FALL_DOWN_ENDING;  // 엔딩 유형을 저장한다.
+                    endings[i] = PARTIMER_ENDING;  // 엔딩 유형을 저장한다.
                     break;                          // 그리고 반복문을 빠져나온다.
                 }
             }
