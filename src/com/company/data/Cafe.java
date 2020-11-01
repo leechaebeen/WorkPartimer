@@ -1,4 +1,4 @@
-package com.company.cafe;
+package com.company.data;
 
 public class Cafe
 {

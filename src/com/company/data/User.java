@@ -1,9 +1,9 @@
-package com.company.character;
+package com.company.data;
 
 import com.company.run.Ending;
 
 // 게임을 진행하는 유저의 속성을 담은 클래스
-public class Partimer
+public class User
 {
     private static String name;         // 유저에게 입력받은 이름
     private static int skillLevel = 1;  // 현재 숙련도 : 하루에 등장하는 손님 수 , 일주일에 1 씩 증가(아직 설정 X)
@@ -43,7 +43,7 @@ public class Partimer
 
     public static void setHp(int hp)
     {
-        Partimer.hp = hp;
+        User.hp = hp;
     }
 
     public static int getSetHp()
@@ -53,7 +53,7 @@ public class Partimer
 
     public static void setSetHp(int setHp)
     {
-        Partimer.setHp = setHp;
+        User.setHp = setHp;
     }
     public static String getName()
     {
@@ -61,7 +61,7 @@ public class Partimer
     }
     public static void setName(String name)
     {
-        Partimer.name = name;
+        User.name = name;
     }
     public static int getSkillLevel()
     {
@@ -70,7 +70,7 @@ public class Partimer
 
     public static void setSkillLevel(int skillLevel)
     {
-        Partimer.skillLevel = skillLevel;
+        User.skillLevel = skillLevel;
     }
 
     public static int getFeeling()
@@ -80,7 +80,7 @@ public class Partimer
 
     public static void setFeeling(int feeling)
     {
-        Partimer.feeling = feeling;
+        User.feeling = feeling;
     }
 
     public static int getSalary()
@@ -90,7 +90,7 @@ public class Partimer
 
     public static void setSalary(int salary)
     {
-        Partimer.salary = salary;
+        User.salary = salary;
     }
 
     public static int getProperty()
@@ -100,7 +100,7 @@ public class Partimer
 
     public static void setProperty(int property)
     {
-        Partimer.property = property;
+        User.property = property;
     }
 
     public static int getWorkingDays()
@@ -110,7 +110,7 @@ public class Partimer
 
     public static void setWorkingDays(int workingDays)
     {
-        Partimer.workingDays = workingDays;
+        User.workingDays = workingDays;
     }
 
     public static int getSetFeeling()
@@ -120,7 +120,7 @@ public class Partimer
 
     public static void setSetFeeling(int setFeeling)
     {
-        Partimer.setFeeling = setFeeling;
+        User.setFeeling = setFeeling;
     }
 
     public static int getFailNum()
@@ -130,7 +130,7 @@ public class Partimer
 
     public static void setFailNum(int failNum)
     {
-        Partimer.failNum = failNum;
+        User.failNum = failNum;
     }
 
     public static int getSuccessNum()
@@ -140,7 +140,7 @@ public class Partimer
 
     public static void setSuccessNum(int successNum)
     {
-        Partimer.successNum = successNum;
+        User.successNum = successNum;
     }
 
     public static int[] getEndings()
@@ -150,6 +150,6 @@ public class Partimer
 
     public static void setEndings(int[] endings)
     {
-        Partimer.endings = endings;
+        User.endings = endings;
     }
 }

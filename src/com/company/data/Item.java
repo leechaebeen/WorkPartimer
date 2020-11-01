@@ -1,4 +1,4 @@
-package com.company.cafe;
+package com.company.data;
 
 // 아이템 클래스
 public class Item

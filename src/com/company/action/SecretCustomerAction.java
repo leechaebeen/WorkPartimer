@@ -1,14 +1,14 @@
-package com.company.character;
+package com.company.action;
 
-import com.company.beverage.Beverage;
-import com.company.cafe.Cafe;
-import com.company.run.Ending;
+import com.company.data.Beverage;
+import com.company.data.Cafe;
+import com.company.data.User;
 
 
-// SpecialCustomer 클래스를 상속받아 SpecialCustomer 클래스의 기능 사용가능
+// SpecialCustomerAction 클래스를 상속받아 SpecialCustomerAction 클래스의 기능 사용가능
 // 비밀 손님 고유 기능을 추가한 클래스이다.
 // 특별 손님과 달리 유저의 체력이나 인내력이 소모되지 않는다.
-public class SecretCustomer extends SpecialCustomer
+public class SecretCustomerAction extends SpecialCustomerAction
 {
     private static int secretCustomerCnt; // 등장횟수 누적해서 담는 변수
 
@@ -19,7 +19,7 @@ public class SecretCustomer extends SpecialCustomer
         String whippingCream;   // 휘핑크림 대사 담을 변수
         String takeout;         // 테이크아웃 대사 담을 변수
 
-        SecretCustomer.secretCustomerCnt += 1; // 등장횟수 1 증가
+        SecretCustomerAction.secretCustomerCnt += 1; // 등장횟수 1 증가
 
         // ICE / HOT 선택값에 따라 대사 분기
         if(beverage.getIceOption()==0)  // 0이면 HOT
@@ -101,7 +101,7 @@ public class SecretCustomer extends SpecialCustomer
         String whippingCream;   // 휘핑크림 대사 담을 변수
         String takeout;         // 테이크아웃 대사 담을 변수
 
-        SecretCustomer.secretCustomerCnt += 1; // 등장횟수 1 증가
+        SecretCustomerAction.secretCustomerCnt += 1; // 등장횟수 1 증가
 
         // ICE / HOT 선택값에 따라 대사 분기
         if(beverage.getIceOption()==0)  // 0이면 HOT
@@ -141,15 +141,15 @@ public class SecretCustomer extends SpecialCustomer
         System.out.println("         .");
         System.out.println("         .");
         System.out.println();
-        System.out.printf(" %s님은 ICE/HOT 옵션을 물어봤습니다.\n", Partimer.getName());
+        System.out.printf(" %s님은 ICE/HOT 옵션을 물어봤습니다.\n", User.getName());
         System.out.println();
         System.out.println(" 손님 : " + iceOption);
         System.out.println();
-        System.out.printf(" %s님은 휘핑크림을 추가하는지 물어봤습니다.\n", Partimer.getName());
+        System.out.printf(" %s님은 휘핑크림을 추가하는지 물어봤습니다.\n", User.getName());
         System.out.println();
         System.out.println(" 손님 : " + whippingCream);
         System.out.println();
-        System.out.printf(" %s님은 테이크아웃 여부를 물어봤습니다.\n",Partimer.getName());
+        System.out.printf(" %s님은 테이크아웃 여부를 물어봤습니다.\n", User.getName());
         System.out.println();
         System.out.println(" 손님 : " + takeout);
         System.out.println();
@@ -198,7 +198,7 @@ public class SecretCustomer extends SpecialCustomer
         String whippingCream;   // 휘핑크림 대사 담을 변수
         String takeout;         // 테이크아웃 대사 담을 변수
 
-        SecretCustomer.secretCustomerCnt += 1; // 등장횟수 1 증가
+        SecretCustomerAction.secretCustomerCnt += 1; // 등장횟수 1 증가
 
         // ICE / HOT 선택값에 따라 대사 분기할 수 있도록 변수에 담기
         if(beverage.getIceOption()==0)  // 0이면 HOT
@@ -277,7 +277,7 @@ public class SecretCustomer extends SpecialCustomer
 
     public static void setSecretCustomerCnt(int secretCustomerCnt)
     {
-        SecretCustomer.secretCustomerCnt = secretCustomerCnt;
+        SecretCustomerAction.secretCustomerCnt = secretCustomerCnt;
     }
 
 }

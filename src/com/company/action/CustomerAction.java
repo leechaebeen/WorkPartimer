@@ -1,34 +1,33 @@
-package com.company.character;
+package com.company.action;
 
-import com.company.beverage.Beverage;
-import com.company.beverage.BeverageAction;
-import com.company.cafe.Cafe;
+import com.company.data.Beverage;
+import com.company.data.Cafe;
+import com.company.data.User;
 import com.company.run.Ending;
-
 import java.util.Random;
 
 // 게임에 등장하는 손님의 가장 기본이 되는 기능을 담은 클래스.
 // 이 클래스를 상속받는 클래스가 존재한다.
-public class Customer
+public class CustomerAction
 {
-    // 음료 주문 전 테이크아웃 확인
+    // 테이크아웃 여부 정하는 메소드
     public boolean checkTakeout()
     {
-        Random rd = new Random();
-        int takeout = rd.nextInt(10)+1;      // 1 ~ 10의 랜덤값을 변수 takeout 에 저장.
-        boolean checkTakeout = true;
+        Random rd = new Random();               // 랜덤 객체 생성
+        int takeout = rd.nextInt(10)+1;   // 1 ~ 10의 랜덤값을 변수 takeout 에 저장.
+        boolean checkTakeout = true;            // 테이크아웃 여부를 담을 변수
 
         //테이크 아웃 여부 확인
-        if(takeout > 7)  // 랜덤값이 8,9,10 이면 테이크아웃 하지 않는다.
+        if(takeout > 5)                         // 랜덤값이 6~10 이면 테이크아웃 하지 않는다.
         {
             checkTakeout = false;
         }
 
-        return checkTakeout;
+        return checkTakeout;                    // 랜덤값이 1~5 이면 테이크아웃 한다.
 
     } // end checkTakeout()
 
-    // 주문할 음료 객체 생성하는 메소드(음료, Hot/Ice 옵션, 휘핑)
+    // 랜덤으로 음료 주문하는 메소드(음료, Hot/Ice 옵션, 휘핑)
     public Beverage orderBeverage()
     {
         Random rd = new Random();               // 랜덤 클래스 객체 생성
@@ -40,48 +39,48 @@ public class Customer
         int whippingCream = rd.nextInt(2);  // 0 또는 1의 랜덤값을 변수 whippingCream 에 저장한다.
 
         // 음료 주문
-        int beverageSel = rd.nextInt(5)+1; // 1 ~ 5 의 랜덤값을 변수 beverage 에 저장한다.
-        BeverageAction beverageAction = new BeverageAction();
-        Beverage beverage = beverageAction.createBeverage(beverageSel, iceOption, whippingCream);   // 음료 객체 생성
+        int beverageSel = rd.nextInt(5)+1;              // 1 ~ 5 의 랜덤값(음료 메뉴 번호)을 변수 beverageSel 에 저장한다.
+        BeverageAction beverageAction = new BeverageAction();  // 음료 객체 생성하는 메소드 가진 객체 생성
+        Beverage beverage = beverageAction.createBeverage(beverageSel, iceOption, whippingCream); // 음료 객체 생성하는 메소드 호출
 
-        return beverage;
+        return beverage;  // 음료 객체 반환
 
     }// end orderBeverage()
 
     // 손님이 음료를 주문하는 메소드
     public void orderToPartimer(Beverage beverage)
     {
-        String iceOption;
-        String whippingCream;
-        String takeout;
+        String iceOption;       // ICE/HOT 선택하는 손님대사 담는 변수
+        String whippingCream;   // 휘핑크림 여부 선택하는 손님대사 담는 변수
+        String takeout;         // 테이크아웃 여부 선택하는 손님대사 담는 변수 
 
-        // ICE / HOT 선택값에 따라 대사 분기할 수 있도록 변수에 담기
-        if(beverage.getIceOption()==0)  // 0이면 HOT
+        // ICE / HOT 선택에 따른 대사 담기
+        if(beverage.getIceOption() ==0)  // HOT 선택했을 때 
         {
             iceOption = "뜨거운 ";
         }
-        else    // 1이면 ICE
+        else                            // ICE 선택했을 때 
         {
             iceOption = "차가운 ";
         }
 
-        // 휘핑 선택
-        if(beverage.getWhippingCream()==0) // 0 이면 휘핑크림 X
+        // 휘핑 선택에 따른 대사 담기
+        if(beverage.getWhippingCream()==0) // 휘핑크림 안올릴 때
         {
             whippingCream = "";
         }
-        else // 1 이면 휘핑크림 O
+        else                                // 휘핑크림 올릴 때
         {
             whippingCream = "휘핑크림 추가할게요.";
         }
 
-        // 테이크아웃
-        boolean checkTakeout = checkTakeout();
-        if(checkTakeout)  // checkTakeout() 는 테이크아웃하면 true 반환
+        // 테이크아웃 선택에 따른 대사 담기
+        boolean checkTakeout = checkTakeout();  // 테이크아웃 여부 반환하는 메소드 호출(테이크아웃하면 true 반환)
+        if(checkTakeout)                        // 테이크아웃한다면
         {
             takeout = " 가지고 갈거에요.";
         }
-        else
+        else                                    // 테이크아웃 안한다면
         {
             takeout = " 먹고 갈거에요.";
         }
@@ -89,7 +88,7 @@ public class Customer
         System.out.println(" 손님 : " + iceOption + beverage.getName() + " 주세요.");
         System.out.println("       " + whippingCream + takeout );
 
-        if(!checkTakeout) // 매장에서 먹고 간다면
+        if(!checkTakeout)                       // 테이크아웃 안한다면
         {
             // 매장에 자리가 있는지 확인
             if(Cafe.getChair()==0)    // 매장에 자리가 없으면 손님이 나간다.
@@ -98,7 +97,7 @@ public class Customer
                 System.out.println(" 매장에 자리가 없어서 손님이 나갔습니다. ");
                 System.out.println("========================================================================");
             }
-            else
+            else                    // 매장에 자리가 있으면
             {
                 Cafe.setChair(Cafe.getChair()-1);// 매장 자리를 하나 줄인다.
             }
@@ -114,17 +113,18 @@ public class Customer
             }
             else    // 뜨거운 음료인데 머그잔이 없거나 차가운 음료인데 유리잔이 없으면 유저 인내력 1 감소
             {
-                Partimer.setHp(Partimer.getFeeling() - 1);
+                User.setHp(User.getFeeling() - 1);
                 System.out.println("========================================================================");
                 System.out.println(" 매장에 잔이 모자라 일회용 컵을 사용했습니다. 컴플레인이 들어왔습니다. ");
-                System.out.printf(" %s님의 인내력이 1 감소합니다.\n", Partimer.getName());
-                System.out.printf(" 현재 %s님의 인내력 : %d\n", Partimer.getName(), Partimer.getFeeling());
+                System.out.printf(" %s님의 인내력이 1 감소합니다.\n", User.getName());
+                System.out.printf(" 현재 %s님의 인내력 : %d\n", User.getName(), User.getFeeling());
                 System.out.println("========================================================================");
+
                 // 유저 상태 체크
-                if(Partimer.getFeeling()==0)       // 인내력이 이 0이 된다면
+                if(User.getFeeling()==0)        // 인내력이 이 0이 된다면
                 {
-                    Ending ending = new Ending();   // 자발적으로 관두는 엔딩
-                    ending.toQuitEnding();
+                    Ending ending = new Ending();   // 엔딩 객체 생성
+                    ending.toQuitEnding();          // 자발적으로 관두는 엔딩 메소드 호출
                 }
             }
         }

@@ -1,50 +1,49 @@
-package com.company.character;
+package com.company.action;
 
-import com.company.beverage.Beverage;
+import com.company.data.Beverage;
+import com.company.data.User;
+
 import java.util.Random;
 import java.util.Scanner;
 
-public class PartimerAction
+// 아르바이트생(User)의 기능을 담은 클래스
+public class userAction
 {
     // 음료 만드는 메소드
     public boolean makeBeverage(Beverage beverage)
     {
-        final int typingGame = 1;
-        boolean result = false;
+        final int TYPING_GAME = 1;  // 음료 만드는 유형 변수 - 타이핑하기
+        final int QUIZ_GAME = 2;    // 음료 만드는 유형 변수 - 퀴즈풀기
+        boolean result = false;     // 음료 제조 결과 반환하기 위한 변수
 
-        Random rd = new Random();
-        int makeBeverageType = rd.nextInt(3) + 1; // 1~3의 랜덤값을 makeBeverageType 변수에 담는다.
-        PartimerAction partimerAction = new PartimerAction();
+        Random rd = new Random();                       // 랜덤 객체 생성
+        int makeBeverageType = rd.nextInt(2) + 1; // 1,2의 랜덤값을 makeBeverageType 변수에 담는다.
 
-        switch (makeBeverageType)
+        userAction userAction = new userAction();        // 유저 액션 객체 생성
+        switch (makeBeverageType)                        // 랜덤값 결과에 따라
         {
-            case 1:
-                result = partimerAction.makeBeverageTyping(beverage);   // 타이핑 게임
+            case TYPING_GAME:
+                result = userAction.makeBeverageTyping(beverage);   // 타이핑 게임 메소드 호출
                 break;
 
-            case 2:
-                result = makeBeverageQuiz(beverage);    // 퀴즈 게임
-
-                break;
-
-            case 3:
-                result = makeBeverageQuiz(beverage);    // 변경하기@@
-
+            case QUIZ_GAME:
+                result = makeBeverageQuiz(beverage);                // 퀴즈 게임 메소드 호출
                 break;
         }
 
-        return result;
+        return result;  // 음료 제조 결과 반환
     }
 
-    // 음료 만드는 미니게임 메소드1 : 제시하는 문자 따라치기
+    // 음료 만드는 유형 : 제시하는 문자열 따라치기
     public boolean makeBeverageTyping(Beverage beverage)
     {
-        final int RANDOM_NUM = 1;
-        final int RANDOM_SMALL_LETTER = 2;
-        final int RANDOM_CAPITAL_LETTER = 3;
+        // 랜덤 값에 따라 생성할 문자 유형 지정하는 변수
+        final int RANDOM_NUM = 1;               // 숫자
+        final int RANDOM_SMALL_LETTER = 2;      // 소문자
+        final int RANDOM_CAPITAL_LETTER = 3;    // 대문자
 
-        int makeLevel = beverage.getMakeLevel();            // 음료 만드는 난이도. 1~5의 수
-        boolean result = false;
+        int makeLevel = beverage.getMakeLevel(); // 음료 만드는 난이도. 1~5의 수
+        boolean result = false;                  // 음료 제조 결과 담기 위한 변수
 
         System.out.println();
         System.out.println("------------------------------------------------------------------------");
@@ -54,39 +53,40 @@ public class PartimerAction
         System.out.println();
 
         // 랜덤 문자열 생성
-        Random rd = new Random();
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < makeLevel * 2; i++)   // 난이도에 따라 문자열 길이가 증가한다.
+        Random rd = new Random();               // 랜덤 객체 생성
+        StringBuffer sb = new StringBuffer();   // StringBuffer 객체 생성(String 은 + 연산마다 새로운 객체가 생성된다.)
+        for (int i = 0; i < makeLevel * 2; i++) // 난이도에 따라 반복횟수가 늘어나면서 문자열 길이가 증가한다.
         {
             /*
             아스키코드에서 영어 대문자는 65~90이고, 영어 소문자는 97~122 이다.
             0~25까지의 난수에 + 65 를 하면 대문자를 얻을 수있고
             동일한 범위의 난수에 + 97을 하면 소문자를 얻을 수 있다.
             */
-            int rdNum = rd.nextInt(3) + 1; // 1~3 범위의 난수 반환해서 rdNum 변수에 담는다.
+
+            int rdNum = rd.nextInt(3) + 1; // 1~3 범위의 난수 반환해서 어떤 유형의 랜덤값을 생성할지 rdNum 변수에 담는다.
             switch (rdNum)
             {
-                case RANDOM_SMALL_LETTER: // 랜덤 소문자 생성
+                case RANDOM_SMALL_LETTER:               // 하나의 랜덤 소문자 생성
                     sb.append((char) (rd.nextInt(26) + 65));
                     break;
-                case RANDOM_CAPITAL_LETTER: // 랜덤 대문자 생성
+                case RANDOM_CAPITAL_LETTER:             // 하나의 랜덤 대문자 생성
                     sb.append((char) (rd.nextInt(26) + 97));
                     break;
-                case RANDOM_NUM:    // 한 자리의 랜덤 숫자 생성
+                case RANDOM_NUM:                        // 하나의 랜덤 숫자 생성
                     sb.append(rd.nextInt(10));
                     break;
             }
         }
 
-        System.out.println(" " + sb);
+        System.out.println(" " + sb);       // 생성된 랜덤 문자열 출력
 
-        System.out.printf(" 입력 : ");
+        System.out.printf(" 입력 : ");       // 사용자에게서 문자열 입력받기
         Scanner sc = new Scanner(System.in);
         String inputStr = sc.nextLine();
 
         inputStr = inputStr.replace(" ", ""); // 입력받은 문자열 공백 제거
 
-        // stringbuffer → String으로
+        // stringbuffer → String으로 변환
         String sbStr = sb.toString();
 
         /*
@@ -98,15 +98,15 @@ public class PartimerAction
         */
 
         // 제시한 문자열과 입력받은 문자열이 일치하는지 비교
-        if (sbStr.equals(inputStr)) // 일치하면
+        if (sbStr.equals(inputStr))                         // 일치하면
         {
-            result = true;
-
-            Partimer.setSuccessNum(Partimer.getSuccessNum() + 1); // 음료제조 성공횟수 1 증가
-        } else    // 일치하지 않으면
+            result = true;                                  // result 에 true 를 담고(true 반환)
+            User.setSuccessNum(User.getSuccessNum() + 1);   // 음료제조 성공횟수 1 증가
+        }
+        else                                                // 일치하지 않으면
         {
-            Partimer.setFailNum(Partimer.getFailNum() + 1);   // 음료제조 실패 횟수 1 증가
-            Partimer.setHp(Partimer.getHp() - 1 );            // 유저 체력 1 감소
+            User.setFailNum(User.getFailNum() + 1);         // 음료제조 실패 횟수 1 증가
+            User.setHp(User.getHp() - 1 );                  // 유저 체력 1 감소 , false 반환
         }
 
         return result;
@@ -117,9 +117,11 @@ public class PartimerAction
     {
         boolean result = false;  // 이 메소드가 반환하는 값을 담을 변수
         boolean check = true;    // 반복여부 결정할 변수
-        String resultStr;
-        int quizResult = 0;
+        String resultStr;        // 사용자에게 입력받은 값을 담기 위한 변수
+        int quizResult = 0;      // 사용자에게 입력받은 값을 형변환해서 담기 위한 변수
 
+        final int YES = 1;       // 퀴즈 선택지 (1. 그렇다)
+        final int NO = 2;        // 퀴즈 선택지 (2. 아니다)
 
         // 음료 관련 변수
         boolean ismilk = beverage.isMilk();                 // 우유 들어가는 음료인지의 여부를 담을 변수
@@ -144,48 +146,46 @@ public class PartimerAction
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
 
-            resultStr = sc.nextLine();
+            resultStr = sc.nextLine();      // 사용자에게 입력받은 값을 변수에 담는다.
 
             // 입력받은 값이 숫자인지 확인
             try
             {
                 // 입력받은 값의 공백을 제거하고
                 // 자료형 변경한 뒤(String → int) int형에 담는다.
-                // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
-                // int형으로 변경되지 않는다면 NumberFormatException 발생
                 quizResult = Integer.parseInt(resultStr.replace(" ",""));
                 check = false;
+                // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
+                // int형으로 변경되지 않는다면 NumberFormatException 발생
 
                 if (ismilk) // 우유가 들어갔다면
                 {
-                    if (quizResult == 1)
+                    System.out.println("------------------------------------------------------------------------");
+                    if (quizResult == YES)
                     {
-                        System.out.println("------------------------------------------------------------------------");
                         System.out.println(" 정답입니다. ");
                     }
                     else
                     {
-                        System.out.println("------------------------------------------------------------------------");
                         System.out.println(" 오답입니다. ");
 
-                        Partimer.setFailNum(Partimer.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
-                        Partimer.setHp(Partimer.getHp() - 1 );            // 유저 체력 1 감소
+                        User.setFailNum(User.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
+                        User.setHp(User.getHp() - 1 );            // 유저 체력 1 감소
                         return false;
                     }
                 }
                 else // 우유가 들어가지 않았다면
                 {
-                    if (quizResult == 1)
+                    System.out.println("------------------------------------------------------------------------");
+                    if (quizResult == YES)
                     {
-                        System.out.println("------------------------------------------------------------------------");
                         System.out.println(" 오답입니다. ");
-                        Partimer.setFailNum(Partimer.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
-                        Partimer.setHp(Partimer.getHp() - 1 );            // 유저 체력 1 감소
+                        User.setFailNum(User.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
+                        User.setHp(User.getHp() - 1 );            // 유저 체력 1 감소
                         return false;
                     }
                     else
                     {
-                        System.out.println("------------------------------------------------------------------------");
                         System.out.println(" 정답입니다. ");
                     }
                 }
@@ -231,32 +231,30 @@ public class PartimerAction
 
                 if (iceOption == 1) // ICE 라면
                 {
-                    if (quizResult == 1)
+                    System.out.println("------------------------------------------------------------------------");
+                    if (quizResult == YES)
                     {
-                        System.out.println("------------------------------------------------------------------------");
                         System.out.println(" 정답입니다. ");
                     } else
                     {
-                        System.out.println("------------------------------------------------------------------------");
                         System.out.println(" 오답입니다. ");
 
-                        Partimer.setFailNum(Partimer.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
-                        Partimer.setHp(Partimer.getHp() - 1 );            // 유저 체력 1 감소
+                        User.setFailNum(User.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
+                        User.setHp(User.getHp() - 1 );            // 유저 체력 1 감소
                         return false;
                     }
                 } else // HOT 이라면
                 {
-                    if (quizResult == 1)
+                    System.out.println("------------------------------------------------------------------------");
+                    if (quizResult == YES)
                     {
-                        System.out.println("------------------------------------------------------------------------");
                         System.out.println(" 오답입니다. ");
-                        Partimer.setFailNum(Partimer.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
-                        Partimer.setHp(Partimer.getHp() - 1 );            // 유저 체력 1 감소
-
+                        User.setFailNum(User.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
+                        User.setHp(User.getHp() - 1 );            // 유저 체력 1 감소
                         return false;
+
                     } else
                     {
-                        System.out.println("------------------------------------------------------------------------");
                         System.out.println(" 정답입니다. ");
                     }
                 }
@@ -299,37 +297,36 @@ public class PartimerAction
 
                     if (whippingCream == 1) // 휘핑크림 올라간다면
                     {
-                        if (quizResult == 1)
+                        System.out.println("------------------------------------------------------------------------");
+                        if (quizResult == YES)
                         {
-                            System.out.println("------------------------------------------------------------------------");
                             System.out.println(" 정답입니다. ");
-                            Partimer.setSuccessNum(Partimer.getSuccessNum() + 1 ); // 음료 제조 성공 횟수 1 증가
+                            User.setSuccessNum(User.getSuccessNum() + 1 ); // 음료 제조 성공 횟수 1 증가
                             result = true;  // true 값 반환
 
                         } else
                         {
-                            System.out.println("------------------------------------------------------------------------");
                             System.out.println(" 오답입니다. ");
 
-                            Partimer.setFailNum(Partimer.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
-                            Partimer.setHp(Partimer.getHp() - 1 );            // 유저 체력 1 감소
+                            User.setFailNum(User.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
+                            User.setHp(User.getHp() - 1 );            // 유저 체력 1 감소
                             return false;
                         }
-                    } else // 휘핑크림 올라가지 않는다면
+                    }
+                    else // 휘핑크림 올라가지 않는다면
                     {
-                        if (quizResult == 1)
+                        System.out.println("------------------------------------------------------------------------");
+                        if (quizResult == YES)
                         {
-                            System.out.println("------------------------------------------------------------------------");
                             System.out.println(" 오답입니다. ");
-                            Partimer.setFailNum(Partimer.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
-                            Partimer.setHp(Partimer.getHp() - 1 );            // 유저 체력 1 감소
+                            User.setFailNum(User.getFailNum() + 1);   // 음료 제조 실패 횟수 1 증가
+                            User.setHp(User.getHp() - 1 );            // 유저 체력 1 감소
                             return false;
 
                         } else
                         {
-                            System.out.println("------------------------------------------------------------------------");
                             System.out.println(" 정답입니다. ");
-                            Partimer.setSuccessNum(Partimer.getSuccessNum() + 1 ); // 음료 제조 성공 횟수 1 증가
+                            User.setSuccessNum(User.getSuccessNum() + 1 ); // 음료 제조 성공 횟수 1 증가
                             result = true;  // true 값 반환
                         }
                     }
@@ -348,10 +345,9 @@ public class PartimerAction
                 }
 
             }
-
         }
-        return result;
 
+        return result;
 
     }// end makeBeverageQuiz()
 
@@ -367,8 +363,8 @@ public class PartimerAction
             System.out.println("------------------------------------------------------------------------");
             System.out.println("                            음료 만들기 실패 ! ");
             System.out.println("------------------------------------------------------------------------");
-            System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", Partimer.getName());
-            System.out.printf(" 현재 %s님의 체력 : %d\n", Partimer.getName(), Partimer.getHp());
+            System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", User.getName());
+            System.out.printf(" 현재 %s님의 체력 : %d\n", User.getName(), User.getHp());
             System.out.println("========================================================================");
         }
         else

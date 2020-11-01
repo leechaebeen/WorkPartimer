@@ -2,11 +2,11 @@ package com.company.run;
 import java.util.Random;
 import java.util.Scanner;
 
-import com.company.beverage.Beverage;
-import com.company.cafe.Cafe;
-import com.company.cafe.CafeAction;
-import com.company.cafe.Item;
-import com.company.character.*;
+import com.company.action.*;
+import com.company.data.Beverage;
+import com.company.data.Cafe;
+import com.company.data.Item;
+import com.company.data.User;
 
 import java.util.regex.Pattern;
 
@@ -56,7 +56,7 @@ public class Run<endings>
 
         }while (!check); // 입력받은 이름이 한글이 아니면 반복
 
-        Partimer.setName(userName);         // 입력받은 유저이름 속성에 넣기
+        User.setName(userName);         // 입력받은 유저이름 속성에 넣기
 
         System.out.println(" 어쩌구 저쩌구 스토리 설명 쫓겨난 이유 ");
 
@@ -70,7 +70,7 @@ public class Run<endings>
         System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
         System.out.println("　 　　　　　　。　　　 。      　三 ඞ;;   　  　ﾟ　　　.　 　　　　　　　　.");
         System.out.println(". 　。　　　        　    　。　　　　      •　 　        　　　     　　");
-        System.out.printf("\t\t。\t\t\t %s님은 결국 추방당했습니다 . . .     .          。\n", Partimer.getName());
+        System.out.printf("\t\t。\t\t\t %s님은 결국 추방당했습니다 . . .     .          。\n", User.getName());
         System.out.println(",　　　　　　　　　.　 .　　　　　　　　.");
         System.out.println("　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.");
@@ -81,7 +81,7 @@ public class Run<endings>
 
         System.out.println();
         System.out.println();
-        System.out.printf(" %s님은 오늘부터 카페 아르바이트를 시작했습니다.\n", Partimer.getName());
+        System.out.printf(" %s님은 오늘부터 카페 아르바이트를 시작했습니다.\n", User.getName());
         System.out.println(" 아르바이트를 진행하면서 다양한 엔딩을 볼 수 있습니다.");
 
         // 올바른 선택지를 선택할 때까지 반복
@@ -149,21 +149,21 @@ public class Run<endings>
 
         System.out.println();
 
-        Customer customer = new Customer();           // 손님 객체 생성
+        CustomerAction customerAction = new CustomerAction();           // 손님 객체 생성
 
-        Beverage beverage = customer.orderBeverage(); // 주문할 음료 객체 생성
-        customer.orderToPartimer(beverage);           // 손님이 음료 주문
+        Beverage beverage = customerAction.orderBeverage(); // 주문할 음료 객체 생성
+        customerAction.orderToPartimer(beverage);           // 손님이 음료 주문
 
-        PartimerAction partimerAction = new PartimerAction();   // 유저 액션 객체 생성
-        boolean result = partimerAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
-        partimerAction.makeBeverageResult(result);              // 결과에 따른 출력
+        userAction userAction = new userAction();   // 유저 액션 객체 생성
+        boolean result = userAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
+        userAction.makeBeverageResult(result);              // 결과에 따른 출력
 
         Ending ending = new Ending();       // 엔딩 객체 생성
-        if(Partimer.getHp()==0)             // 만약 유저의 체력이 0이 된다면
+        if(User.getHp()==0)             // 만약 유저의 체력이 0이 된다면
         {
             ending.fallDownEnding();        // 과로 엔딩 실행
         }
-        else if(Partimer.getSuccessNum() < Partimer.getFailNum())   // 음료 제조 성공 누적 횟수 < 실패 누적 횟수라면
+        else if(User.getSuccessNum() < User.getFailNum())   // 음료 제조 성공 누적 횟수 < 실패 누적 횟수라면
         {
             ending.getFireEnding();         // 해고 엔딩 실행
         }
@@ -182,7 +182,7 @@ public class Run<endings>
         Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum()+1); // 기존의 하루 방문자 수에 하나 더하기
         Cafe.setTotalCustomerNum(Cafe.getTotalCustomerNum()+1); // 기존의 총 방문자 수에 한명 더하기
 
-        SpecialCustomer specialCustomer = new SpecialCustomer(); // 특별 손님 객체 생성
+        SpecialCustomerAction specialCustomer = new SpecialCustomerAction(); // 특별 손님 객체 생성
         Beverage beverage = specialCustomer.orderBeverage();     // 주문할 음료 객체 생성
 
         System.out.println();
@@ -213,21 +213,21 @@ public class Run<endings>
         if(typeNum == 1 ||typeNum == 2)  // 음료를 주문하는 특별손님의 경우에만
         {
             // 유저가 음료 만들기
-            PartimerAction partimerAction = new PartimerAction();   // 유저 액션 객체 생성
-            boolean result = partimerAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
-            partimerAction.makeBeverageResult(result);              // 결과에 따른 출력
+            userAction userAction = new userAction();   // 유저 액션 객체 생성
+            boolean result = userAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
+            userAction.makeBeverageResult(result);              // 결과에 따른 출력
         }
 
         Ending ending = new Ending();       // 엔딩 객체 생성
-        if(Partimer.getHp()==0)             // 만약 유저의 체력이 0이 된다면
+        if(User.getHp()==0)             // 만약 유저의 체력이 0이 된다면
         {
             ending.fallDownEnding();        //  쓰러지는 엔딩 실행
         }
-        else if(Partimer.getFeeling() == 0) // 만약 유저의 인내력이 0이 된다면
+        else if(User.getFeeling() == 0) // 만약 유저의 인내력이 0이 된다면
         {
             ending.toQuitEnding();          // 그만두는 엔딩 실행
         }
-        else if(Partimer.getSuccessNum() < Partimer.getFailNum())   // 음료 제조 성공 누적 횟수 < 실패 누적 횟수라면
+        else if(User.getSuccessNum() < User.getFailNum())   // 음료 제조 성공 누적 횟수 < 실패 누적 횟수라면
         {
             ending.getFireEnding();         // 해고 엔딩 실행
         }
@@ -252,7 +252,7 @@ public class Run<endings>
         }
         else
         {
-            SecretCustomer secretCustomer = new SecretCustomer();  // 비밀 손님 객체 생성
+            SecretCustomerAction secretCustomer = new SecretCustomerAction();  // 비밀 손님 객체 생성
             Beverage beverage = secretCustomer.orderBeverage();    // 주문할 음료 객체 생성
 
             System.out.println();
@@ -274,20 +274,20 @@ public class Run<endings>
             }
 
             // 유저가 음료 만들기
-            PartimerAction partimerAction = new PartimerAction();   // 유저 액션 객체 생성
-            boolean result = partimerAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
-            partimerAction.makeBeverageResult(result);              // 결과에 따른 출력
+            userAction userAction = new userAction();   // 유저 액션 객체 생성
+            boolean result = userAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
+            userAction.makeBeverageResult(result);              // 결과에 따른 출력
 
             Ending ending = new Ending();       // 엔딩 객체 생성
-            if(Partimer.getHp()==0)             // 만약 유저의 체력이 0이 된다면
+            if(User.getHp()==0)             // 만약 유저의 체력이 0이 된다면
             {
                 ending.fallDownEnding();        //  쓰러지는 엔딩 실행
             }
-            else if(Partimer.getFeeling() == 0) // 만약 유저의 인내력이 0이 된다면
+            else if(User.getFeeling() == 0) // 만약 유저의 인내력이 0이 된다면
             {
                 ending.toQuitEnding();          // 그만두는 엔딩 실행
             }
-            else if(Partimer.getSuccessNum() < Partimer.getFailNum())   // 음료 제조 성공 누적 횟수 < 실패 누적 횟수라면
+            else if(User.getSuccessNum() < User.getFailNum())   // 음료 제조 성공 누적 횟수 < 실패 누적 횟수라면
             {
                 ending.getFireEnding();         // 해고 엔딩 실행
             }
@@ -312,7 +312,7 @@ public class Run<endings>
         while(check)
         {
             System.out.println("========================================================================");
-            System.out.printf(" 1. %s님의 정보 보기  2.카페 정보 보기  3.이전으로 \n", Partimer.getName());
+            System.out.printf(" 1. %s님의 정보 보기  2.카페 정보 보기  3.이전으로 \n", User.getName());
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
             Scanner sc = new Scanner(System.in);
@@ -363,7 +363,7 @@ public class Run<endings>
 
     public void myInfo()// 내 정보 확인
     {
-        int week = (Partimer.getWorkingDays() / 7) + 1;               // 주차 = 일한날짜/7 + 1
+        int week = (User.getWorkingDays() / 7) + 1;               // 주차 = 일한날짜/7 + 1
         System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
         System.out.printf("==========================     %d주차   정보      =========================\n", week);
         System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
@@ -378,9 +378,9 @@ public class Run<endings>
         System.out.println();
         System.out.println("------------------------------------------------------------------------");
         System.out.println();
-        System.out.printf(" %s님의 체력 : %d\n", Partimer.getName(), Partimer.getSetHp());
-        System.out.printf(" %s님의 인내력 : %d\n",Partimer.getName(), Partimer.getSetFeeling());
-        System.out.printf(" %s님의 숙련도 : %d\n ", Partimer.getName(),Partimer.getSkillLevel());
+        System.out.printf(" %s님의 체력 : %d\n", User.getName(), User.getSetHp());
+        System.out.printf(" %s님의 인내력 : %d\n", User.getName(), User.getSetFeeling());
+        System.out.printf(" %s님의 숙련도 : %d\n ", User.getName(), User.getSkillLevel());
         System.out.println();
 
         info(); // 이전으로
@@ -389,7 +389,7 @@ public class Run<endings>
 
     public void cafeInfo()  // 카페 정보
     {
-        int week = (Partimer.getWorkingDays() / 7) + 1;               // 주차 = 일한날짜/7 + 1
+        int week = (User.getWorkingDays() / 7) + 1;               // 주차 = 일한날짜/7 + 1
         System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
         System.out.printf("==========================    %d주차  카페 정보    =========================\n", week);
         System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
@@ -429,7 +429,7 @@ public class Run<endings>
         System.out.println("==========================     아이템  구매      ==========================");
         System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
         System.out.println();
-        System.out.printf(" 현재 %s님이 보유하고 있는 코인 : %d코인\n", Partimer.getName(), Partimer.getProperty());
+        System.out.printf(" 현재 %s님이 보유하고 있는 코인 : %d코인\n", User.getName(), User.getProperty());
         boolean check = true;   // 반복여부 체크하는 변수
         String resultStr;       // 사용자의 선택값을 담을 변수(1. 정보 확인  2.상점가기 3.모은 엔딩 확인)
         int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
@@ -517,8 +517,8 @@ public class Run<endings>
             System.out.printf(" 의자         : %d개\n", Cafe.getSetChair());
             System.out.printf(" 유리잔       : %d개\n", Cafe.getSetCup());
             System.out.printf(" 머그잔       : %d개\n", Cafe.getSetMug());
-            System.out.printf(" 체력 최댓값   : %d개\n", Partimer.getSetHp());
-            System.out.printf(" 인내력 최댓값 : %d개\n", Partimer.getSetFeeling());
+            System.out.printf(" 체력 최댓값   : %d개\n", User.getSetHp());
+            System.out.printf(" 인내력 최댓값 : %d개\n", User.getSetFeeling());
             System.out.println();
             System.out.println("------------------------------------------------------------------------");
             System.out.println();
@@ -595,14 +595,14 @@ public class Run<endings>
         // 아이템 객체 생성
         Item item = new Item();
 
-        if(Partimer.getProperty() >= item.getChairPrice())  // 의자 가격보다 보유한 코인이 많거나 같으면
+        if(User.getProperty() >= item.getChairPrice())  // 의자 가격보다 보유한 코인이 많거나 같으면
         {
-            Partimer.setProperty(Partimer.getProperty() - item.getChairPrice());    // 계산하고
+            User.setProperty(User.getProperty() - item.getChairPrice());    // 계산하고
             Cafe.setSetChair(Cafe.getSetChair()+1); // 의자 설정값 추가
 
             System.out.println("========================================================================");
             System.out.printf(" %d 코인을 사용했습니다.\n", item.getChairPrice());
-            System.out.printf(" 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.printf(" 보유 코인      : %d코인\n", User.getProperty());
             System.out.printf(" 카페 의자 수   : %d \n", Cafe.getSetChair() );
             System.out.println("========================================================================");
 
@@ -656,7 +656,7 @@ public class Run<endings>
         {
             System.out.println("========================================================================");
             System.out.println(" 보유한 코인으로 의자를 구매할 수 없습니다.");
-            System.out.printf(" 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.printf(" 보유 코인      : %d코인\n", User.getProperty());
             System.out.println("========================================================================");
             buyPermanentItem(); // 이전으로
         }
@@ -673,14 +673,14 @@ public class Run<endings>
         // 아이템 객체 생성
         Item item = new Item();
 
-        if(Partimer.getProperty() >= item.getCupPrice())  // 유리잔 가격보다 보유한 코인이 많거나 같으면
+        if(User.getProperty() >= item.getCupPrice())  // 유리잔 가격보다 보유한 코인이 많거나 같으면
         {
-            Partimer.setProperty(Partimer.getProperty() - item.getCupPrice());    // 계산하고
+            User.setProperty(User.getProperty() - item.getCupPrice());    // 계산하고
             Cafe.setSetCup(Cafe.getSetCup()+1); // 유리잔 설정값 추가
 
             System.out.println("========================================================================");
             System.out.printf(" %d 코인을 사용했습니다.\n", item.getChairPrice());
-            System.out.printf(" 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.printf(" 보유 코인      : %d코인\n", User.getProperty());
             System.out.printf(" 카페 유리잔 수   : %d \n", Cafe.getSetCup() );
             System.out.println("========================================================================");
 
@@ -734,7 +734,7 @@ public class Run<endings>
         {
             System.out.println("========================================================================");
             System.out.println(" 보유한 코인으로 유리잔을 구매할 수 없습니다.");
-            System.out.printf(" 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.printf(" 보유 코인      : %d코인\n", User.getProperty());
             System.out.println("========================================================================");
             buyPermanentItem(); // 이전으로
         }
@@ -751,14 +751,14 @@ public class Run<endings>
         // 아이템 객체 생성
         Item item = new Item();
 
-        if(Partimer.getProperty() >= item.getMugPrice())  // 머그잔 가격보다 보유한 코인이 많거나 같으면
+        if(User.getProperty() >= item.getMugPrice())  // 머그잔 가격보다 보유한 코인이 많거나 같으면
         {
-            Partimer.setProperty(Partimer.getProperty() - item.getMugPrice());    // 계산하고
+            User.setProperty(User.getProperty() - item.getMugPrice());    // 계산하고
             Cafe.setSetMug(Cafe.getSetMug()+1); // 머그잔 설정값 추가
 
             System.out.println("========================================================================");
             System.out.printf(" %d 코인을 사용했습니다.\n", item.getChairPrice());
-            System.out.printf(" 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.printf(" 보유 코인      : %d코인\n", User.getProperty());
             System.out.printf(" 카페 머그잔 수   : %d \n", Cafe.getSetMug() );
             System.out.println("========================================================================");
 
@@ -812,7 +812,7 @@ public class Run<endings>
         {
             System.out.println("========================================================================");
             System.out.println(" 보유한 코인으로 머그잔을 구매할 수 없습니다.");
-            System.out.printf(" 현재 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.printf(" 현재 보유 코인      : %d코인\n", User.getProperty());
             System.out.println("========================================================================");
             buyPermanentItem(); // 이전으로
         }
@@ -829,15 +829,15 @@ public class Run<endings>
         // 아이템 객체 생성
         Item item = new Item();
 
-        if(Partimer.getProperty() >= item.getHpPrice())  // 체력 증가 가격보다 보유한 코인이 많거나 같으면
+        if(User.getProperty() >= item.getHpPrice())  // 체력 증가 가격보다 보유한 코인이 많거나 같으면
         {
-            Partimer.setProperty(Partimer.getProperty() - item.getHpPrice());    // 계산하고
-            Partimer.setSetHp(Partimer.getSetHp()+1); // 체력 설정값 추가
+            User.setProperty(User.getProperty() - item.getHpPrice());    // 계산하고
+            User.setSetHp(User.getSetHp()+1); // 체력 설정값 추가
 
             System.out.println("========================================================================");
             System.out.printf(" %d 코인을 사용했습니다.\n", item.getHpPrice());
-            System.out.printf(" 보유 코인      : %d코인\n", Partimer.getProperty());
-            System.out.printf(" 체력          : %d \n", Partimer.getSetHp() );
+            System.out.printf(" 보유 코인      : %d코인\n", User.getProperty());
+            System.out.printf(" 체력          : %d \n", User.getSetHp() );
             System.out.println("========================================================================");
 
             final int REPURCHASE = 1;   // 재구매
@@ -890,7 +890,7 @@ public class Run<endings>
         {
             System.out.println("========================================================================");
             System.out.println(" 보유한 코인으로 체력을 증가시킬 수 없습니다.");
-            System.out.printf(" 현재 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.printf(" 현재 보유 코인      : %d코인\n", User.getProperty());
             System.out.println("========================================================================");
             buyPermanentItem(); // 이전으로
         }
@@ -907,15 +907,15 @@ public class Run<endings>
         // 아이템 객체 생성
         Item item = new Item();
 
-        if(Partimer.getProperty() >= item.getFeelingPrice())  // 체력 증가 가격보다 보유한 코인이 많거나 같으면
+        if(User.getProperty() >= item.getFeelingPrice())  // 체력 증가 가격보다 보유한 코인이 많거나 같으면
         {
-            Partimer.setProperty(Partimer.getProperty() - item.getFeelingPrice());    // 계산하고
-            Partimer.setSetFeeling(Partimer.getSetFeeling()+1); // 인내력 설정값 추가
+            User.setProperty(User.getProperty() - item.getFeelingPrice());    // 계산하고
+            User.setSetFeeling(User.getSetFeeling()+1); // 인내력 설정값 추가
 
             System.out.println("========================================================================");
             System.out.printf(" %d 코인을 사용했습니다.\n", item.getFeelingPrice());
-            System.out.printf(" 보유 코인      : %d코인\n", Partimer.getProperty());
-            System.out.printf(" 인내력         : %d \n", Partimer.getSetFeeling() );
+            System.out.printf(" 보유 코인      : %d코인\n", User.getProperty());
+            System.out.printf(" 인내력         : %d \n", User.getSetFeeling() );
             System.out.println("========================================================================");
 
             final int REPURCHASE = 1;   // 재구매
@@ -968,7 +968,7 @@ public class Run<endings>
         {
             System.out.println("========================================================================");
             System.out.println(" 보유한 코인으로 인내력을 증가시킬 수 없습니다.");
-            System.out.printf(" 현재 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.printf(" 현재 보유 코인      : %d코인\n", User.getProperty());
             System.out.println("========================================================================");
             buyPermanentItem(); // 이전으로
         }
@@ -1071,14 +1071,14 @@ public class Run<endings>
         // 아이템 객체 생성
         Item item = new Item();
 
-        if(Partimer.getProperty() >= item.getCakePrice())  // 체력 증가 가격보다 보유한 코인이 많거나 같으면
+        if(User.getProperty() >= item.getCakePrice())  // 체력 증가 가격보다 보유한 코인이 많거나 같으면
         {
-            Partimer.setProperty(Partimer.getProperty() - item.getCakePrice());    // 계산하고
+            User.setProperty(User.getProperty() - item.getCakePrice());    // 계산하고
             Item.setCake(Item.getCake()+1); // 보유한 개수에 추가
 
             System.out.println("========================================================================");
             System.out.printf(" %d 코인을 사용했습니다.\n", item.getCakePrice());
-            System.out.printf(" 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.printf(" 보유 코인      : %d코인\n", User.getProperty());
             System.out.printf(" 보유 케이크     : %d개 \n", Item.getCake() );
             System.out.println("========================================================================");
 
@@ -1130,7 +1130,7 @@ public class Run<endings>
         {
             System.out.println("========================================================================");
             System.out.println(" 보유한 코인으로 케이크를 구매할 수 없습니다.");
-            System.out.printf(" 현재 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.printf(" 현재 보유 코인      : %d코인\n", User.getProperty());
             System.out.println();
             buyConsumableItem(); // 이전으로
         }
@@ -1147,14 +1147,14 @@ public class Run<endings>
         // 아이템 객체 생성
         Item item = new Item();
 
-        if(Partimer.getProperty() >= item.getSandwichPrice())  // 체력 증가 가격보다 보유한 코인이 많거나 같으면
+        if(User.getProperty() >= item.getSandwichPrice())  // 체력 증가 가격보다 보유한 코인이 많거나 같으면
         {
-            Partimer.setProperty(Partimer.getProperty() - item.getSandwichPrice());    // 계산하고
+            User.setProperty(User.getProperty() - item.getSandwichPrice());    // 계산하고
             Item.setSandwich(Item.getSandwich()+1); // 보유한 개수에 추가
 
             System.out.println("========================================================================");
             System.out.printf(" %d 코인을 사용했습니다.\n", item.getSandwichPrice());
-            System.out.printf(" 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.printf(" 보유 코인      : %d코인\n", User.getProperty());
             System.out.printf(" 보유 케이크     : %d개 \n", Item.getSandwich() );
             System.out.println("========================================================================");
 
@@ -1206,7 +1206,7 @@ public class Run<endings>
         {
             System.out.println("========================================================================");
             System.out.println(" 보유한 코인으로 샌드위치를 구매할 수 없습니다.");
-            System.out.printf(" 현재 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.printf(" 현재 보유 코인      : %d코인\n", User.getProperty());
             System.out.println();
             buyConsumableItem(); // 이전으로
         }
@@ -1223,14 +1223,14 @@ public class Run<endings>
         // 아이템 객체 생성
         Item item = new Item();
 
-        if(Partimer.getProperty() >= item.getChocoPrice())  // 초콜릿 가격보다 보유한 코인이 많거나 같으면
+        if(User.getProperty() >= item.getChocoPrice())  // 초콜릿 가격보다 보유한 코인이 많거나 같으면
         {
-            Partimer.setProperty(Partimer.getProperty() - item.getChocoPrice());    // 계산하고
+            User.setProperty(User.getProperty() - item.getChocoPrice());    // 계산하고
             Item.setChoco(Item.getChoco()+1); // 보유한 초콜릿 개수 1 증가
 
             System.out.println("========================================================================");
             System.out.printf(" %d 코인을 사용했습니다.\n", item.getChocoPrice());
-            System.out.printf(" 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.printf(" 보유 코인      : %d코인\n", User.getProperty());
             System.out.printf(" 보유 케이크     : %d개 \n", Item.getChoco() );
             System.out.println("========================================================================");
 
@@ -1282,7 +1282,7 @@ public class Run<endings>
         {
             System.out.println("========================================================================");
             System.out.println(" 보유한 코인으로 초콜릿을 구매할 수 없습니다.");
-            System.out.printf(" 현재 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.printf(" 현재 보유 코인      : %d코인\n", User.getProperty());
             System.out.println();
             buyConsumableItem(); // 이전으로
         }
@@ -1299,14 +1299,14 @@ public class Run<endings>
         // 아이템 객체 생성
         Item item = new Item();
 
-        if(Partimer.getProperty() >= item.getMacaronPrice())  // 체력 증가 가격보다 보유한 코인이 많거나 같으면
+        if(User.getProperty() >= item.getMacaronPrice())  // 체력 증가 가격보다 보유한 코인이 많거나 같으면
         {
-            Partimer.setProperty(Partimer.getProperty() - item.getMacaronPrice());    // 계산하고
+            User.setProperty(User.getProperty() - item.getMacaronPrice());    // 계산하고
             Item.setMacaron(Item.getMacaron()+1); // 보유한 개수에 추가
 
             System.out.println("========================================================================");
             System.out.printf(" %d 코인을 사용했습니다.\n", item.getMacaronPrice());
-            System.out.printf(" 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.printf(" 보유 코인      : %d코인\n", User.getProperty());
             System.out.printf(" 보유 케이크     : %d개 \n", Item.getMacaron() );
             System.out.println("========================================================================");
 
@@ -1358,7 +1358,7 @@ public class Run<endings>
         {
             System.out.println("========================================================================");
             System.out.println(" 보유한 코인으로 마카롱을 구매할 수 없습니다.");
-            System.out.printf(" 현재 보유 코인      : %d코인\n", Partimer.getProperty());
+            System.out.printf(" 현재 보유 코인      : %d코인\n", User.getProperty());
             System.out.println();
             buyConsumableItem(); // 이전으로
         }
@@ -1369,7 +1369,7 @@ public class Run<endings>
 
     public void openEnding()
     {
-        int[] endings = Partimer.getEndings();  // 공개된 엔딩 유형 저장한 배열 불러오기
+        int[] endings = User.getEndings();  // 공개된 엔딩 유형 저장한 배열 불러오기
 
         if(endings[0]==0)                       // 첫번째 배열 칸이 0 이면 공개된 엔딩이 없다는 뜻이다.
         {
@@ -1418,7 +1418,7 @@ public class Run<endings>
             {
                 if (endingType == FALL_DOWN_ENDING)
                 {
-                    System.out.printf(" [과로 엔딩] %s님은 고된 노동에 시달리다 쓰러졌습니다. \n", Partimer.getName());
+                    System.out.printf(" [과로 엔딩] %s님은 고된 노동에 시달리다 쓰러졌습니다. \n", User.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 과로 엔딩 tip ✨ ");
                     System.out.println("    체력이 0 이 되면 과로 엔딩의 조건이 달성됩니다. ");
@@ -1428,7 +1428,7 @@ public class Run<endings>
 
                 if (endingType == QUIT_ENDING)
                 {
-                    System.out.printf(" [사표 엔딩] %s님은 극심한 스트레스를 견디지 못해 카페를 떠났습니다. \n", Partimer.getName());
+                    System.out.printf(" [사표 엔딩] %s님은 극심한 스트레스를 견디지 못해 카페를 떠났습니다. \n", User.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 사표 엔딩 tip ✨ ");
                     System.out.println("    인내력이 0 이 되면 사표 엔딩의 조건이 달성됩니다. ");
@@ -1439,7 +1439,7 @@ public class Run<endings>
                 if (endingType == SCOUT_ENDING)
                 {
                     System.out.println(" [이직 엔딩] 종종 방문하던 특이한 손님의 일부는 몰래 방문한 인근 카페 사장이었습니다.");
-                    System.out.printf("                %s님을 시험하고 눈여겨본 사장은 %s님을 스카웃했습니다. \n", Partimer.getName());
+                    System.out.printf("                %s님을 시험하고 눈여겨본 사장은 %s님을 스카웃했습니다. \n", User.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 이직 엔딩 tip ✨ ");
                     System.out.println("    숙련도가 4이상 이고 비밀 손님의 방문이 4회 이상이면 이직 엔딩의 조건이 달성됩니다. ");
@@ -1448,8 +1448,8 @@ public class Run<endings>
 
                 if (endingType == BOSS_ENDING)
                 {
-                    System.out.printf(" [사장 엔딩] 코인을 아끼며 열심히 일한 %s님은 모은 코인으로 카페를 차렸습니다.\n", Partimer.getName());
-                    System.out.printf("            %s님은 더이상 알바생이 아닙니다.\n", Partimer.getName());
+                    System.out.printf(" [사장 엔딩] 코인을 아끼며 열심히 일한 %s님은 모은 코인으로 카페를 차렸습니다.\n", User.getName());
+                    System.out.printf("            %s님은 더이상 알바생이 아닙니다.\n", User.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 사장 엔딩 tip ✨ ");
                     System.out.println("    보유하고 있는 코인이 10개 이상이고 ");
@@ -1459,8 +1459,8 @@ public class Run<endings>
 
                 if (endingType == GET_FIRE_ENDING)
                 {
-                    System.out.printf(" [해고 엔딩] %s님은 음료를 제조하지 못해서 해고되었습니다.\n", Partimer.getName());
-                    System.out.printf("            괜찮습니다 카페는 많으니까요... 힘내세요! \n", Partimer.getName());
+                    System.out.printf(" [해고 엔딩] %s님은 음료를 제조하지 못해서 해고되었습니다.\n", User.getName());
+                    System.out.printf("            괜찮습니다 카페는 많으니까요... 힘내세요! \n", User.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 해고 엔딩 tip ✨ ");
                     System.out.println("    음료제조 성공 횟수보다 실패 횟수가 많아지면 엔딩의 조건이 달성됩니다.");
@@ -1468,7 +1468,7 @@ public class Run<endings>
                 }
                 if (endingType == PARTIMER_ENDING)
                 {
-                    System.out.printf(" [알바 엔딩] %s님은 카페 아르바이트를 능숙하게 해내고 있습니다.\n", Partimer.getName());
+                    System.out.printf(" [알바 엔딩] %s님은 카페 아르바이트를 능숙하게 해내고 있습니다.\n", User.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 알바 엔딩 tip ✨ ");
                     System.out.println("    나머지 엔딩에 해당하지 않으면 알바 엔딩의 조건이 달성됩니다.");
@@ -1587,13 +1587,13 @@ public class Run<endings>
         if(Item.getCake() > 0)  // 보유한 케이크 수가 0보다 크다면
         {
             Item.setCake(Item.getCake() - 1);           // 보유한 개수에서 하나 감소
-            Partimer.setHp(Partimer.getHp() + 2 );   // 현재 체력에서 2 회복
+            User.setHp(User.getHp() + 2 );   // 현재 체력에서 2 회복
 
             System.out.println("========================================================================");
             System.out.println(" 케이크를 사용했습니다.");
             System.out.println(" 체력이 2 회복되었습니다.");
             System.out.printf(" 보유 케이크   : %d개 \n", Item.getCake());
-            System.out.printf(" 현재 체력     : %d\n", Partimer.getHp());
+            System.out.printf(" 현재 체력     : %d\n", User.getHp());
             System.out.println("========================================================================");
 
             final int REUSE = 1;   // 재사용
@@ -1658,13 +1658,13 @@ public class Run<endings>
         if(Item.getSandwich() > 0)  // 보유한 샌드위치 수가 0보다 크다면
         {
             Item.setSandwich(Item.getSandwich() - 1);        // 보유한 개수에서 하나 감소
-            Partimer.setHp(Partimer.getHp() + 4 );           // 현재 체력에서 4 회복
+            User.setHp(User.getHp() + 4 );           // 현재 체력에서 4 회복
 
             System.out.println("========================================================================");
             System.out.println(" 샌드위치를 사용했습니다.");
             System.out.println(" 체력이 4 회복되었습니다.");
             System.out.printf(" 보유 샌드위치   : %d개 \n", Item.getSandwich());
-            System.out.printf(" 현재 체력      : %d\n", Partimer.getHp());
+            System.out.printf(" 현재 체력      : %d\n", User.getHp());
             System.out.println("========================================================================");
 
             final int REUSE = 1;   // 재사용
@@ -1728,13 +1728,13 @@ public class Run<endings>
         if(Item.getChoco() > 0)  // 보유한 초콜릿 수가 0보다 크다면
         {
             Item.setChoco(Item.getChoco() - 1);                 // 보유한 개수에서 하나 감소
-            Partimer.setFeeling(Partimer.getFeeling() + 2 );    // 현재 인내력에서 2 회복
+            User.setFeeling(User.getFeeling() + 2 );    // 현재 인내력에서 2 회복
 
             System.out.println("========================================================================");
             System.out.println(" 초콜릿을 사용했습니다.");
             System.out.println(" 인내력이 2 회복되었습니다.");
             System.out.printf(" 보유 초콜릿   : %d개 \n", Item.getChoco());
-            System.out.printf(" 현재 인내력   : %d\n", Partimer.getFeeling());
+            System.out.printf(" 현재 인내력   : %d\n", User.getFeeling());
             System.out.println("========================================================================");
 
             final int REUSE = 1;   // 재사용
@@ -1798,13 +1798,13 @@ public class Run<endings>
         if(Item.getMacaron() > 0)  // 보유한 마카롱 수가 0보다 크다면
         {
             Item.setMacaron(Item.getMacaron() - 1);             // 보유한 개수에서 하나 감소
-            Partimer.setFeeling(Partimer.getFeeling() + 4 );    // 현재 인내력에서 4 회복
+            User.setFeeling(User.getFeeling() + 4 );    // 현재 인내력에서 4 회복
 
             System.out.println("========================================================================");
             System.out.println(" 마카롱을 사용했습니다.");
             System.out.println(" 인내력이 4 회복되었습니다.");
             System.out.printf(" 보유 마카롱  : %d개 \n", Item.getMacaron());
-            System.out.printf(" 현재 인내력  : %d\n", Partimer.getFeeling());
+            System.out.printf(" 현재 인내력  : %d\n", User.getFeeling());
             System.out.println("========================================================================");
 
             final int REUSE = 1;   // 재사용

@@ -1,14 +1,15 @@
-package com.company.character;
+package com.company.action;
 
-import com.company.beverage.Beverage;
-import com.company.cafe.Cafe;
+import com.company.data.Beverage;
+import com.company.data.Cafe;
+import com.company.data.User;
 
 import java.util.Random;
 import java.util.Scanner;
 
-// Customer 클래스를 상속받아 customer 클래스의 기능 사용가능
+// CustomerAction 클래스를 상속받아 customer 클래스의 기능 사용가능
 // 특별손님 고유 기능을 추가한 클래스이다.
-public class SpecialCustomer extends Customer
+public class SpecialCustomerAction extends CustomerAction
 {
     // 음료 주문 전 조건 확인하는 메소드 checkTakeout() - 상속받음
     // 주문할 음료 객체 생성하는 메소드 orderBeverage() - 상속받음
@@ -56,14 +57,14 @@ public class SpecialCustomer extends Customer
         System.out.println(" 손님 : " + iceOption + beverage.getName()+".");
         System.out.println("       " + whippingCream + takeout );
 
-        Partimer.setFeeling(Partimer.getFeeling()-1);
-        Partimer.setHp(Partimer.getHp()-1);
+        User.setFeeling(User.getFeeling()-1);
+        User.setHp(User.getHp()-1);
         System.out.println("========================================================================");
         System.out.println(" 손님이 반말로 주문하였습니다. ");
-        System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", Partimer.getName());
-        System.out.printf(" %s님의 인내력이 1 소모되었습니다.\n", Partimer.getName());
-        System.out.printf(" 현재 %s님의 체력 : %d\n", Partimer.getName(), Partimer.getHp());
-        System.out.printf(" 현재 %s님의 인내력 : %d\n", Partimer.getName(), Partimer.getFeeling());
+        System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", User.getName());
+        System.out.printf(" %s님의 인내력이 1 소모되었습니다.\n", User.getName());
+        System.out.printf(" 현재 %s님의 체력 : %d\n", User.getName(), User.getHp());
+        System.out.printf(" 현재 %s님의 인내력 : %d\n", User.getName(), User.getFeeling());
         System.out.println("========================================================================");
 
 
@@ -92,11 +93,11 @@ public class SpecialCustomer extends Customer
             }
             else    // 뜨거운 음료인데 머그잔이 없거나 차가운 음료인데 유리잔이 없으면 유저 인내력 1 감소
             {
-                Partimer.setFeeling(Partimer.getFeeling() - 1);
+                User.setFeeling(User.getFeeling() - 1);
                 System.out.println("========================================================================");
                 System.out.println(" 매장에 잔이 모자라 일회용 컵을 사용했습니다. 컴플레인이 들어왔습니다. ");
-                System.out.printf(" %s님의 인내력이 1 소모되었습니다.\n", Partimer.getName());
-                System.out.printf(" 현재 %s님의 인내력 : %d\n", Partimer.getName(), Partimer.getFeeling());
+                System.out.printf(" %s님의 인내력이 1 소모되었습니다.\n", User.getName());
+                System.out.printf(" 현재 %s님의 인내력 : %d\n", User.getName(), User.getFeeling());
                 System.out.println("========================================================================");
             }
         }
@@ -148,28 +149,28 @@ public class SpecialCustomer extends Customer
         System.out.println("         .");
         System.out.println("         .");
         System.out.println();
-        System.out.printf(" %s님은 ICE/HOT 옵션을 물어봤습니다.\n", Partimer.getName());
+        System.out.printf(" %s님은 ICE/HOT 옵션을 물어봤습니다.\n", User.getName());
         System.out.println();
         System.out.println(" 손님 : " + iceOption);
         System.out.println();
-        System.out.printf(" %s님은 휘핑크림을 추가하는지 물어봤습니다.\n", Partimer.getName());
+        System.out.printf(" %s님은 휘핑크림을 추가하는지 물어봤습니다.\n", User.getName());
         System.out.println();
         System.out.println(" 손님 : " + whippingCream);
         System.out.println();
-        System.out.printf(" %s님은 테이크아웃 여부를 물어봤습니다.\n",Partimer.getName());
+        System.out.printf(" %s님은 테이크아웃 여부를 물어봤습니다.\n", User.getName());
         System.out.println();
         System.out.println(" 손님 : " + takeout);
         System.out.println();
 
-        Partimer.setHp(Partimer.getHp()-1);
-        Partimer.setFeeling(Partimer.getFeeling()-2);
+        User.setHp(User.getHp()-1);
+        User.setFeeling(User.getFeeling()-2);
 
         System.out.println("========================================================================");
         System.out.println(" 손님이 짜증을 내며 주문했습니다. ");
-        System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", Partimer.getName());
-        System.out.printf(" %s님의 인내력이 2 소모되었습니다.\n", Partimer.getName());
-        System.out.printf(" 현재 %s님의 체력 : %d\n", Partimer.getName(), Partimer.getHp());
-        System.out.printf(" 현재 %s님의 인내력 : %d\n", Partimer.getName(), Partimer.getFeeling());
+        System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", User.getName());
+        System.out.printf(" %s님의 인내력이 2 소모되었습니다.\n", User.getName());
+        System.out.printf(" 현재 %s님의 체력 : %d\n", User.getName(), User.getHp());
+        System.out.printf(" 현재 %s님의 인내력 : %d\n", User.getName(), User.getFeeling());
         System.out.println("========================================================================");
 
 
@@ -198,11 +199,11 @@ public class SpecialCustomer extends Customer
             }
             else    // 뜨거운 음료인데 머그잔이 없거나 차가운 음료인데 유리잔이 없으면 유저 인내력 1 감소
             {
-                Partimer.setFeeling(Partimer.getFeeling() - 1);
+                User.setFeeling(User.getFeeling() - 1);
                 System.out.println("========================================================================");
                 System.out.println(" 매장에 잔이 모자라 일회용 컵을 사용했습니다. 컴플레인이 들어왔습니다. ");
-                System.out.printf(" %s님의 인내력이 1 소모되었습니다.\n", Partimer.getName());
-                System.out.printf(" 현재 %s님의 인내력 : %d\n", Partimer.getName(), Partimer.getFeeling());
+                System.out.printf(" %s님의 인내력이 1 소모되었습니다.\n", User.getName());
+                System.out.printf(" 현재 %s님의 인내력 : %d\n", User.getName(), User.getFeeling());
                 System.out.println("========================================================================");
             }
         }
@@ -242,23 +243,23 @@ public class SpecialCustomer extends Customer
 
                     if(result == 1) // 내보낸 경우 인내력 1 감소
                     {
-                        Partimer.setFeeling(Partimer.getFeeling()-1);
+                        User.setFeeling(User.getFeeling()-1);
                         System.out.println("========================================================================");
                         System.out.println(" 사이비 손님이 찾아왔습니다. ");
-                        System.out.printf(" %s님의 인내력이 1 소모되었습니다.\n", Partimer.getName());
-                        System.out.printf(" 현재 %s님의 인내력 : %d\n", Partimer.getName(), Partimer.getFeeling());
+                        System.out.printf(" %s님의 인내력이 1 소모되었습니다.\n", User.getName());
+                        System.out.printf(" 현재 %s님의 인내력 : %d\n", User.getName(), User.getFeeling());
                         System.out.println("========================================================================");
                     }
                     else // 얘기를 들어본 경우 체력과 인내력 1 씩 감소
                     {
-                        Partimer.setHp(Partimer.getHp()-1);
-                        Partimer.setFeeling(Partimer.getFeeling()-1);
+                        User.setHp(User.getHp()-1);
+                        User.setFeeling(User.getFeeling()-1);
                         System.out.println("========================================================================");
                         System.out.println(" 이야기를 듣고보니 사이비 손님이었습니다. 시간낭비였습니다 ! ");
-                        System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", Partimer.getName());
-                        System.out.printf(" %s님의 인내력이 1 소모되었습니다.\n", Partimer.getName());
-                        System.out.printf(" 현재 %s님의 체력 : %d\n", Partimer.getName(), Partimer.getHp());
-                        System.out.printf(" 현재 %s님의 인내력 : %d\n", Partimer.getName(), Partimer.getFeeling());
+                        System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", User.getName());
+                        System.out.printf(" %s님의 인내력이 1 소모되었습니다.\n", User.getName());
+                        System.out.printf(" 현재 %s님의 체력 : %d\n", User.getName(), User.getHp());
+                        System.out.printf(" 현재 %s님의 인내력 : %d\n", User.getName(), User.getFeeling());
                         System.out.println("========================================================================");
                     }
 
@@ -336,19 +337,19 @@ public class SpecialCustomer extends Customer
 
                 if (result == randomNum)                 // 선택한 값과 랜덤값이 같다면
                 {
-                    if (Partimer.getFeeling() != Partimer.getSetFeeling()) // 현재 feeling 이 최대 feeling 이 아니라면
+                    if (User.getFeeling() != User.getSetFeeling()) // 현재 feeling 이 최대 feeling 이 아니라면
                     {
-                        Partimer.setFeeling(Partimer.getFeeling() + 1); // 현재 feeling 에서 1 증가
+                        User.setFeeling(User.getFeeling() + 1); // 현재 feeling 에서 1 증가
                         System.out.println("========================================================================");
-                        System.out.printf(" %s님의 인내력이 1 회복되었습니다.\n", Partimer.getName());
-                        System.out.printf(" 현재 %s님의 인내력 : %d\n", Partimer.getName(), Partimer.getFeeling());
+                        System.out.printf(" %s님의 인내력이 1 회복되었습니다.\n", User.getName());
+                        System.out.printf(" 현재 %s님의 인내력 : %d\n", User.getName(), User.getFeeling());
                         System.out.println("========================================================================");
                     }
                     else
                     {
                         System.out.println("========================================================================");
-                        System.out.printf(" %s님의 인내력이 최댓값입니다.\n", Partimer.getName());
-                        System.out.printf(" 현재 %s님의 인내력 : %d\n", Partimer.getName(), Partimer.getFeeling());
+                        System.out.printf(" %s님의 인내력이 최댓값입니다.\n", User.getName());
+                        System.out.printf(" 현재 %s님의 인내력 : %d\n", User.getName(), User.getFeeling());
                         System.out.println("========================================================================");
                     }
 
@@ -356,19 +357,19 @@ public class SpecialCustomer extends Customer
 
                 } else    // 선택한 값과 랜덤값이 다르다면
                 {
-                    if (Partimer.getHp() != Partimer.getSetHp()) // 현재 hp 가 최대 hp 가 아니라면
+                    if (User.getHp() != User.getSetHp()) // 현재 hp 가 최대 hp 가 아니라면
                     {
-                        Partimer.setHp(Partimer.getHp() + 1);         // 현재 hp 에서 1 증가
+                        User.setHp(User.getHp() + 1);         // 현재 hp 에서 1 증가
                         System.out.println("========================================================================");
-                        System.out.printf(" %s님의 체력이 1 회복되었습니다.\n", Partimer.getName());
-                        System.out.printf(" 현재 %s님의 체력 : %d\n", Partimer.getName(), Partimer.getHp());
+                        System.out.printf(" %s님의 체력이 1 회복되었습니다.\n", User.getName());
+                        System.out.printf(" 현재 %s님의 체력 : %d\n", User.getName(), User.getHp());
                         System.out.println("========================================================================");
                     }
                     else
                     {
                         System.out.println("========================================================================");
-                        System.out.printf(" %s님의 체력이 최댓값입니다.\n", Partimer.getName());
-                        System.out.printf(" 현재 %s님의 체력 : %d\n", Partimer.getName(), Partimer.getHp());
+                        System.out.printf(" %s님의 체력이 최댓값입니다.\n", User.getName());
+                        System.out.printf(" 현재 %s님의 체력 : %d\n", User.getName(), User.getHp());
                         System.out.println("========================================================================");
                     }
 

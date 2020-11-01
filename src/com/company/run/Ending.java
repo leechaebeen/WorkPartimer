@@ -1,9 +1,8 @@
 package com.company.run;
 
-import com.company.cafe.Cafe;
-import com.company.cafe.CafeAction;
-import com.company.cafe.Item;
-import com.company.character.Partimer;
+import com.company.data.Cafe;
+import com.company.data.Item;
+import com.company.data.User;
 
 import java.util.Scanner;
 
@@ -11,7 +10,7 @@ public class Ending
 {
     private static int endingTypeNum = 6;
     // static 이어야하는 이유 :
-    // Partimer 클래스의 모은 엔딩 유형을 저장하는 배열이 static 변수라서
+    // User 클래스의 모은 엔딩 유형을 저장하는 배열이 static 변수라서
     // 배열 초기화할 때 길이를 나타내는 변수도 static 이어야한다.
     // → private static int[] endings = new int[Ending.getEndingTypeNum()-1];
 
@@ -25,7 +24,7 @@ public class Ending
     // 1. 과로 엔딩 : 유저의 체력이 0이 되면 (호출 완료)
     public void fallDownEnding()
     {
-        int[] endings = Partimer.getEndings();   // 공개된 엔딩 유형 저장할 배열 호출해서 변수에 담기
+        int[] endings = User.getEndings();   // 공개된 엔딩 유형 저장할 배열 호출해서 변수에 담기
         boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
         // 배열에 중복되는 값 있는지 검사
@@ -73,7 +72,7 @@ public class Ending
         System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
-        System.out.printf("\t\t\t\t %s님은 고된 노동을 견디지 못하고 쓰러졌습니다.\n",Partimer.getName());
+        System.out.printf("\t\t\t\t %s님은 고된 노동을 견디지 못하고 쓰러졌습니다.\n", User.getName());
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println();
         finalEnding();
@@ -84,7 +83,7 @@ public class Ending
     public void toQuitEnding()
     {
         // 엔딩 저장
-        int[] endings = Partimer.getEndings();
+        int[] endings = User.getEndings();
         boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
         // 배열에 중복되는 값 있는지 검사
@@ -126,7 +125,7 @@ public class Ending
         System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
-        System.out.printf("\t\t %s님은 스트레스를 견디지 못하고 자발적으로 카페를 떠났습니다.\n", Partimer.getName());
+        System.out.printf("\t\t %s님은 스트레스를 견디지 못하고 자발적으로 카페를 떠났습니다.\n", User.getName());
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println();
         finalEnding();
@@ -137,7 +136,7 @@ public class Ending
     public void scoutEnding()
     {
         // 엔딩 저장
-        int[] endings = Partimer.getEndings();
+        int[] endings = User.getEndings();
         boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
         // 배열에 중복되는 값 있는지 검사
@@ -175,7 +174,7 @@ public class Ending
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
         System.out.println("\t\t 종종 방문하던 특이한 손님의 일부는 몰래 방문한 인근 카페 사장이었습니다... ");
-        System.out.printf(" \t\t %s님을 시험하고 눈여겨본 사장은 %s님을 스카웃했습니다. \n", Partimer.getName());
+        System.out.printf(" \t\t %s님을 시험하고 눈여겨본 사장은 %s님을 스카웃했습니다. \n", User.getName());
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println();
         finalEnding();
@@ -189,7 +188,7 @@ public class Ending
     public void bossEnding()
     {
         // 엔딩 저장
-        int[] endings = Partimer.getEndings();
+        int[] endings = User.getEndings();
         boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
         // 배열에 중복되는 값 있는지 검사
@@ -226,8 +225,8 @@ public class Ending
         System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
-        System.out.printf("\t\t 코인을 아끼며 열심히 일한 %s님은 모은 코인으로 카페를 차렸습니다.\n", Partimer.getName());
-        System.out.printf("\t\t %s님은 더이상 알바생이 아닙니다.\n", Partimer.getName());
+        System.out.printf("\t\t 코인을 아끼며 열심히 일한 %s님은 모은 코인으로 카페를 차렸습니다.\n", User.getName());
+        System.out.printf("\t\t %s님은 더이상 알바생이 아닙니다.\n", User.getName());
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println();
         finalEnding();
@@ -238,7 +237,7 @@ public class Ending
     public void getFireEnding()
     {
         // 엔딩 저장
-        int[] endings = Partimer.getEndings();
+        int[] endings = User.getEndings();
         boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
         // 배열에 중복되는 값 있는지 검사
@@ -275,8 +274,8 @@ public class Ending
         System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
-        System.out.printf("\t\t\t\t %s님은 제조 실수가 잦아서 해고되었습니다.\n", Partimer.getName());
-        System.out.printf("\t\t\t\t 괜찮습니다. 카페는 많으니까요... 힘내세요! \n", Partimer.getName());
+        System.out.printf("\t\t\t\t %s님은 제조 실수가 잦아서 해고되었습니다.\n", User.getName());
+        System.out.printf("\t\t\t\t 괜찮습니다. 카페는 많으니까요... 힘내세요! \n", User.getName());
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println();
         finalEnding();
@@ -288,7 +287,7 @@ public class Ending
     public void partimerEnding()
     {
         // 엔딩 저장
-        int[] endings = Partimer.getEndings();
+        int[] endings = User.getEndings();
         boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
         // 배열에 중복되는 값 있는지 검사
@@ -326,7 +325,7 @@ public class Ending
         System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
-        System.out.printf("\t\t %s님은 카페 아르바이트를 능숙하게 해내고 있습니다.\n", Partimer.getName());
+        System.out.printf("\t\t %s님은 카페 아르바이트를 능숙하게 해내고 있습니다.\n", User.getName());
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println();
         finalEnding();
@@ -419,15 +418,15 @@ public class Ending
     public void reset()
     {
         // 유저 관련
-        Partimer.setSetHp(5);
-        Partimer.setSetFeeling(5);
-        Partimer.setHp(5);
-        Partimer.setFeeling(5);
-        Partimer.setProperty(0);
-        Partimer.setSkillLevel(1);
-        Partimer.setWorkingDays(0);
-        Partimer.setSuccessNum(0);
-        Partimer.setFailNum(0);
+        User.setSetHp(5);
+        User.setSetFeeling(5);
+        User.setHp(5);
+        User.setFeeling(5);
+        User.setProperty(0);
+        User.setSkillLevel(1);
+        User.setWorkingDays(0);
+        User.setSuccessNum(0);
+        User.setFailNum(0);
 
         // 아이템 관련
         Item.setCake(0);
