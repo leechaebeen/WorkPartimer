@@ -8,31 +8,40 @@ import java.util.Scanner;
 
 public class Ending
 {
-    private static int endingTypeNum = 6;
+    private final static int ENDING_TYPE_NUM = 6;
     // static 이어야하는 이유 :
     // User 클래스의 모은 엔딩 유형을 저장하는 배열이 static 변수라서
     // 배열 초기화할 때 길이를 나타내는 변수도 static 이어야한다.
     // → private static int[] endings = new int[Ending.getEndingTypeNum()-1];
 
-    private final int FALL_DOWN_ENDING = 1; // 과로 엔딩
-    private final int QUIT_ENDING = 2;      // 퇴사 엔딩
-    private final int SCOUT_ENDING = 3;     // 이직 엔딩
-    private final int BOSS_ENDING = 4;      // 사장 엔딩
-    private final int GET_FIRE_ENDING = 5;  // 해고 엔딩
-    private final int PARTIMER_ENDING = 6;  // 알바 엔딩
+
+    /*
+        final int FALL_DOWN_ENDING = 1; // 과로 엔딩
+        final int QUIT_ENDING = 2;      // 퇴사 엔딩
+        final int SCOUT_ENDING = 3;     // 이직 엔딩
+        final int BOSS_ENDING = 4;      // 사장 엔딩
+        final int GET_FIRE_ENDING = 5;  // 해고 엔딩
+        final int PARTIMER_ENDING = 6;  // 알바 엔딩
+    */
 
     // 1. 과로 엔딩 : 유저의 체력이 0이 되면 (호출 완료)
     public void fallDownEnding()
     {
-        int[] endings = User.getEndings();   // 공개된 엔딩 유형 저장할 배열 호출해서 변수에 담기
         boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
-        // 배열에 중복되는 값 있는지 검사
-        for (int i = 0; i < endings.length; i++) // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
+        // 공개된 엔딩 유형을 저장할 배열을 호출해서 변수에 담는다.
+        int[] endings = User.getEndings();
+
+        // 과로 엔딩
+        int FALL_DOWN_ENDING = 1;
+
+        // 배열에 중복되는 엔딩 유형 있는지 비교
+        for (int ending : endings)             // 공개된 엔딩 유형 저장할 배열 호출해서 변수에 담는다.
         {
-            if(endings[i] == FALL_DOWN_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
+            if (ending == FALL_DOWN_ENDING)   // 엔딩 유형과 중복되는 값이 있는지 비교한다.
             {
-                flag = false;                    // flag 에 false 대입
+                flag = false;                    // flag 에 false 대입하고
+                break;                           // 반복문 빠져나온다.
             }
         }
 
@@ -82,14 +91,18 @@ public class Ending
     // 2. 퇴사엔딩 : 유저의 인내력이 0이 되면 (호출 완료)
     public void toQuitEnding()
     {
-        // 엔딩 저장
-        int[] endings = User.getEndings();
         boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
-        // 배열에 중복되는 값 있는지 검사
-        for (int i = 0; i < endings.length; i++) // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
+        // 공개된 엔딩 유형을 저장할 배열을 호출해서 변수에 담는다.
+        int[] endings = User.getEndings();
+
+        // 퇴사 엔딩
+        int QUIT_ENDING = 2;
+
+        // 배열에 중복되는 엔딩 유형 있는지 비교
+        for (int ending : endings)       // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
         {
-            if(endings[i] == QUIT_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
+            if (ending == QUIT_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
             {
                 flag = false;                    // flag 에 false 대입
             }
@@ -132,17 +145,20 @@ public class Ending
 
     }
     // 3. 숙련도 4 이상, secret 손님 방문 4회 이상 : 이직 엔딩 (호출 완료)
-    //    3주간 매번 숙련도를 높였을 때 최대 숙련도 : 4
     public void scoutEnding()
     {
-        // 엔딩 저장
-        int[] endings = User.getEndings();
-        boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
+        boolean flag = true;               // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
-        // 배열에 중복되는 값 있는지 검사
-        for (int i = 0; i < endings.length; i++) // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
+        // 공개된 엔딩 유형을 저장할 배열을 호출해서 변수에 담는다.
+        int[] endings = User.getEndings();
+
+        // 이직 엔딩
+        int SCOUT_ENDING = 3;
+
+        // 배열에 중복되는 엔딩 유형 있는지 비교
+        for (int ending : endings)        // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
         {
-            if(endings[i] == SCOUT_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
+            if (ending == SCOUT_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
             {
                 flag = false;                    // flag 에 false 대입
             }
@@ -174,7 +190,7 @@ public class Ending
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
         System.out.println("\t\t 종종 방문하던 특이한 손님의 일부는 몰래 방문한 인근 카페 사장이었습니다... ");
-        System.out.printf(" \t\t %s님을 시험하고 눈여겨본 사장은 %s님을 스카웃했습니다. \n", User.getName());
+        System.out.printf(" \t\t %s님을 시험하고 눈여겨본 사장은 %s님을 스카웃했습니다. \n", User.getName(), User.getName());
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println();
         finalEnding();
@@ -187,14 +203,18 @@ public class Ending
     //    숙련도 매주 올렸을 때 3주간 등장할 수 있는 최대 손님 수 : 30명
     public void bossEnding()
     {
-        // 엔딩 저장
-        int[] endings = User.getEndings();
         boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
-        // 배열에 중복되는 값 있는지 검사
-        for (int i = 0; i < endings.length; i++) // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
+        // 공개된 엔딩 유형을 저장할 배열을 호출해서 변수에 담는다.
+        int[] endings = User.getEndings();
+
+        // 사장 엔딩
+        int BOSS_ENDING = 4;
+
+        // 배열에 중복되는 엔딩 유형 있는지 비교
+        for (int ending : endings)      // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
         {
-            if(endings[i] == BOSS_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
+            if (ending == BOSS_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
             {
                 flag = false;                    // flag 에 false 대입
             }
@@ -240,10 +260,13 @@ public class Ending
         int[] endings = User.getEndings();
         boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
-        // 배열에 중복되는 값 있는지 검사
-        for (int i = 0; i < endings.length; i++) // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
+        // 해고 엔딩
+        int GET_FIRE_ENDING = 5;
+
+        // 배열에 중복되는 엔딩 유형 있는지 비교
+        for (int ending : endings)           // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
         {
-            if(endings[i] == GET_FIRE_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
+            if (ending == GET_FIRE_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
             {
                 flag = false;                    // flag 에 false 대입
             }
@@ -275,7 +298,7 @@ public class Ending
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
         System.out.printf("\t\t\t\t %s님은 제조 실수가 잦아서 해고되었습니다.\n", User.getName());
-        System.out.printf("\t\t\t\t 괜찮습니다. 카페는 많으니까요... 힘내세요! \n", User.getName());
+        System.out.println("\t\t\t\t 괜찮습니다. 카페는 많으니까요... 힘내세요! ");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println();
         finalEnding();
@@ -288,14 +311,17 @@ public class Ending
     {
         // 엔딩 저장
         int[] endings = User.getEndings();
-        boolean flag = true;                    // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
+        boolean flag = true;                 // 배열 안에 중복되는 값이 있는지 구분하기 위한 변수
 
-        // 배열에 중복되는 값 있는지 검사
-        for (int i = 0; i < endings.length; i++) // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
+        // 알바 엔딩
+        int PARTIMER_ENDING = 6;
+
+        // 배열에 중복되는 엔딩 유형 있는지 비교
+        for (int ending : endings)           // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
         {
-            if(endings[i] == PARTIMER_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
+            if (ending == PARTIMER_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
             {
-                flag = false;                    // flag 에 false 대입
+                flag = false;                // flag 에 false 대입
             }
         }
 
@@ -417,7 +443,7 @@ public class Ending
     // 이전 플레이의 모든 값 리셋
     public void reset()
     {
-        // 유저 관련
+        // 유저 관련 값 리셋
         User.setSetHp(5);
         User.setSetFeeling(5);
         User.setHp(5);
@@ -428,27 +454,24 @@ public class Ending
         User.setSuccessNum(0);
         User.setFailNum(0);
 
-        // 아이템 관련
+        // 아이템 관련 값 리셋
         Item.setCake(0);
         Item.setSandwich(0);
         Item.setChoco(0);
         Item.setMacaron(0);
 
-        // 카페 관련
+        // 카페 관련 값 리셋
         Cafe.setTotalCustomerNum(0);
-        Cafe.setSetChair(2);
+        Cafe.setSetChair(1);
         Cafe.setSetCup(1);
         Cafe.setSetMug(1);
 
     }
 
+    // 외부에서 속성에 접근할 수 있도록 getter 생성
     public static int getEndingTypeNum()
     {
-        return endingTypeNum;
+        return ENDING_TYPE_NUM;
     }
 
-    public static void setEndingTypeNum(int endingTypeNum)
-    {
-        Ending.endingTypeNum = endingTypeNum;
-    }
 }

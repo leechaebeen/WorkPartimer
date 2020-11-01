@@ -19,11 +19,10 @@ public class Run<endings>
     // 1.초기화면 실행하는 메소드
     public void initialRun()
     {
-        // 반환값을 담을 변수 선언
-        // 초기화해야하는 이유  : 지역변수는 자동으로 초기화가 안된다. 클래스 변수와 인스턴스 변수는 자료형에 맞게 기본값으로 초기화된다.
-        // → 예측할 수 없는 값을 담는걸 방지하기 위해
         String resultStr;
         int result = 0;
+        // 초기화해야하는 이유  : Primitive type 인 지역변수는 자동으로 초기화가 안된다.
+        // → 예측할 수 없는 값을 담는걸 방지하기 위해 초기화 해줘야 한다.
 
         // 스캐너 객체 생성
         Scanner sc = new Scanner(System.in);
