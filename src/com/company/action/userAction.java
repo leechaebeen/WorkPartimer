@@ -170,8 +170,8 @@ public class userAction
                         System.out.println(" 오답입니다. ");
 
                         User.setFailNum(User.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
-                        User.setHp(User.getHp() - 1 );            // 유저 체력 1 감소
-                        return false;
+                        User.setHp(User.getHp() - 1 );          // 유저 체력 1 감소
+                        return false;                           // false 반환, 메소드 종료
                     }
                 }
                 else // 우유가 들어가지 않았다면
@@ -181,8 +181,8 @@ public class userAction
                     {
                         System.out.println(" 오답입니다. ");
                         User.setFailNum(User.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
-                        User.setHp(User.getHp() - 1 );            // 유저 체력 1 감소
-                        return false;
+                        User.setHp(User.getHp() - 1 );          // 유저 체력 1 감소
+                        return false;                           // false 반환, 메소드 종료
                     }
                     else
                     {
@@ -239,9 +239,9 @@ public class userAction
                     {
                         System.out.println(" 오답입니다. ");
 
-                        User.setFailNum(User.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
+                        User.setFailNum(User.getFailNum() + 1);   // 음료 제조 실패 횟수 1 증가
                         User.setHp(User.getHp() - 1 );            // 유저 체력 1 감소
-                        return false;
+                        return false;                             // false 반환, 메소드 종료
                     }
                 } else // HOT 이라면
                 {
@@ -249,9 +249,9 @@ public class userAction
                     if (quizResult == YES)
                     {
                         System.out.println(" 오답입니다. ");
-                        User.setFailNum(User.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
+                        User.setFailNum(User.getFailNum() + 1);   // 음료 제조 실패 횟수 1 증가
                         User.setHp(User.getHp() - 1 );            // 유저 체력 1 감소
-                        return false;
+                        return false;                             // false 반환, 메소드 종료
 
                     } else
                     {
@@ -290,10 +290,10 @@ public class userAction
                 {
                     // 입력받은 값의 공백을 제거하고
                     // 자료형 변경한 뒤(String → int) int형에 담는다.
-                    // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
-                    // int형으로 변경되지 않는다면 NumberFormatException 발생
                     quizResult = Integer.parseInt(resultStr.replace(" ",""));
                     check = false;
+                    // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
+                    // int형으로 변경되지 않는다면 NumberFormatException 발생
 
                     if (whippingCream == 1) // 휘핑크림 올라간다면
                     {
@@ -302,15 +302,15 @@ public class userAction
                         {
                             System.out.println(" 정답입니다. ");
                             User.setSuccessNum(User.getSuccessNum() + 1 ); // 음료 제조 성공 횟수 1 증가
-                            result = true;  // true 값 반환
+                            result = true;  // true 값 반환하도록 변수에 담는다
 
                         } else
                         {
                             System.out.println(" 오답입니다. ");
 
                             User.setFailNum(User.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
-                            User.setHp(User.getHp() - 1 );            // 유저 체력 1 감소
-                            return false;
+                            User.setHp(User.getHp() - 1 );          // 유저 체력 1 감소
+                            result = false;                         // false 반환, 메소드 종료
                         }
                     }
                     else // 휘핑크림 올라가지 않는다면
@@ -321,7 +321,7 @@ public class userAction
                             System.out.println(" 오답입니다. ");
                             User.setFailNum(User.getFailNum() + 1);   // 음료 제조 실패 횟수 1 증가
                             User.setHp(User.getHp() - 1 );            // 유저 체력 1 감소
-                            return false;
+                            return false;                             // false 반환, 메소드 종료
 
                         } else
                         {
@@ -343,7 +343,6 @@ public class userAction
                     System.out.println(" 올바른 값을 입력해주세요.");
                     check = true;
                 }
-
             }
         }
 

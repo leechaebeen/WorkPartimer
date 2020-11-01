@@ -11,45 +11,42 @@ import java.util.Scanner;
 // 특별손님 고유 기능을 추가한 클래스이다.
 public class SpecialCustomerAction extends CustomerAction
 {
-    // 음료 주문 전 조건 확인하는 메소드 checkTakeout() - 상속받음
-    // 주문할 음료 객체 생성하는 메소드 orderBeverage() - 상속받음
-
     // 음료 주문하는 메소드
-    // 유형1 반말하고 매장에서 먹고가는거 말 안하는 손님 : 유저의 체력과 인내력이 -1씩 감소한다.
+    // 유형1 반말하는 손님 : 유저의 체력과 인내력이 -1씩 감소한다.
     public void orderTalkDown(Beverage beverage)
     {
-        String iceOption;
-        String whippingCream;
-        String takeout;
+        String iceOption;       // ICE/HOT 선택하는 손님대사 담는 변수
+        String whippingCream;   // 휘핑크림 여부 선택하는 손님대사 담는 변수
+        String takeout;         // 테이크아웃 여부 선택하는 손님대사 담는 변수
 
         // ICE / HOT 선택값에 따라 대사 분기
-        if(beverage.getIceOption()==0)  // 0이면 HOT
+        if(beverage.getIceOption()==0)  // HOT 선택했을 때
         {
             iceOption = " 뜨거운걸로.";
         }
-        else    // 1이면 ICE
+        else                            // ICE 선택했을 때
         {
             iceOption = " 차가운걸로. ";
         }
 
         // 휘핑크림 선택값에 따라 대사 분기
-        if(beverage.getWhippingCream()==0) // 0 이면 휘핑크림 X
+        if(beverage.getWhippingCream()==0) // 휘핑크림 안올릴 때
         {
             whippingCream = "";
         }
-        else // 1 이면 휘핑크림 O
+        else                               // 휘핑크림 올릴 때
         {
             whippingCream = " 휘핑크림.";
         }
 
         // 테이크아웃 선택 값에 따라 대사 분기
-        boolean checkTakeout = checkTakeout();
+        boolean checkTakeout = checkTakeout();  // 테이크아웃 여부 반환하는 메소드 호출(테이크아웃하면 true 반환)
 
-        if(checkTakeout)  // checkTakeout() 는 테이크아웃하면 true 반환
+        if(checkTakeout)                        // 테이크아웃한다면
         {
             takeout = " 테이크아웃.";
         }
-        else
+        else                                    // 테이크아웃 안한다면
         {
             takeout = "";
         }
@@ -57,8 +54,9 @@ public class SpecialCustomerAction extends CustomerAction
         System.out.println(" 손님 : " + iceOption + beverage.getName()+".");
         System.out.println("       " + whippingCream + takeout );
 
-        User.setFeeling(User.getFeeling()-1);
-        User.setHp(User.getHp()-1);
+        User.setHp(User.getHp()-1);             // 체력 1 감소
+        User.setFeeling(User.getFeeling()-1);   // 인내력 1 감소
+
         System.out.println("========================================================================");
         System.out.println(" 손님이 반말로 주문하였습니다. ");
         System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", User.getName());
@@ -68,7 +66,7 @@ public class SpecialCustomerAction extends CustomerAction
         System.out.println("========================================================================");
 
 
-        if(!checkTakeout) // 매장에서 먹고 간다면
+        if(!checkTakeout) // 테이크아웃 안한다면
         {
             // 매장에 자리가 있는지 확인
             if(Cafe.getChair()==0)    // 매장에 자리가 없으면 손님이 나간다.
@@ -77,7 +75,7 @@ public class SpecialCustomerAction extends CustomerAction
                 System.out.println(" 매장에 자리가 없어서 손님이 나갔습니다. ");
                 System.out.println("========================================================================");
             }
-            else
+            else                    // 자리가 있다면
             {
                 Cafe.setChair(Cafe.getChair()-1);// 매장 자리를 하나 줄인다.
             }
@@ -107,38 +105,39 @@ public class SpecialCustomerAction extends CustomerAction
     // 유형2 시비걸기 : 유저의 체력이 1, 인내력이 2 감소한다.
     public void orderFight(Beverage beverage)
     {
-        String iceOption;
-        String whippingCream;
-        String takeout;
+        String iceOption;       // ICE/HOT 선택하는 손님대사 담는 변수
+        String whippingCream;   // 휘핑크림 여부 선택하는 손님대사 담는 변수
+        String takeout;         // 테이크아웃 여부 선택하는 손님대사 담는 변수
+
 
         // ICE / HOT 선택값에 따라 대사 분기
-        if(beverage.getIceOption()==0)  // 0이면 HOT
+        if(beverage.getIceOption()==0)      // HOT 이라면
         {
             iceOption = " 이 날씨에 차가운걸 먹겠어요?";
         }
-        else    // 1이면 ICE
+        else                                // ICE 라면
         {
             iceOption = " 이 날씨에 뜨거운걸 먹겠어요? ";
         }
 
         // 휘핑 선택값에 따라 대사 분기
-        if(beverage.getWhippingCream()==0) // 0 이면 휘핑크림 X
+        if(beverage.getWhippingCream()==0) // 휘핑크림 안올린다면
         {
             whippingCream = "누가 여기에 휘핑을 올려요?";
         }
-        else // 1 이면 휘핑크림 O
+        else                                // 휘핑크림 올린다면
         {
             whippingCream = "당연히 올리죠.";
         }
 
         // 테이크아웃 선택 값에 따라 대사 분기
-        boolean checkTakeout = checkTakeout();
+        boolean checkTakeout = checkTakeout();  // checkTakeout() 는 테이크아웃하면 true 반환
 
-        if(checkTakeout)  // checkTakeout() 는 테이크아웃하면 true 반환
+        if(checkTakeout)                        // 테이크아웃 한다면
         {
             takeout = " 하... 테이크아웃이요. 그만 좀 물어보세요";
         }
-        else    // false 인 경우
+        else                                    // 테이크아웃 안한다면
         {
             takeout = "하...먹고 갈거에요. 그만 물어보세요.";
         }
@@ -162,8 +161,8 @@ public class SpecialCustomerAction extends CustomerAction
         System.out.println(" 손님 : " + takeout);
         System.out.println();
 
-        User.setHp(User.getHp()-1);
-        User.setFeeling(User.getFeeling()-2);
+        User.setHp(User.getHp()-1);             // 체력 1 감소
+        User.setFeeling(User.getFeeling()-2);   // 인내력 2 감소
 
         System.out.println("========================================================================");
         System.out.println(" 손님이 짜증을 내며 주문했습니다. ");
@@ -174,7 +173,7 @@ public class SpecialCustomerAction extends CustomerAction
         System.out.println("========================================================================");
 
 
-        if(!checkTakeout) // 매장에서 먹고 간다면
+        if(!checkTakeout)             // 테이크아웃하지 않는다면
         {
             // 매장에 자리가 있는지 확인
             if(Cafe.getChair()==0)    // 매장에 자리가 없으면 손님이 나간다.
@@ -183,7 +182,7 @@ public class SpecialCustomerAction extends CustomerAction
                 System.out.println(" 매장에 자리가 없어서 손님이 나갔습니다. ");
                 System.out.println("========================================================================");
             }
-            else
+            else                     // 매장에 자리가 있다면 
             {
                 Cafe.setChair(Cafe.getChair()-1);// 매장 자리를 하나 줄인다.
             }
@@ -210,12 +209,12 @@ public class SpecialCustomerAction extends CustomerAction
 
     }
     
-    // 유형3 도를 믿으시나요 : 내보낸 경우 feeling -1 , 얘기 듣는 경우 hp,feeling 1씩 감소
+    // 유형3 도를 믿으시나요 : 내보낸 경우 체력 1 감소, 얘기 듣는 경우 체력과 인내력 1씩 감소
     public void orderFalseReligion()
     {
-        boolean check = true;
-        String resultStr;
-        int result = 0 ;
+        boolean check = true;       // 반복여부 담기 위한 변수
+        String resultStr;           // 사용자가 입력한 값을 담기 위한 변수
+        int result = 0 ;            // 사용자가 입력한 값을 형변환해서 담기 위한 변수
 
         System.out.println(" 손님 : 얼굴에 복이 많으세요. ");
         System.out.println("              :  ");
@@ -228,8 +227,8 @@ public class SpecialCustomerAction extends CustomerAction
                 System.out.println(" 1.내보낸다.  2.얘기를 들어본다 ");
                 System.out.println("------------------------------------------------------------------------");
                 System.out.print(" 선택 : ");
-                Scanner sc = new Scanner(System.in);
-                resultStr = sc.nextLine();
+                Scanner sc = new Scanner(System.in);    // 스캐너 객체 생성
+                resultStr = sc.nextLine();              // 사용자에게 값 입력받기
 
                 // 입력받은 값이 숫자인지 확인
                 try
@@ -276,10 +275,7 @@ public class SpecialCustomerAction extends CustomerAction
                     System.out.println(" 올바른 값을 입력해주세요.");
                     check = true;
                 }
-
         }
-
-
     }
 
     // 유형4 잘못찾아옴
@@ -337,45 +333,41 @@ public class SpecialCustomerAction extends CustomerAction
 
                 if (result == randomNum)                 // 선택한 값과 랜덤값이 같다면
                 {
-                    if (User.getFeeling() != User.getSetFeeling()) // 현재 feeling 이 최대 feeling 이 아니라면
+                    if (User.getFeeling() != User.getSetFeeling()) // 현재 인내력이 세팅된 인내력(최대 인내력)이 아니라면
                     {
-                        User.setFeeling(User.getFeeling() + 1); // 현재 feeling 에서 1 증가
+                        User.setFeeling(User.getFeeling() + 1); // 현재 인내력 에서 1 증가
                         System.out.println("========================================================================");
                         System.out.printf(" %s님의 인내력이 1 회복되었습니다.\n", User.getName());
-                        System.out.printf(" 현재 %s님의 인내력 : %d\n", User.getName(), User.getFeeling());
-                        System.out.println("========================================================================");
                     }
                     else
                     {
                         System.out.println("========================================================================");
                         System.out.printf(" %s님의 인내력이 최댓값입니다.\n", User.getName());
-                        System.out.printf(" 현재 %s님의 인내력 : %d\n", User.getName(), User.getFeeling());
-                        System.out.println("========================================================================");
                     }
-
-                    System.out.println();
+                    System.out.printf(" 현재 %s님의 인내력 : %d\n", User.getName(), User.getFeeling());
+                    System.out.println("========================================================================");
 
                 } else    // 선택한 값과 랜덤값이 다르다면
                 {
-                    if (User.getHp() != User.getSetHp()) // 현재 hp 가 최대 hp 가 아니라면
+                    if (User.getHp() != User.getSetHp()) // 현재 체력이 세팅된 체력(최대 체력)이 아니라면
                     {
-                        User.setHp(User.getHp() + 1);         // 현재 hp 에서 1 증가
+                        User.setHp(User.getHp() + 1);    // 현재 체력에서 1 증가
                         System.out.println("========================================================================");
                         System.out.printf(" %s님의 체력이 1 회복되었습니다.\n", User.getName());
-                        System.out.printf(" 현재 %s님의 체력 : %d\n", User.getName(), User.getHp());
-                        System.out.println("========================================================================");
                     }
                     else
                     {
                         System.out.println("========================================================================");
                         System.out.printf(" %s님의 체력이 최댓값입니다.\n", User.getName());
-                        System.out.printf(" 현재 %s님의 체력 : %d\n", User.getName(), User.getHp());
-                        System.out.println("========================================================================");
                     }
+                    System.out.printf(" 현재 %s님의 체력 : %d\n", User.getName(), User.getHp());
+                    System.out.println("========================================================================");
 
-                    System.out.println();
                 }
-            } catch (NumberFormatException e) // NumberFormatException 발생한다면
+                System.out.println();
+
+            }
+            catch (NumberFormatException e) // NumberFormatException 발생한다면
             {
                 check = true;   // check 에 true 담아서 다시 반복
                 // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
@@ -396,7 +388,5 @@ public class SpecialCustomerAction extends CustomerAction
         System.out.println();
 
     }// end orderPresent()
-
-
 
 }
