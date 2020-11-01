@@ -7,7 +7,6 @@ import com.company.run.Ending;
 import java.util.Random;
 
 // 게임에 등장하는 손님의 가장 기본이 되는 기능을 담은 클래스.
-// 이 클래스를 상속받는 클래스가 존재한다.
 public class CustomerAction
 {
     // 테이크아웃 여부 정하는 메소드
@@ -38,10 +37,11 @@ public class CustomerAction
         // 휘핑크림 유무 랜덤 선택
         int whippingCream = rd.nextInt(2);  // 0 또는 1의 랜덤값을 변수 whippingCream 에 저장한다.
 
-        // 음료 주문
-        int beverageSel = rd.nextInt(5)+1;              // 1 ~ 5 의 랜덤값(음료 메뉴 번호)을 변수 beverageSel 에 저장한다.
+        // 음료 선택
+        int beverageSel = rd.nextInt(5)+1;               // 1 ~ 5 의 랜덤값(음료 메뉴 번호)을 변수 beverageSel 에 저장한다.
+
         BeverageAction beverageAction = new BeverageAction();  // 음료 객체 생성하는 메소드 가진 객체 생성
-        Beverage beverage = beverageAction.createBeverage(beverageSel, iceOption, whippingCream); // 음료 객체 생성하는 메소드 호출
+        Beverage beverage = beverageAction.createBeverage(beverageSel, iceOption, whippingCream); // 선택한 값들을 매개변수로 넘기며 음료 객체 생성하는 메소드 호출
 
         return beverage;  // 음료 객체 반환
 
@@ -88,7 +88,7 @@ public class CustomerAction
         System.out.println(" 손님 : " + iceOption + beverage.getName() + " 주세요.");
         System.out.println("       " + whippingCream + takeout );
 
-        if(!checkTakeout)                       // 테이크아웃 안한다면
+        if(!checkTakeout)              // 테이크아웃 안한다면
         {
             // 매장에 자리가 있는지 확인
             if(Cafe.getChair()==0)    // 매장에 자리가 없으면 손님이 나간다.
@@ -97,7 +97,7 @@ public class CustomerAction
                 System.out.println(" 매장에 자리가 없어서 손님이 나갔습니다. ");
                 System.out.println("========================================================================");
             }
-            else                    // 매장에 자리가 있으면
+            else                                // 매장에 자리가 있으면
             {
                 Cafe.setChair(Cafe.getChair()-1);// 매장 자리를 하나 줄인다.
             }
@@ -121,7 +121,7 @@ public class CustomerAction
                 System.out.println("========================================================================");
 
                 // 유저 상태 체크
-                if(User.getFeeling()==0)        // 인내력이 이 0이 된다면
+                if(User.getFeeling()==0)            // 인내력이 이 0이 된다면
                 {
                     Ending ending = new Ending();   // 엔딩 객체 생성
                     ending.toQuitEnding();          // 자발적으로 관두는 엔딩 메소드 호출

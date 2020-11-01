@@ -352,9 +352,6 @@ public class userAction
     }// end makeBeverageQuiz()
 
 
-    // 음료 만드는 메소드 3 :
-
-
     // 음료 제조 결과 출력하는 메소드
     public void makeBeverageResult(boolean result)
     {

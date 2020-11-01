@@ -7,7 +7,7 @@ import com.company.data.User;
 import java.util.Random;
 import java.util.Scanner;
 
-// CustomerAction 클래스를 상속받아 customer 클래스의 기능 사용가능
+// CustomerAction <- 상속 -  SpecialCustomerAction
 // 특별손님 고유 기능을 추가한 클래스이다.
 public class SpecialCustomerAction extends CustomerAction
 {

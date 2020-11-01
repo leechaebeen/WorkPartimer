@@ -1494,10 +1494,10 @@ public class Run<endings>
         System.out.println("=========================    보유한 소비 아이템    =========================");
         System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
         System.out.println();
-        System.out.println(" 케이크 : 체력을 2 회복합니다.");
+        System.out.println(" 케이크   : 체력을 2 회복합니다.");
         System.out.println(" 샌드위치 : 체력을 4 회복합니다.");
-        System.out.println(" 초콜릿 : 인내력을 2 회복합니다.");
-        System.out.println(" 마카롱 : 인내력을 4 회복합니다. ");
+        System.out.println(" 초콜릿   : 인내력을 2 회복합니다.");
+        System.out.println(" 마카롱    : 인내력을 4 회복합니다. ");
         System.out.println();
         System.out.println("------------------------------------------------------------------------");
         System.out.println();
@@ -1858,8 +1858,6 @@ public class Run<endings>
             useItem(); // 이전으로
         }
     }
-
-
 
 }// end class
 

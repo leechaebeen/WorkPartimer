@@ -5,9 +5,8 @@ import com.company.data.Cafe;
 import com.company.data.User;
 
 
-// SpecialCustomerAction 클래스를 상속받아 SpecialCustomerAction 클래스의 기능 사용가능
-// 비밀 손님 고유 기능을 추가한 클래스이다.
-// 특별 손님과 달리 유저의 체력이나 인내력이 소모되지 않는다.
+// CustomerAction <- 상속 -  SpecialCustomerAction <- 상속 - SecretCustomer
+// 비밀손님은 특별 손님과 달리 유저의 체력이나 인내력이 소모되지 않는다.
 public class SecretCustomerAction extends SpecialCustomerAction
 {
     private static int secretCustomerCnt; // 등장횟수 누적해서 담는 변수
