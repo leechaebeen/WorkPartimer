@@ -114,7 +114,7 @@ public class Customer
             }
             else    // 뜨거운 음료인데 머그잔이 없거나 차가운 음료인데 유리잔이 없으면 유저 인내력 1 감소
             {
-                Partimer.setHp(Partimer.getHp() - 1);
+                Partimer.setHp(Partimer.getFeeling() - 1);
                 System.out.println("========================================================================");
                 System.out.println(" 매장에 잔이 모자라 일회용 컵을 사용했습니다. 컴플레인이 들어왔습니다. ");
                 System.out.printf(" %s님의 인내력이 1 감소합니다.\n", Partimer.getName());

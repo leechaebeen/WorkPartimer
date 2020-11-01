@@ -82,6 +82,11 @@ public class CafeAction
         else // 랜덤값이 10인 경우 특별 손님이 방문한다.
         {
             run.comeSecretCustomer();   // 음료 객체 생성하고, 손님이 주문하고, 유저가 음료 만든다.
+
+            // 이직 엔딩 조건 확인
+
+
+
         }
 
         selBusiness();  // 선택지 호출
@@ -176,8 +181,6 @@ public class CafeAction
            두번째 토요일 : 11/6 == 1
         */
 
-        // 숙련도 업데이트
-
         // 급여 코인 제공 (조건 : 음료 제조 성공 횟수/주차가 숙련도와 같거나 높아야 한다.)
         if(Partimer.getSuccessNum()/week >= Partimer.getSkillLevel())
         {
@@ -204,6 +207,12 @@ public class CafeAction
         System.out.println();
         System.out.println();
 
+        // 숙련도 업데이트
+        // 누적 음료 제조 성공 횟수가 숙련도(하루 최대 방문자 수)*4보다 크면
+        if(Partimer.getSkillLevel()*4 < Partimer.getSuccessNum())
+        {
+            Partimer.setSkillLevel(Partimer.getSkillLevel()+1);// 숙련도 1 증가
+        }
 
 
         System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
@@ -216,6 +225,25 @@ public class CafeAction
         System.out.printf(" 보유한 코인 : %d\n", Partimer.getProperty());
         //System.out.println(" 비밀 손님 방문 여부 : ");
         System.out.println();
+
+        // 3주차 엔딩 호출 - 사장 엔딩
+        Ending ending = new Ending();                   // 엔딩객체 생성
+        if(week >= 3 && Partimer.getSkillLevel() >= 4)  // 3주차 이상 운영하고, 숙련도가 4이상이고
+        {
+            if(Cafe.getTotalCustomerNum() >= 30)        // 총 방문자 수가 30명 이상일 때
+            {
+                ending.bossEnding();                    // 사장 엔딩 호출
+            }
+
+            else if(SecretCustomer.getSecretCustomerCnt() >= 4) // 비밀 손님 방문 횟수가 4 이상이면
+            {
+                ending.scoutEnding();                           // 이직 엔딩 호출
+            }
+        }
+        else if(week >= 3)                                  // 3주차 이상이고 앞선 조건에 부합하지 않으면
+        {
+            ending.partimerEnding();                        // 알바 엔딩 호출
+        }
 
         weekend(); // 주말 선택지 호출
 

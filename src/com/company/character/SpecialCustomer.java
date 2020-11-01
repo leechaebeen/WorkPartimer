@@ -38,7 +38,7 @@ public class SpecialCustomer extends Customer
         }
         else // 1 이면 휘핑크림 O
         {
-            whippingCream = "휘핑크림.";
+            whippingCream = " 휘핑크림.";
         }
 
         // 테이크아웃 선택 값에 따라 대사 분기
@@ -92,10 +92,10 @@ public class SpecialCustomer extends Customer
             }
             else    // 뜨거운 음료인데 머그잔이 없거나 차가운 음료인데 유리잔이 없으면 유저 인내력 1 감소
             {
-                Partimer.setHp(Partimer.getHp() - 1);
+                Partimer.setFeeling(Partimer.getFeeling() - 1);
                 System.out.println("========================================================================");
                 System.out.println(" 매장에 잔이 모자라 일회용 컵을 사용했습니다. 컴플레인이 들어왔습니다. ");
-                System.out.printf(" %s님의 인내력이 1 감소합니다.\n", Partimer.getName());
+                System.out.printf(" %s님의 인내력이 1 소모되었습니다.\n", Partimer.getName());
                 System.out.printf(" 현재 %s님의 인내력 : %d\n", Partimer.getName(), Partimer.getFeeling());
                 System.out.println("========================================================================");
             }
@@ -198,10 +198,10 @@ public class SpecialCustomer extends Customer
             }
             else    // 뜨거운 음료인데 머그잔이 없거나 차가운 음료인데 유리잔이 없으면 유저 인내력 1 감소
             {
-                Partimer.setHp(Partimer.getHp() - 1);
+                Partimer.setFeeling(Partimer.getFeeling() - 1);
                 System.out.println("========================================================================");
                 System.out.println(" 매장에 잔이 모자라 일회용 컵을 사용했습니다. 컴플레인이 들어왔습니다. ");
-                System.out.printf(" %s님의 인내력이 1 감소합니다.\n", Partimer.getName());
+                System.out.printf(" %s님의 인내력이 1 소모되었습니다.\n", Partimer.getName());
                 System.out.printf(" 현재 %s님의 인내력 : %d\n", Partimer.getName(), Partimer.getFeeling());
                 System.out.println("========================================================================");
             }
@@ -233,8 +233,9 @@ public class SpecialCustomer extends Customer
                 // 입력받은 값이 숫자인지 확인
                 try
                 {
+                    // 입력받은 값의 공백을 제거하고
                     // 자료형 변경한 뒤(String → int) int형에 담는다.
-                    result = Integer.parseInt(resultStr);
+                    result = Integer.parseInt(resultStr.replace(" ",""));
                     check = false;
                     // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                     // int형으로 변경되지 않는다면 NumberFormatException 발생
@@ -322,8 +323,9 @@ public class SpecialCustomer extends Customer
             // 입력받은 값이 숫자인지 확인
             try
             {
+                // 입력받은 값의 공백을 제거하고
                 // 자료형 변경한 뒤(String → int) int형에 담는다.
-                result = Integer.parseInt(resultStr);
+                result = Integer.parseInt(resultStr.replace(" ",""));
                 check = false;
                 // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                 // int형으로 변경되지 않는다면 NumberFormatException 발생
