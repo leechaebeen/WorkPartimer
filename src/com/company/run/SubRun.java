@@ -636,7 +636,7 @@ public class SubRun
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 사표 엔딩 tip ✨ ");
                     System.out.println("    인내력이 0 이 되면 사표 엔딩의 조건이 달성됩니다. ");
-                    System.out.println("    아이템을 이용해서 체력과 인내력을 관리해주세요 ! ");
+                    System.out.println("    아이템을 이용해서 인내력을 관리해주세요 ! ");
                     System.out.println("------------------------------------------------------------------------");
                 }
 
@@ -646,7 +646,7 @@ public class SubRun
                     System.out.printf("             %s님을 시험하고 눈여겨본 사장은 %s님을 스카웃했습니다.\n", User.getName(), User.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 이직 엔딩 tip ✨ ");
-                    System.out.println("    숙련도가 4이상 이고 비밀 손님의 방문이 4회 이상이면 이직 엔딩의 조건이 달성됩니다. ");
+                    System.out.println("    숙련도와 비밀 손님의 방문 횟수가 일정 기준 이상이면 이직 엔딩의 조건이 달성됩니다. ");
                     System.out.println("------------------------------------------------------------------------");
                 }
 
@@ -656,7 +656,7 @@ public class SubRun
                     System.out.printf("            %s님은 더이상 알바생이 아닙니다.\n", User.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 사장 엔딩 tip ✨ ");
-                    System.out.println("    보유하고 있는 코인과 %s님의 숙련도, 방문한 손님 수가 일정 수준 이상이면 ");
+                    System.out.println("    보유하고 있는 코인과 %s님의 숙련도, 방문한 손님 수가 일정 기준 이상이면 ");
                     System.out.println("    사장 엔딩의 조건이 달성됩니다.");
                     System.out.println("------------------------------------------------------------------------");
                 }
@@ -667,18 +667,20 @@ public class SubRun
                     System.out.println("            괜찮습니다 카페는 많으니까요... 힘내세요!");
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 해고 엔딩 tip ✨ ");
-                    System.out.println("    음료제조 성공 횟수보다 실패 횟수가 많아지면 엔딩의 조건이 달성됩니다.");
+                    System.out.println("    음료제조 실패 확률이 높아지면 해고 엔딩의 조건이 달성됩니다.");
                     System.out.println("------------------------------------------------------------------------");
                 }
+
                 if (endingType == PARTIMER_ENDING)
                 {
                     System.out.printf(" [알바 엔딩] %s님은 카페 아르바이트를 능숙하게 해내고 있습니다.\n", User.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 알바 엔딩 tip ✨ ");
-                    System.out.println("    나머지 엔딩에 해당하지 않으면 알바 엔딩의 조건이 달성됩니다.");
-                    System.out.println("    그만큼 잘 맞는다는거겠죠?  ");
+                    System.out.println("    비밀입니다.");
                     System.out.println("------------------------------------------------------------------------");
                 }
+
+                // 엔딩 유형 추가하기... 멋진 카페 엔딩
                 
             }
 
