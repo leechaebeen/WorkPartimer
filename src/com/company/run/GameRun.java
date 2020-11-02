@@ -320,10 +320,10 @@ public class GameRun
         // 조건 : 이번주 성공횟수 > 이번주 실패횟수
         if(User.getWeekSuccessNum() > User.getWeekFailNum())
         {
-            User.setProperty(User.getProperty() + User.getSalary());    // 코인 제공
-            // 전재산 = 현재 전재산 + 제공받는 급여코인
+            // 전재산 = 현재 전재산 + 제공받는 급여코인(숙련도 * 2)
+            User.setProperty(User.getProperty() + User.getSkillLevel() * 2);
 
-            System.out.printf("                        ✨ %d코인을 획득했습니다 ✨\n", User.getSalary());
+            System.out.printf("                        ✨ %d코인을 획득했습니다 ✨\n", User.getSkillLevel() * 2);
 
         }
         else    // 조건 만족하지 못하면
@@ -385,7 +385,7 @@ public class GameRun
 
         if(week >= 3 && User.getSkillLevel() >= 4)  // 3주차 이상 운영하고, 숙련도가 4이상이고
         {
-            if(Cafe.getTotalCustomerNum() >= 30)        // 총 방문자 수가 30명 이상일 때
+            if(Cafe.getTotalCustomerNum() >= 30 && User.getProperty() >= 10)// 총 방문자 수가 30명 이상이고 코인 10개 이상일 때
             {
                 ending.bossEnding();                    // 사장 엔딩 호출
             }

@@ -20,12 +20,8 @@ public class User
     protected static int setHp = 5;        // 세팅된 초기 체력값
     private static int setFeeling = 5;     // 세팅된 초기 인내력값
 
-
-    // 코인 관련 변수
-    private static int property;                  // 유저가 소유하고 있는 총 재산
-    private static int salary = skillLevel*2;     // 한 주에 받는 급여. 단위는 코인이다.
-                                                  // 특정 조건을 만족하면 숙련도 두 배만큼의 코인을 받는다.
-                                                  // (조건 : 음료 제조 성공 횟수/주차가 숙련도와 같거나 높아야 한다.)
+    // 유저가 소유하고 있는 총 재산. 단위는 코인이다.
+    private static int property;
 
 
     // 음료 제조 관련 변수
@@ -96,11 +92,6 @@ public class User
         User.feeling = feeling;
     }
 
-    public static int getSalary()
-    {
-        return salary;
-    }
-
     public static int getProperty()
     {
         return property;
@@ -154,11 +145,6 @@ public class User
     public static int[] getEndings()
     {
         return endings;
-    }
-
-    public static void setSalary(int salary)
-    {
-        User.salary = salary;
     }
 
     public static int getWeekFailNum()
