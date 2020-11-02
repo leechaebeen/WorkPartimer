@@ -36,7 +36,18 @@ public class InfoAction
 
     public void cafeInfo()  // 카페 정보
     {
-        int week = (User.getWorkingDays() / 7) + 1;               // 주차 = 일한날짜/7 + 1
+        int week = (User.getWorkingDays() / 6) + 1;
+        // 주차 = 일한일수/6 + 1
+
+        // 일한 일수는 0에서부터 시작한다. 하루가 지날 때마다 일한일수가 1씩 증가한다.
+        // 0%6 == 0 월
+        // 1%6 == 1 화
+        // 2%6 == 2 수
+        // 3%6 == 3 목
+        // 4%6 == 4 금
+        // 5%6 == 5 토
+        // 첫 주(월~토)에 연산결과가 0이 되므로 '1주차' 부터 시작하기 위해서 1을 더해준다.
+
         System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
         System.out.printf("==========================    %d주차  카페 정보    =========================\n", week);
         System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
@@ -48,13 +59,15 @@ public class InfoAction
         System.out.println("------------------------------------------------------------------------");
         System.out.println();
         System.out.println(" 유리잔 : 매장 내 취식하는 손님이 차가운 음료를 마실 경우 사용하는 잔입니다. ");
-        System.out.println("         알맞은 잔이 없을 경우 컴플레인이 들어오고, 유저의 인내력이 1 감소합니다. ");
+        System.out.println("         알맞은 잔이 없을 경우 컴플레인이 들어올 수 있습니다.  ");
+        System.out.println("         컴플레인을 받을 경우 유저의 인내력이 1 감소합니다.");
         System.out.println("         아이템 구매를 통해 유리잔의 수를 늘릴 수 있습니다. ");
         System.out.println();
         System.out.println("------------------------------------------------------------------------");
         System.out.println();
         System.out.println(" 머그잔 : 매장 내 취식하는 손님이 따뜻한 음료를 마실 경우 사용하는 잔입니다. ");
-        System.out.println("         알맞은 잔이 없을 경우 컴플레인이 들어오고, 유저의 인내력이 1 감소합니다. ");
+        System.out.println("         알맞은 잔이 없을 경우 컴플레인이 들어올 수 있습니다.  ");
+        System.out.println("         컴플레인을 받을 경우 유저의 인내력이 1 감소합니다.");
         System.out.println("         아이템 구매를 통해 머그잔의 수를 늘릴 수 있습니다. ");
         System.out.println();
         System.out.println("========================================================================");

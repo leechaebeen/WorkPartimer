@@ -85,19 +85,19 @@ public class SubRun
 
         boolean orderResult = true;         // 주문이 확정되었는지의 여부를 저장하는 변수
 
-        // 랜덤값에 따라 유형 별 손님이 음료 주문 -  음료를 주문한 경우 true 반환
+        // 랜덤값에 따라 유형 별 손님이 음료 주문 -  음료를 주문하는 경우 true 반환, 주문하지 않는 경우 false 반환
         switch(typeNum)
         {
-            case TALK_DOWN :
-                orderResult = specialCustomer.orderTalkDown(beverage);// 반말하는 손님
+            case TALK_DOWN:
+                orderResult = specialCustomer.orderTalkDown(beverage);      // 반말하는 손님
                 break;
 
             case FIGHT:
-                orderResult = specialCustomer.orderFight(beverage);       // 시비거는 손님
+                orderResult = specialCustomer.orderFight(beverage);         // 시비거는 손님
                 break;
 
             case FALSE_RELIGION:
-                orderResult = specialCustomer.orderFalseReligion();// 사이비 손님
+                orderResult = specialCustomer.orderFalseReligion();         // 사이비 손님
                 break;
 
             case WRONG:
@@ -105,9 +105,20 @@ public class SubRun
                 break;
 
             case PRESENT:
-                orderResult = specialCustomer.orderPresent();             // 선물주는 손님
+                orderResult = specialCustomer.orderPresent();               // 선물주는 손님
                 break;
 
+        }
+
+
+        Ending ending = new Ending();       // 엔딩 객체 생성
+        if(User.getHp()==0)                 // 만약 유저의 체력이 0이 된다면
+        {
+            ending.fallDownEnding();        //  과로 엔딩 메소드 호출
+        }
+        else if(User.getFeeling() == 0)     // 만약 유저의 인내력이 0이 된다면
+        {
+            ending.toQuitEnding();          // 퇴사 엔딩 메소드 호출
         }
 
         if(orderResult)     // 주문이 확정된 경우
@@ -131,7 +142,6 @@ public class SubRun
         }
 
 
-        Ending ending = new Ending();       // 엔딩 객체 생성
         if(User.getHp()==0)                 // 만약 유저의 체력이 0이 된다면
         {
             //test
@@ -156,82 +166,68 @@ public class SubRun
         final int TALK_DOWN = 2;        // 반말하는 유형
         final int FIGHT = 3;            // 시비거는 유형
 
-        Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum()+1); // 기존의 하루 방문자 수에 하나 더하기
-        Cafe.setTotalCustomerNum(Cafe.getTotalCustomerNum()+1); // 기존의 총 방문자 수에 한명 더하기
+        Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum() + 1); // 기존의 하루 방문자 수에 하나 더하기
+        Cafe.setTotalCustomerNum(Cafe.getTotalCustomerNum() + 1); // 기존의 총 방문자 수에 한명 더하기
         Cafe.setWeekCustomerNum(Cafe.getWeekCustomerNum() + 1); // 기존의 주 방문자 수에 한명 더하기
 
-        // 매장에 자리가 있는지 확인
-       /* if(Cafe.getChair()==0)    // 매장에 자리가 없으면 손님이 나간다.
+        SecretCustomerAction secretCustomer = new SecretCustomerAction();  // 비밀 손님 객체 생성
+        Beverage beverage = secretCustomer.orderBeverage();    // 주문할 음료 객체 생성
+
+        System.out.println();
+
+        // 음료 주문 유형 랜덤으로 실행하기
+        Random rd = new Random();
+        int typeNum = rd.nextInt(3) + 1; //1~3 랜덤값 반환해서 typeNum 변수에 저장
+
+        // 랜덤값에 따라 유형 별 손님이 음료 주문 -  음료를 주문한 경우 true 반환
+        boolean orderResult = true;
+        switch (typeNum)
         {
-            System.out.println(" 매장에 자리가 없어서 손님이 나갔다 . . .");
-            System.out.println(" 자리를 늘리던가 해야지 원 . . . ");
-            System.out.println("------------------------------------------------------------------------");
+            case COMMON:
+                orderResult = secretCustomer.orderToPartimer(beverage);   // 일반 손님
+                break;
+
+            case TALK_DOWN:
+                orderResult = secretCustomer.orderTalkDown(beverage);    // 반말하는 손님
+                break;
+
+            case FIGHT:
+                orderResult = secretCustomer.orderFight(beverage);       // 시비거는 손님
+                break;
         }
-        else
-        {*/
-            SecretCustomerAction secretCustomer = new SecretCustomerAction();  // 비밀 손님 객체 생성
-            Beverage beverage = secretCustomer.orderBeverage();    // 주문할 음료 객체 생성
 
-            System.out.println();
+        if (orderResult)                                         // 주문이 확정된 경우
+        {
+            // 유저가 음료 만들기
+            UserAction userAction = new UserAction();           // 유저 액션 객체 생성
+            boolean result = userAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
+            userAction.makeBeverageResult(result);              // 결과에 따른 출력
 
-            // 음료 주문 유형 랜덤으로 실행하기
-            Random rd = new Random();
-            int typeNum = rd.nextInt(3)+1; //1~3 랜덤값 반환해서 typeNum 변수에 저장
-
-            // 랜덤값에 따라 유형 별 손님이 음료 주문 -  음료를 주문한 경우 true 반환
-            boolean orderResult = true;
-            switch(typeNum)
+            // 여기서 실패, 성공횟수 더하기
+            if (result)                                          // 음료만들기 성공한경우
             {
-                case COMMON:
-                    orderResult = secretCustomer.orderToPartimer(beverage);   // 일반 손님
-                    break;
-
-                case TALK_DOWN:
-                    orderResult = secretCustomer.orderTalkDown(beverage);    // 반말하는 손님
-                    break;
-
-                case FIGHT:
-                    orderResult = secretCustomer.orderFight(beverage);       // 시비거는 손님
-                    break;
-            }
-
-            if(orderResult)                                         // 주문이 확정된 경우
+                User.setTotalSuccessNum(User.getTotalSuccessNum() + 1); // 총 음료 제조 성공 횟수 1 증가
+                User.setWeekSuccessNum(User.getWeekSuccessNum() + 1);    // 이번주 음료제조 성공횟수 1 증가
+            } else
             {
-                // 유저가 음료 만들기
-                UserAction userAction = new UserAction();           // 유저 액션 객체 생성
-                boolean result = userAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
-                userAction.makeBeverageResult(result);              // 결과에 따른 출력
+                User.setTotalFailNum(User.getTotalFailNum() + 1); // 총 음료제조 실패 횟수 1 증가
+                User.setWeekFailNum(User.getWeekFailNum() + 1);   // 이번주 음료제조 실패 횟수 1 증가
+            }
+        }
 
-                // 여기서 실패, 성공횟수 더하기
-                if(result)                                          // 음료만들기 성공한경우
-                {
-                    User.setTotalSuccessNum(User.getTotalSuccessNum() + 1 ); // 총 음료 제조 성공 횟수 1 증가
-                    User.setWeekSuccessNum(User.getWeekSuccessNum() + 1);    // 이번주 음료제조 성공횟수 1 증가
-                }
-                else
-                {
-                    User.setTotalFailNum(User.getTotalFailNum() + 1); // 총 음료제조 실패 횟수 1 증가
-                    User.setWeekFailNum(User.getWeekFailNum() + 1);   // 이번주 음료제조 실패 횟수 1 증가
-                }
-            }
+        Ending ending = new Ending();       // 엔딩 객체 생성
+        if (User.getHp() == 0)             // 만약 유저의 체력이 0이 된다면
+        {
+            ending.fallDownEnding();        //  과로 엔딩 실행
+        } else if (User.getFeeling() == 0) // 만약 유저의 인내력이 0이 된다면
+        {
+            ending.toQuitEnding();          // 퇴사 엔딩 실행
+        } else if (User.getTotalFailNum() / User.getSkillLevel() < User.getWeekFailNum())
+        // 총 음료제조 실패횟수/숙련도 < 이번 주 실패횟수
+        {
+            ending.getFireEnding();         // 해고 엔딩 실행
+        }
 
-            Ending ending = new Ending();       // 엔딩 객체 생성
-            if(User.getHp()==0)             // 만약 유저의 체력이 0이 된다면
-            {
-                //test
-                //System.out.println(User.getHp());
-                ending.fallDownEnding();        //  쓰러지는 엔딩 실행
-            }
-            else if(User.getFeeling() == 0) // 만약 유저의 인내력이 0이 된다면
-            {
-                ending.toQuitEnding();          // 그만두는 엔딩 실행
-            }
-            else if(User.getTotalFailNum()/User.getSkillLevel() < User.getWeekFailNum() )
-            {
-                ending.getFireEnding();         // 해고 엔딩 실행
-            }
-
-       // }
 
     }
 
@@ -395,7 +391,7 @@ public class SubRun
             System.out.printf(" 의자         : %d개\n", Cafe.getSetChair());
             System.out.printf(" 유리잔       : %d개\n", Cafe.getSetCup());
             System.out.printf(" 머그잔       : %d개\n", Cafe.getSetMug());
-            System.out.printf(" 체력 설정값 : %d\n", User.getSetHp());
+            System.out.printf(" 체력 설정값   : %d\n", User.getSetHp());
             System.out.printf(" 인내력 설정값 : %d\n", User.getSetFeeling());
             System.out.println();
             System.out.println("------------------------------------------------------------------------");
@@ -588,9 +584,9 @@ public class SubRun
         }
         else    // 공개된 엔딩이 있으면
         {
-            final int FALL_DOWN_ENDING = 1; // 쓰러지는 엔딩
-            final int QUIT_ENDING = 2;      // 그만두는 엔딩
-            final int SCOUT_ENDING = 3;     // 스카웃 엔딩
+            final int FALL_DOWN_ENDING = 1; // 과로 엔딩
+            final int QUIT_ENDING = 2;      // 퇴사 엔딩
+            final int SCOUT_ENDING = 3;     // 이직 엔딩
             final int BOSS_ENDING = 4;      // 사장 엔딩
             final int GET_FIRE_ENDING = 5;  // 해고 엔딩
             final int PARTIMER_ENDING = 6;  // 알바 엔딩
@@ -725,7 +721,7 @@ public class SubRun
         System.out.println(" 케이크   : 체력을 2 회복합니다.");
         System.out.println(" 샌드위치 : 체력을 4 회복합니다.");
         System.out.println(" 초콜릿   : 인내력을 2 회복합니다.");
-        System.out.println(" 마카롱    : 인내력을 4 회복합니다. ");
+        System.out.println(" 마카롱   : 인내력을 4 회복합니다. ");
         System.out.println();
         System.out.println("------------------------------------------------------------------------");
         System.out.println();

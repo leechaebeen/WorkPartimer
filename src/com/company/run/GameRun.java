@@ -226,8 +226,8 @@ public class GameRun
     public void open()
     {
         String[] days = {"월", "화", "수", "목","금","토"};   // 요일 배열. 토요일은 평일과 주말을 구분하기 위해 존재한다.
-        String day = days[User.getWorkingDays() % 6];   // 요일 = 일한일수%6
-        // 0에서부터 시작한다. 하루가 지날 때마다 일한일수가 1씩 증가한다.
+        String day = days[User.getWorkingDays() % 6];       // 요일 = 일한일수%6
+        // 일한 일수는 0에서부터 시작한다. 하루가 지날 때마다 일한일수가 1씩 증가한다.
         // 0%6 == 0 월
         // 1%6 == 1 화
         // 2%6 == 2 수
@@ -236,7 +236,7 @@ public class GameRun
         // 5%6 == 5 토
 
         int week = (User.getWorkingDays() / 6) + 1;
-        // 첫 주(월~금)는 연산결과가 0이 되므로 '1주차' 부터 시작하기 위해서 1을 더해준다.
+        // 첫 주(월~토)에 연산결과가 0이 되므로 '1주차' 부터 시작하기 위해서 1을 더해준다.
 
         if(!day.equals("토"))    // 평일이라면
         {
@@ -432,13 +432,13 @@ public class GameRun
         System.out.printf("=========================       %d주차 정산       =========================\n", week);
         System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
         System.out.println();
-        System.out.printf(" 이번주 방문한 손님 수 : %d \n", Cafe.getWeekCustomerNum());
+        System.out.printf(" 이번주 상대한 손님 수 : %d \n", Cafe.getWeekCustomerNum());
         System.out.printf(" 이번주 음료제조에 성공한 횟수 : %d \n", User.getWeekSuccessNum());
         System.out.printf(" 이번주 음료제조에 실패한 횟수 : %d \n", User.getWeekFailNum());
         System.out.println();
         System.out.println("------------------------------------------------------------------------");
         System.out.println();
-        System.out.printf(" 총 방문한 손님 수 : %d \n", Cafe.getTotalCustomerNum());
+        System.out.printf(" 총 상대한 손님 수 : %d \n", Cafe.getTotalCustomerNum());
         System.out.printf(" 총 음료제조에 성공한 횟수 : %d \n", User.getTotalSuccessNum());
         System.out.printf(" 총 음료제조에 실패한 횟수 : %d \n", User.getTotalFailNum());
         System.out.println();

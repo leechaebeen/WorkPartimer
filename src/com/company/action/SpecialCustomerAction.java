@@ -262,7 +262,7 @@ public class SpecialCustomerAction extends CustomerAction
                         User.setHp(User.getHp()-1);
                         User.setFeeling(User.getFeeling()-1);
                         System.out.println("========================================================================");
-                        System.out.println(" 이야기를 듣고보니 사이비 손님이었습니다. 시간낭비였습니다 ! ");
+                        System.out.println(" 이야기를 듣다보니 사이비였습니다. 시간을 낭비했습니다 ! ");
                         System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", User.getName());
                         System.out.printf(" %s님의 인내력이 1 소모되었습니다.\n", User.getName());
                         System.out.printf(" 현재 %s님의 체력 : %d\n", User.getName(), User.getHp());
