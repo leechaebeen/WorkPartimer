@@ -21,14 +21,14 @@ public class CustomerAction
             return false;                        // 테이크아웃 하지 않는다.(false 반환)
         }
 
-        return true;                             // 그 외의 경우 테이크아웃한다.(true 반환)
+        return true;                             // 랜덤값이 0이면 테이크아웃한다.(true 반환)
 
     } // end checkTakeout()
 
-    // 랜덤으로 주문할 음료 객체 생성하는 메소드(음료, Hot/Ice 옵션, 휘핑)
+    // 랜덤으로 주문할 음료 객체를 생성하는 메소드(종류, Hot/Ice 옵션, 휘핑)
     public Beverage orderBeverage()
     {
-        Random rd = new Random();               // 랜덤 클래스 객체 생성
+        Random rd = new Random();                 // 랜덤 클래스 객체 생성
 
         // Ice or Hot 랜덤 선택
         int iceOption = rd.nextInt(2);      // 0 또는 1의 랜덤값을 변수 iceOption 에 저장한다.
@@ -37,10 +37,12 @@ public class CustomerAction
         int whippingCream = rd.nextInt(2);  // 0 또는 1의 랜덤값을 변수 whippingCream 에 저장한다.
 
         // 음료 선택
-        int beverageSel = rd.nextInt(5)+1;               // 1 ~ 5 의 랜덤값(음료 메뉴 번호)을 변수 beverageSel 에 저장한다.
+        int beverageSel = rd.nextInt(5)+1;   // 1 ~ 5 의 랜덤값(음료 종류)을 변수 beverageSel 에 저장한다.
 
-        BeverageAction beverageAction = new BeverageAction();  // 음료 객체 생성하는 메소드 가진 객체 생성
-        Beverage beverage = beverageAction.createBeverage(beverageSel, iceOption, whippingCream); // 선택한 값들을 매개변수로 넘기며 음료 객체 생성하는 메소드 호출
+        BeverageAction beverageAction = new BeverageAction();  // 음료 액션 객체 생성
+
+        // 랜덤으로 선택한 값들을 매개변수로 넘기며 음료 객체 생성하는 메소드 호출
+        Beverage beverage = beverageAction.createBeverage(beverageSel, iceOption, whippingCream);
 
         return beverage;  // 음료 객체 반환
 
@@ -112,7 +114,7 @@ public class CustomerAction
             {
                 Cafe.setCup(Cafe.getCup() - 1); // 유리잔 1 감소
             }
-            else    // 뜨거운 음료인데 머그잔이 없거나 차가운 음료인데 유리잔이 없으면 유저 인내력 1 감소
+            else    // 뜨거운 음료인데 머그잔이 없거나 차가운 음료인데 유리잔이 없으면 컴플레인 발생, 유저 인내력 1 감소
             {
                 User.setFeeling(User.getFeeling() - 1);
                 System.out.println(" 매장에 잔이 모자라 일회용 컵을 사용했습니다. 컴플레인이 들어왔습니다. ");

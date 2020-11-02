@@ -3,7 +3,6 @@ import com.company.data.Beverage;
 import com.company.data.Cafe;
 import com.company.data.Item;
 import com.company.data.User;
-import org.omg.PortableInterceptor.USER_EXCEPTION;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -88,7 +87,7 @@ public class UserAction
 
         System.out.println(" " + sb);       // 생성된 랜덤 문자열 출력
 
-        System.out.printf(" 입력 : ");       // 사용자에게서 문자열 입력받기
+        System.out.print(" 입력 : ");       // 사용자에게서 문자열 입력받기
         Scanner sc = new Scanner(System.in);
         String inputStr = sc.nextLine();
 

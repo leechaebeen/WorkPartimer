@@ -14,7 +14,6 @@ public class BeverageAction
         final int CAFE_MOCHA = 5;    // 카페모카
 
         Beverage beverage = new Beverage(); // 음료 객체 생성
-        // (객체를 반환하는 메소드라서 객체명을 통일하기 위해 switch 문 밖에서 객체를 생성한다.)
 
         switch(beverageOrder)               // 음료 주문에 따라 객체를 생성해서 담는다.
         {
