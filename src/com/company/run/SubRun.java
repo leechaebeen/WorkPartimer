@@ -563,6 +563,26 @@ public class SubRun
         {
             System.out.println("========================================================================");
             System.out.println(" 현재 공개된 엔딩이 없습니다.");
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+
+
             GameRun gameRun = new GameRun();
             gameRun.initialRun(); // 이전으로
         }
@@ -627,7 +647,7 @@ public class SubRun
                 if (endingType == SCOUT_ENDING)
                 {
                     System.out.println(" [이직 엔딩] 종종 방문하던 특이한 손님의 일부는 몰래 방문한 인근 카페 사장이었습니다.");
-                    System.out.printf("                %s님을 시험하고 눈여겨본 사장은 %s님을 스카웃했습니다. \n", User.getName());
+                    System.out.printf("             %s님을 시험하고 눈여겨본 사장은 %s님을 스카웃했습니다.\n", User.getName(), User.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 이직 엔딩 tip ✨ ");
                     System.out.println("    숙련도가 4이상 이고 비밀 손님의 방문이 4회 이상이면 이직 엔딩의 조건이 달성됩니다. ");
@@ -648,7 +668,7 @@ public class SubRun
                 if (endingType == GET_FIRE_ENDING)
                 {
                     System.out.printf(" [해고 엔딩] %s님은 음료제조 실수가 잦아 해고되었습니다.\n", User.getName());
-                    System.out.printf("            괜찮습니다 카페는 많으니까요... 힘내세요! \n", User.getName());
+                    System.out.println("            괜찮습니다 카페는 많으니까요... 힘내세요!");
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 해고 엔딩 tip ✨ ");
                     System.out.println("    음료제조 성공 횟수보다 실패 횟수가 많아지면 엔딩의 조건이 달성됩니다.");
@@ -667,6 +687,26 @@ public class SubRun
             }
 
             System.out.printf(" 아직 공개되지 않은 엔딩이 %d개 남아있습니다 !\n", cnt);
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+
+
         }
 
         GameRun gameRun = new GameRun();

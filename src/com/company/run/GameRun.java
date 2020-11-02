@@ -116,7 +116,15 @@ public class GameRun
         System.out.println();
         System.out.println();
         System.out.println();
-        System.out.println("========================================================================");
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
         System.out.println();
         System.out.println();
         System.out.printf(" %s님은 우주선에 탑승한 스파이입니다.\n",User.getName());
@@ -459,7 +467,7 @@ public class GameRun
                 ending.scoutEnding();                        // 이직 엔딩 호출
             }
         }
-        else if(week >= 4)                                  // 4주차 이상이고 앞선 조건에 부합하지 않으면
+        else if(week == 4)                                  // 4주차가 되고 앞선 조건에 부합하지 않으면
         {
             ending.partimerEnding();                        // 알바 엔딩 호출
         }
