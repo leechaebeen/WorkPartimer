@@ -61,6 +61,7 @@ public class Ending
         System.out.println();
         System.out.println();
         System.out.println();
+        System.out.println();
         System.out.println("\t\t\t\t 으 아 아 아 ㅇㅏ");
         System.out.println("\t\t\t\t　　　　　　       ㅇ");
         System.out.println("\t\t\t\t　　　　　          ⋌");
@@ -126,6 +127,8 @@ public class Ending
         System.out.println();
         System.out.println();
         System.out.println();
+        System.out.println();
+        System.out.println();
         System.out.println("\t\t\t\t 더러워서 못 해먹겠다... 때려쳐야지. ");
 
         System.out.println();
@@ -175,6 +178,8 @@ public class Ending
             }
         }
 
+        System.out.println();
+        System.out.println();
         System.out.println();
         System.out.println();
         System.out.println();
@@ -238,6 +243,8 @@ public class Ending
         System.out.println();
         System.out.println();
         System.out.println();
+        System.out.println();
+        System.out.println();
 
         System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
         System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
@@ -252,7 +259,7 @@ public class Ending
 
     }
 
-    // 5. 해고 엔딩 : 음료제조 성공 누적 횟수 < 실패 횟수인 경우 (호출 완료)
+    // 5. 해고 엔딩 :  총 음료 제조 횟수/ 숙련도 < 이번 주 실패 횟수(호출 완료)
     public void getFireEnding()
     {
         // 엔딩 저장
@@ -290,13 +297,15 @@ public class Ending
         System.out.println();
         System.out.println();
         System.out.println();
+        System.out.println();
+        System.out.println();
 
         System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
         System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
         System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
-        System.out.printf("\t\t\t\t %s님은 제조 실패 확률이 높아 해고되었습니다.\n", User.getName());
+        System.out.printf("\t\t\t\t %s님은 음료 제조 실수가 잦아 해고되었습니다.\n", User.getName());
         System.out.println("\t\t\t\t 괜찮습니다. 카페는 많으니까요... 힘내세요! ");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println();
@@ -351,6 +360,7 @@ public class Ending
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
         System.out.printf("\t\t %s님은 카페 아르바이트를 능숙하게 해내고 있습니다.\n", User.getName());
+        System.out.println("\t\t\t\t 스파이보다 적성에 잘 맞는 일을 찾았습니다 ! ");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println();
         finalEnding();

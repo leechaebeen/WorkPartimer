@@ -8,7 +8,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 // CustomerAction <- 상속 -  SpecialCustomerAction
-// 특별손님 고유 기능을 추가한 클래스이다.
+// checkTakeout() 메소드 사용
 public class SpecialCustomerAction extends CustomerAction
 {
     // 음료 주문하는 메소드
@@ -16,7 +16,6 @@ public class SpecialCustomerAction extends CustomerAction
     // 음료를 주문하는 경우 true, 음료를 주문하지 않는 경우 false 반환
     public boolean orderTalkDown(Beverage beverage)
     {
-
         String iceOption;       // ICE/HOT 선택하는 손님대사 담는 변수
         String whippingCream;   // 휘핑크림 여부 선택하는 손님대사 담는 변수
         String takeout;         // 테이크아웃 여부 선택하는 손님대사 담는 변수
@@ -119,11 +118,11 @@ public class SpecialCustomerAction extends CustomerAction
         // ICE / HOT 선택값에 따라 대사 분기
         if(beverage.getIceOption()==0)      // HOT 이라면
         {
-            iceOption = " 이 날씨에 차가운걸 먹겠어요?";
+            iceOption = "이 날씨에 차가운걸 먹겠어요?";
         }
         else                                // ICE 라면
         {
-            iceOption = " 이 날씨에 뜨거운걸 먹겠어요? ";
+            iceOption = "이 날씨에 뜨거운걸 먹겠어요? ";
         }
 
         // 휘핑 선택값에 따라 대사 분기
@@ -141,7 +140,7 @@ public class SpecialCustomerAction extends CustomerAction
 
         if(checkTakeout)                        // 테이크아웃 한다면
         {
-            takeout = " 하... 테이크아웃이요. 그만 좀 물어보세요";
+            takeout = "하... 테이크아웃이요. 그만 좀 물어보세요";
         }
         else                                    // 테이크아웃 안한다면
         {

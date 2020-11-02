@@ -39,7 +39,7 @@ public class SubRun
                 User.setTotalSuccessNum(User.getTotalSuccessNum() + 1 ); // 총 음료 제조 성공 횟수 1 증가
                 User.setWeekSuccessNum(User.getWeekSuccessNum() + 1);    // 이번주 음료제조 성공횟수 1 증가
             }
-            else
+            else                                                // 음료만들기 실패한 경우
             {
                 User.setTotalFailNum(User.getTotalFailNum() + 1); // 총 음료제조 실패 횟수 1 증가
                 User.setWeekFailNum(User.getWeekFailNum() + 1);   // 이번주 음료제조 실패 횟수 1 증가
@@ -51,10 +51,10 @@ public class SubRun
         if(User.getHp()==0)                                  // 만약 유저의 체력이 0이 된다면
         {
             //test
-            System.out.println(User.getHp());
+            //System.out.println(User.getHp());
             ending.fallDownEnding();                         // 과로 엔딩 메소드 호출
         }
-        else if(User.getTotalSuccessNum() < User.getTotalFailNum())   // 음료 제조 성공 누적 횟수 < 실패 누적 횟수라면
+        else if(User.getTotalFailNum()/User.getSkillLevel() < User.getWeekFailNum() )// 총 음료 제조 횟수/숙련도 < 이번 주 실패 횟수라면
         {
             ending.getFireEnding();                         // 해고 엔딩 실행
         }
@@ -131,19 +131,18 @@ public class SubRun
         }
 
 
-
         Ending ending = new Ending();       // 엔딩 객체 생성
         if(User.getHp()==0)                 // 만약 유저의 체력이 0이 된다면
         {
             //test
-            System.out.println(User.getHp());
+            //System.out.println(User.getHp());
             ending.fallDownEnding();        //  과로 엔딩 메소드 호출
         }
         else if(User.getFeeling() == 0)     // 만약 유저의 인내력이 0이 된다면
         {
             ending.toQuitEnding();          // 퇴사 엔딩 메소드 호출
         }
-        else if(User.getTotalSuccessNum() < User.getTotalFailNum())   // 음료 제조 성공 누적 횟수 < 실패 누적 횟수라면
+        else if(User.getTotalFailNum()/User.getSkillLevel() < User.getWeekFailNum() ) // 총 음료 제조 횟수/숙련도 < 이번 주 실패 횟수
         {
             ending.getFireEnding();         // 해고 엔딩 메소드 호출
         }
@@ -220,14 +219,14 @@ public class SubRun
             if(User.getHp()==0)             // 만약 유저의 체력이 0이 된다면
             {
                 //test
-                System.out.println(User.getHp());
+                //System.out.println(User.getHp());
                 ending.fallDownEnding();        //  쓰러지는 엔딩 실행
             }
             else if(User.getFeeling() == 0) // 만약 유저의 인내력이 0이 된다면
             {
                 ending.toQuitEnding();          // 그만두는 엔딩 실행
             }
-            else if(User.getTotalSuccessNum() < User.getTotalFailNum())   // 음료 제조 성공 누적 횟수 < 실패 누적 횟수라면
+            else if(User.getTotalFailNum()/User.getSkillLevel() < User.getWeekFailNum() )
             {
                 ending.getFireEnding();         // 해고 엔딩 실행
             }
@@ -396,16 +395,16 @@ public class SubRun
             System.out.printf(" 의자         : %d개\n", Cafe.getSetChair());
             System.out.printf(" 유리잔       : %d개\n", Cafe.getSetCup());
             System.out.printf(" 머그잔       : %d개\n", Cafe.getSetMug());
-            System.out.printf(" 체력 최댓값   : %d개\n", User.getSetHp());
-            System.out.printf(" 인내력 최댓값 : %d개\n", User.getSetFeeling());
+            System.out.printf(" 체력 설정값 : %d\n", User.getSetHp());
+            System.out.printf(" 인내력 설정값 : %d\n", User.getSetFeeling());
             System.out.println();
             System.out.println("------------------------------------------------------------------------");
             System.out.println();
             System.out.printf(" 1.의자 구매         (- %d코인)\n", item.getChairPrice());
             System.out.printf(" 2.유리잔 구매       (- %d코인)\n", item.getCupPrice());
             System.out.printf(" 3.머그잔 구매       (- %d코인)\n", item.getMugPrice());
-            System.out.printf(" 4.체력 최댓값 +2    (- %d코인)\n", item.getHpPrice());
-            System.out.printf(" 5.인내력 최댓값 +2  (- %d코인)\n", item.getFeelingPrice());
+            System.out.printf(" 4.체력 설정값 +2    (- %d코인)\n", item.getHpPrice());
+            System.out.printf(" 5.인내력 설정값 +2  (- %d코인)\n", item.getFeelingPrice());
             System.out.println(" 6.이전으로");
             System.out.println();
             System.out.println("========================================================================");
@@ -565,7 +564,7 @@ public class SubRun
             System.out.println("========================================================================");
             System.out.println(" 현재 공개된 엔딩이 없습니다.");
             GameRun gameRun = new GameRun();
-            gameRun.weekend(); // 이전으로
+            gameRun.initialRun(); // 이전으로
         }
         else    // 공개된 엔딩이 있으면
         {
@@ -641,14 +640,14 @@ public class SubRun
                     System.out.printf("            %s님은 더이상 알바생이 아닙니다.\n", User.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 사장 엔딩 tip ✨ ");
-                    System.out.println("    보유하고 있는 코인이 10개 이상이고 ");
-                    System.out.println("    방문한 손님 수가 30명 이상이면 사장 엔딩의 조건이 달성됩니다.");
+                    System.out.println("    보유하고 있는 코인과 %s님의 숙련도, 방문한 손님 수가 일정 수준 이상이면 ");
+                    System.out.println("    사장 엔딩의 조건이 달성됩니다.");
                     System.out.println("------------------------------------------------------------------------");
                 }
 
                 if (endingType == GET_FIRE_ENDING)
                 {
-                    System.out.printf(" [해고 엔딩] %s님은 음료를 제조하지 못해서 해고되었습니다.\n", User.getName());
+                    System.out.printf(" [해고 엔딩] %s님은 음료제조 실수가 잦아 해고되었습니다.\n", User.getName());
                     System.out.printf("            괜찮습니다 카페는 많으니까요... 힘내세요! \n", User.getName());
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println(" ✨ 해고 엔딩 tip ✨ ");
@@ -671,7 +670,7 @@ public class SubRun
         }
 
         GameRun gameRun = new GameRun();
-        gameRun.weekend();  // 이전으로
+        gameRun.initialRun();  // 이전으로
 
     }//end openEnding()
 

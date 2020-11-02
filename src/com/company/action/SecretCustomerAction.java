@@ -109,11 +109,11 @@ public class SecretCustomerAction extends SpecialCustomerAction
         // ICE / HOT 선택값에 따라 대사 분기
         if(beverage.getIceOption()==0)  // HOT 이라면
         {
-            iceOption = " 이 날씨에 차가운걸 먹겠어요?";
+            iceOption = "이 날씨에 차가운걸 먹겠어요?";
         }
         else                            // ICE 라면
         {
-            iceOption = " 이 날씨에 뜨거운걸 먹겠어요? ";
+            iceOption = "이 날씨에 뜨거운걸 먹겠어요? ";
         }
 
         // 휘핑 선택값에 따라 대사 분기
@@ -131,11 +131,11 @@ public class SecretCustomerAction extends SpecialCustomerAction
 
         if(checkTakeout)                        // 테이크아웃한다면
         {
-            takeout = " 테이크아웃이요.";
+            takeout = "테이크아웃이요.";
         }
         else                                    // 테이크아웃 안한다면
         {
-            takeout = " 먹고 갈거에요.";
+            takeout = "먹고 갈거에요.";
         }
 
         System.out.println(" 손님 : " + beverage.getName());

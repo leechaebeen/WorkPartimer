@@ -9,24 +9,23 @@ import java.util.Random;
 // 게임에 등장하는 손님의 가장 기본이 되는 기능을 담은 클래스.
 public class CustomerAction
 {
-    // 테이크아웃 여부 정하는 메소드
+    // 테이크아웃 여부 정하는 메소드 : 테이크아웃하면 true 반환, 테이크아웃 하지 않으면 false 반환 
     public boolean checkTakeout()
     {
         Random rd = new Random();               // 랜덤 객체 생성
-        int takeout = rd.nextInt(10)+1;   // 1 ~ 10의 랜덤값을 변수 takeout 에 저장.
-        boolean checkTakeout = true;            // 테이크아웃 여부를 담을 변수
+        int takeout = rd.nextInt(1);      // 0, 1의 랜덤값을 변수 takeout 에 저장.
 
         //테이크 아웃 여부 확인
-        if(takeout > 5)                         // 랜덤값이 6~10 이면 테이크아웃 하지 않는다.
+        if(takeout == 1)                         // 랜덤값이 1이면
         {
-            checkTakeout = false;
+            return false;                        // 테이크아웃 하지 않는다.(false 반환)
         }
 
-        return checkTakeout;                    // 랜덤값이 1~5 이면 테이크아웃 한다.
+        return true;                             // 그 외의 경우 테이크아웃한다.(true 반환)
 
     } // end checkTakeout()
 
-    // 랜덤으로 음료 주문하는 메소드(음료, Hot/Ice 옵션, 휘핑)
+    // 랜덤으로 주문할 음료 객체 생성하는 메소드(음료, Hot/Ice 옵션, 휘핑)
     public Beverage orderBeverage()
     {
         Random rd = new Random();               // 랜덤 클래스 객체 생성
@@ -47,8 +46,7 @@ public class CustomerAction
 
     }// end orderBeverage()
 
-    // 손님이 음료를 주문하는 메소드
-    // 음료를 주문하는 경우 true, 주문하지 않는 경우 false 반환
+    // 손님이 음료를 주문하는 메소드 :  음료를 주문하는 경우 true, 주문하지 않는 경우 false 반환
     public boolean orderToPartimer(Beverage beverage)
     {
         String iceOption;       // ICE/HOT 선택하는 손님대사 담는 변수

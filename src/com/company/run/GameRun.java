@@ -14,8 +14,8 @@ public class GameRun
     // 최초 실행하는 메소드
     public void initialRun()
     {
-        String resultStr;
-        int result = 0;
+        String selectStr;
+        int select = 0;
         // 초기화해야하는 이유  : Primitive type 인 지역변수는 자동으로 초기화가 안된다.
         // → 예측할 수 없는 값을 담는걸 방지하기 위해 초기화 해줘야 한다.
 
@@ -40,11 +40,67 @@ public class GameRun
         System.out.println();
         System.out.println();
 
+        boolean check = true;   // 반복 여부를 체크하기 위한 변수
+
+        while (check)            // 올바른 선택지를 선택할 때까지 반복한다.
+        {
+            System.out.println("========================================================================");
+            System.out.println(" 1.시작하기  2.공개된 엔딩 보기 ");
+            System.out.println("------------------------------------------------------------------------");
+            System.out.print(" 선택 : ");
+            selectStr = sc.nextLine();
+
+            // 입력받은 값이 숫자인지 확인
+            try
+            {
+                // 자료형 변경한 뒤(String → int) int형에 담는다.
+                // int형으로 변경되지 않는다면 NumberFormatException 발생
+                select = Integer.parseInt(selectStr);
+                check = false;
+
+            } catch (NumberFormatException e) // NumberFormatException 발생한다면
+            {
+                check = true;   // check 에 true 담아서 다시 반복
+                // select = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+            }
+
+            if (select < 1 || select > 2)// 주어진 값 이외의 수를 선택한 경우
+            {
+                System.out.println("========================================================================");
+                System.out.println(" 올바른 값을 입력해주세요.");
+                check = true;
+            }
+        }
+
+        final int START = 1;                // 게임 시작
+        final int OPEN_ENDINGS = 2;         // 공개된 엔딩 확인
+
+        while (true)
+        {
+            switch (select)              // 유저의 선택값에 따라 분기 처리
+            {
+                case START:                            // 1. 시작하기를 선택한 경우
+                    GameRun gameRun = new GameRun();    // 게임 실행 객체 생성
+                    gameRun.start();                     // 게임 시작하는 메소드 호출
+                    break;
+
+                case OPEN_ENDINGS:                  // 3. 공개된 엔딩보기를 선택한 경우
+                    SubRun subRun = new SubRun();   // 서브 실행 객체 생성
+                    subRun.openEndings();           // 3.공개된 엔딩 확인 메소드 호출
+                    break;
+            }
+
+        }
+    }// end initialRun()
+
+    public void start()
+    {
         String userName; // 유저이름을 저장할 변수
-        boolean check;   // 조건에 맞게 이름 입력했는지 확인할 변수
+        boolean check = true;   // 조건에 맞게 이름 입력했는지 확인할 변수
 
         do {
             System.out.print(" 이름을 입력해주세요(한글만 가능) : ");
+            Scanner sc = new Scanner(System.in);
             userName = sc.nextLine();                                   // 유저이름을 입력받고
             userName = userName.replaceAll(" ", "");    // 공백을 제거하고
             check = Pattern.matches("^[가-힣]*$", userName);       // 정규표현식을 이용해서 한글인지 확인한다. 한글인 경우 true 반환
@@ -55,6 +111,11 @@ public class GameRun
 
         System.out.println();
         System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
         System.out.println("========================================================================");
         System.out.println();
         System.out.println();
@@ -62,7 +123,7 @@ public class GameRun
         System.out.println();
         System.out.println(" 하지만 스파이로서 미션을 수행하던 중 정체를 들켰습니다 ! ");
         System.out.println();
-        System.out.println(" 치열한 토론 끝에 . . . ");
+        System.out.println(" 팀원들의 치열한 토론 끝에 . . . ");
 
         System.out.println();
         System.out.println();
@@ -84,35 +145,39 @@ public class GameRun
 
         System.out.println();
         System.out.println();
-        System.out.printf(" 이곳저곳을 떠돌던 %s님은 우여곡절 끝에 지구에 정착했습니다.\n", User.getName());
+        System.out.printf(" 이곳저곳을 떠돌던 %s님은 우여곡절 끝에 지구에 도착했습니다.\n", User.getName());
         System.out.println();
-        System.out.printf(" 지구에서 살아남기 위해 %s님은 일자리를 열심히 알아보았습니다.\n",User.getName());
+        System.out.printf(" 지구에서 살아남기 위해 %s님은 오늘부터 카페 아르바이트를 시작합니다.\n", User.getName());
         System.out.println();
-        System.out.printf(" %s님은 오늘부터 카페 아르바이트를 시작했습니다.\n", User.getName());
-        System.out.println();
-        System.out.println(" 아르바이트를 진행하면서 다양한 엔딩을 볼 수 있습니다.");
+        System.out.println(" 아르바이트를 진행하면서 다양한 엔딩을 모을 수 있습니다.");
         System.out.println();
         System.out.println(" 행운을 빕니다 . . . ! ");
         System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println(" ※ 주의 ※ 프로그램을 종료하면 공개된 엔딩이 사라집니다. ");
+
+        String selectStr;   // 사용자의 선택값을 담을 변수
+        int select = 0;         // selectStr 변수의 값을 int 로 형변환해서 담을 변수
 
         // 올바른 선택지를 선택할 때까지 반복
         while(check) // check 는 위에서 입력받은 유저이름이 한글인걸 확인했기 때문에 true 인 상황이다.
         {
             System.out.println("========================================================================");
-            System.out.println(" 1. 시작하기  2.이름 재설정 ");
+            System.out.println(" 1.카페 열기  2.이름 재설정  ");
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
-            resultStr = sc.nextLine();
+            Scanner sc = new Scanner(System.in);
+            selectStr = sc.nextLine();
 
             // 입력받은 값이 숫자인지 확인
             try
             {
-                // 입력받은 값의 공백을 제거하고
                 // 자료형 변경한 뒤(String → int) int형에 담는다.
-                result = Integer.parseInt(resultStr.replace(" ",""));
+                // int 형으로 변경되지 않는다면 NumberFormatException 발생
+                select = Integer.parseInt(selectStr);
                 check = false;
-                // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
-                // int형으로 변경되지 않는다면 NumberFormatException 발생
+
             }
             catch (NumberFormatException e) // NumberFormatException 발생한다면
             {
@@ -120,7 +185,7 @@ public class GameRun
                 // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
             }
 
-            if(result < 1 || result > 2 )// 주어진 값 이외의 수를 선택한 경우
+            if(select < 1 || select > 2 )// 주어진 값 이외의 수를 선택한 경우
             {
                 System.out.println("========================================================================");
                 System.out.println(" 올바른 값을 입력해주세요.");
@@ -128,27 +193,26 @@ public class GameRun
             }
         }
 
-        final int START = 1;                // 게임 시작
-        final int INITIAL_RUN = 2;          // 초기화면 실행
+        final int OPEN = 1;             // 1.카페 열기
+        final int START = 2;            // 2. 이름 재설정
 
         GameRun gameRun = new GameRun(); // Cafe 객체 생성
 
         while(true)
         {
-            switch(result)              // 유저의 선택값에 따라 분기 처리
+            switch(select)              // 유저의 선택값에 따라 분기 처리
             {
-                case  START:             // 1. 시작하기를 선택한 경우
-                    gameRun.open();
+                case  OPEN:             // 1. 카페 열기를 선택한 경우
+                    gameRun.open();     // 게임 시작하는 메소드 호출
                     break;
 
-                case INITIAL_RUN :       // 2. 다시 시작하기를 선택한 경우
-                    initialRun();
+                case START :            // 2. 이름 재설정을 선택한 경우
+                    start();            // 이름 설정 메소드 호출
                     break;
             }
-
         }
 
-    } //end initialRun()
+    } //end start()
 
     // 카페 오픈 메소드(하루 단위, 평일): 몇주차 며칠인지 보여줌
     public void open()
@@ -383,7 +447,7 @@ public class GameRun
         // 엔딩 호출
         Ending ending = new Ending();                   // 엔딩객체 생성
 
-        if(week >= 3 && User.getSkillLevel() >= 4)  // 3주차 이상 운영하고, 숙련도가 4이상이고
+        if(week >= 3 && User.getSkillLevel() >= 4)      // 3주차 이상이고, 숙련도가 4이상이고
         {
             if(Cafe.getTotalCustomerNum() >= 30 && User.getProperty() >= 10)// 총 방문자 수가 30명 이상이고 코인 10개 이상일 때
             {
@@ -411,13 +475,12 @@ public class GameRun
 
         final int INFO = 1;     //1. 정보 확인 - 1.내 정보 확인 2.카페 정보 확인 3.이전 화면
         final int SHOP = 2;     //2. 상점가기 - 1.영구 아이템  2.소모 아이템  3.이전 화면
-        final int ENDING = 3;   //3. 공개된 엔딩 확인
-        final int SKIP = 4;     //4. 주말 지나가기
+        final int SKIP = 3;     //4. 주말 지나가기
 
         while(check)
         {
             System.out.println("========================================================================");
-            System.out.println(" 1. 정보 확인  2.상점가기  3.공개된 엔딩 확인  4. 주말 지나가기");
+            System.out.println(" 1. 정보 확인  2.상점가기  3.주말 지나가기");
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
             Scanner sc = new Scanner(System.in);
@@ -438,7 +501,7 @@ public class GameRun
                 // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
             }
 
-            if(result < 1 || result > 4 )// 주어진 값 이외의 수를 선택한 경우
+            if(result < 1 || result > 3 )// 주어진 값 이외의 수를 선택한 경우
             {
                 System.out.println("========================================================================");
                 System.out.println(" 올바른 값을 입력해주세요.");
@@ -451,7 +514,7 @@ public class GameRun
 
         System.out.println();
 
-        switch(result)                      // 사용자의 선택값에 따라
+        switch(result)                          // 사용자의 선택값에 따라
         {
             case  INFO: subRun.info();         // 1. 정보 확인 메소드 호출
                 break;
@@ -459,10 +522,7 @@ public class GameRun
             case  SHOP: subRun.goShop();       // 2. 상점 가기 메소드 호출
                 break;
 
-            case  ENDING: subRun.openEndings(); // 3.공개된 엔딩 확인 메소드 호출
-                break;
-
-            case SKIP :                     // 4. 주말 지나가기 : 다음날 카페 시작하는 메소드 호출
+            case SKIP :                        // 3. 주말 지나가기 : 다음날 카페 시작하는 메소드 호출
                 User.setWorkingDays(User.getWorkingDays() + 1);
                 // 주말이 지나도록 하루를 더한다. 토 → 월로 요일 변경
                 open();

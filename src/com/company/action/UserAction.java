@@ -1,9 +1,9 @@
 package com.company.action;
-
 import com.company.data.Beverage;
 import com.company.data.Cafe;
 import com.company.data.Item;
 import com.company.data.User;
+import org.omg.PortableInterceptor.USER_EXCEPTION;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -16,10 +16,12 @@ public class UserAction
     {
         final int TYPING_GAME = 1;  // 음료 만드는 유형 변수 - 타이핑하기
         final int QUIZ_GAME = 2;    // 음료 만드는 유형 변수 - 퀴즈풀기
-        boolean result = false;     // 음료 제조 결과 반환하기 위한 변수
+        final int RPS_GAME = 3;     // 음료 만드는 유형 변수 - 가위바위보
+
+        boolean result = false;     // 음료 제조 결과 반환하기 위한 변수 (성공하면 true, 실패하면 false를 반환한다)
 
         Random rd = new Random();                       // 랜덤 객체 생성
-        int makeBeverageType = rd.nextInt(2) + 1; // 1,2의 랜덤값을 makeBeverageType 변수에 담는다.
+        int makeBeverageType = rd.nextInt(3) + 1; // 1~3의 랜덤값을 makeBeverageType 변수에 담는다.
 
         UserAction userAction = new UserAction();        // 유저 액션 객체 생성
         switch (makeBeverageType)                        // 랜덤값 결과에 따라
@@ -31,12 +33,16 @@ public class UserAction
             case QUIZ_GAME:
                 result = makeBeverageQuiz(beverage);                // 퀴즈 게임 메소드 호출
                 break;
+
+            case RPS_GAME :
+                result = makeBeverageRPS();                         // 가위바위보 메소드 호출
+                break;
         }
 
         return result;  // 음료 제조 결과 반환
     }
 
-    // 음료 만드는 유형 : 제시하는 문자열 따라치기
+    // 음료 만드는 미니게임1 : 제시하는 문자열 따라치기
     public boolean makeBeverageTyping(Beverage beverage)
     {
         // 랜덤 값에 따라 생성할 문자 유형 지정하는 변수
@@ -117,7 +123,7 @@ public class UserAction
         return result;
     }
 
-    // 음료 만드는 메소드2 : 레시피 외우기(퀴즈)
+    // 음료 만드는 미니게임 2 : 레시피 외우기(퀴즈)
     public boolean makeBeverageQuiz(Beverage beverage)
     {
         boolean result = false;  // 이 메소드가 반환하는 값을 담을 변수
@@ -286,7 +292,7 @@ public class UserAction
                         // test
                         //System.out.println(User.getWeekFailNum() + 1);
 
-                        User.setHp(User.getHp() - 1 );                    // 유저 체력 1 감소
+                        User.setHp(User.getHp() - 1);                     // 유저 체력 1 감소
                         return false;                                     // false 반환, 메소드 종료
                     }
                     else
@@ -352,7 +358,7 @@ public class UserAction
                             //User.setWeekFailNum(User.getWeekFailNum() + 1);   // 이번주 음료제조 실패 횟수 1 증가
 
                             // test
-                            System.out.println(User.getWeekFailNum() + 1);
+                            //System.out.println(User.getWeekFailNum() + 1);
 
                             User.setHp(User.getHp() - 1 );                    // 유저 체력 1 감소
                             result = false;                                   // false 반환, 메소드 종료
@@ -396,6 +402,91 @@ public class UserAction
     }// end makeBeverageQuiz()
 
 
+    // 음료만드는 미니게임3 : 가위바위보
+    public boolean makeBeverageRPS()
+    {
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("                             음료 만들기 ");
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println(" 손님과 가위바위보를 해서 이기세요. ");
+        System.out.println("------------------------------------------------------------------------");
+
+        boolean result = true;  // 게임 결과 담는 변수
+        boolean check = true;   // 반복여부 체크하는 변수
+        String selectStr;       // 사용자의 선택값을 담을 변수
+        int select = 0;         // selectStr를 int 로 변환해 사용자의 선택값을 담을 변수
+
+        while(check)
+        {
+            System.out.println(" 1. 가위  2.바위  3.보 ");
+            System.out.println("------------------------------------------------------------------------");
+            Scanner sc = new Scanner(System.in);
+            System.out.print(" 선택 : ");
+            selectStr = sc.nextLine();
+
+            // 입력받은 값이 숫자인지 확인
+            try
+            {
+                // 자료형 변경한 뒤(String → int) int형에 담는다.
+                select = Integer.parseInt(selectStr);
+                // int형으로 변경되지 않는다면 NumberFormatException 발생
+
+                if (select < 1 || select > 3)// 주어진 값 이외의 수를 선택한 경우
+                {
+                    System.out.println("========================================================================");
+                    System.out.println(" 올바른 값을 입력해주세요.");
+                    check = true;
+                }
+                else
+                {
+                    // 손님의 선택값을 랜덤으로 지정
+                    Random rd = new Random();                   // 랜덤 객체 생성
+                    int randomNum = rd.nextInt(3);        // 0~2 사이의 랜덤값을 randomNum 변수에 담는다.
+
+                    final int ROCK = 1;     // 바위
+                    final int PAPER = 2;    // 보
+                    final int SCISSOR = 3;  // 가위
+
+                    if(randomNum == select)     // 손님의 선택값과 유저의 선택값이 같으면
+                    {
+                        System.out.println("------------------------------------------------------------------------");
+                        System.out.println(" 비겼습니다! 다시 진행해주세요 ");
+                        check = true;       // 반복하도록 check 에 true 값을 담는다.
+                    }
+                    else if(randomNum == ROCK && select == PAPER
+                            || randomNum == PAPER && select == SCISSOR
+                            || randomNum == SCISSOR && select == ROCK)  // 유저가 이기는 경우라면
+                    {
+                        System.out.println("------------------------------------------------------------------------");
+                        System.out.println(" 손님에게 이겼습니다 ! ");
+                        result = true;      // 결과에 true 값을 담는다.
+                        check = false;      // 반복문을 빠져나간다.
+
+
+                    }
+                    else    // 유저가 지는 경우라면
+                    {
+                        System.out.println("------------------------------------------------------------------------");
+                        System.out.println(" 손님에게 졌습니다 ! ");
+
+                        User.setHp(User.getHp() - 1);   // 유저 체력 1 감소
+                        result = false;                 // 결과에 false 값을 담는다.
+                        check = false;                  // 반복문을 빠져나간다.
+                    }
+                }
+
+            }
+            catch (NumberFormatException e) // NumberFormatException 발생한다면
+            {
+              check = true;   // check 에 true 담아서 다시 반복
+              // select = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+            }
+
+        }
+
+        return result;
+    }
+
     // 음료 제조 결과 출력하는 메소드
     public void makeBeverageResult(boolean result)
     {
@@ -408,8 +499,6 @@ public class UserAction
             System.out.printf(" 현재 %s님의 체력 : %d\n", User.getName(), User.getHp());
             System.out.println("========================================================================");
 
-            // test
-            System.out.println(User.getWeekFailNum() + 1);
         }
         else
         {
