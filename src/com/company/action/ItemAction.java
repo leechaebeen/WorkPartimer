@@ -270,7 +270,8 @@ public class ItemAction
         if(User.getProperty() >= item.getHpPrice())  // 체력 증가 가격보다 보유한 코인이 많거나 같으면
         {
             User.setProperty(User.getProperty() - item.getHpPrice());    // 계산하고
-            User.setSetHp(User.getSetHp()+1); // 체력 설정값 추가
+            User.setSetHp(User.getSetHp()+2); // 체력 설정값 증가
+            User.setHp(User.getSetHp());      // 증가된 체력 설정값으로 현재 체력 설정
 
             System.out.println("========================================================================");
             System.out.printf(" %d 코인을 사용했습니다.\n", item.getHpPrice());
@@ -333,7 +334,7 @@ public class ItemAction
             System.out.printf(" 현재 보유 코인      : %d코인\n", User.getProperty());
             System.out.println("========================================================================");
             SubRun subRun = new SubRun();    // 실행 객체 생성
-            subRun.buyPermanentItem(); // 이전으로
+            subRun.buyPermanentItem();       // 이전으로
         }
 
     }// end buyHp()
@@ -348,10 +349,11 @@ public class ItemAction
         // 아이템 객체 생성
         Item item = new Item();
 
-        if(User.getProperty() >= item.getFeelingPrice())  // 체력 증가 가격보다 보유한 코인이 많거나 같으면
+        if(User.getProperty() >= item.getFeelingPrice())  // 인내력 증가 가격보다 보유한 코인이 많거나 같으면
         {
             User.setProperty(User.getProperty() - item.getFeelingPrice());    // 계산하고
-            User.setSetFeeling(User.getSetFeeling()+1); // 인내력 설정값 추가
+            User.setSetFeeling(User.getSetFeeling()+2); // 인내력 설정값 증가
+            User.setFeeling(User.getSetFeeling());      // 증가된 인내력으로 현재 인내력 초기화
 
             System.out.println("========================================================================");
             System.out.printf(" %d 코인을 사용했습니다.\n", item.getFeelingPrice());
