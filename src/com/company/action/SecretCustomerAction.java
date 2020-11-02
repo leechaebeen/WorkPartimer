@@ -12,7 +12,8 @@ public class SecretCustomerAction extends SpecialCustomerAction
     private static int secretCustomerCnt; // 등장횟수 누적해서 담는 변수
 
     @Override
-    public void orderTalkDown(Beverage beverage)
+    // 음료를 주문하는 경우 true, 주문하지 않는 경우 false 반환
+    public boolean orderTalkDown(Beverage beverage)
     {
         String iceOption;       // 아이스 옵션 대사 담을 변수
         String whippingCream;   // 휘핑크림 대사 담을 변수
@@ -68,6 +69,7 @@ public class SecretCustomerAction extends SpecialCustomerAction
                 System.out.println("========================================================================");
                 System.out.println(" 매장에 자리가 없어서 손님이 나갔습니다. ");
                 System.out.println("========================================================================");
+                return false;       // false 반환, 메소드 종료
             }
             else
             {
@@ -91,10 +93,12 @@ public class SecretCustomerAction extends SpecialCustomerAction
             }
         }
 
+        return true;
     }
 
     @Override
-    public void orderFight(Beverage beverage)
+    // 음료를 주문하는 경우 true, 주문하지 않는 경우 false 반환
+    public boolean orderFight(Beverage beverage)
     {
         String iceOption;       // 아이스 옵션 대사 담을 변수
         String whippingCream;   // 휘핑크림 대사 담을 변수
@@ -166,6 +170,7 @@ public class SecretCustomerAction extends SpecialCustomerAction
                 System.out.println("========================================================================");
                 System.out.println(" 매장에 자리가 없어서 손님이 나갔습니다. ");
                 System.out.println("========================================================================");
+                return false;       // false 반환, 메소드 종료
             }
             else
             {
@@ -188,10 +193,13 @@ public class SecretCustomerAction extends SpecialCustomerAction
                 System.out.println("========================================================================");
             }
         }
+
+        return true;
     }
 
     @Override
-    public void orderToPartimer(Beverage beverage)
+    // 음료를 주문하는 경우 true, 주문하지 않는 경우 false 반환
+    public boolean orderToPartimer(Beverage beverage)
     {
         String iceOption;       // 아이스 옵션 대사 담을 변수
         String whippingCream;   // 휘핑크림 대사 담을 변수
@@ -242,6 +250,7 @@ public class SecretCustomerAction extends SpecialCustomerAction
                 System.out.println("========================================================================");
                 System.out.println(" 매장에 자리가 없어서 손님이 나갔습니다. ");
                 System.out.println("========================================================================");
+                return false;       // false 반환, 메소드 종료
             }
             else
             {
@@ -266,6 +275,7 @@ public class SecretCustomerAction extends SpecialCustomerAction
             }
         }
 
+        return true;
     }
 
     // 외부에서 속성에 접근할 수 있도록 getter/setter 생성

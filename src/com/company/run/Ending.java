@@ -1,7 +1,6 @@
 package com.company.run;
 
-import com.company.data.Cafe;
-import com.company.data.Item;
+import com.company.action.UserAction;
 import com.company.data.User;
 
 import java.util.Scanner;
@@ -45,7 +44,6 @@ public class Ending
             }
         }
 
-        // 중복되는 값이 없다면
         if(flag) // flag 가 true 일 때(== 중복되는 값이 없다면) 조건문 실행
         {
             for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼 반복해서
@@ -109,7 +107,6 @@ public class Ending
             }
         }
 
-        // 중복되는 값이 없다면
         if(flag) // flag 가 true 일 때(== 중복되는 값이 없다면) 조건문 실행
         {
             for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼 반복해서
@@ -161,11 +158,11 @@ public class Ending
         {
             if (ending == SCOUT_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
             {
-                flag = false;                    // flag 에 false 대입
+                flag = false;                    // flag 에 false 대입하고
+                break;                           // 반복문 빠져나온다.
             }
         }
 
-        // 중복되는 값이 없다면
         if(flag) // flag 가 true 일 때(== 중복되는 값이 없다면) 조건문 실행
         {
             for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼 반복해서
@@ -213,15 +210,15 @@ public class Ending
         int BOSS_ENDING = 4;
 
         // 배열에 중복되는 엔딩 유형 있는지 비교
-        for (int ending : endings)      // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
+        for (int ending : endings)              // 0부터 (배열의 길이-1)까지 반복(== 엔딩 유형의 수만큼 반복)
         {
-            if (ending == BOSS_ENDING)   // 엔딩 유형과 중복되는 값이 있다면
+            if (ending == BOSS_ENDING)          // 엔딩 유형과 중복되는 값이 있다면
             {
-                flag = false;                    // flag 에 false 대입하고
-                break;                           // 반복문 빠져나온다.
+                flag = false;                   // flag 에 false 대입하고
+                break;                          // 반복문 빠져나온다.
             }
         }
-        // 중복되는 값이 없다면
+
         if(flag) // flag 가 true 일 때(== 중복되는 값이 없다면) 조건문 실행
         {
             for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼 반복해서
@@ -275,7 +272,6 @@ public class Ending
             }
         }
 
-        // 중복되는 값이 없다면
         if(flag) // flag 가 true 일 때(== 중복되는 값이 없다면) 조건문 실행
         {
             for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼 반복해서
@@ -300,7 +296,7 @@ public class Ending
         System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
-        System.out.printf("\t\t\t\t %s님은 제조 실수가 잦아서 해고되었습니다.\n", User.getName());
+        System.out.printf("\t\t\t\t %s님은 제조 실패 확률이 높아 해고되었습니다.\n", User.getName());
         System.out.println("\t\t\t\t 괜찮습니다. 카페는 많으니까요... 힘내세요! ");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println();
@@ -309,7 +305,7 @@ public class Ending
     }
 
 
-    // 6. 3주차가 지나고 이도저도 아닌 경우 : 알바 엔딩
+    // 6. 4주차가 지나고 이도저도 아닌 경우 : 알바 엔딩 (호출 완료)
     public void partimerEnding()
     {
         // 엔딩 저장
@@ -329,7 +325,6 @@ public class Ending
             }
         }
 
-        // 중복되는 값이 없다면
         if(flag) // flag 가 true 일 때(== 중복되는 값이 없다면) 조건문 실행
         {
             for (int i = 0; i < endings.length; i++)    // 0부터 배열 길이만큼 반복해서
@@ -425,7 +420,6 @@ public class Ending
 
         final int STOP = 1;     // 프로그램 종료하는 선택지
         final int RESTART = 2;  // 다시 시작하는 선택지
-
         while(true)
         {
             switch(result)
@@ -435,40 +429,14 @@ public class Ending
                     break;
 
                 case RESTART: // 다시 시작하기
-                    reset();  // 이전 플레이의 모든 세팅값 리셋하는 메소드
-                    Run run = new Run();
-                    run.initialRun();
+
+                    UserAction userAction = new UserAction();   // 유저 기능 객체 생성 
+                    userAction.reset();                         // 기존 값 초기화하는 메소드 호출 
+                    GameRun gameRun = new GameRun();            // 게임 실행 객체 생성
+                    gameRun.initialRun();                       // 최초 실행 메소드 호츨
                     break;
             }
         }
-
-    }
-
-    // 이전 플레이의 모든 값 리셋
-    public void reset()
-    {
-        // 유저 관련 값 리셋
-        User.setSetHp(5);
-        User.setSetFeeling(5);
-        User.setHp(5);
-        User.setFeeling(5);
-        User.setProperty(0);
-        User.setSkillLevel(1);
-        User.setWorkingDays(0);
-        User.setSuccessNum(0);
-        User.setFailNum(0);
-
-        // 아이템 관련 값 리셋
-        Item.setCake(0);
-        Item.setSandwich(0);
-        Item.setChoco(0);
-        Item.setMacaron(0);
-
-        // 카페 관련 값 리셋
-        Cafe.setTotalCustomerNum(0);
-        Cafe.setSetChair(1);
-        Cafe.setSetCup(1);
-        Cafe.setSetMug(1);
 
     }
 

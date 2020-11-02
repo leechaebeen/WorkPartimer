@@ -1,13 +1,15 @@
 package com.company.action;
 
 import com.company.data.Beverage;
+import com.company.data.Cafe;
+import com.company.data.Item;
 import com.company.data.User;
 
 import java.util.Random;
 import java.util.Scanner;
 
 // 아르바이트생(User)의 기능을 담은 클래스
-public class userAction
+public class UserAction
 {
     // 음료 만드는 메소드
     public boolean makeBeverage(Beverage beverage)
@@ -19,7 +21,7 @@ public class userAction
         Random rd = new Random();                       // 랜덤 객체 생성
         int makeBeverageType = rd.nextInt(2) + 1; // 1,2의 랜덤값을 makeBeverageType 변수에 담는다.
 
-        userAction userAction = new userAction();        // 유저 액션 객체 생성
+        UserAction userAction = new UserAction();        // 유저 액션 객체 생성
         switch (makeBeverageType)                        // 랜덤값 결과에 따라
         {
             case TYPING_GAME:
@@ -98,15 +100,18 @@ public class userAction
         */
 
         // 제시한 문자열과 입력받은 문자열이 일치하는지 비교
-        if (sbStr.equals(inputStr))                         // 일치하면
+        if (sbStr.equals(inputStr))                                   // 일치하면
         {
-            result = true;                                  // result 에 true 를 담고(true 반환)
-            User.setSuccessNum(User.getSuccessNum() + 1);   // 음료제조 성공횟수 1 증가
+            result = true;                                            // result 에 true 를 담고(true 반환)
+            //User.setTotalSuccessNum(User.getTotalSuccessNum() + 1);   // 음료제조 총 성공횟수 1 증가
+            //User.setWeekSuccessNum(User.getWeekSuccessNum() + 1);     // 이번주 음료제조 성공횟수 1 증가
         }
-        else                                                // 일치하지 않으면
+        else                                                          // 일치하지 않으면
         {
-            User.setFailNum(User.getFailNum() + 1);         // 음료제조 실패 횟수 1 증가
-            User.setHp(User.getHp() - 1 );                  // 유저 체력 1 감소 , false 반환
+            //User.setTotalFailNum(User.getTotalFailNum() + 1);         // 음료제조 총 실패 횟수 1 증가
+            //User.setWeekFailNum(User.getWeekFailNum() + 1);           // 이번주 음료제조 실패 횟수 1 증가
+
+            User.setHp(User.getHp() - 1 );                            // 유저 체력 1 감소 , false 반환
         }
 
         return result;
@@ -116,12 +121,12 @@ public class userAction
     public boolean makeBeverageQuiz(Beverage beverage)
     {
         boolean result = false;  // 이 메소드가 반환하는 값을 담을 변수
-        boolean check = true;    // 반복여부 결정할 변수
+
         String resultStr;        // 사용자에게 입력받은 값을 담기 위한 변수
         int quizResult = 0;      // 사용자에게 입력받은 값을 형변환해서 담기 위한 변수
+        boolean check = true;    // 반복여부 결정할 변수
 
         final int YES = 1;       // 퀴즈 선택지 (1. 그렇다)
-        final int NO = 2;        // 퀴즈 선택지 (2. 아니다)
 
         // 음료 관련 변수
         boolean ismilk = beverage.isMilk();                 // 우유 들어가는 음료인지의 여부를 담을 변수
@@ -135,13 +140,12 @@ public class userAction
         System.out.println("                            음료 만들기 ");
         System.out.println("------------------------------------------------------------------------");
         System.out.println(" 하단에 제시된 퀴즈를 맞혀주세요. ");
-        System.out.println();
 
         // 퀴즈 1 : 우유 들어가는 음료인지
         while (check)
         {
-
-            System.out.println(" 주문받은 음료는 우유가 들어간다.");
+            System.out.println();
+            System.out.println(" Q.주문받은 음료는 우유가 들어간다.");
             System.out.println(" 1. 그렇다  2. 아니다");
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
@@ -151,16 +155,23 @@ public class userAction
             // 입력받은 값이 숫자인지 확인
             try
             {
-                // 입력받은 값의 공백을 제거하고
                 // 자료형 변경한 뒤(String → int) int형에 담는다.
-                quizResult = Integer.parseInt(resultStr.replace(" ",""));
+                quizResult = Integer.parseInt(resultStr);
                 check = false;
                 // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                 // int형으로 변경되지 않는다면 NumberFormatException 발생
 
-                if (ismilk) // 우유가 들어갔다면
+                if (quizResult < 1 || quizResult > 2)// 주어진 값 이외의 수를 선택한 경우
+                {
+                    System.out.println("========================================================================");
+                    System.out.println(" 올바른 값을 입력해주세요.");
+                    System.out.println("========================================================================");
+                    check = true;
+                }
+                else if (ismilk) // 우유가 들어갔다면
                 {
                     System.out.println("------------------------------------------------------------------------");
+
                     if (quizResult == YES)
                     {
                         System.out.println(" 정답입니다. ");
@@ -169,9 +180,14 @@ public class userAction
                     {
                         System.out.println(" 오답입니다. ");
 
-                        User.setFailNum(User.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
-                        User.setHp(User.getHp() - 1 );          // 유저 체력 1 감소
-                        return false;                           // false 반환, 메소드 종료
+                        //User.setTotalFailNum(User.getTotalFailNum() + 1); // 총 음료제조 실패 횟수 1 증가
+                        //User.setWeekFailNum(User.getWeekFailNum() + 1);   // 이번주 음료제조 실패 횟수 1 증가
+
+                        // test
+                        //System.out.println(User.getWeekFailNum() + 1);
+
+                        User.setHp(User.getHp() - 1 );                    // 유저 체력 1 감소
+                        return false;                                     // false 반환, 메소드 종료
                     }
                 }
                 else // 우유가 들어가지 않았다면
@@ -180,9 +196,14 @@ public class userAction
                     if (quizResult == YES)
                     {
                         System.out.println(" 오답입니다. ");
-                        User.setFailNum(User.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
-                        User.setHp(User.getHp() - 1 );          // 유저 체력 1 감소
-                        return false;                           // false 반환, 메소드 종료
+                        //User.setTotalFailNum(User.getTotalFailNum() + 1); // 총 음료제조 실패 횟수 1 증가
+                        //User.setWeekFailNum(User.getWeekFailNum() + 1);   // 이번주 음료제조 실패 횟수 1 증가
+
+                        // test
+                        //System.out.println(User.getWeekFailNum() + 1);
+
+                        User.setHp(User.getHp() - 1 );                    // 유저 체력 1 감소
+                        return false;                                     // false 반환, 메소드 종료
                     }
                     else
                     {
@@ -192,68 +213,83 @@ public class userAction
 
             } catch (NumberFormatException e) // NumberFormatException 발생한다면
             {
-                check = true;   // check 에 true 담아서 다시 반복
-                // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
-            }
-
-            if (quizResult < 1 || quizResult > 2)// 주어진 값 이외의 수를 선택한 경우
-            {
                 System.out.println("========================================================================");
                 System.out.println(" 올바른 값을 입력해주세요.");
-                check = true;
+                System.out.println("========================================================================");
+                check = true;   // check 에 true 담아서 다시 반복
             }
 
         }
 
         check = true;       // 반복문 다시 작동하도록 true 로 초기화
 
+
+
         // 퀴즈 2 : ICE 인지 HOT 인지
         while (check)
         {
-            System.out.println("========================================================================");
             System.out.println();
-            System.out.println(" 주문받은 음료는 ICE 이다.");
+            System.out.println(" Q.주문받은 음료는 ICE 이다.");
             System.out.println(" 1. 그렇다  2. 아니다");
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
 
-            resultStr = sc.nextLine();
+            resultStr = sc.nextLine();      // 사용자에게 입력받은 값을 변수에 담는다.
 
             // 입력받은 값이 숫자인지 확인
             try
             {
-                // 입력받은 값의 공백을 제거하고
                 // 자료형 변경한 뒤(String → int) int형에 담는다.
+                quizResult = Integer.parseInt(resultStr);
+                check = false;
                 // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                 // int형으로 변경되지 않는다면 NumberFormatException 발생
-                quizResult = Integer.parseInt(resultStr.replaceAll(" ",""));
-                check = false;
 
-                if (iceOption == 1) // ICE 라면
+                if (quizResult < 1 || quizResult > 2)// 주어진 값 이외의 수를 선택한 경우
+                {
+                    System.out.println("========================================================================");
+                    System.out.println(" 올바른 값을 입력해주세요.");
+                    System.out.println("========================================================================");
+                    check = true;
+                }
+                else if (iceOption == 1) // ICE 라면
                 {
                     System.out.println("------------------------------------------------------------------------");
+
                     if (quizResult == YES)
                     {
                         System.out.println(" 정답입니다. ");
-                    } else
+                    }
+                    else
                     {
                         System.out.println(" 오답입니다. ");
 
-                        User.setFailNum(User.getFailNum() + 1);   // 음료 제조 실패 횟수 1 증가
-                        User.setHp(User.getHp() - 1 );            // 유저 체력 1 감소
-                        return false;                             // false 반환, 메소드 종료
+                        //User.setTotalFailNum(User.getTotalFailNum() + 1); // 총 음료제조 실패 횟수 1 증가
+                        //User.setWeekFailNum(User.getWeekFailNum() + 1);   // 이번주 음료제조 실패 횟수 1 증가
+
+                        // test
+                        //System.out.println(User.getWeekFailNum() + 1);
+
+                        User.setHp(User.getHp() - 1 );                    // 유저 체력 1 감소
+                        return false;                                     // false 반환, 메소드 종료
                     }
-                } else // HOT 이라면
+                }
+                else // ICE가 아니라면
                 {
                     System.out.println("------------------------------------------------------------------------");
                     if (quizResult == YES)
                     {
                         System.out.println(" 오답입니다. ");
-                        User.setFailNum(User.getFailNum() + 1);   // 음료 제조 실패 횟수 1 증가
-                        User.setHp(User.getHp() - 1 );            // 유저 체력 1 감소
-                        return false;                             // false 반환, 메소드 종료
+                       // User.setTotalFailNum(User.getTotalFailNum() + 1); // 총 음료제조 실패 횟수 1 증가
+                       // User.setWeekFailNum(User.getWeekFailNum() + 1);   // 이번주 음료제조 실패 횟수 1 증가
 
-                    } else
+                        // test
+                        //System.out.println(User.getWeekFailNum() + 1);
+
+                        User.setHp(User.getHp() - 1 );                    // 유저 체력 1 감소
+                        return false;                                     // false 반환, 메소드 종료
+                    }
+                    else
                     {
                         System.out.println(" 정답입니다. ");
                     }
@@ -261,25 +297,22 @@ public class userAction
 
             } catch (NumberFormatException e) // NumberFormatException 발생한다면
             {
-                check = true;   // check 에 true 담아서 다시 반복
-                // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
-            }
-
-            if (quizResult < 1 || quizResult > 2)// 주어진 값 이외의 수를 선택한 경우
-            {
                 System.out.println("========================================================================");
                 System.out.println(" 올바른 값을 입력해주세요.");
-                check = true;
+                System.out.println("========================================================================");
+                check = true;   // check 에 true 담아서 다시 반복
             }
 
+        }
+        
             check = true;       // 반복문 다시 작동하도록 true 로 초기화
 
+        
             // 퀴즈 3 : 휘핑크림 추가했는지
             while (check)
             {
-                System.out.println("========================================================================");
                 System.out.println();
-                System.out.println(" 주문받은 음료는 휘핑크림을 올린다.");
+                System.out.println(" Q.주문받은 음료는 휘핑크림을 올린다.");
                 System.out.println(" 1. 그렇다  2. 아니다");
                 System.out.println("------------------------------------------------------------------------");
                 System.out.print(" 선택 : ");
@@ -288,29 +321,41 @@ public class userAction
                 // 입력받은 값이 숫자인지 확인
                 try
                 {
-                    // 입력받은 값의 공백을 제거하고
                     // 자료형 변경한 뒤(String → int) int형에 담는다.
-                    quizResult = Integer.parseInt(resultStr.replace(" ",""));
+                    quizResult = Integer.parseInt(resultStr);
                     check = false;
                     // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                     // int형으로 변경되지 않는다면 NumberFormatException 발생
 
-                    if (whippingCream == 1) // 휘핑크림 올라간다면
+                    if (quizResult < 1 || quizResult > 2)// 주어진 값 이외의 수를 선택한 경우
+                    {
+                        System.out.println("========================================================================");
+                        System.out.println(" 올바른 값을 입력해주세요.");
+                        System.out.println("========================================================================");
+                        check = true;
+                    }
+                    else if (whippingCream == 1) // 휘핑크림 올라간다면
                     {
                         System.out.println("------------------------------------------------------------------------");
                         if (quizResult == YES)
                         {
                             System.out.println(" 정답입니다. ");
-                            User.setSuccessNum(User.getSuccessNum() + 1 ); // 음료 제조 성공 횟수 1 증가
+                            //User.setTotalSuccessNum(User.getTotalSuccessNum() + 1 ); // 총 음료제조 성공 횟수 1 증가
+                            //User.setWeekSuccessNum(User.getWeekSuccessNum() + 1);    // 이번주 음료제조 성공횟수 1 증가
                             result = true;  // true 값 반환하도록 변수에 담는다
 
                         } else
                         {
                             System.out.println(" 오답입니다. ");
 
-                            User.setFailNum(User.getFailNum() + 1); // 음료 제조 실패 횟수 1 증가
-                            User.setHp(User.getHp() - 1 );          // 유저 체력 1 감소
-                            result = false;                         // false 반환, 메소드 종료
+                            //User.setTotalFailNum(User.getTotalFailNum() + 1); // 총 음료제조 실패 횟수 1 증가
+                            //User.setWeekFailNum(User.getWeekFailNum() + 1);   // 이번주 음료제조 실패 횟수 1 증가
+
+                            // test
+                            System.out.println(User.getWeekFailNum() + 1);
+
+                            User.setHp(User.getHp() - 1 );                    // 유저 체력 1 감소
+                            result = false;                                   // false 반환, 메소드 종료
                         }
                     }
                     else // 휘핑크림 올라가지 않는다면
@@ -319,32 +364,32 @@ public class userAction
                         if (quizResult == YES)
                         {
                             System.out.println(" 오답입니다. ");
-                            User.setFailNum(User.getFailNum() + 1);   // 음료 제조 실패 횟수 1 증가
-                            User.setHp(User.getHp() - 1 );            // 유저 체력 1 감소
-                            return false;                             // false 반환, 메소드 종료
+                            //User.setTotalFailNum(User.getTotalFailNum() + 1);   // 총 음료제조 실패 횟수 1 증가
+                           // User.setWeekFailNum(User.getWeekFailNum() + 1);     // 이번주 음료제조 실패 횟수 1 증가
+                            // test
+                            //System.out.println(User.getWeekFailNum() + 1);
+
+                            User.setHp(User.getHp() - 1 );                      // 유저 체력 1 감소
+                            return false;                                       // false 반환, 메소드 종료
 
                         } else
                         {
                             System.out.println(" 정답입니다. ");
-                            User.setSuccessNum(User.getSuccessNum() + 1 ); // 음료 제조 성공 횟수 1 증가
+                           //User.setTotalSuccessNum(User.getTotalSuccessNum() + 1 ); // 총 음료 제조 성공 횟수 1 증가
+                            //User.setWeekSuccessNum(User.getWeekSuccessNum() + 1);    // 이번주 음료제조 성공횟수 1 증가
                             result = true;  // true 값 반환
                         }
                     }
 
                 } catch (NumberFormatException e) // NumberFormatException 발생한다면
                 {
-                    check = true;   // check 에 true 담아서 다시 반복
-                    // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
-                }
-
-                if (quizResult < 1 || quizResult > 2)// 주어진 값 이외의 수를 선택한 경우
-                {
                     System.out.println("========================================================================");
                     System.out.println(" 올바른 값을 입력해주세요.");
-                    check = true;
+                    System.out.println("========================================================================");
+                    check = true;   // check 에 true 담아서 다시 반복
                 }
+
             }
-        }
 
         return result;
 
@@ -362,6 +407,9 @@ public class userAction
             System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", User.getName());
             System.out.printf(" 현재 %s님의 체력 : %d\n", User.getName(), User.getHp());
             System.out.println("========================================================================");
+
+            // test
+            System.out.println(User.getWeekFailNum() + 1);
         }
         else
         {
@@ -369,6 +417,38 @@ public class userAction
             System.out.println("                          ✨ 음료 만들기 성공 ✨  ");
             System.out.println("------------------------------------------------------------------------");
         }
+
+    }
+
+    // 이전 플레이의 모든 값 리셋
+    public void reset()
+    {
+        // 유저 관련 값 리셋
+        User.setSetHp(5);
+        User.setSetFeeling(5);
+        User.setHp(5);
+        User.setFeeling(5);
+        User.setProperty(0);
+        User.setSkillLevel(1);
+        User.setWorkingDays(0);
+        User.setTotalSuccessNum(0);
+        User.setTotalFailNum(0);
+        User.setWeekFailNum(0);
+        User.setWeekSuccessNum(0);
+
+        // 아이템 관련 값 리셋
+        Item.setCake(0);
+        Item.setSandwich(0);
+        Item.setChoco(0);
+        Item.setMacaron(0);
+
+        // 카페 관련 값 리셋
+        Cafe.setTotalCustomerNum(0);
+        Cafe.setTodayCustomerNum(0);
+        Cafe.setWeekCustomerNum(0);
+        Cafe.setSetChair(1);
+        Cafe.setSetCup(1);
+        Cafe.setSetMug(1);
 
     }
 

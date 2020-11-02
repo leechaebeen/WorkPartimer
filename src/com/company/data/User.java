@@ -8,13 +8,12 @@ public class User
     // 유저에게 입력받은 이름
     private static String name;
 
-
     // 유저의 현재 능력치
     private static int skillLevel = 1;                      // 현재 숙련도 : 하루에 등장하는 손님 수와 같다. 조건을 만족하면 주말마다 1씩 증가할 수 있다.
                                                             // 조건 : 누적 음료 제조 성공 횟수 >= (하루 최대 방문자 수)*4
-    protected static int hp = User.getSetHp();              // 현재 체력
-    private static int feeling = User.getSetFeeling();      // 현재 인내력
-    // 체력과 인내력은 한 주가 지날 때마다 세팅된 값으로 초기화된다. 첫 주는 초기화되지 않으므로 세팅된 값으로 초기화해준다.
+    protected static int hp = 5;              // 현재 체력
+    private static int feeling = 5;      // 현재 인내력
+    // 체력과 인내력은 한 주가 지날 때마다 세팅된 값으로 초기화된다. 첫 주는 초기화되지 않으므로 5로 초기화해준다.
 
 
     // 캐릭터의 능력치 세팅값 : 아이템을 구입해 증가시킬 수 있다.
@@ -30,9 +29,11 @@ public class User
 
 
     // 음료 제조 관련 변수
-    private static int failNum;     // 음료 제조 실패 총 횟수
-    private static int successNum;  // 음료 제조 성공 총 횟수
+    private static int totalFailNum;     // 총 음료제조 실패 횟수
+    private static int totalSuccessNum;  // 총 음료제조 성공 횟수
 
+    private static int weekFailNum;    // 이번주 음료제조 실패 횟수
+    private static int weekSuccessNum; // 이번주 음료제조 성공 횟수
 
     // 근무 일자 변수
     private static int workingDays; // 총 근무일자 : 주말마다 상점 방문 가능/ 최대 플레이 가능 일자 설정하기(아직 설정X)
@@ -130,24 +131,24 @@ public class User
         User.setFeeling = setFeeling;
     }
 
-    public static int getFailNum()
+    public static int getTotalFailNum()
     {
-        return failNum;
+        return totalFailNum;
     }
 
-    public static void setFailNum(int failNum)
+    public static void setTotalFailNum(int totalFailNum)
     {
-        User.failNum = failNum;
+        User.totalFailNum = totalFailNum;
     }
 
-    public static int getSuccessNum()
+    public static int getTotalSuccessNum()
     {
-        return successNum;
+        return totalSuccessNum;
     }
 
-    public static void setSuccessNum(int successNum)
+    public static void setTotalSuccessNum(int totalSuccessNum)
     {
-        User.successNum = successNum;
+        User.totalSuccessNum = totalSuccessNum;
     }
 
     public static int[] getEndings()
@@ -155,4 +156,33 @@ public class User
         return endings;
     }
 
+    public static void setSalary(int salary)
+    {
+        User.salary = salary;
+    }
+
+    public static int getWeekFailNum()
+    {
+        return weekFailNum;
+    }
+
+    public static void setWeekFailNum(int weekFailNum)
+    {
+        User.weekFailNum = weekFailNum;
+    }
+
+    public static int getWeekSuccessNum()
+    {
+        return weekSuccessNum;
+    }
+
+    public static void setWeekSuccessNum(int weekSuccessNum)
+    {
+        User.weekSuccessNum = weekSuccessNum;
+    }
+
+    public static void setEndings(int[] endings)
+    {
+        User.endings = endings;
+    }
 }

@@ -9,7 +9,8 @@ public class Cafe
 
     // 카페 방문자 수
     private static int todayCustomerNum;    // 현재 하루 방문자 수
-    private static int totalCustomerNum;    // 총 카페 방문자 수
+    private static int totalCustomerNum;    // 총 방문자 수
+    private static int weekCustomerNum;     // 이번주 방문자 수
 
     // 카페 설정값
     private static int setCup = 1;          // 설정되어 있는 유리잔 수
@@ -97,5 +98,13 @@ public class Cafe
         Cafe.setChair = setChair;
     }
 
+    public static int getWeekCustomerNum()
+    {
+        return weekCustomerNum;
+    }
 
+    public static void setWeekCustomerNum(int weekCustomerNum)
+    {
+        Cafe.weekCustomerNum = weekCustomerNum;
+    }
 }

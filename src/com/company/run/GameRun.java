@@ -1,17 +1,157 @@
-package com.company.action;
+package com.company.run;
 
+import com.company.action.SecretCustomerAction;
 import com.company.data.Cafe;
 import com.company.data.User;
-import com.company.run.Ending;
-import com.company.run.Run;
+
 import java.util.Random;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
-// 카페 운영의 메인 흐름을 담은 클래스(평일과 주말)
-public class CafeAction
+// 게임의 메인 흐름을 담은 클래스(최초실행, 평일과 주말)
+public class GameRun
 {
-    // 하루 시작 메소드: 몇주차 며칠인지 보여줌
-    public void start()
+    // 최초 실행하는 메소드
+    public void initialRun()
+    {
+        String resultStr;
+        int result = 0;
+        // 초기화해야하는 이유  : Primitive type 인 지역변수는 자동으로 초기화가 안된다.
+        // → 예측할 수 없는 값을 담는걸 방지하기 위해 초기화 해줘야 한다.
+
+        // 스캐너 객체 생성
+        Scanner sc = new Scanner(System.in);
+
+        // 게임 소개
+        System.out.println();
+        System.out.println();
+
+
+        System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
+        System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
+        System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
+        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
+        System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
+        System.out.println("　 　　　　　　。　　　　   　Work! partimer ! 　　ﾟ　　　.　 　　　　　　　　.");
+        System.out.println(",　　　　　　　　　.　 .　　　　　　　　.");
+        System.out.println("　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
+        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.");
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+        String userName; // 유저이름을 저장할 변수
+        boolean check;   // 조건에 맞게 이름 입력했는지 확인할 변수
+
+        do {
+            System.out.print(" 이름을 입력해주세요(한글만 가능) : ");
+            userName = sc.nextLine();                                   // 유저이름을 입력받고
+            userName = userName.replaceAll(" ", "");    // 공백을 제거하고
+            check = Pattern.matches("^[가-힣]*$", userName);       // 정규표현식을 이용해서 한글인지 확인한다. 한글인 경우 true 반환
+
+        }while (!check); // 입력받은 이름이 한글이 아니면 반복
+
+        User.setName(userName);         // 입력받은 유저이름 속성에 넣기
+
+        System.out.println();
+        System.out.println();
+        System.out.println("========================================================================");
+        System.out.println();
+        System.out.println();
+        System.out.printf(" %s님은 우주선에 탑승한 스파이입니다.\n",User.getName());
+        System.out.println();
+        System.out.println(" 하지만 스파이로서 미션을 수행하던 중 정체를 들켰습니다 ! ");
+        System.out.println();
+        System.out.println(" 치열한 토론 끝에 . . . ");
+
+        System.out.println();
+        System.out.println();
+
+        System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.     ");
+        System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
+        System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。    ");
+        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
+        System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
+        System.out.println("　 　　　　　　。　　　 。      　三 ඞ;;   　  　ﾟ　　　.　 　　　　　　　　.");
+        System.out.println(". 　。　　　        　    　。　　　　      •　 　        　　　     　　");
+        System.out.printf("\t\t。\t\t\t %s님은 결국 추방당했습니다 . . .     .          。\n", User.getName());
+        System.out.println(",　　　　　　　　　.　 .　　　　　　　　.");
+        System.out.println("　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
+        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.");
+        System.out.println();
+        System.out.println();
+
+
+        System.out.println();
+        System.out.println();
+        System.out.printf(" 이곳저곳을 떠돌던 %s님은 우여곡절 끝에 지구에 정착했습니다.\n", User.getName());
+        System.out.println();
+        System.out.printf(" 지구에서 살아남기 위해 %s님은 일자리를 열심히 알아보았습니다.\n",User.getName());
+        System.out.println();
+        System.out.printf(" %s님은 오늘부터 카페 아르바이트를 시작했습니다.\n", User.getName());
+        System.out.println();
+        System.out.println(" 아르바이트를 진행하면서 다양한 엔딩을 볼 수 있습니다.");
+        System.out.println();
+        System.out.println(" 행운을 빕니다 . . . ! ");
+        System.out.println();
+
+        // 올바른 선택지를 선택할 때까지 반복
+        while(check) // check 는 위에서 입력받은 유저이름이 한글인걸 확인했기 때문에 true 인 상황이다.
+        {
+            System.out.println("========================================================================");
+            System.out.println(" 1. 시작하기  2.이름 재설정 ");
+            System.out.println("------------------------------------------------------------------------");
+            System.out.print(" 선택 : ");
+            resultStr = sc.nextLine();
+
+            // 입력받은 값이 숫자인지 확인
+            try
+            {
+                // 입력받은 값의 공백을 제거하고
+                // 자료형 변경한 뒤(String → int) int형에 담는다.
+                result = Integer.parseInt(resultStr.replace(" ",""));
+                check = false;
+                // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
+                // int형으로 변경되지 않는다면 NumberFormatException 발생
+            }
+            catch (NumberFormatException e) // NumberFormatException 발생한다면
+            {
+                check = true;   // check 에 true 담아서 다시 반복
+                // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+            }
+
+            if(result < 1 || result > 2 )// 주어진 값 이외의 수를 선택한 경우
+            {
+                System.out.println("========================================================================");
+                System.out.println(" 올바른 값을 입력해주세요.");
+                check = true;
+            }
+        }
+
+        final int START = 1;                // 게임 시작
+        final int INITIAL_RUN = 2;          // 초기화면 실행
+
+        GameRun gameRun = new GameRun(); // Cafe 객체 생성
+
+        while(true)
+        {
+            switch(result)              // 유저의 선택값에 따라 분기 처리
+            {
+                case  START:             // 1. 시작하기를 선택한 경우
+                    gameRun.open();
+                    break;
+
+                case INITIAL_RUN :       // 2. 다시 시작하기를 선택한 경우
+                    initialRun();
+                    break;
+            }
+
+        }
+
+    } //end initialRun()
+
+    // 카페 오픈 메소드(하루 단위, 평일): 몇주차 며칠인지 보여줌
+    public void open()
     {
         String[] days = {"월", "화", "수", "목","금","토"};   // 요일 배열. 토요일은 평일과 주말을 구분하기 위해 존재한다.
         String day = days[User.getWorkingDays() % 6];   // 요일 = 일한일수%6
@@ -31,6 +171,7 @@ public class CafeAction
             User.setWorkingDays(User.getWorkingDays() + 1);  // 지금까지 일한 일수에 하루를 더해준다.
 
             Cafe.setTodayCustomerNum(0);                // 하루 방문자 수 0으로 초기화
+
             Cafe.setChair(Cafe.getSetChair());          // 현재 카페의 의자 수를 세팅된 값으로 초기화
             Cafe.setCup(Cafe.getSetCup());              // 현재 유리컵 수를 세팅된 값으로 초기화
             Cafe.setMug(Cafe.getSetMug());              // 현재 머그잔 수를 세팅된 값으로 초기화
@@ -42,15 +183,15 @@ public class CafeAction
             System.out.println("                         ✨ 카페를 열었습니다 ✨ ");
             System.out.println();
 
-            business(); // 아르바이트하는 메소드
+            work(); // 아르바이트하는 메소드 호출 
         }
-        else    // 토요일이라면
+        else        // 토요일이라면
         {
             System.out.println();
             System.out.println("                         ✨ 주말이 되었습니다 ✨ ");
             System.out.println();
 
-            weekendInfo();  // 한 주의 아르바이트를 정산하는 메소드
+            weekendInfo();  // 아르바이트 결과를 정산하는 메소드 호출
 
         }
 
@@ -59,7 +200,7 @@ public class CafeAction
 
 
     // 아르바이트하는 메소드
-    public void business()
+    public void work()
     {
         String[] nums = {"첫", "두", "세", "네", "다섯", "여섯", "일곱", "여덟", "아홉", "열"}; // 손님수 표현하기 위한 배열
 
@@ -71,26 +212,27 @@ public class CafeAction
         Random rd = new Random();               // 랜덤클래스 객체 생성
         int randomNum = rd.nextInt(10)+1; // 1 ~ 10 사이의 랜덤값을 생성해서 변수에 담는다.
 
-        Run run = new Run();                    // 실행 객체 생성
+        SubRun subRun = new SubRun();           // 실행 객체 생성
 
-        if(randomNum <=7)                       // 랜덤값이 1 ~ 7 인 경우 일반 손님이 방문한다.
+        if(randomNum <=7)                       // 랜덤값이 1 ~ 7 인 경우
         {
-            run.comeCustomer();                 // 일반 손님이 등장하는 메소드 호출
+            subRun.comeCustomer();              // 일반 손님이 등장하는 메소드 호출
         }
-        else if(randomNum==8||randomNum==9)     // 랜덤값이 8,9인 경우 특별 손님이 방문한다.
+        else if(randomNum==8||randomNum==9)     // 랜덤값이 8,9인 경우
         {
-            run.comeSpecialCustomer();          // 특별 손님이 등장하는 메소드 호출
+            subRun.comeSpecialCustomer();       // 특별 손님이 등장하는 메소드 호출
         }
-        else                                    // 랜덤값이 10인 경우 비밀손님이 방문한다.
+        else                                    // 랜덤값이 10인 경우
         {
-            run.comeSecretCustomer();           // 비밀 손님이 등장하는 메소드 호출
+            subRun.comeSecretCustomer();        // 비밀 손님이 등장하는 메소드 호출
         }
 
-        selBusiness();                          // 선택지 고르는 메소드 호출(1. 계속하기 2. 마감하기 3.아이템 사용)
+        selWork();                          // 선택지 고르는 메소드 호출(1. 계속하기 2. 마감하기 3.아이템 사용)
 
     }// end business()
 
-    public void selBusiness()
+    // 한 주문을 처리한 뒤 등장하는 선택지 메소드
+    public void selWork()
     {
         boolean check;      // 아르바이트 반복 여부 체크하는 변수
         int result = 0;     // 주어진 값 외의 수를 입력했는지 비교할 때 사용할 변수
@@ -134,7 +276,7 @@ public class CafeAction
             else if(result == KEEP && Cafe.getTodayCustomerNum() == User.getSkillLevel()) // 계속하기를 선택했는데 숙련도와 방문한 손님 수가 같으면
             {
                 System.out.println("========================================================================");
-                System.out.printf("  %s님의 숙련도가 낮아 더이상 손님을 받을 수 없습니다. \n", User.getName());
+                System.out.printf(" %s님의 숙련도가 낮아 더이상 손님을 받을 수 없습니다. \n", User.getName());
                 result = 2;     // 손님을 그만 받는 선택지를 택하고
                 check = false;  // 반복문을 빠져나간다.
             }
@@ -146,7 +288,7 @@ public class CafeAction
             switch(result)  // 위에서 선택한 값에 따라서 해당하는 메소드를 호출한다
             {
                 case KEEP :                 // 계속 아르바이트한다.
-                    business();
+                    work();
                     break;
 
                 case STOP:                  // 다음날로 시간이 흐른다.
@@ -155,12 +297,12 @@ public class CafeAction
                     System.out.println(" ☾ ⋆*･ﾟ ⋆*･ﾟ ⋆. ･ﾟ. ⋆ * ･ﾟ. ⋆⋆ *･ﾟ⋆*･ﾟ ⋆ . ･ﾟ .⋆*･ﾟ .⋆ ⋆*･ﾟ ⋆*･ﾟ ⋆･ﾟ⋆ *･ﾟ ⋆･ﾟ");
                     System.out.println();
                     System.out.println();
-                    start();                // 하루 시작하는 메소드 호출
+                    open();                // 하루 시작하는 메소드 호출
                     break;
 
                 case ITEM :                 // 보유한 아이템을 보여주는 메소드 호출
-                    Run run = new Run();
-                    run.myItem();
+                    SubRun subRun = new SubRun();
+                    subRun.myItem();
                     break;
             }
         }
@@ -175,8 +317,8 @@ public class CafeAction
         // 두번째 토요일 : 11/6 == 1
 
         // 코인 제공 조건 만족하면
-        // 조건 : (음료 제조 성공 총 횟수 - 총 실패 횟수)/숙련도 > 총 방문자 수/2)
-        if((User.getSuccessNum()- User.getFailNum())/ User.getSkillLevel() > Cafe.getTotalCustomerNum()/2)
+        // 조건 : 이번주 성공횟수 > 이번주 실패횟수
+        if(User.getWeekSuccessNum() > User.getWeekFailNum())
         {
             User.setProperty(User.getProperty() + User.getSalary());    // 코인 제공
             // 전재산 = 현재 전재산 + 제공받는 급여코인
@@ -186,14 +328,14 @@ public class CafeAction
         }
         else    // 조건 만족하지 못하면
         {
-            System.out.println("                     코인을 획득하지 못했습니다! ");
+            System.out.println("                        코인을 획득하지 못했습니다! ");
 
         }
         System.out.println();
 
         // 숙련도 증가 조건 만족하면
-        // 조건 : 누적 음료 제조 성공 횟수 >= (하루 최대 방문자 수)*4
-        if(User.getSkillLevel()*4 <= User.getSuccessNum())
+        // 조건 : 숙련도 * 4 <= 누적 음료 제조 성공 횟수
+        if(User.getSkillLevel()*4 <= User.getTotalSuccessNum())
         {
             User.setSkillLevel(User.getSkillLevel()+1);     // 숙련도 1 증가
             System.out.println("                      ✨ 숙련도가 1 증가했습니다 ✨");
@@ -202,7 +344,8 @@ public class CafeAction
         }
         else    // 조건 만족하지 못하면
         {
-            System.out.println("                     숙련도에 변동이 없습니다! ");
+            System.out.println("                         숙련도에 변동이 없습니다! ");
+            System.out.println();
         }
 
         // 체력, 인내력 설정값으로 초기화
@@ -217,11 +360,25 @@ public class CafeAction
         System.out.printf("=========================       %d주차 정산       =========================\n", week);
         System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
         System.out.println();
-        System.out.printf(" 현재까지 방문한 손님 수 : %d \n", Cafe.getTotalCustomerNum());
-        System.out.printf(" 음료제조에 성공한 횟수 : %d \n", User.getSuccessNum());
-        System.out.printf(" 음료제조에 실패한 횟수 : %d \n", User.getFailNum());
+        System.out.printf(" 이번주 방문한 손님 수 : %d \n", Cafe.getWeekCustomerNum());
+        System.out.printf(" 이번주 음료제조에 성공한 횟수 : %d \n", User.getWeekSuccessNum());
+        System.out.printf(" 이번주 음료제조에 실패한 횟수 : %d \n", User.getWeekFailNum());
+        System.out.println();
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println();
+        System.out.printf(" 총 방문한 손님 수 : %d \n", Cafe.getTotalCustomerNum());
+        System.out.printf(" 총 음료제조에 성공한 횟수 : %d \n", User.getTotalSuccessNum());
+        System.out.printf(" 총 음료제조에 실패한 횟수 : %d \n", User.getTotalFailNum());
+        System.out.println();
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println();
         System.out.printf(" 보유한 코인 : %d\n", User.getProperty());
         System.out.println();
+
+        // 정산 출력 후
+        Cafe.setWeekCustomerNum(0);                // 주 방문자수 0으로 초기화
+        User.setWeekSuccessNum(0);                 // 주 음료제조 성공횟수 0으로 초기화
+        User.setWeekFailNum(0);                    // 주 음료제조 실패횟수 0으로 초기화
 
         // 엔딩 호출
         Ending ending = new Ending();                   // 엔딩객체 생성
@@ -269,9 +426,8 @@ public class CafeAction
             // 입력받은 값이 숫자인지 확인
             try
             {
-                // 입력받은 문자열의 공백을 제거하고
                 // 자료형 변경한 뒤(String → int) int 형 변수에 담는다.
-                result = Integer.parseInt(resultStr.replace(" ", ""));
+                result = Integer.parseInt(resultStr);
                 check = false;
                 // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                 // int 형으로 변경되지 않는다면 NumberFormatException 발생
@@ -291,25 +447,25 @@ public class CafeAction
 
         }
 
-        Run run = new Run();    // 실행 객체 생성
+        SubRun subRun = new SubRun();    // 실행 객체 생성
 
         System.out.println();
 
         switch(result)                      // 사용자의 선택값에 따라
         {
-            case  INFO: run.info();         // 1. 정보 확인 메소드 호출
+            case  INFO: subRun.info();         // 1. 정보 확인 메소드 호출
                 break;
 
-            case  SHOP: run.goShop();       // 2. 상점 가기 메소드 호출
+            case  SHOP: subRun.goShop();       // 2. 상점 가기 메소드 호출
                 break;
 
-            case  ENDING: run.openEnding(); // 3.공개된 엔딩 확인 메소드 호출
+            case  ENDING: subRun.openEndings(); // 3.공개된 엔딩 확인 메소드 호출
                 break;
 
             case SKIP :                     // 4. 주말 지나가기 : 다음날 카페 시작하는 메소드 호출
                 User.setWorkingDays(User.getWorkingDays() + 1);
                 // 주말이 지나도록 하루를 더한다. 토 → 월로 요일 변경
-                start();
+                open();
                 break;
         }
     }

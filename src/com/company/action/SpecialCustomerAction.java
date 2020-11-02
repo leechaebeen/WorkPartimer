@@ -12,9 +12,11 @@ import java.util.Scanner;
 public class SpecialCustomerAction extends CustomerAction
 {
     // 음료 주문하는 메소드
-    // 유형1 반말하는 손님 : 유저의 체력과 인내력이 -1씩 감소한다.
-    public void orderTalkDown(Beverage beverage)
+    // 유형1 반말하는 손님 1: 유저의 체력과 인내력이 -1씩 감소한다.
+    // 음료를 주문하는 경우 true, 음료를 주문하지 않는 경우 false 반환
+    public boolean orderTalkDown(Beverage beverage)
     {
+
         String iceOption;       // ICE/HOT 선택하는 손님대사 담는 변수
         String whippingCream;   // 휘핑크림 여부 선택하는 손님대사 담는 변수
         String takeout;         // 테이크아웃 여부 선택하는 손님대사 담는 변수
@@ -74,6 +76,7 @@ public class SpecialCustomerAction extends CustomerAction
                 System.out.println("========================================================================");
                 System.out.println(" 매장에 자리가 없어서 손님이 나갔습니다. ");
                 System.out.println("========================================================================");
+                return false;       // false 반환, 메소드 종료
             }
             else                    // 자리가 있다면
             {
@@ -99,11 +102,14 @@ public class SpecialCustomerAction extends CustomerAction
                 System.out.println("========================================================================");
             }
         }
+
+        return true;
     }
 
 
     // 유형2 시비걸기 : 유저의 체력이 1, 인내력이 2 감소한다.
-    public void orderFight(Beverage beverage)
+    // 음료를 주문하는 경우 true, 주문하지 않는 경우 false 반환
+    public boolean orderFight(Beverage beverage)
     {
         String iceOption;       // ICE/HOT 선택하는 손님대사 담는 변수
         String whippingCream;   // 휘핑크림 여부 선택하는 손님대사 담는 변수
@@ -181,6 +187,7 @@ public class SpecialCustomerAction extends CustomerAction
                 System.out.println("========================================================================");
                 System.out.println(" 매장에 자리가 없어서 손님이 나갔습니다. ");
                 System.out.println("========================================================================");
+                return false;       // false 반환, 메소드 종료
             }
             else                     // 매장에 자리가 있다면 
             {
@@ -207,10 +214,12 @@ public class SpecialCustomerAction extends CustomerAction
             }
         }
 
+        return true;
     }
     
     // 유형3 도를 믿으시나요 : 내보낸 경우 체력 1 감소, 얘기 듣는 경우 체력과 인내력 1씩 감소
-    public void orderFalseReligion()
+    // 음료를 주문하지 않는 손님이므로 false 반환
+    public boolean orderFalseReligion()
     {
         boolean check = true;       // 반복여부 담기 위한 변수
         String resultStr;           // 사용자가 입력한 값을 담기 위한 변수
@@ -276,10 +285,13 @@ public class SpecialCustomerAction extends CustomerAction
                     check = true;
                 }
         }
+
+        return false;
     }
 
     // 유형4 잘못찾아옴
-    public void orderWrong()
+    // 음료를 주문하지 않는 손님이므로 false 반환
+    public boolean orderWrong()
     {
         String[] menus = {"냉면", "떡볶이", "치킨", "회", "오므라이스", "커리"} ;  // 잘못찾아온 손님이 찾을 메뉴 목록
 
@@ -291,10 +303,13 @@ public class SpecialCustomerAction extends CustomerAction
         System.out.println(" 잘못 찾아온 손님이었다. ");
         System.out.println("------------------------------------------------------------------------");
 
+        return false;
+
     }
 
     // 유형5 의문의 아이템 선물
-    public void orderPresent()
+    // 음료를 주문하지 않으므로 false 반환
+    public boolean orderPresent()
     {
         boolean check = true;   // 반복 여부 체크하기 위한 변수
         int result = 0;         // 선택값을 비교하기 위한 변수
@@ -386,6 +401,8 @@ public class SpecialCustomerAction extends CustomerAction
         System.out.println("           ＞  안녕히 계세요! ＜");
         System.out.println("           ￣^Y^Y^Y^Y^Y^Y^Y￣ ");
         System.out.println();
+
+        return false;       
 
     }// end orderPresent()
 

@@ -48,7 +48,8 @@ public class CustomerAction
     }// end orderBeverage()
 
     // 손님이 음료를 주문하는 메소드
-    public void orderToPartimer(Beverage beverage)
+    // 음료를 주문하는 경우 true, 주문하지 않는 경우 false 반환
+    public boolean orderToPartimer(Beverage beverage)
     {
         String iceOption;       // ICE/HOT 선택하는 손님대사 담는 변수
         String whippingCream;   // 휘핑크림 여부 선택하는 손님대사 담는 변수
@@ -91,11 +92,13 @@ public class CustomerAction
         if(!checkTakeout)              // 테이크아웃 안한다면
         {
             // 매장에 자리가 있는지 확인
-            if(Cafe.getChair()==0)    // 매장에 자리가 없으면 손님이 나간다.
+            if(Cafe.getChair()==0)    // 매장에 자리가 없으면 
             {
                 System.out.println("========================================================================");
                 System.out.println(" 매장에 자리가 없어서 손님이 나갔습니다. ");
                 System.out.println("========================================================================");
+
+                return false;                   // false 반환, 메소드 종료
             }
             else                                // 매장에 자리가 있으면
             {
@@ -113,8 +116,7 @@ public class CustomerAction
             }
             else    // 뜨거운 음료인데 머그잔이 없거나 차가운 음료인데 유리잔이 없으면 유저 인내력 1 감소
             {
-                User.setHp(User.getFeeling() - 1);
-                System.out.println("========================================================================");
+                User.setFeeling(User.getFeeling() - 1);
                 System.out.println(" 매장에 잔이 모자라 일회용 컵을 사용했습니다. 컴플레인이 들어왔습니다. ");
                 System.out.printf(" %s님의 인내력이 1 감소합니다.\n", User.getName());
                 System.out.printf(" 현재 %s님의 인내력 : %d\n", User.getName(), User.getFeeling());
@@ -129,6 +131,7 @@ public class CustomerAction
             }
         }
 
+        return true;
     }
 
 }
