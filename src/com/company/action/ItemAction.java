@@ -275,8 +275,8 @@ public class ItemAction
 
             System.out.println("========================================================================");
             System.out.printf(" %d 코인을 사용했습니다.\n", item.getHpPrice());
-            System.out.printf(" 보유 코인      : %d코인\n", User.getProperty());
-            System.out.printf(" 체력          : %d \n", User.getSetHp() );
+            System.out.printf(" 보유 코인        : %d코인\n", User.getProperty());
+            System.out.printf(" 체력 설정값      : %d \n", User.getSetHp() );
             System.out.println("========================================================================");
 
             final int REPURCHASE = 1;   // 재구매

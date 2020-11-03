@@ -9,10 +9,10 @@ public class User
     private static String name;
 
     // 유저의 현재 능력치
-    private static int skillLevel = 1;                      // 현재 숙련도 : 하루에 등장하는 손님 수와 같다. 조건을 만족하면 주말마다 1씩 증가할 수 있다.
-                                                            // 조건 : 누적 음료 제조 성공 횟수 >= (하루 최대 방문자 수)*4
-    protected static int hp = 5;              // 현재 체력
-    private static int feeling = 5;      // 현재 인내력
+    private static int skillLevel = 1;    // 현재 숙련도 : 하루에 등장하는 손님 수와 같다. 조건을 만족하면 주말마다 1씩 증가할 수 있다.
+                                          // 조건 : 총 음료제조 성공 횟수 >= 숙련도 *4
+    protected static int hp = 5;          // 현재 체력
+    private static int feeling = 5;       // 현재 인내력
     // 체력과 인내력은 한 주가 지날 때마다 세팅된 값으로 초기화된다. 첫 주는 초기화되지 않으므로 5로 초기화해준다.
 
 
@@ -32,12 +32,10 @@ public class User
     private static int weekSuccessNum; // 이번주 음료제조 성공 횟수
 
     // 근무 일자 변수
-    private static int workingDays; // 총 근무일자 : 주말마다 상점 방문 가능/ 최대 플레이 가능 일자 설정하기(아직 설정X)
+    private static int workingDays;  // 총 근무일자 : 평일과 주말을 구분하고 몇 주차인지 나타내기 위해 사용한다.
 
-
-    // 공개된 엔딩 저장하는 변수. 프로그램을 종료할 때까지 유지된다.
-    private static int[] endings = new int[Ending.getEndingTypeNum()];
-
+    // 엔딩 관련 변수
+    private static int[] endings = new int[Ending.getEndingTypeNum()];  // 공개된 엔딩 유형을 저장하는 배열.
 
 
 

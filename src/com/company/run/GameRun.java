@@ -16,13 +16,12 @@ public class GameRun
     {
         String selectStr;
         int select = 0;
-        // 초기화해야하는 이유  : Primitive type 인 지역변수는 자동으로 초기화가 안된다.
+        // 초기화해야하는 이유  : Primitive type 인 지역변수는 자동으로 초기화되지 않는다.
         // → 예측할 수 없는 값을 담는걸 방지하기 위해 초기화 해줘야 한다.
 
         // 스캐너 객체 생성
         Scanner sc = new Scanner(System.in);
 
-        // 게임 소개
         System.out.println();
         System.out.println();
 
@@ -58,18 +57,18 @@ public class GameRun
                 select = Integer.parseInt(selectStr);
                 check = false;
 
+                if (select < 1 || select > 2)// 주어진 값 이외의 수를 선택한 경우
+                {
+                    System.out.println("========================================================================");
+                    System.out.println(" 올바른 값을 입력해주세요.");
+                    check = true;
+                }
+
             } catch (NumberFormatException e) // NumberFormatException 발생한다면
             {
                 check = true;   // check 에 true 담아서 다시 반복
-                // select = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
             }
 
-            if (select < 1 || select > 2)// 주어진 값 이외의 수를 선택한 경우
-            {
-                System.out.println("========================================================================");
-                System.out.println(" 올바른 값을 입력해주세요.");
-                check = true;
-            }
         }
 
         final int START = 1;                // 게임 시작
@@ -84,7 +83,7 @@ public class GameRun
                     gameRun.start();                     // 게임 시작하는 메소드 호출
                     break;
 
-                case OPEN_ENDINGS:                  // 3. 공개된 엔딩보기를 선택한 경우
+                case OPEN_ENDINGS:                  // 2. 공개된 엔딩보기를 선택한 경우
                     SubRun subRun = new SubRun();   // 서브 실행 객체 생성
                     subRun.openEndings();           // 3.공개된 엔딩 확인 메소드 호출
                     break;
@@ -95,7 +94,7 @@ public class GameRun
 
     public void start()
     {
-        String userName; // 유저이름을 저장할 변수
+        String userName;        // 유저이름을 저장할 변수
         boolean check = true;   // 조건에 맞게 이름 입력했는지 확인할 변수
 
         do {
@@ -166,7 +165,7 @@ public class GameRun
         System.out.println(" ※ 주의 ※ 프로그램을 종료하면 공개된 엔딩이 사라집니다. ");
 
         String selectStr;   // 사용자의 선택값을 담을 변수
-        int select = 0;         // selectStr 변수의 값을 int 로 형변환해서 담을 변수
+        int select = 0;     // selectStr 변수의 값을 int 로 형변환해서 담을 변수
 
         // 올바른 선택지를 선택할 때까지 반복
         while(check) // check 는 위에서 입력받은 유저이름이 한글인걸 확인했기 때문에 true 인 상황이다.
@@ -228,12 +227,12 @@ public class GameRun
         String[] days = {"월", "화", "수", "목","금","토"};   // 요일 배열. 토요일은 평일과 주말을 구분하기 위해 존재한다.
         String day = days[User.getWorkingDays() % 6];       // 요일 = 일한일수%6
         // 일한 일수는 0에서부터 시작한다. 하루가 지날 때마다 일한일수가 1씩 증가한다.
-        // 0%6 == 0 월
-        // 1%6 == 1 화
-        // 2%6 == 2 수
-        // 3%6 == 3 목
-        // 4%6 == 4 금
-        // 5%6 == 5 토
+        // 0%6 == 0 일 때 월
+        // 1%6 == 1 일 때 화
+        // 2%6 == 2 일 때 수
+        // 3%6 == 3 일 때 목
+        // 4%6 == 4 일 때 금
+        // 5%6 == 5 일 때 토
 
         int week = (User.getWorkingDays() / 6) + 1;
         // 첫 주(월~토)에 연산결과가 0이 되므로 '1주차' 부터 시작하기 위해서 1을 더해준다.
@@ -257,13 +256,13 @@ public class GameRun
 
             work(); // 아르바이트하는 메소드 호출 
         }
-        else        // 토요일이라면
+        else                // 토요일이라면
         {
             System.out.println();
             System.out.println("                         ✨ 주말이 되었습니다 ✨ ");
             System.out.println();
 
-            weekendInfo();  // 아르바이트 결과를 정산하는 메소드 호출
+            weekendInfo();  // 해당 주의 아르바이트 결과를 정산하는 메소드 호출
 
         }
 
@@ -274,7 +273,10 @@ public class GameRun
     // 아르바이트하는 메소드
     public void work()
     {
-        String[] nums = {"첫", "두", "세", "네", "다섯", "여섯", "일곱", "여덟", "아홉", "열"}; // 손님수 표현하기 위한 배열
+        // 손님수 표현하기 위한 배열, 최대 4주차에서 게임이 끝나기 때문에 최대 숙련도는 5이다. 
+        // 하루에 방문하는 최대 손님수는 숙련도와 동일하므로 다섯까지 존재  
+        String[] nums = {"첫", "두", "세", "네", "다섯"};
+        
 
         System.out.println("------------------------------------------------------------------------");
         System.out.println("                        " + nums[Cafe.getTodayCustomerNum()] + "번째 손님이 등장했습니다.");
