@@ -187,7 +187,7 @@ public class SpecialCustomerAction extends CustomerAction
         if(!checkTakeout) // 테이크아웃 안한다면
         {
             // 매장에 자리가 있는지 확인
-            if(Cafe.getChair()==0)    // 매장에 자리가 없으면 손님이 나간다.
+            if(Cafe.getChairNum()==0)    // 매장에 자리가 없으면 손님이 나간다.
             {
                 System.out.println("========================================================================");
                 System.out.println(" 매장에 자리가 없어서 손님이 나갔습니다. ");
@@ -196,17 +196,17 @@ public class SpecialCustomerAction extends CustomerAction
             }
             else                    // 자리가 있다면
             {
-                Cafe.setChair(Cafe.getChair()-1);// 매장 자리를 하나 줄인다.
+                Cafe.setChairNum(Cafe.getChairNum()-1);// 매장 자리를 하나 줄인다.
             }
 
             // 유리잔 또는 머그잔 감소시키기.
-            if(beverage.getIceOption()==0 && Cafe.getMug() !=0 ) // 뜨거운 음료이고 머그잔이 있으면
+            if(beverage.getIceOption()==0 && Cafe.getMugNum() !=0 ) // 뜨거운 음료이고 머그잔이 있으면
             {
-                Cafe.setMug(Cafe.getMug() - 1); // 머그잔 1 감소
+                Cafe.setMugNum(Cafe.getMugNum() - 1); // 머그잔 1 감소
             }
-            else if(beverage.getIceOption()==1 && Cafe.getCup() != 0) // 차가운 음료이고 유리잔이 있으면
+            else if(beverage.getIceOption()==1 && Cafe.getCupNum() != 0) // 차가운 음료이고 유리잔이 있으면
             {
-                Cafe.setCup(Cafe.getCup() - 1); // 유리잔 1 감소
+                Cafe.setCupNum(Cafe.getCupNum() - 1); // 유리잔 1 감소
             }
             else    // 뜨거운 음료인데 머그잔이 없거나 차가운 음료인데 유리잔이 없으면 유저 인내력 1 감소
             {
@@ -298,7 +298,7 @@ public class SpecialCustomerAction extends CustomerAction
         if(!checkTakeout)             // 테이크아웃하지 않는다면
         {
             // 매장에 자리가 있는지 확인
-            if(Cafe.getChair()==0)    // 매장에 자리가 없으면 손님이 나간다.
+            if(Cafe.getChairNum()==0)    // 매장에 자리가 없으면 손님이 나간다.
             {
                 System.out.println("========================================================================");
                 System.out.println(" 매장에 자리가 없어서 손님이 나갔습니다. ");
@@ -307,17 +307,17 @@ public class SpecialCustomerAction extends CustomerAction
             }
             else                     // 매장에 자리가 있다면 
             {
-                Cafe.setChair(Cafe.getChair()-1);// 매장 자리를 하나 줄인다.
+                Cafe.setChairNum(Cafe.getChairNum()-1);// 매장 자리를 하나 줄인다.
             }
 
             // 유리잔 또는 머그잔 감소시키기.
-            if(beverage.getIceOption()==0 && Cafe.getMug() !=0 ) // 뜨거운 음료이고 머그잔이 있으면
+            if(beverage.getIceOption()==0 && Cafe.getMugNum() !=0 ) // 뜨거운 음료이고 머그잔이 있으면
             {
-                Cafe.setMug(Cafe.getMug() - 1); // 머그잔 1 감소
+                Cafe.setMugNum(Cafe.getMugNum() - 1); // 머그잔 1 감소
             }
-            else if(beverage.getIceOption()==1 && Cafe.getCup() != 0) // 차가운 음료이고 유리잔이 있으면
+            else if(beverage.getIceOption()==1 && Cafe.getCupNum() != 0) // 차가운 음료이고 유리잔이 있으면
             {
-                Cafe.setCup(Cafe.getCup() - 1); // 유리잔 1 감소
+                Cafe.setCupNum(Cafe.getCupNum() - 1); // 유리잔 1 감소
             }
             else    // 뜨거운 음료인데 머그잔이 없거나 차가운 음료인데 유리잔이 없으면 유저 인내력 1 감소
             {

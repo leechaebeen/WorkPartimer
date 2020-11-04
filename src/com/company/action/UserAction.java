@@ -35,7 +35,7 @@ public class UserAction
                 break;
 
             case RPS_GAME :
-                result = makeBeverageRPS();                         // 가위바위보 메소드 호출
+                result = makeBeverageRockPaperScissors();                         // 가위바위보 메소드 호출
                 break;
         }
 
@@ -403,7 +403,7 @@ public class UserAction
 
 
     // 음료만드는 미니게임3 : 가위바위보
-    public boolean makeBeverageRPS()
+    public boolean makeBeverageRockPaperScissors()
     {
         System.out.println("------------------------------------------------------------------------");
         System.out.println("                             음료 만들기 ");
@@ -530,13 +530,13 @@ public class UserAction
 
             switch (itemName)
             {
-                case "의자":  Cafe.setSetChair(Cafe.getSetChair() + 1); // 의자 개수 추가
+                case "의자":  Cafe.setSetChairNum(Cafe.getSetChairNum() + 1); // 의자 개수 추가
                     break;
 
-                case "유리잔": Cafe.setSetCup(Cafe.getSetCup() + 1);     // 유리잔 개수 추가
+                case "유리잔": Cafe.setSetCupNum(Cafe.getSetCupNum() + 1);     // 유리잔 개수 추가
                     break;
 
-                case "머그잔": Cafe.setSetMug(Cafe.getSetMug() + 1);     // 머그잔 개수 추가
+                case "머그잔": Cafe.setSetMugNum(Cafe.getSetMugNum() + 1);     // 머그잔 개수 추가
                     break;
 
                 case "체력":  User.setSetHp(User.getSetHp() + 2);        // 체력 추가
@@ -584,9 +584,6 @@ public class UserAction
 
 
     }// end buyItem(Item item)
-
-
-
 
     // 아이템 사용 메소드
     public void useItem(String itemName)
@@ -700,7 +697,7 @@ public class UserAction
         useItemSel();  // 아이템 사용 메소드
     }
 
-    public void useItemSel()// 아이템 사용 메소드
+    public void useItemSel()// 사용할 아이템 선택 메소드
     {
         boolean check = true;   // 반복여부 체크하는 변수
         String resultStr;       // 사용자의 선택값을 담을 변수
@@ -805,9 +802,9 @@ public class UserAction
         Cafe.setTotalCustomerNum(0);
         Cafe.setTodayCustomerNum(0);
         Cafe.setWeekCustomerNum(0);
-        Cafe.setSetChair(1);
-        Cafe.setSetCup(1);
-        Cafe.setSetMug(1);
+        Cafe.setSetChairNum(1);
+        Cafe.setSetCupNum(1);
+        Cafe.setSetMugNum(1);
 
         // 비밀손님 누적 값 리셋
         SecretCustomerAction.setSecretCustomerCnt(0);

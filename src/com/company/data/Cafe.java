@@ -3,9 +3,9 @@ package com.company.data;
 public class Cafe
 {
     // 카페 기구 상태
-    private static int cup;                 // 현재 사용가능한 유리잔 수 : ICE 음료용
-    private static int mug;                 // 현재 사용가능한 머그잔 수 : HOT 음료용
-    private static int chair;               // 현재 사용가능한 의자 수
+    private static int cupNum;                 // 현재 사용가능한 유리잔 수 : ICE 음료용
+    private static int mugNum;                 // 현재 사용가능한 머그잔 수 : HOT 음료용
+    private static int chairNum;               // 현재 사용가능한 의자 수
 
     // 카페 방문자 수
     private static int todayCustomerNum;    // 현재 하루 방문자 수
@@ -13,39 +13,39 @@ public class Cafe
     private static int weekCustomerNum;     // 이번주 방문자 수
 
     // 카페 설정값
-    private static int setCup = 1;          // 설정되어 있는 유리잔 수
-    private static int setMug = 1;          // 설정되어 있는 머그잔 수
-    private static int setChair = 1;        // 설정되어 있는 의자 수
+    private static int setCupNum = 1;          // 설정되어 있는 유리잔 수
+    private static int setMugNum = 1;          // 설정되어 있는 머그잔 수
+    private static int setChairNum = 1;        // 설정되어 있는 의자 수
 
     // 외부에서 속성에 접근할 수 있도록 getter/setter 생성
-    public static int getCup()
+    public static int getCupNum()
     {
-        return cup;
+        return cupNum;
     }
 
-    public static void setCup(int cup)
+    public static void setCupNum(int cupNum)
     {
-        Cafe.cup = cup;
+        Cafe.cupNum = cupNum;
     }
 
-    public static int getMug()
+    public static int getMugNum()
     {
-        return mug;
+        return mugNum;
     }
 
-    public static void setMug(int mug)
+    public static void setMugNum(int mugNum)
     {
-        Cafe.mug = mug;
+        Cafe.mugNum = mugNum;
     }
 
-    public static int getChair()
+    public static int getChairNum()
     {
-        return chair;
+        return chairNum;
     }
 
-    public static void setChair(int chair)
+    public static void setChairNum(int chairNum)
     {
-        Cafe.chair = chair;
+        Cafe.chairNum = chairNum;
     }
 
     public static int getTodayCustomerNum()
@@ -68,34 +68,34 @@ public class Cafe
         Cafe.totalCustomerNum = totalCustomerNum;
     }
 
-    public static int getSetCup()
+    public static int getSetCupNum()
     {
-        return setCup;
+        return setCupNum;
     }
 
-    public static void setSetCup(int setCup)
+    public static void setSetCupNum(int setCupNum)
     {
-        Cafe.setCup = setCup;
+        Cafe.setCupNum = setCupNum;
     }
 
-    public static int getSetMug()
+    public static int getSetMugNum()
     {
-        return setMug;
+        return setMugNum;
     }
 
-    public static void setSetMug(int setMug)
+    public static void setSetMugNum(int setMugNum)
     {
-        Cafe.setMug = setMug;
+        Cafe.setMugNum = setMugNum;
     }
 
-    public static int getSetChair()
+    public static int getSetChairNum()
     {
-        return setChair;
+        return setChairNum;
     }
 
-    public static void setSetChair(int setChair)
+    public static void setSetChairNum(int setChairNum)
     {
-        Cafe.setChair = setChair;
+        Cafe.setChairNum = setChairNum;
     }
 
     public static int getWeekCustomerNum()

@@ -9,7 +9,8 @@ import java.util.Scanner;
 
 public class ItemAction
 {
-    public void goShop()   // 아이템 구입하기
+    // 아이템 구입하기
+    public void goShop()
     {
         System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
         System.out.println("==========================     아이템  구매      ==========================");
@@ -73,6 +74,7 @@ public class ItemAction
 
     }
 
+    // 영구 아이템 구매 메뉴
     public void buyPermanentItem()
     {
         boolean check = true;   // 반복여부 체크하는 변수
@@ -95,9 +97,9 @@ public class ItemAction
             System.out.println("                             ✨ 현재 보유 정보 ✨");
             System.out.println("------------------------------------------------------------------------");
             System.out.println();
-            System.out.printf(" 의자         : %d개\n", Cafe.getSetChair());
-            System.out.printf(" 유리잔       : %d개\n", Cafe.getSetCup());
-            System.out.printf(" 머그잔       : %d개\n", Cafe.getSetMug());
+            System.out.printf(" 의자         : %d개\n", Cafe.getSetChairNum());
+            System.out.printf(" 유리잔       : %d개\n", Cafe.getSetCupNum());
+            System.out.printf(" 머그잔       : %d개\n", Cafe.getSetMugNum());
             System.out.printf(" 체력 설정값   : %d\n", User.getSetHp());
             System.out.printf(" 인내력 설정값 : %d\n", User.getSetFeeling());
             System.out.println();
@@ -174,6 +176,7 @@ public class ItemAction
 
     }// end buyPermanentItem
 
+    // 소비 아이템 구매 메뉴 
     public void buyConsumableItem()
     {
         boolean check = true;   // 반복여부 체크하는 변수

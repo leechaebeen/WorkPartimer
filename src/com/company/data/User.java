@@ -21,8 +21,9 @@ public class User
     private static int setFeeling = 5;     // 세팅된 초기 인내력값
 
     // 유저가 소유하고 있는 총 재산. 단위는 코인이다.
-    private static int property=20;//임시초기화
+    private static int property;
 
+    // 소유하고 있는 소비아이템 수
     private static int cakeNum;
     private static int sandwichNum;
     private static int chocoNum;
@@ -36,8 +37,8 @@ public class User
     private static int weekFailNum;    // 이번주 음료제조 실패 횟수
     private static int weekSuccessNum; // 이번주 음료제조 성공 횟수
 
-    // 근무 일자 변수
-    private static int workingDays;  // 총 근무일자 : 평일과 주말을 구분하고 몇 주차인지 나타내기 위해 사용한다.
+    // 근무 일수 변수
+    private static int workingDays;  // 총 근무일수 : 평일과 주말을 구분하고 몇 주차인지 나타내기 위해 사용한다.
 
     // 엔딩 관련 변수
     private final static int[] endings = new int[Ending.getEndingTypeNum()];  // 공개된 엔딩 유형을 저장하는 배열.

@@ -89,6 +89,7 @@ public class GameRun
         }
     }// end initialRun()
 
+    // 게임 시작 메소드
     public void start()
     {
         String userName;        // 유저이름을 저장할 변수
@@ -240,9 +241,9 @@ public class GameRun
 
             Cafe.setTodayCustomerNum(0);                // 하루 방문자 수 0으로 초기화
 
-            Cafe.setChair(Cafe.getSetChair());          // 현재 카페의 의자 수를 세팅된 값으로 초기화
-            Cafe.setCup(Cafe.getSetCup());              // 현재 유리컵 수를 세팅된 값으로 초기화
-            Cafe.setMug(Cafe.getSetMug());              // 현재 머그잔 수를 세팅된 값으로 초기화
+            Cafe.setChairNum(Cafe.getSetChairNum());          // 현재 카페의 의자 수를 세팅된 값으로 초기화
+            Cafe.setCupNum(Cafe.getSetCupNum());              // 현재 유리컵 수를 세팅된 값으로 초기화
+            Cafe.setMugNum(Cafe.getSetMugNum());              // 현재 머그잔 수를 세팅된 값으로 초기화
 
             System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
             System.out.printf("=========================     %d주차     %s요일    =========================\n", week, day);
@@ -382,7 +383,7 @@ public class GameRun
         }
     }
 
-    // 주말 초기화면  메소드(정보 확인 가능, 상점 이용 가능, 아이템 사용 가능)
+    // 주말 정산 메소드
     public void weekendInfo()
     {
         int week = (User.getWorkingDays() /6) + 1;
@@ -476,6 +477,7 @@ public class GameRun
         weekend(); // 주말 선택지 메소드 호출(1. 정보 확인  2.상점가기  3.공개된 엔딩 확인  4. 주말 지나가기)
     }
 
+    // 주말 선택지  메소드(정보 확인 가능, 상점 이용 가능, 아이템 사용 가능)
     public void weekend()
     {
         boolean check = true;   // 반복여부 체크하는 변수
@@ -525,7 +527,7 @@ public class GameRun
         {
             case  INFO:
                 InfoAction infoAction = new InfoAction();
-                infoAction.info();         // 1. 정보 확인 메소드 호출
+                infoAction.infoSel();         // 1. 정보 확인 메소드 호출
                 break;
 
             case  SHOP:

@@ -53,8 +53,7 @@ public class CustomerAction
 
     }
 
-
-    // 테이크아웃 여부 정하는 메소드 : 테이크아웃하면 true 반환, 테이크아웃 하지 않으면 false 반환 
+    // 테이크아웃 여부 정하는 메소드 : 테이크아웃하면 true 반환, 테이크아웃 하지 않으면 false 반환
     public boolean checkTakeout()
     {
         Random rd = new Random();               // 랜덤 객체 생성
@@ -70,7 +69,7 @@ public class CustomerAction
 
     } // end checkTakeout()
 
-    // 랜덤으로 주문할 음료 객체를 생성하는 메소드(종류, Hot/Ice 옵션, 휘핑)
+    // 랜덤으로 음료 생성하는 랜덤
     public Beverage orderBeverage()
     {
         Random rd = new Random();                 // 랜덤 클래스 객체 생성
@@ -84,10 +83,48 @@ public class CustomerAction
         // 음료 선택
         int beverageSel = rd.nextInt(5)+1;   // 1 ~ 5 의 랜덤값(음료 종류)을 변수 beverageSel 에 저장한다.
 
-        BeverageAction beverageAction = new BeverageAction();  // 음료 액션 객체 생성
+        final int AMERICANO = 1;     // 아메리카노
+        final int CAFE_LATTE = 2;    // 카페라떼
+        final int VANILLA_LATTE = 3; // 바닐라라떼
+        final int HAZEL_LATTE = 4;   // 헤이즐넛라떼
+        final int CAFE_MOCHA = 5;    // 카페모카
 
+        String name=""; // 음료 이름
+        int makeLevel = 0;  // 음료 제조 난이도
+        boolean isMilk = true;   // 우유들어가는지 여부
+
+        switch (beverageSel)
+        {
+            case AMERICANO:
+                name = "아메리카노";
+                makeLevel = 1;
+                isMilk = false;
+                break;
+
+            case CAFE_LATTE:
+                name = "카페라떼";
+                makeLevel = 2;
+                isMilk = true;
+                break;
+            case VANILLA_LATTE:
+                name = "바닐라라떼";
+                makeLevel = 3;
+                isMilk = true;
+                break;
+            case HAZEL_LATTE:
+                name = "헤이즐넛 라떼";
+                makeLevel = 4;
+                isMilk = true;
+                break;
+            case CAFE_MOCHA:
+                name = "카페모카";
+                makeLevel = 5;
+                isMilk = true;
+                break;
+
+        }
         // 랜덤으로 선택한 값들을 매개변수로 넘기며 음료 객체 생성하는 메소드 호출
-        Beverage beverage = beverageAction.createBeverage(beverageSel, iceOption, whippingCream);
+        Beverage beverage = new  Beverage(iceOption,isMilk,whippingCream,makeLevel,name);
 
         return beverage;  // 음료 객체 반환
 
@@ -137,7 +174,7 @@ public class CustomerAction
         if(!checkTakeout)              // 테이크아웃 안한다면
         {
             // 매장에 자리가 있는지 확인
-            if(Cafe.getChair()==0)    // 매장에 자리가 없으면 
+            if(Cafe.getChairNum()==0)    // 매장에 자리가 없으면
             {
                 System.out.println("========================================================================");
                 System.out.println(" 매장에 자리가 없어서 손님이 나갔습니다. ");
@@ -147,17 +184,17 @@ public class CustomerAction
             }
             else                                // 매장에 자리가 있으면
             {
-                Cafe.setChair(Cafe.getChair()-1);// 매장 자리를 하나 줄인다.
+                Cafe.setChairNum(Cafe.getChairNum()-1);// 매장 자리를 하나 줄인다.
             }
 
             // 유리잔 또는 머그잔 감소시키기.
-            if(beverage.getIceOption()==0 && Cafe.getMug() !=0 ) // 뜨거운 음료이고 머그잔이 있으면
+            if(beverage.getIceOption()==0 && Cafe.getMugNum() !=0 ) // 뜨거운 음료이고 머그잔이 있으면
             {
-                Cafe.setMug(Cafe.getMug() - 1); // 머그잔 1 감소
+                Cafe.setMugNum(Cafe.getMugNum() - 1); // 머그잔 1 감소
             }
-            else if(beverage.getIceOption()==1 && Cafe.getCup() != 0) // 차가운 음료이고 유리잔이 있으면
+            else if(beverage.getIceOption()==1 && Cafe.getCupNum() != 0) // 차가운 음료이고 유리잔이 있으면
             {
-                Cafe.setCup(Cafe.getCup() - 1); // 유리잔 1 감소
+                Cafe.setCupNum(Cafe.getCupNum() - 1); // 유리잔 1 감소
             }
             else    // 뜨거운 음료인데 머그잔이 없거나 차가운 음료인데 유리잔이 없으면 컴플레인 발생, 유저 인내력 1 감소
             {
