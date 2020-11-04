@@ -374,8 +374,6 @@ public class SubRun
         final int FEELING = 5;  // 인내력 늘리기
         final int EXIT = 6;
 
-        Item item = new Item(); // 아이템 객체 생성
-
         while(check)
         {
             System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
@@ -433,33 +431,33 @@ public class SubRun
         switch(result)                          // 사용자의 선택 값에 따라서
         {
             case CHAIR:
-                NewItem chair = new NewItem("의자",2,1);
+                Item chair = new Item("의자",2,1);
                 itemAction.buyItem(chair);
                 //itemAction.buyChair(); // 의자 구매
                 break;
 
             case CUP:
-                NewItem cup = new NewItem("유리잔",2,1);
+                Item cup = new Item("유리잔",2,1);
                 itemAction.buyItem(cup);
                 //itemAction.buyCup();     // 유리잔 구매
                 break;
 
             case MUG:
-                NewItem mug = new NewItem("머그잔",2,1);
+                Item mug = new Item("머그잔",2,1);
                 itemAction.buyItem(mug);
                 //itemAction.buyMug();     // 머그잔 구매
 
                 break;
 
             case HP:
-                NewItem hp = new NewItem("체력",4,1);
+                Item hp = new Item("체력",4,1);
                 itemAction.buyItem(hp);
                 //itemAction.buyHp();       // 체력 증가
 
                 break;
 
             case FEELING:
-                NewItem feeling = new NewItem("인내력",4,1);
+                Item feeling = new Item("인내력",4,1);
                 itemAction.buyItem(feeling);
                 //itemAction.buyFeeling(); // 인내력 증가
 
@@ -479,8 +477,6 @@ public class SubRun
         boolean check = true;   // 반복여부 체크하는 변수
         String resultStr;       // 사용자의 선택값을 담을 변수
         int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
-
-        Item item = new Item();// 아이템 객체 생성
 
         while (check)
         {
@@ -542,25 +538,25 @@ public class SubRun
         switch (result)                             // 사용자의 선택값에 따라
         {
             case CAKE:
-                NewItem cake = new NewItem("케이크",3,2);
+                Item cake = new Item("케이크",3,2);
                 itemAction.buyItem(cake);
                 //itemAction.buyCake();                  // 케이크 구매
                 break;
 
             case SANDWICH:
-                NewItem sandwich = new NewItem("샌드위치",5,2);
+                Item sandwich = new Item("샌드위치",5,2);
                 itemAction.buyItem(sandwich);
                 //itemAction.buySandwich();           // 샌드위치 구매
                 break;
 
             case CHOCO:
-                NewItem choco = new NewItem("초콜릿",3,2);
+                Item choco = new Item("초콜릿",3,2);
                 itemAction.buyItem(choco);
                 //itemAction.buyChoco();                 // 초콜릿 구매
                 break;
 
             case MACARON:
-                NewItem macaron = new NewItem("마카롱",5,2);
+                Item macaron = new Item("마카롱",5,2);
                 itemAction.buyItem(macaron);
                 //itemAction.buyMacaron();             // 마카롱 구매
                 break;

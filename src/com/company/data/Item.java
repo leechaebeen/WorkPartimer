@@ -1,67 +1,38 @@
 package com.company.data;
 
-// 아이템 클래스
 public class Item
 {
-    // 영구 아이템 가격 저장하는 변수
-    private int chairPrice = 2;
-    private int cupPrice = 2;
-    private int mugPrice = 2;
-    private int hpPrice = 4;
-    private int feelingPrice = 4;
+    // 변수
+    private String name;    // 아이템 이름
+    private int price;      // 아이템 가격
+    private int type;       // 아이템 유형 구분 (1: 영구아이템, 2:소비아이템)
 
-    // 소비 아이템 가격 저장하는 변수
-    private int cakePrice = 3;
-    private int sandwichPrice = 5;
-    private int chocoPrice = 3;
-    private int macaronPrice = 5;
+    // 기본생성자
+    public Item(){}
 
-
-    // 외부에서 속성에 접근할 수 있도록 getter/setter 생성
-    public int getChairPrice()
+    // 사용자 정의 생성자
+    public Item(String name, int price, int type)
     {
-        return chairPrice;
+        this.name = name;
+        this.price = price;
+        this.type = type;
+
     }
 
-    public int getCupPrice()
+    // getter / setter
+    public int getPrice()
     {
-        return cupPrice;
+        return price;
     }
 
-    public int getMugPrice()
+    public String getName()
     {
-        return mugPrice;
+        return name;
     }
 
-    public int getHpPrice()
+    public int getType()
     {
-        return hpPrice;
+        return type;
     }
-
-    public int getFeelingPrice()
-    {
-        return feelingPrice;
-    }
-
-    public int getCakePrice()
-    {
-        return cakePrice;
-    }
-
-    public int getSandwichPrice()
-    {
-        return sandwichPrice;
-    }
-
-    public int getChocoPrice()
-    {
-        return chocoPrice;
-    }
-
-    public int getMacaronPrice()
-    {
-        return macaronPrice;
-    }
-
 
 }

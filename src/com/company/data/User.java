@@ -40,9 +40,7 @@ public class User
     private static int workingDays;  // 총 근무일자 : 평일과 주말을 구분하고 몇 주차인지 나타내기 위해 사용한다.
 
     // 엔딩 관련 변수
-    private static int[] endings = new int[Ending.getEndingTypeNum()];  // 공개된 엔딩 유형을 저장하는 배열.
-
-
+    private final static int[] endings = new int[Ending.getEndingTypeNum()];  // 공개된 엔딩 유형을 저장하는 배열.
 
     // 클래스 외부에서 속성에 접근할 수 있도록 getter/setter 생성
     public static int getHp()
@@ -168,11 +166,6 @@ public class User
     public static void setWeekSuccessNum(int weekSuccessNum)
     {
         User.weekSuccessNum = weekSuccessNum;
-    }
-
-    public static void setEndings(int[] endings)
-    {
-        User.endings = endings;
     }
 
     public static int getCakeNum()

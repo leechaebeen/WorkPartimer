@@ -1,7 +1,6 @@
 package com.company.action;
 import com.company.data.Beverage;
 import com.company.data.Cafe;
-import com.company.data.Item;
 import com.company.data.User;
 
 import java.util.Random;
@@ -61,7 +60,7 @@ public class UserAction
 
         // 랜덤 문자열 생성
         Random rd = new Random();               // 랜덤 객체 생성
-        StringBuffer sb = new StringBuffer();   // StringBuffer 객체 생성(String 은 + 연산마다 새로운 객체가 생성된다.)
+        StringBuffer stringBuffer = new StringBuffer();   // StringBuffer 객체 생성(String 은 + 연산마다 새로운 객체가 생성된다.)
         for (int i = 0; i < makeLevel * 2; i++) // 난이도에 따라 반복횟수가 늘어나면서 문자열 길이가 증가한다.
         {
             /*
@@ -74,18 +73,18 @@ public class UserAction
             switch (rdNum)
             {
                 case RANDOM_SMALL_LETTER:               // 하나의 랜덤 소문자 생성
-                    sb.append((char) (rd.nextInt(26) + 65));
+                    stringBuffer.append((char) (rd.nextInt(26) + 65));
                     break;
                 case RANDOM_CAPITAL_LETTER:             // 하나의 랜덤 대문자 생성
-                    sb.append((char) (rd.nextInt(26) + 97));
+                    stringBuffer.append((char) (rd.nextInt(26) + 97));
                     break;
                 case RANDOM_NUM:                        // 하나의 랜덤 숫자 생성
-                    sb.append(rd.nextInt(10));
+                    stringBuffer.append(rd.nextInt(10));
                     break;
             }
         }
 
-        System.out.println(" " + sb);       // 생성된 랜덤 문자열 출력
+        System.out.println(" " + stringBuffer);       // 생성된 랜덤 문자열 출력
 
         System.out.print(" 입력 : ");       // 사용자에게서 문자열 입력받기
         Scanner sc = new Scanner(System.in);
@@ -94,7 +93,7 @@ public class UserAction
         inputStr = inputStr.replace(" ", ""); // 입력받은 문자열 공백 제거
 
         // stringbuffer → String으로 변환
-        String sbStr = sb.toString();
+        String sbStr = stringBuffer.toString();
 
         /*
         String →  Object 클래스의 equals() 오버라이딩
@@ -128,7 +127,7 @@ public class UserAction
         boolean result = false;  // 이 메소드가 반환하는 값을 담을 변수
 
         String resultStr;        // 사용자에게 입력받은 값을 담기 위한 변수
-        int quizResult = 0;      // 사용자에게 입력받은 값을 형변환해서 담기 위한 변수
+        int quizResult;          // 사용자에게 입력받은 값을 형변환해서 담기 위한 변수
         boolean check = true;    // 반복여부 결정할 변수
 
         final int YES = 1;       // 퀴즈 선택지 (1. 그렇다)
@@ -413,7 +412,7 @@ public class UserAction
         boolean result = true;  // 게임 결과 담는 변수
         boolean check = true;   // 반복여부 체크하는 변수
         String selectStr;       // 사용자의 선택값을 담을 변수
-        int select = 0;         // selectStr를 int 로 변환해 사용자의 선택값을 담을 변수
+        int select;             // selectStr를 int 로 변환해 사용자의 선택값을 담을 변수
 
         while(check)
         {
@@ -440,7 +439,7 @@ public class UserAction
                 {
                     // 손님의 선택값을 랜덤으로 지정
                     Random rd = new Random();                   // 랜덤 객체 생성
-                    int randomNum = rd.nextInt(3);        // 0~2 사이의 랜덤값을 randomNum 변수에 담는다.
+                    int randomNum = rd.nextInt(3)+1;        // 1~3 사이의 랜덤값을 randomNum 변수에 담는다.
 
                     final int ROCK = 1;     // 바위
                     final int PAPER = 2;    // 보
@@ -489,7 +488,7 @@ public class UserAction
     // 음료 제조 결과 출력하는 메소드
     public void makeBeverageResult(boolean result)
     {
-        if(result == false)     // 음료 실패했을 경우
+        if(!result)     // 음료 실패했을 경우
         {
             System.out.println("------------------------------------------------------------------------");
             System.out.println("                            음료 만들기 실패 ! ");

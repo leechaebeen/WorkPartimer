@@ -92,7 +92,7 @@ public class GameRun
     public void start()
     {
         String userName;        // 유저이름을 저장할 변수
-        boolean check = true;          // 조건에 맞게 이름 입력했는지 확인할 변수
+        boolean check;          // 조건에 맞게 이름 입력했는지 확인할 변수
 
         do {
             System.out.print(" 이름을 입력해주세요(한글만 가능) : ");
@@ -409,14 +409,13 @@ public class GameRun
         {
             User.setSkillLevel(User.getSkillLevel()+1);     // 숙련도 1 증가
             System.out.println("                      ✨ 숙련도가 1 증가했습니다 ✨");
-            System.out.println();
 
         }
         else    // 조건 만족하지 못하면
         {
             System.out.println("                         숙련도에 변동이 없습니다! ");
-            System.out.println();
         }
+        System.out.println();
 
         // 체력, 인내력 설정값으로 초기화
         User.setHp(User.getSetHp());
