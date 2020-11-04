@@ -16,11 +16,6 @@ public class Item
     private int chocoPrice = 3;
     private int macaronPrice = 5;
 
-    // 보유한 아이템 수 저장하는 변수
-    private static int cake;
-    private static int sandwich;
-    private static int choco;
-    private static int macaron;
 
     // 외부에서 속성에 접근할 수 있도록 getter/setter 생성
     public int getChairPrice()
@@ -68,43 +63,5 @@ public class Item
         return macaronPrice;
     }
 
-    public static int getCake()
-    {
-        return cake;
-    }
 
-    public static void setCake(int cake)
-    {
-        Item.cake = cake;
-    }
-
-    public static int getSandwich()
-    {
-        return sandwich;
-    }
-
-    public static void setSandwich(int sandwich)
-    {
-        Item.sandwich = sandwich;
-    }
-
-    public static int getChoco()
-    {
-        return choco;
-    }
-
-    public static void setChoco(int choco)
-    {
-        Item.choco = choco;
-    }
-
-    public static int getMacaron()
-    {
-        return macaron;
-    }
-
-    public static void setMacaron(int macaron)
-    {
-        Item.macaron = macaron;
-    }
 }

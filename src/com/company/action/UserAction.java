@@ -525,10 +525,10 @@ public class UserAction
         User.setWeekSuccessNum(0);
 
         // 아이템 관련 값 리셋
-        Item.setCake(0);
-        Item.setSandwich(0);
-        Item.setChoco(0);
-        Item.setMacaron(0);
+        User.setCakeNum(0);
+        User.setSandwichNum(0);
+        User.setChocoNum(0);
+        User.setMacaronNum(0);
 
         // 카페 관련 값 리셋
         Cafe.setTotalCustomerNum(0);

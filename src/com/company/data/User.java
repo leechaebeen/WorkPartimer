@@ -21,7 +21,12 @@ public class User
     private static int setFeeling = 5;     // 세팅된 초기 인내력값
 
     // 유저가 소유하고 있는 총 재산. 단위는 코인이다.
-    private static int property;
+    private static int property=20;//임시초기화
+
+    private static int cakeNum;
+    private static int sandwichNum;
+    private static int chocoNum;
+    private static int macaronNum;
 
 
     // 음료 제조 관련 변수
@@ -168,5 +173,45 @@ public class User
     public static void setEndings(int[] endings)
     {
         User.endings = endings;
+    }
+
+    public static int getCakeNum()
+    {
+        return cakeNum;
+    }
+
+    public static void setCakeNum(int cakeNum)
+    {
+        User.cakeNum = cakeNum;
+    }
+
+    public static int getSandwichNum()
+    {
+        return sandwichNum;
+    }
+
+    public static void setSandwichNum(int sandwichNum)
+    {
+        User.sandwichNum = sandwichNum;
+    }
+
+    public static int getChocoNum()
+    {
+        return chocoNum;
+    }
+
+    public static void setChocoNum(int chocoNum)
+    {
+        User.chocoNum = chocoNum;
+    }
+
+    public static int getMacaronNum()
+    {
+        return macaronNum;
+    }
+
+    public static void setMacaronNum(int macaronNum)
+    {
+        User.macaronNum = macaronNum;
     }
 }

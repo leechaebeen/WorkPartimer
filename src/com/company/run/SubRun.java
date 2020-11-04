@@ -3,10 +3,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import com.company.action.*;
-import com.company.data.Beverage;
-import com.company.data.Cafe;
-import com.company.data.Item;
-import com.company.data.User;
+import com.company.data.*;
 
 // 게임의 메인 흐름(게임시작, 평일, 주말) 이외의 흐름을 담은 클래스
 public class SubRun
@@ -396,11 +393,11 @@ public class SubRun
             System.out.println();
             System.out.println("------------------------------------------------------------------------");
             System.out.println();
-            System.out.printf(" 1.의자 구매         (- %d코인)\n", item.getChairPrice());
-            System.out.printf(" 2.유리잔 구매       (- %d코인)\n", item.getCupPrice());
-            System.out.printf(" 3.머그잔 구매       (- %d코인)\n", item.getMugPrice());
-            System.out.printf(" 4.체력 설정값 +2    (- %d코인)\n", item.getHpPrice());
-            System.out.printf(" 5.인내력 설정값 +2  (- %d코인)\n", item.getFeelingPrice());
+            System.out.println(" 1.의자 구매         (- 2코인)");
+            System.out.println(" 2.유리잔 구매       (- 2코인)");
+            System.out.println(" 3.머그잔 구매       (- 2코인)");
+            System.out.println(" 4.체력 설정값 +2    (- 4코인)");
+            System.out.println(" 5.인내력 설정값 +2  (- 4코인)");
             System.out.println(" 6.이전으로");
             System.out.println();
             System.out.println("========================================================================");
@@ -435,21 +432,36 @@ public class SubRun
         
         switch(result)                          // 사용자의 선택 값에 따라서
         {
-            case CHAIR: itemAction.buyChair(); // 의자 구매
+            case CHAIR:
+                NewItem chair = new NewItem("의자",2,1);
+                itemAction.buyItem(chair);
+                //itemAction.buyChair(); // 의자 구매
                 break;
 
-            case CUP: itemAction.buyCup();     // 유리잔 구매
+            case CUP:
+                NewItem cup = new NewItem("유리잔",2,1);
+                itemAction.buyItem(cup);
+                //itemAction.buyCup();     // 유리잔 구매
                 break;
 
-            case MUG: itemAction.buyMug();     // 머그잔 구매
+            case MUG:
+                NewItem mug = new NewItem("머그잔",2,1);
+                itemAction.buyItem(mug);
+                //itemAction.buyMug();     // 머그잔 구매
 
                 break;
 
-            case HP: itemAction.buyHp();       // 체력 증가
+            case HP:
+                NewItem hp = new NewItem("체력",4,1);
+                itemAction.buyItem(hp);
+                //itemAction.buyHp();       // 체력 증가
 
                 break;
 
-            case FEELING: itemAction.buyFeeling(); // 인내력 증가
+            case FEELING:
+                NewItem feeling = new NewItem("인내력",4,1);
+                itemAction.buyItem(feeling);
+                //itemAction.buyFeeling(); // 인내력 증가
 
                 break;
 
@@ -468,12 +480,6 @@ public class SubRun
         String resultStr;       // 사용자의 선택값을 담을 변수
         int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
 
-        final int CAKE = 1;     // 체력 2 회복
-        final int SANDWICH = 2; // 체력 4 회복
-        final int CHOCO = 3;    // 인내력 2 회복
-        final int MACARON = 4;  // 인내력 4 회복
-        final int EXIT = 5;     // 이전으로
-
         Item item = new Item();// 아이템 객체 생성
 
         while (check)
@@ -486,17 +492,17 @@ public class SubRun
             System.out.println();
             System.out.println("------------------------------------------------------------------------");
             System.out.println();
-            System.out.printf(" 케이크   : %d개 ( 체력을 2 회복시킨다. )\n", Item.getCake());
-            System.out.printf(" 샌드위치 : %d개 ( 체력을 4 회복시킨다. )\n", Item.getSandwich());
-            System.out.printf(" 초콜릿   : %d개 ( 인내력을 2 회복시킨다. )\n", Item.getChoco());
-            System.out.printf(" 마카롱   : %d개 ( 인내력을 4 회복시킨다. )\n", Item.getMacaron());
+            System.out.printf(" 케이크   : %d개 ( 체력을 2 회복시킨다. )\n", User.getCakeNum());
+            System.out.printf(" 샌드위치 : %d개 ( 체력을 4 회복시킨다. )\n", User.getSandwichNum());
+            System.out.printf(" 초콜릿   : %d개 ( 인내력을 2 회복시킨다. )\n", User.getChocoNum());
+            System.out.printf(" 마카롱   : %d개 ( 인내력을 4 회복시킨다. )\n", User.getMacaronNum());
             System.out.println();
             System.out.println("------------------------------------------------------------------------");
             System.out.println();
-            System.out.printf(" 1.케이크 구매         (- %d코인)\n", item.getCakePrice());
-            System.out.printf(" 2.샌드위치 구매       (- %d코인)\n", item.getSandwichPrice());
-            System.out.printf(" 3.초콜릿 구매         (- %d코인)\n", item.getChocoPrice());
-            System.out.printf(" 4.마카롱 구매         (- %d코인)\n", item.getMacaronPrice());
+            System.out.println(" 1.케이크 구매         (- 3코인)");
+            System.out.println(" 2.샌드위치 구매       (- 5코인)");
+            System.out.println(" 3.초콜릿 구매         (- 3코인)");
+            System.out.println(" 4.마카롱 구매         (- 5코인)");
             System.out.println(" 5.이전으로");
             System.out.println();
             System.out.println("========================================================================");
@@ -526,20 +532,37 @@ public class SubRun
             }
         }
     
-        ItemAction itemAction = new ItemAction();   // 아이템 기능 관련 객체 생성 
-        
+        final int CAKE = 1;     // 체력 2 회복
+        final int SANDWICH = 2; // 체력 4 회복
+        final int CHOCO = 3;    // 인내력 2 회복
+        final int MACARON = 4;  // 인내력 4 회복
+        final int EXIT = 5;     // 이전으로
+
+        ItemAction itemAction = new ItemAction();   // 아이템 기능 관련 객체 생성
         switch (result)                             // 사용자의 선택값에 따라
         {
-            case CAKE:  itemAction.buyCake();                  // 케이크 구매
+            case CAKE:
+                NewItem cake = new NewItem("케이크",3,2);
+                itemAction.buyItem(cake);
+                //itemAction.buyCake();                  // 케이크 구매
                 break;
 
-            case SANDWICH: itemAction.buySandwich();           // 샌드위치 구매
+            case SANDWICH:
+                NewItem sandwich = new NewItem("샌드위치",5,2);
+                itemAction.buyItem(sandwich);
+                //itemAction.buySandwich();           // 샌드위치 구매
                 break;
 
-            case CHOCO: itemAction.buyChoco();                 // 초콜릿 구매
+            case CHOCO:
+                NewItem choco = new NewItem("초콜릿",3,2);
+                itemAction.buyItem(choco);
+                //itemAction.buyChoco();                 // 초콜릿 구매
                 break;
 
-            case MACARON: itemAction.buyMacaron();             // 마카롱 구매
+            case MACARON:
+                NewItem macaron = new NewItem("마카롱",5,2);
+                itemAction.buyItem(macaron);
+                //itemAction.buyMacaron();             // 마카롱 구매
                 break;
 
             case EXIT: goShop();   // 이전으로
@@ -727,17 +750,17 @@ public class SubRun
         System.out.println();
         System.out.println("------------------------------------------------------------------------");
         System.out.println();
-        System.out.printf(" 케이크   : %d개\n", Item.getCake());
-        System.out.printf(" 샌드위치 : %d개\n", Item.getSandwich());
-        System.out.printf(" 초콜릿   : %d개\n", Item.getChoco());
-        System.out.printf(" 마카롱   : %d개\n", Item.getMacaron());
+        System.out.printf(" 케이크   : %d개\n", User.getCakeNum());
+        System.out.printf(" 샌드위치 : %d개\n", User.getSandwichNum());
+        System.out.printf(" 초콜릿   : %d개\n", User.getChocoNum());
+        System.out.printf(" 마카롱   : %d개\n", User.getMacaronNum());
         System.out.println();
         System.out.println("========================================================================");
 
-        useItem();  // 아이템 사용 메소드
+        useItemSel();  // 아이템 사용 메소드
     }
 
-    public void useItem()// 아이템 사용 메소드
+    public void useItemSel()// 아이템 사용 메소드
     {
         boolean check = true;   // 반복여부 체크하는 변수
         String resultStr;       // 사용자의 선택값을 담을 변수
@@ -786,16 +809,24 @@ public class SubRun
 
         switch (result)                     // 사용자의 선택값에 따라
         {
-            case CAKE: itemAction.useCake();           // 케이크 사용
+            case CAKE:
+                itemAction.useItem("케이크");
+                //itemAction.useCake();           // 케이크 사용
                 break;
 
-            case SANDWICH: itemAction.useSandwich();   // 샌드위치 사용
+            case SANDWICH:
+                itemAction.useItem("샌드위치");
+                //itemAction.useSandwich();   // 샌드위치 사용
                 break;
 
-            case CHOCO: itemAction.useChoco();         // 초콜릿 사용
+            case CHOCO:
+                itemAction.useItem("초콜릿");
+                //itemAction.useChoco();         // 초콜릿 사용
                 break;
 
-            case MACARON: itemAction.useMacaron();     // 마카롱 사용
+            case MACARON:
+                itemAction.useItem("마카롱");
+                //itemAction.useMacaron();     // 마카롱 사용
                 break;
 
             case EXIT:  // 이전으로

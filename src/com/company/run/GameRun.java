@@ -14,17 +14,8 @@ public class GameRun
     // 최초 실행하는 메소드
     public void initialRun()
     {
-        String selectStr;
-        int select = 0;
-        // 초기화해야하는 이유  : Primitive type 인 지역변수는 자동으로 초기화되지 않는다.
-        // → 예측할 수 없는 값을 담는걸 방지하기 위해 초기화 해줘야 한다.
-
-        // 스캐너 객체 생성
-        Scanner sc = new Scanner(System.in);
-
         System.out.println();
         System.out.println();
-
 
         System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
         System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
@@ -40,6 +31,11 @@ public class GameRun
         System.out.println();
 
         boolean check = true;   // 반복 여부를 체크하기 위한 변수
+        String selectStr;       // 사용자가 입력한 값을 담을 변수
+        int select = 0;         // selectStr 변수를 형변환해서 담을 변수 
+
+        // 스캐너 객체 생성
+        Scanner sc = new Scanner(System.in);
 
         while (check)            // 올바른 선택지를 선택할 때까지 반복한다.
         {
@@ -66,6 +62,8 @@ public class GameRun
 
             } catch (NumberFormatException e) // NumberFormatException 발생한다면
             {
+                System.out.println("========================================================================");
+                System.out.println(" 올바른 값을 입력해주세요.");
                 check = true;   // check 에 true 담아서 다시 반복
             }
 
@@ -88,14 +86,13 @@ public class GameRun
                     subRun.openEndings();           // 3.공개된 엔딩 확인 메소드 호출
                     break;
             }
-
         }
     }// end initialRun()
 
     public void start()
     {
         String userName;        // 유저이름을 저장할 변수
-        boolean check = true;   // 조건에 맞게 이름 입력했는지 확인할 변수
+        boolean check = true;          // 조건에 맞게 이름 입력했는지 확인할 변수
 
         do {
             System.out.print(" 이름을 입력해주세요(한글만 가능) : ");
@@ -274,9 +271,8 @@ public class GameRun
     public void work()
     {
         // 손님수 표현하기 위한 배열, 최대 4주차에서 게임이 끝나기 때문에 최대 숙련도는 5이다. 
-        // 하루에 방문하는 최대 손님수는 숙련도와 동일하므로 다섯까지 존재  
+        // 하루에 방문하는 최대 손님수는 숙련도와 동일하므로 다섯까지 존재
         String[] nums = {"첫", "두", "세", "네", "다섯"};
-        
 
         System.out.println("------------------------------------------------------------------------");
         System.out.println("                        " + nums[Cafe.getTodayCustomerNum()] + "번째 손님이 등장했습니다.");
