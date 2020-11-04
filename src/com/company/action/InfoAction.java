@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class InfoAction
 {
     // 정보확인 선택
-    public void infoSel()
+    public void infoSelect()
     {
         boolean check = true;   // 반복여부 체크하는 변수
         String resultStr;       // 사용자의 선택값을 담을 변수(1. 정보 확인  2.상점가기 3.모은 엔딩 확인)
@@ -93,7 +93,7 @@ public class InfoAction
         System.out.println();
 
         InfoAction infoAction = new InfoAction();
-        infoAction.infoSel(); // 이전으로
+        infoAction.infoSelect(); // 이전으로
 
     }// end myInfo()
 
@@ -141,6 +141,6 @@ public class InfoAction
         System.out.println();
 
         InfoAction infoAction = new InfoAction();
-        infoAction.infoSel(); // 이전으로
+        infoAction.infoSelect(); // 이전으로
     }
 }

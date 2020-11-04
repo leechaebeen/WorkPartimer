@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 public class ItemAction
 {
-    // 아이템 구입하기
-    public void goShop()
+    // 구입할 아이템 종류 선택
+    public void selectItemType()
     {
         System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
         System.out.println("==========================     아이템  구매      ==========================");
@@ -169,7 +169,7 @@ public class ItemAction
                 userAction.buyItem(feeling);
                 break;
 
-            case EXIT : goShop();   // 이전으로
+            case EXIT : selectItemType();   // 이전으로
                 break;
 
         }
@@ -262,7 +262,7 @@ public class ItemAction
                 userAction.buyItem(macaron);
                 break;
 
-            case EXIT: goShop();   // 이전으로
+            case EXIT: selectItemType();   // 이전으로
                 break;
 
         }

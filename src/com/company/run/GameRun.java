@@ -527,12 +527,12 @@ public class GameRun
         {
             case  INFO:
                 InfoAction infoAction = new InfoAction();
-                infoAction.infoSel();         // 1. 정보 확인 메소드 호출
+                infoAction.infoSelect();         // 1. 정보 확인 메소드 호출
                 break;
 
             case  SHOP:
                 ItemAction itemAction = new ItemAction();
-                itemAction.goShop();       // 2. 상점 가기 메소드 호출
+                itemAction.selectItemType();       // 2. 상점 가기 메소드 호출
                 break;
 
             case SKIP :                        // 3. 주말 지나가기 : 다음날 카페 시작하는 메소드 호출

@@ -105,7 +105,8 @@ public class SpecialCustomerAction extends CustomerAction
         {
             ending.toQuitEnding();          // 퇴사 엔딩 메소드 호출
         }
-        else if(User.getTotalFailNum()/User.getSkillLevel() < User.getWeekFailNum() ) // 총 음료 제조 횟수/숙련도 < 이번 주 실패 횟수
+        else if(User.getTotalFailNum()+User.getTotalSuccessNum()/User.getSkillLevel() < User.getWeekFailNum())
+        // 총 음료 제조 횟수 / 숙련도 < 이번주 실패 횟수
         {
             ending.getFireEnding();         // 해고 엔딩 메소드 호출
         }

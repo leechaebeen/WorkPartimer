@@ -78,7 +78,7 @@ public class SecretCustomerAction extends SpecialCustomerAction
         } else if (User.getFeeling() == 0) // 만약 유저의 인내력이 0이 된다면
         {
             ending.toQuitEnding();          // 퇴사 엔딩 실행
-        } else if (User.getTotalFailNum() / User.getSkillLevel() < User.getWeekFailNum())
+        } else if(User.getTotalFailNum()+User.getTotalSuccessNum()/User.getSkillLevel() < User.getWeekFailNum())
         // 총 음료제조 실패횟수/숙련도 < 이번 주 실패횟수
         {
             ending.getFireEnding();         // 해고 엔딩 실행

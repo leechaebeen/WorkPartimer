@@ -46,7 +46,8 @@ public class CustomerAction
             //test
             //System.out.println(User.getHp());
             ending.fallDownEnding();                         // 과로 엔딩 메소드 호출
-        } else if (User.getTotalFailNum() / User.getSkillLevel() < User.getWeekFailNum())// 총 음료 제조 횟수/숙련도 < 이번 주 실패 횟수라면
+        } else if (User.getTotalFailNum()+User.getTotalSuccessNum()/User.getSkillLevel() < User.getWeekFailNum())
+            // 총 음료 제조 횟수/숙련도 < 이번 주 실패 횟수라면
         {
             ending.getFireEnding();                         // 해고 엔딩 실행
         }
@@ -81,7 +82,7 @@ public class CustomerAction
         int whippingCream = rd.nextInt(2);  // 0 또는 1의 랜덤값을 변수 whippingCream 에 저장한다.
 
         // 음료 선택
-        int beverageSel = rd.nextInt(5)+1;   // 1 ~ 5 의 랜덤값(음료 종류)을 변수 beverageSel 에 저장한다.
+        int beverageSelect = rd.nextInt(5)+1;   // 1 ~ 5 의 랜덤값(음료 종류)을 변수 beverageSelect 에 저장한다.
 
         final int AMERICANO = 1;     // 아메리카노
         final int CAFE_LATTE = 2;    // 카페라떼
@@ -93,7 +94,7 @@ public class CustomerAction
         int makeLevel = 0;  // 음료 제조 난이도
         boolean isMilk = true;   // 우유들어가는지 여부
 
-        switch (beverageSel)
+        switch (beverageSelect)
         {
             case AMERICANO:
                 name = "아메리카노";
