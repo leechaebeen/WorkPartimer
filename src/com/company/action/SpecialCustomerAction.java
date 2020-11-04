@@ -3,6 +3,7 @@ package com.company.action;
 import com.company.data.Beverage;
 import com.company.data.Cafe;
 import com.company.data.User;
+import com.company.run.Ending;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -11,6 +12,106 @@ import java.util.Scanner;
 // checkTakeout() 메소드 사용
 public class SpecialCustomerAction extends CustomerAction
 {
+    private int customerType;
+
+    // 특별 손님 등장 메소드
+    public void comeSpecialCustomer()
+    {
+        final int TALK_DOWN = 1;        // 반말하는 유형
+        final int FIGHT = 2;            // 시비거는 유형
+        final int FALSE_RELIGION = 3;   // 사이비 유형
+        final int WRONG = 4;            // 잘못 찾아온 유형
+        final int PRESENT = 5;          // 선물주는 유형
+
+        Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum()+1); // 기존의 하루 방문자 수에 하나 더하기
+        Cafe.setTotalCustomerNum(Cafe.getTotalCustomerNum()+1); // 기존의 총 방문자 수에 한명 더하기
+        Cafe.setWeekCustomerNum(Cafe.getWeekCustomerNum() + 1); // 기존의 주 방문자 수에 한명 더하기
+
+        SpecialCustomerAction specialCustomer = new SpecialCustomerAction(); // 특별 손님 객체 생성
+        Beverage beverage = specialCustomer.orderBeverage();                 // 주문할 음료 객체 생성
+
+        System.out.println();
+
+        // 음료 주문 유형 랜덤으로 실행하기
+        Random rd = new Random();
+        int typeNum = rd.nextInt(5)+1; //1~5 랜덤값 반환해서 typeNum 변수에 저장
+
+        boolean orderResult = true;         // 주문이 확정되었는지의 여부를 저장하는 변수
+
+        // 랜덤값에 따라 유형 별 손님이 음료 주문 -  음료를 주문하는 경우 true 반환, 주문하지 않는 경우 false 반환
+        switch(typeNum)
+        {
+            case TALK_DOWN:
+                orderResult = specialCustomer.orderTalkDown(beverage);      // 반말하는 손님
+                break;
+
+            case FIGHT:
+                orderResult = specialCustomer.orderFight(beverage);         // 시비거는 손님
+                break;
+
+            case FALSE_RELIGION:
+                orderResult = specialCustomer.orderFalseReligion();         // 사이비 손님
+                break;
+
+            case WRONG:
+                orderResult = specialCustomer.orderWrong();                 // 잘못찾아온 손님
+                break;
+
+            case PRESENT:
+                orderResult = specialCustomer.orderPresent();               // 선물주는 손님
+                break;
+
+        }
+
+
+        Ending ending = new Ending();       // 엔딩 객체 생성
+        if(User.getHp()==0)                 // 만약 유저의 체력이 0이 된다면
+        {
+            ending.fallDownEnding();        //  과로 엔딩 메소드 호출
+        }
+        else if(User.getFeeling() == 0)     // 만약 유저의 인내력이 0이 된다면
+        {
+            ending.toQuitEnding();          // 퇴사 엔딩 메소드 호출
+        }
+
+        if(orderResult)     // 주문이 확정된 경우
+        {
+            // 유저가 음료 만들기
+            UserAction userAction = new UserAction();           // 유저 액션 객체 생성
+            boolean result = userAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
+            userAction.makeBeverageResult(result);              // 결과에 따른 출력
+
+            // 여기서 실패, 성공횟수 더하기
+            if(result)                                          // 음료만들기 성공한경우
+            {
+                User.setTotalSuccessNum(User.getTotalSuccessNum() + 1 ); // 총 음료 제조 성공 횟수 1 증가
+                User.setWeekSuccessNum(User.getWeekSuccessNum() + 1);    // 이번주 음료제조 성공횟수 1 증가
+            }
+            else
+            {
+                User.setTotalFailNum(User.getTotalFailNum() + 1); // 총 음료제조 실패 횟수 1 증가
+                User.setWeekFailNum(User.getWeekFailNum() + 1);   // 이번주 음료제조 실패 횟수 1 증가
+            }
+        }
+
+        if(User.getHp()==0)                 // 만약 유저의 체력이 0이 된다면
+        {
+            //test
+            //System.out.println(User.getHp());
+            ending.fallDownEnding();        //  과로 엔딩 메소드 호출
+        }
+        else if(User.getFeeling() == 0)     // 만약 유저의 인내력이 0이 된다면
+        {
+            ending.toQuitEnding();          // 퇴사 엔딩 메소드 호출
+        }
+        else if(User.getTotalFailNum()/User.getSkillLevel() < User.getWeekFailNum() ) // 총 음료 제조 횟수/숙련도 < 이번 주 실패 횟수
+        {
+            ending.getFireEnding();         // 해고 엔딩 메소드 호출
+        }
+
+    }
+
+
     // 음료 주문하는 메소드
     // 유형1 반말하는 손님 1: 유저의 체력과 인내력이 -1씩 감소한다.
     // 음료를 주문하는 경우 true, 음료를 주문하지 않는 경우 false 반환

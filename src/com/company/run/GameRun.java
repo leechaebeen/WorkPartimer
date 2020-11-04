@@ -1,6 +1,6 @@
 package com.company.run;
 
-import com.company.action.SecretCustomerAction;
+import com.company.action.*;
 import com.company.data.Cafe;
 import com.company.data.User;
 
@@ -77,13 +77,13 @@ public class GameRun
             switch (select)              // 유저의 선택값에 따라 분기 처리
             {
                 case START:                            // 1. 시작하기를 선택한 경우
-                    GameRun gameRun = new GameRun();    // 게임 실행 객체 생성
-                    gameRun.start();                     // 게임 시작하는 메소드 호출
+                    GameRun gameRun = new GameRun();
+                    gameRun.start();                  // 게임 시작하는 메소드 호출
                     break;
 
                 case OPEN_ENDINGS:                  // 2. 공개된 엔딩보기를 선택한 경우
-                    SubRun subRun = new SubRun();   // 서브 실행 객체 생성
-                    subRun.openEndings();           // 3.공개된 엔딩 확인 메소드 호출
+                    Ending ending = new Ending();
+                    ending.openEndings();           // 공개된 엔딩 확인 메소드 호출
                     break;
             }
         }
@@ -282,19 +282,23 @@ public class GameRun
         Random rd = new Random();               // 랜덤클래스 객체 생성
         int randomNum = rd.nextInt(10)+1; // 1 ~ 10 사이의 랜덤값을 생성해서 변수에 담는다.
 
-        SubRun subRun = new SubRun();           // 실행 객체 생성
-
         if(randomNum <=7)                       // 랜덤값이 1 ~ 7 인 경우
         {
-            subRun.comeCustomer();              // 일반 손님이 등장하는 메소드 호출
+            // 일반 손님이 등장하는 메소드 호출
+            CustomerAction customerAction = new CustomerAction();
+            customerAction.comeCustomer();
         }
         else if(randomNum==8||randomNum==9)     // 랜덤값이 8,9인 경우
         {
-            subRun.comeSpecialCustomer();       // 특별 손님이 등장하는 메소드 호출
+            // 특별 손님이 등장하는 메소드 호출
+            SpecialCustomerAction specialCustomerAction = new SpecialCustomerAction();
+            specialCustomerAction.comeSpecialCustomer();
         }
         else                                    // 랜덤값이 10인 경우
         {
-            subRun.comeSecretCustomer();        // 비밀 손님이 등장하는 메소드 호출
+            // 비밀 손님이 등장하는 메소드 호출
+            SecretCustomerAction secretCustomerAction = new SecretCustomerAction();
+            secretCustomerAction.comeSecretCustomer();
         }
 
         selWork();                          // 선택지 고르는 메소드 호출(1. 계속하기 2. 마감하기 3.아이템 사용)
@@ -371,8 +375,8 @@ public class GameRun
                     break;
 
                 case ITEM :                 // 보유한 아이템을 보여주는 메소드 호출
-                    SubRun subRun = new SubRun();
-                    subRun.myItem();
+                    UserAction userAction = new UserAction();
+                    userAction.myItem();
                     break;
             }
         }
@@ -515,16 +519,18 @@ public class GameRun
 
         }
 
-        SubRun subRun = new SubRun();    // 실행 객체 생성
-
         System.out.println();
 
         switch(result)                          // 사용자의 선택값에 따라
         {
-            case  INFO: subRun.info();         // 1. 정보 확인 메소드 호출
+            case  INFO:
+                InfoAction infoAction = new InfoAction();
+                infoAction.info();         // 1. 정보 확인 메소드 호출
                 break;
 
-            case  SHOP: subRun.goShop();       // 2. 상점 가기 메소드 호출
+            case  SHOP:
+                ItemAction itemAction = new ItemAction();
+                itemAction.goShop();       // 2. 상점 가기 메소드 호출
                 break;
 
             case SKIP :                        // 3. 주말 지나가기 : 다음날 카페 시작하는 메소드 호출

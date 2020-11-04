@@ -3,6 +3,9 @@ package com.company.action;
 import com.company.data.Beverage;
 import com.company.data.Cafe;
 import com.company.data.User;
+import com.company.run.Ending;
+
+import java.util.Random;
 
 
 // CustomerAction <- 상속 -  SpecialCustomerAction <- 상속 - SecretCustomer
@@ -10,6 +13,78 @@ import com.company.data.User;
 public class SecretCustomerAction extends SpecialCustomerAction
 {
     private static int secretCustomerCnt; // 등장횟수 누적해서 담는 변수
+
+    // 비밀 손님 등장 메소드
+    public void comeSecretCustomer()
+    {
+        final int COMMON = 1;           // 일반 손님 유형
+        final int TALK_DOWN = 2;        // 반말하는 유형
+        final int FIGHT = 3;            // 시비거는 유형
+
+        Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum() + 1); // 기존의 하루 방문자 수에 하나 더하기
+        Cafe.setTotalCustomerNum(Cafe.getTotalCustomerNum() + 1); // 기존의 총 방문자 수에 한명 더하기
+        Cafe.setWeekCustomerNum(Cafe.getWeekCustomerNum() + 1); // 기존의 주 방문자 수에 한명 더하기
+
+        SecretCustomerAction secretCustomer = new SecretCustomerAction();  // 비밀 손님 객체 생성
+        Beverage beverage = secretCustomer.orderBeverage();    // 주문할 음료 객체 생성
+
+        System.out.println();
+
+        // 음료 주문 유형 랜덤으로 실행하기
+        Random rd = new Random();
+        int typeNum = rd.nextInt(3) + 1; //1~3 랜덤값 반환해서 typeNum 변수에 저장
+
+        // 랜덤값에 따라 유형 별 손님이 음료 주문 -  음료를 주문한 경우 true 반환
+        boolean orderResult = true;
+        switch (typeNum)
+        {
+            case COMMON:
+                orderResult = secretCustomer.orderToPartimer(beverage);   // 일반 손님
+                break;
+
+            case TALK_DOWN:
+                orderResult = secretCustomer.orderTalkDown(beverage);    // 반말하는 손님
+                break;
+
+            case FIGHT:
+                orderResult = secretCustomer.orderFight(beverage);       // 시비거는 손님
+                break;
+        }
+
+        if (orderResult)                                         // 주문이 확정된 경우
+        {
+            // 유저가 음료 만들기
+            UserAction userAction = new UserAction();           // 유저 액션 객체 생성
+            boolean result = userAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
+            userAction.makeBeverageResult(result);              // 결과에 따른 출력
+
+            // 여기서 실패, 성공횟수 더하기
+            if (result)                                          // 음료만들기 성공한경우
+            {
+                User.setTotalSuccessNum(User.getTotalSuccessNum() + 1); // 총 음료 제조 성공 횟수 1 증가
+                User.setWeekSuccessNum(User.getWeekSuccessNum() + 1);    // 이번주 음료제조 성공횟수 1 증가
+            } else
+            {
+                User.setTotalFailNum(User.getTotalFailNum() + 1); // 총 음료제조 실패 횟수 1 증가
+                User.setWeekFailNum(User.getWeekFailNum() + 1);   // 이번주 음료제조 실패 횟수 1 증가
+            }
+        }
+
+        Ending ending = new Ending();       // 엔딩 객체 생성
+        if (User.getHp() == 0)             // 만약 유저의 체력이 0이 된다면
+        {
+            ending.fallDownEnding();        //  과로 엔딩 실행
+        } else if (User.getFeeling() == 0) // 만약 유저의 인내력이 0이 된다면
+        {
+            ending.toQuitEnding();          // 퇴사 엔딩 실행
+        } else if (User.getTotalFailNum() / User.getSkillLevel() < User.getWeekFailNum())
+        // 총 음료제조 실패횟수/숙련도 < 이번 주 실패횟수
+        {
+            ending.getFireEnding();         // 해고 엔딩 실행
+        }
+
+
+    }
 
     @Override
     // 음료를 주문하는 경우 true, 주문하지 않는 경우 false 반환
@@ -284,4 +359,8 @@ public class SecretCustomerAction extends SpecialCustomerAction
         return secretCustomerCnt;
     }
 
+    public static void setSecretCustomerCnt(int secretCustomerCnt)
+    {
+        SecretCustomerAction.secretCustomerCnt = secretCustomerCnt;
+    }
 }

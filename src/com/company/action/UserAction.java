@@ -1,7 +1,9 @@
 package com.company.action;
 import com.company.data.Beverage;
 import com.company.data.Cafe;
+import com.company.data.Item;
 import com.company.data.User;
+import com.company.run.GameRun;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -507,6 +509,276 @@ public class UserAction
 
     }
 
+    // 아이템 구매 메소드
+    public void buyItem(Item item)
+    {
+        // 매개변수로 받은 객체에서 아이템 유형과 가격 얻기
+        int itemPrice = item.getPrice();     // 아이템의 가격을 담는 변수
+        String itemName = item.getName();    // 아이템의 이름을 담는 변수
+        int itemType = item.getType();       // 아이템의 유형을 담는 변수 (1: 영구아이템, 2: 소비아이템)
+
+        //test
+        /*
+        System.out.println("itemPrice: " + itemPrice );
+        System.out.println("itemName: " + itemName);
+        System.out.println("itemType : " + itemType);
+        */
+
+        if(User.getProperty() >= itemPrice)  // 아이템 가격보다 보유한 코인이 많거나 같으면
+        {
+            User.setProperty(User.getProperty() - itemPrice);    // 계산하고
+
+            switch (itemName)
+            {
+                case "의자":  Cafe.setSetChair(Cafe.getSetChair() + 1); // 의자 개수 추가
+                    break;
+
+                case "유리잔": Cafe.setSetCup(Cafe.getSetCup() + 1);     // 유리잔 개수 추가
+                    break;
+
+                case "머그잔": Cafe.setSetMug(Cafe.getSetMug() + 1);     // 머그잔 개수 추가
+                    break;
+
+                case "체력":  User.setSetHp(User.getSetHp() + 2);        // 체력 추가
+                    break;
+
+                case "인내력": User.setSetFeeling(User.getSetFeeling() + 2 );  // 인내력 추가
+                    break;
+
+                case "케이크" : User.setCakeNum(User.getCakeNum() + 1);        // 케이크 추가
+                    break;
+
+                case "샌드위치" : User.setSandwichNum(User.getSandwichNum() + 1);   // 샌드위치 추가
+                    break;
+
+                case "초콜릿" : User.setChocoNum(User.getChocoNum() + 1);          // 초콜릿 추가
+                    break;
+
+                case "마카롱" : User.setMacaronNum(User.getMacaronNum() + 1);      // 마카롱 추가
+                    break;
+            }
+
+            System.out.println("========================================================================");
+            System.out.printf(" %d 코인을 사용했습니다.\n", item.getPrice());
+            System.out.printf(" 보유 코인 : %d코인\n", User.getProperty());
+
+        }
+        else
+        {
+            System.out.println("========================================================================");
+            System.out.printf(" 보유한 코인으로 %s을(를) 구매할 수 없습니다.\n", item.getName());
+            System.out.printf(" 보유 코인      : %d코인\n", User.getProperty());
+        }
+        System.out.println("========================================================================");
+
+        ItemAction itemAction = new ItemAction();
+
+        if(itemType == 1)// 영구아이템인 경우
+        {
+            itemAction.buyPermanentItem();  // 영구아이템 선택화면으로
+        }
+        else if(itemType == 2)  // 소비아이템인 경우
+        {
+            itemAction.buyConsumableItem(); // 소비아이템 선택화면으로
+        }
+
+
+    }// end buyItem(Item item)
+
+
+
+
+    // 아이템 사용 메소드
+    public void useItem(String itemName)
+    {
+        switch(itemName)
+        {
+            case "케이크" :
+                if(User.getCakeNum() > 0)
+                {
+                    User.setCakeNum(User.getCakeNum() - 1);     // 보유한 개수에서 하나 감소
+                    User.setHp(User.getHp() + 2 );              // 현재 체력에서 2 회복
+
+                    System.out.println("========================================================================");
+                    System.out.println(" 케이크를 사용했습니다.");
+                    System.out.println(" 체력이 2 회복되었습니다.");
+                    System.out.printf(" 보유 케이크  : %d개 \n", User.getCakeNum());
+                    System.out.printf(" 현재 체력    : %d\n", User.getHp());
+
+                }
+                else
+                {
+                    System.out.println(" 보유한 케이크가 없습니다.");
+                }
+                System.out.println("========================================================================");
+                break;
+
+            case "샌드위치":
+                if (User.getSandwichNum() > 0)
+                {
+                    User.setSandwichNum(User.getSandwichNum() - 1);     // 보유한 개수에서 하나 감소
+                    User.setHp(User.getHp() + 4);                       // 현재 체력에서 4 회복
+
+                    System.out.println("========================================================================");
+                    System.out.println(" 샌드위치를 사용했습니다.");
+                    System.out.println(" 체력이 4 회복되었습니다.");
+                    System.out.printf(" 보유 샌드위치  : %d개 \n", User.getSandwichNum());
+                    System.out.printf(" 현재 체력     : %d\n", User.getHp());
+
+                } else
+                {
+                    System.out.println(" 보유한 샌드위치가 없습니다.");
+                }
+                System.out.println("========================================================================");
+                break;
+
+            case "초콜릿":
+                if(User.getChocoNum() > 0)
+                {
+                    User.setChocoNum(User.getChocoNum() - 1);     // 보유한 개수에서 하나 감소
+                    User.setFeeling(User.getFeeling() + 2);       // 현재 인내력에서 2 회복
+
+                    System.out.println("========================================================================");
+                    System.out.println(" 초콜릿을 사용했습니다.");
+                    System.out.println(" 인내력이 2 회복되었습니다.");
+                    System.out.printf(" 보유 초콜릿  : %d개 \n", User.getChocoNum());
+                    System.out.printf(" 현재 인내력  : %d\n", User.getFeeling());
+
+                } else
+                {
+                    System.out.println(" 보유한 초콜릿이 없습니다.");
+                }
+                System.out.println("========================================================================");
+                break;
+
+            case "마카롱":
+                if(User.getMacaronNum() > 0)
+                {
+                    User.setMacaronNum(User.getMacaronNum() - 1);     // 보유한 개수에서 하나 감소
+                    User.setFeeling(User.getFeeling() + 4);           // 현재 인내력에서 4 회복
+
+                    System.out.println("========================================================================");
+                    System.out.println(" 마카롱을 사용했습니다.");
+                    System.out.println(" 인내력이 4 회복되었습니다.");
+                    System.out.printf(" 보유 마카롱  : %d개 \n", User.getMacaronNum());
+                    System.out.printf(" 현재 인내력  : %d\n", User.getFeeling());
+
+                } else
+                {
+                    System.out.println(" 보유한 마카롱이 없습니다.");
+                }
+                System.out.println("========================================================================");
+                break;
+
+        }
+
+        useItemSel(); // 이전으로
+
+
+    }// end userItem(String itemName)
+
+    public void myItem()// 보유한 소비 아이템 확인하는 메소드
+    {
+        System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
+        System.out.println("=========================    보유한 소비 아이템    =========================");
+        System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
+        System.out.println();
+        System.out.println(" 케이크   : 체력을 2 회복합니다.");
+        System.out.println(" 샌드위치 : 체력을 4 회복합니다.");
+        System.out.println(" 초콜릿   : 인내력을 2 회복합니다.");
+        System.out.println(" 마카롱   : 인내력을 4 회복합니다. ");
+        System.out.println();
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println();
+        System.out.printf(" 케이크   : %d개\n", User.getCakeNum());
+        System.out.printf(" 샌드위치 : %d개\n", User.getSandwichNum());
+        System.out.printf(" 초콜릿   : %d개\n", User.getChocoNum());
+        System.out.printf(" 마카롱   : %d개\n", User.getMacaronNum());
+        System.out.println();
+        System.out.println("========================================================================");
+
+        useItemSel();  // 아이템 사용 메소드
+    }
+
+    public void useItemSel()// 아이템 사용 메소드
+    {
+        boolean check = true;   // 반복여부 체크하는 변수
+        String resultStr;       // 사용자의 선택값을 담을 변수
+        int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
+
+        while(check)
+        {
+            System.out.println(" 사용할 아이템을 골라주세요.");
+            System.out.println(" 1.케이크  2.샌드위치  3.초콜릿  4.마카롱  5.이전으로");
+            System.out.println("------------------------------------------------------------------------");
+            Scanner sc = new Scanner(System.in);
+            System.out.print(" 선택 : ");
+            resultStr = sc.nextLine();
+
+            // 입력받은 값이 숫자인지 확인
+            try
+            {
+                // 자료형 변경한 뒤(String → int) int형에 담는다.
+                result = Integer.parseInt(resultStr);
+                check = false;
+                // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
+                // int형으로 변경되지 않는다면 NumberFormatException 발생
+            }
+            catch (NumberFormatException e) // NumberFormatException 발생한다면
+            {
+                check = true;   // check 에 true 담아서 다시 반복
+                // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+            }
+
+            if(result < 1 || result > 5 )// 주어진 값 이외의 수를 선택한 경우
+            {
+                System.out.println("========================================================================");
+                System.out.println(" 올바른 값을 입력해주세요.");
+                check = true;
+            }
+
+        }// end while
+
+        final int CAKE = 1;
+        final int SANDWICH = 2;
+        final int CHOCO = 3;
+        final int MACARON = 4;
+        final int EXIT = 5;
+
+        UserAction userAction = new UserAction();   // 유저 기능 객체 생성
+
+        switch (result)                             // 사용자의 선택값에 따라
+        {
+            case CAKE:
+                userAction.useItem("케이크");
+                //itemAction.useCake();           // 케이크 사용
+                break;
+
+            case SANDWICH:
+                userAction.useItem("샌드위치");
+                //itemAction.useSandwich();   // 샌드위치 사용
+                break;
+
+            case CHOCO:
+                userAction.useItem("초콜릿");
+                //itemAction.useChoco();         // 초콜릿 사용
+                break;
+
+            case MACARON:
+                userAction.useItem("마카롱");
+                //itemAction.useMacaron();     // 마카롱 사용
+                break;
+
+            case EXIT:  // 이전으로
+                GameRun gameRun = new GameRun();
+                gameRun.selWork();
+                break;
+        }
+
+    } // end useItem()
+
+
+
     // 이전 플레이의 모든 값 리셋
     public void reset()
     {
@@ -537,6 +809,8 @@ public class UserAction
         Cafe.setSetCup(1);
         Cafe.setSetMug(1);
 
+        // 비밀손님 누적 값 리셋
+        SecretCustomerAction.setSecretCustomerCnt(0);
     }
 
 }// end class

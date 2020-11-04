@@ -2,10 +2,73 @@ package com.company.action;
 
 import com.company.data.Cafe;
 import com.company.data.User;
-import com.company.run.SubRun;
+import com.company.run.GameRun;
+
+import java.util.Scanner;
 
 public class InfoAction
 {
+
+    public void info()
+    {
+        boolean check = true;   // 반복여부 체크하는 변수
+        String resultStr;       // 사용자의 선택값을 담을 변수(1. 정보 확인  2.상점가기 3.모은 엔딩 확인)
+        int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
+
+        final int MY_INFO = 1;
+        final int CAFE_INFO = 2;
+        final int EXIT = 3;
+
+        while(check)
+        {
+            System.out.println("========================================================================");
+            System.out.printf(" 1. %s님의 정보 보기  2.카페 정보 보기  3.이전으로 \n", User.getName());
+            System.out.println("------------------------------------------------------------------------");
+            System.out.print(" 선택 : ");
+            Scanner sc = new Scanner(System.in);
+            resultStr = sc.nextLine();
+
+            // 입력받은 값이 숫자인지 확인
+            try
+            {
+                // 자료형 변경한 뒤(String → int) int형에 담는다.
+                result = Integer.parseInt(resultStr);
+                check = false;
+                // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
+                // int형으로 변경되지 않는다면 NumberFormatException 발생
+            }
+            catch (NumberFormatException e) // NumberFormatException 발생한다면
+            {
+                check = true;   // check 에 true 담아서 다시 반복
+                // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+            }
+
+            if(result < 1 || result > 3 )// 주어진 값 이외의 수를 선택한 경우
+            {
+                System.out.println("========================================================================");
+                System.out.println(" 올바른 값을 입력해주세요.");
+                check = true;
+            }
+
+        }
+
+        InfoAction infoAction = new InfoAction();   // 정보 기능 객체 생성
+
+        switch(result)
+        {
+            case  MY_INFO: infoAction.myInfo();     // 내 정보 확인
+                break;
+
+            case  CAFE_INFO: infoAction.cafeInfo(); // 카페 정보 확인
+                break;
+
+            case EXIT:
+                GameRun gameRun = new GameRun();    // 카페 실행 객체 생성
+                gameRun.weekend();                  // 주말 초기화면 호출
+                break;
+        }
+
+    }
 
     public void myInfo()// 내 정보 확인
     {
@@ -29,8 +92,8 @@ public class InfoAction
         System.out.printf(" %s님의 숙련도 : %d\n ", User.getName(), User.getSkillLevel());
         System.out.println();
 
-        SubRun subRun = new SubRun();
-        subRun.info(); // 이전으로
+        InfoAction infoAction = new InfoAction();
+        infoAction.info(); // 이전으로
 
     }// end myInfo()
 
@@ -77,7 +140,7 @@ public class InfoAction
         System.out.printf(" 머그잔의 수  : %d\n", Cafe.getSetMug());
         System.out.println();
 
-        SubRun subRun = new SubRun();
-        subRun.info(); // 이전으로
+        InfoAction infoAction = new InfoAction();
+        infoAction.info(); // 이전으로
     }
 }
