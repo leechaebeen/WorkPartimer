@@ -62,7 +62,8 @@ public class SecretCustomerAction extends SpecialCustomerAction
             if (result)                                          // 음료만들기 성공한경우
             {
                 User.setTotalSuccessNum(User.getTotalSuccessNum() + 1); // 총 음료 제조 성공 횟수 1 증가
-                User.setWeekSuccessNum(User.getWeekSuccessNum() + 1);    // 이번주 음료제조 성공횟수 1 증가
+                User.setWeekSuccessNum(User.getWeekSuccessNum() + 1);   // 이번주 음료제조 성공횟수 1 증가
+                giveTips(tip);                                          // 팁 주기
             } else
             {
                 User.setTotalFailNum(User.getTotalFailNum() + 1); // 총 음료제조 실패 횟수 1 증가

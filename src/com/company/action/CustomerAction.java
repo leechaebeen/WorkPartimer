@@ -9,35 +9,30 @@ import java.util.Random;
 // 게임에 등장하는 손님의 가장 기본이 되는 기능을 담은 클래스.
 public class CustomerAction
 {
-    private int coin;
-
     // 일반손님 등장 메소드
     public void comeCustomer()
     {
-        Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum()+1); // 기존의 하루 방문자 수에 한명 더하기
-        Cafe.setTotalCustomerNum(Cafe.getTotalCustomerNum()+1); // 기존의 총 방문자 수에 한명 더하기
+        Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum() + 1); // 기존의 하루 방문자 수에 한명 더하기
+        Cafe.setTotalCustomerNum(Cafe.getTotalCustomerNum() + 1); // 기존의 총 방문자 수에 한명 더하기
         Cafe.setWeekCustomerNum(Cafe.getWeekCustomerNum() + 1); // 기존의 주 방문자 수에 한명 더하기
 
         System.out.println();
 
-        CustomerAction customerAction = new CustomerAction();           // 손님 객체 생성
+        Beverage beverage = orderBeverage();             // 주문할 음료 객체 생성
+        boolean orderResult = orderToPartimer(beverage); // 손님이 음료 주문 - 확정된 경우 true 반환
 
-        Beverage beverage = customerAction.orderBeverage();             // 주문할 음료 객체 생성
-        boolean orderResult = customerAction.orderToPartimer(beverage); // 손님이 음료 주문 - 확정된 경우 true 반환
-
-        if(orderResult) // 음료주문이 확정된 경우
+        if (orderResult) // 음료주문이 확정된 경우
         {
             UserAction userAction = new UserAction();           // 유저 액션 객체 생성
             boolean result = userAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다. 성공 시 true, 실패시 false 반환
             userAction.makeBeverageResult(result);              // 결과에 따른 출력
 
             // 여기서 실패, 성공횟수 더하기
-            if(result)                                          // 음료만들기 성공한경우
+            if (result)                                          // 음료만들기 성공한경우
             {
-                User.setTotalSuccessNum(User.getTotalSuccessNum() + 1 ); // 총 음료 제조 성공 횟수 1 증가
-                User.setWeekSuccessNum(User.getWeekSuccessNum() + 1);    // 이번주 음료제조 성공횟수 1 증가
-            }
-            else                                                // 음료만들기 실패한 경우
+                User.setTotalSuccessNum(User.getTotalSuccessNum() + 1); // 총 음료 제조 성공 횟수 1 증가
+                User.setWeekSuccessNum(User.getWeekSuccessNum() + 1);   // 이번주 음료제조 성공횟수 1 증가
+            } else                                                // 음료만들기 실패한 경우
             {
                 User.setTotalFailNum(User.getTotalFailNum() + 1); // 총 음료제조 실패 횟수 1 증가
                 User.setWeekFailNum(User.getWeekFailNum() + 1);   // 이번주 음료제조 실패 횟수 1 증가
@@ -46,20 +41,18 @@ public class CustomerAction
         }
 
         Ending ending = new Ending();                        // 엔딩 객체 생성
-        if(User.getHp()==0)                                  // 만약 유저의 체력이 0이 된다면
+        if (User.getHp() == 0)                                  // 만약 유저의 체력이 0이 된다면
         {
             //test
             //System.out.println(User.getHp());
             ending.fallDownEnding();                         // 과로 엔딩 메소드 호출
-        }
-        else if(User.getTotalFailNum()/User.getSkillLevel() < User.getWeekFailNum() )// 총 음료 제조 횟수/숙련도 < 이번 주 실패 횟수라면
+        } else if (User.getTotalFailNum() / User.getSkillLevel() < User.getWeekFailNum())// 총 음료 제조 횟수/숙련도 < 이번 주 실패 횟수라면
         {
             ending.getFireEnding();                         // 해고 엔딩 실행
         }
 
     }
 
-    // 팁 주기
 
     // 테이크아웃 여부 정하는 메소드 : 테이크아웃하면 true 반환, 테이크아웃 하지 않으면 false 반환 
     public boolean checkTakeout()

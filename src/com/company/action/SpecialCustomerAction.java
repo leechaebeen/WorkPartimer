@@ -12,7 +12,7 @@ import java.util.Scanner;
 // checkTakeout() 메소드 사용
 public class SpecialCustomerAction extends CustomerAction
 {
-    private int customerType;
+    protected int tip = 1;    // 랜덤으로 주는 팁
 
     // 특별 손님 등장 메소드
     public void comeSpecialCustomer()
@@ -86,6 +86,7 @@ public class SpecialCustomerAction extends CustomerAction
             {
                 User.setTotalSuccessNum(User.getTotalSuccessNum() + 1 ); // 총 음료 제조 성공 횟수 1 증가
                 User.setWeekSuccessNum(User.getWeekSuccessNum() + 1);    // 이번주 음료제조 성공횟수 1 증가
+                giveTips(tip);                                           // 팁 주기
             }
             else
             {
@@ -111,8 +112,23 @@ public class SpecialCustomerAction extends CustomerAction
 
     }
 
+    // 팁주는 메소드
+    public void giveTips(int tip)
+    {
+        Random random = new Random();
+        if(random.nextInt(1) == 0) // 랜덤값이 0이면
+        {
+            // 유저에게 1코인 추가
+            User.setProperty(User.getProperty() + 1);
+            System.out.println();
+            System.out.println("------------------------------------------------------------------------");
+            System.out.printf(" 손님에게 %d 코인의 팁을 받았습니다 ! \n", tip);
+            System.out.printf(" 현재 보유 코인 : %d\n", User.getProperty());
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println();
+        }
+    }
 
-    // 음료 주문하는 메소드
     // 유형1 반말하는 손님 1: 유저의 체력과 인내력이 -1씩 감소한다.
     // 음료를 주문하는 경우 true, 음료를 주문하지 않는 경우 false 반환
     public boolean orderTalkDown(Beverage beverage)
