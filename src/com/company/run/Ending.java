@@ -62,6 +62,7 @@ public class Ending
         System.out.println();
         System.out.println();
         System.out.println();
+        /*
         System.out.println("\t\t\t\t 으 아 아 아 ㅇㅏ");
         System.out.println("\t\t\t\t　　　　　　       ㅇ");
         System.out.println("\t\t\t\t　　　　　          ⋌");
@@ -71,18 +72,36 @@ public class Ending
         System.out.println("\t\t\t\t　 　　　　　　　　　   　      .");
         System.out.println("\t\t\t\t 　 　　　　　　　　　　　         .");
         System.out.println("\t\t\t\t 　 　　　　　　　　　　　             ඞ");
+        */
 
         System.out.println();
         System.out.println();
 
-        System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
+       /* System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
         System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
         System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
         System.out.printf("\t\t\t\t %s님은 고된 노동을 견디지 못하고 쓰러졌습니다.\n", User.getName());
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
-        System.out.println();
+        System.out.println();*/
+
+        String userName = User.getName();   // 유저 이름 담기
+        String str = "\t\t\t" + userName + "님은 고된 노동을 견디지 못하고 쓰러졌습니다.";    // 문자열 만들기
+        String[] strArr = str.split("");// 한 문자씩 배열에 담기
+
+        Thread ending = new Thread(new com.company.thread.Ending(strArr));
+        ending.start(); // 스레드 생성
+
+        try
+        {
+          ending.join();// 스레드 끝날때까지 기다리기
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.toString());
+        }
+
         finalEnding();
     }
 
@@ -129,19 +148,36 @@ public class Ending
         System.out.println();
         System.out.println();
         System.out.println();
-        System.out.println("\t\t\t\t 더러워서 못 해먹겠다... 때려쳐야지. ");
-
+        //System.out.println("\t\t\t\t 더러워서 못 해먹겠다... 때려쳐야지. ");
         System.out.println();
         System.out.println();
 
-        System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
+       /* System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
         System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
         System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
         System.out.printf("\t\t %s님은 스트레스를 견디지 못하고 자발적으로 카페를 떠났습니다.\n", User.getName());
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
-        System.out.println();
+        System.out.println();*/
+
+
+        String userName = User.getName();   // 유저 이름 담기
+        String str = "\t\t" + userName + "님은 스트레스를 견디지 못하고 자발적으로 카페를 떠났습니다.";    // 문자열 만들기
+        String[] strArr = str.split("");// 한 문자씩 배열에 담기
+
+        Thread ending = new Thread(new com.company.thread.Ending(strArr));
+        ending.start(); // 스레드 생성
+
+        try
+        {
+            ending.join();// 스레드 끝날때까지 기다리기
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.toString());
+        }
+
         finalEnding();
 
     }
@@ -187,6 +223,7 @@ public class Ending
         System.out.println();
         System.out.println();
 
+        /*
         System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
         System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
         System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
@@ -195,7 +232,25 @@ public class Ending
         System.out.println("\t\t 종종 방문하던 특이한 손님의 일부는 몰래 방문한 인근 카페 사장이었습니다... ");
         System.out.printf(" \t\t %s님을 시험하고 눈여겨본 사장은 %s님을 스카웃했습니다. \n", User.getName(), User.getName());
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
-        System.out.println();
+        System.out.println();*/
+
+        String userName = User.getName();   // 유저 이름 담기
+        String str = "\t\t종종 등장한 특이한 손님은 인근 카페 사장이었습니다... \n"
+                    + "\t\t" + userName + "님을 시험하고 눈여겨본 사장은 " + userName + "님을 스카웃했습니다."; // 문자열 만들기
+        String[] strArr = str.split("");// 한 문자씩 배열에 담기
+
+        Thread ending = new Thread(new com.company.thread.Ending(strArr));
+        ending.start(); // 스레드 생성
+
+        try
+        {
+            ending.join();// 스레드 끝날때까지 기다리기
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.toString());
+        }
+
         finalEnding();
 
 
@@ -246,15 +301,34 @@ public class Ending
         System.out.println();
         System.out.println();
 
+        /*
         System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
         System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
         System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
-        System.out.printf("\t\t 코인을 아끼며 열심히 일한 %s님은 모은 코인으로 카페를 차렸습니다.\n", User.getName());
+        System.out.printf("\t\t %s님은 모은 코인으로 카페를 차렸습니다.\n", User.getName());
         System.out.printf("\t\t %s님은 더이상 알바생이 아닙니다.\n", User.getName());
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println();
+        */
+
+        String userName = User.getName();   // 유저 이름 담기
+        String str = "\t\t열심히 일한 " + userName + "님은 모은 코인으로 카페를 차렸습니다.\n" +
+                 "\t\t\t" + userName + "님은 더이상 알바생이 아닙니다."; // 문자열 만들기
+        String[] strArr = str.split("");// 한 문자씩 배열에 담기
+
+        Thread ending = new Thread(new com.company.thread.Ending(strArr));
+        ending.start(); // 스레드 생성
+
+        try
+        {
+            ending.join();// 스레드 끝날때까지 기다리기
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.toString());
+        }
         finalEnding();
 
     }
@@ -300,6 +374,7 @@ public class Ending
         System.out.println();
         System.out.println();
 
+        /*
         System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
         System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
         System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
@@ -309,6 +384,25 @@ public class Ending
         System.out.println("\t\t\t\t 괜찮습니다. 카페는 많으니까요... 힘내세요! ");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println();
+        */
+
+
+        String userName = User.getName();   // 유저 이름 담기
+        String str =  "\t\t\t" + userName + "님은 음료 제조 실수가 잦아 해고되었습니다.\n" +
+                "\t\t\t 괜찮습니다. 카페는 많으니까요... 힘내세요!"; // 문자열 만들기
+        String[] strArr = str.split("");// 한 문자씩 배열에 담기
+
+        Thread ending = new Thread(new com.company.thread.Ending(strArr));
+        ending.start(); // 스레드 생성
+
+        try
+        {
+            ending.join();// 스레드 끝날때까지 기다리기
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.toString());
+        }
         finalEnding();
 
     }
@@ -354,7 +448,7 @@ public class Ending
         System.out.println();
         System.out.println();
 
-        System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
+       /* System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
         System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
         System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
@@ -363,6 +457,24 @@ public class Ending
         System.out.println("\t\t\t\t 스파이보다 적성에 잘 맞는 일을 찾았습니다 ! ");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
         System.out.println();
+        finalEnding();*/
+
+        String userName = User.getName();   // 유저 이름 담기
+        String str = "\t\t" + userName + "님은 카페 아르바이트를 능숙하게 해내고 있습니다... \n" +
+                "\t\t\t 스파이보다 적성에 잘 맞는 일을 찾았습니다 !"; // 문자열 만들기
+        String[] strArr = str.split("");// 한 문자씩 배열에 담기
+
+        Thread ending = new Thread(new com.company.thread.Ending(strArr));
+        ending.start(); // 스레드 생성
+
+        try
+        {
+            ending.join();// 스레드 끝날때까지 기다리기
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.toString());
+        }
         finalEnding();
 
 
@@ -376,11 +488,11 @@ public class Ending
         int result = 0;
 
 
-        System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
+        /*System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
         System.out.println("　 　　　　　　。　　　　　　　　- End - 　　ﾟ　　　.　　　　　　　　　　　　　　.");
         System.out.println(",　　　　　　　　　.　 .　　　　　　　　.");
         System.out.println("　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
-        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.");
+        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.");*/
         System.out.println();
         System.out.println();
         System.out.println();
