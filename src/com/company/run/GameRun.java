@@ -3,6 +3,8 @@ package com.company.run;
 import com.company.action.*;
 import com.company.data.Cafe;
 import com.company.data.User;
+import com.company.thread.Title;
+import com.company.thread.loading;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -14,25 +16,23 @@ public class GameRun
     // 최초 실행하는 메소드
     public void initialRun()
     {
-        System.out.println();
-        System.out.println();
+        Thread title = new Thread(new Title());
+        title.start();  // title 쓰레드 실행
 
-        System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
-        System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
-        System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
-        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
-        System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
-        System.out.println("　 　　　　　　。　　　　   　Work! partimer ! 　　ﾟ　　　.　 　　　　　　　　.");
-        System.out.println(",　　　　　　　　　.　 .　　　　　　　　.");
-        System.out.println("　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
-        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.");
-        System.out.println();
-        System.out.println();
-        System.out.println();
+        try
+        {
+            title.join();   // title 쓰레드 모두 끝날때까지 기다리기
+        }
+        catch (Exception e)
+        {
+            e.toString();
+        }
+
 
         boolean check = true;   // 반복 여부를 체크하기 위한 변수
         String selectStr;       // 사용자가 입력한 값을 담을 변수
         int select = 0;         // selectStr 변수를 형변환해서 담을 변수 
+
 
         // 스캐너 객체 생성
         Scanner sc = new Scanner(System.in);
@@ -369,7 +369,18 @@ public class GameRun
                 case STOP:                  // 다음날로 시간이 흐른다.
                     System.out.println();
                     System.out.println();
-                    System.out.println(" ☾ ⋆*･ﾟ ⋆*･ﾟ ⋆. ･ﾟ. ⋆ * ･ﾟ. ⋆⋆ *･ﾟ⋆*･ﾟ ⋆ . ･ﾟ .⋆*･ﾟ .⋆ ⋆*･ﾟ ⋆*･ﾟ ⋆･ﾟ⋆ *･ﾟ ⋆･ﾟ");
+                    //System.out.println(" ☾ ⋆*･ﾟ ⋆*･ﾟ ⋆. ･ﾟ. ⋆ * ･ﾟ. ⋆⋆ *･ﾟ⋆*･ﾟ ⋆ . ･ﾟ .⋆*･ﾟ .⋆ ⋆*･ﾟ ⋆*･ﾟ ⋆･ﾟ⋆ *･ﾟ ⋆･ﾟ");
+                    Thread weekendLoading = new Thread(new loading());
+                    weekendLoading.start();
+
+                    try
+                    {
+                        weekendLoading.join();
+                    }catch (Exception e)
+                    {
+                        System.out.println(e.toString());
+                    }
+
                     System.out.println();
                     System.out.println();
                     open();                // 하루 시작하는 메소드 호출
