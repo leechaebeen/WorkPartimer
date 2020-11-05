@@ -3,6 +3,7 @@ package com.company.run;
 import com.company.action.*;
 import com.company.data.Cafe;
 import com.company.data.User;
+import com.company.thread.Intro;
 import com.company.thread.Title;
 import com.company.thread.loading;
 
@@ -124,6 +125,20 @@ public class GameRun
         System.out.println();
         System.out.println();
         System.out.println();
+
+        Thread intro = new Thread(new Intro());
+        intro.start();
+
+        try
+        {
+          intro.join();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.toString());
+        }
+
+        /*
         System.out.printf(" %s님은 우주선에 탑승한 스파이입니다.\n",User.getName());
         System.out.println();
         System.out.println(" 하지만 스파이로서 미션을 수행하던 중 정체를 들켰습니다 ! ");
@@ -161,6 +176,8 @@ public class GameRun
         System.out.println();
         System.out.println();
         System.out.println(" ※ 주의 ※ 프로그램을 종료하면 공개된 엔딩이 사라집니다. ");
+        */
+
 
         String selectStr;   // 사용자의 선택값을 담을 변수
         int select = 0;     // selectStr 변수의 값을 int 로 형변환해서 담을 변수
