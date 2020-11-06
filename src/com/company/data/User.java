@@ -21,7 +21,7 @@ public class User
     private static int setFeeling = 5;     // 세팅된 초기 인내력값
 
     // 유저가 소유하고 있는 총 재산. 단위는 코인이다.
-    private static int property=20;//임의로 20코인 부여
+    private static int property;
 
     // 소유하고 있는 소비아이템 수
     private static int cakeNum;

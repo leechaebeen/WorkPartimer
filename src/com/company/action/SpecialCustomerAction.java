@@ -298,7 +298,7 @@ public class SpecialCustomerAction extends CustomerAction
             System.out.printf(" %s님은 ICE/HOT 옵션을 물어봤습니다.\n", User.getName());
             Thread.sleep(200);
             System.out.println();
-            Thread.sleep(200);
+            Thread.sleep(300);
             System.out.println(" 손님 : " + iceOption);
             Thread.sleep(200);
             System.out.println();
@@ -306,7 +306,7 @@ public class SpecialCustomerAction extends CustomerAction
             System.out.printf(" %s님은 휘핑크림을 추가하는지 물어봤습니다.\n", User.getName());
             Thread.sleep(200);
             System.out.println();
-            Thread.sleep(200);
+            Thread.sleep(300);
             System.out.println(" 손님 : " + whippingCream);
             Thread.sleep(200);
             System.out.println();
@@ -314,7 +314,7 @@ public class SpecialCustomerAction extends CustomerAction
             System.out.printf(" %s님은 테이크아웃 여부를 물어봤습니다.\n", User.getName());
             Thread.sleep(200);
             System.out.println();
-            Thread.sleep(200);
+            Thread.sleep(300);
             System.out.println(" 손님 : " + takeout);
             Thread.sleep(200);
             System.out.println();

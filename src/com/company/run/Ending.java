@@ -1,11 +1,8 @@
 package com.company.run;
 
-import com.company.action.UserAction;
 import com.company.data.User;
-import com.company.thread.LoadEnding;
+import com.company.thread.LoadEndings;
 import com.company.thread.OneTimeSound;
-
-import java.util.Scanner;
 
 public class Ending
 {
@@ -13,7 +10,7 @@ public class Ending
     // static 이어야하는 이유 :
     // User 클래스의 모은 엔딩 유형을 저장하는 배열이 static 변수라서
     // 배열 초기화할 때 길이를 나타내는 변수도 static 이어야한다.
-    // → private static int[] endings = new int[LoadEnding.getEndingTypeNum()-1];
+    // → private static int[] endings = new int[LoadEndings.getEndingTypeNum()-1];
 
 
     /*
@@ -96,7 +93,7 @@ public class Ending
         Thread sound = new Thread(new OneTimeSound("ending.mp3"));
         sound.start();
 
-        Thread ending = new Thread(new LoadEnding(strArr));
+        Thread ending = new Thread(new LoadEndings(strArr));
         ending.start(); // 스레드 생성
 
         try
@@ -187,7 +184,7 @@ public class Ending
         Thread sound = new Thread(new OneTimeSound("ending.mp3"));
         sound.start();
 
-        Thread ending = new Thread(new LoadEnding(strArr));
+        Thread ending = new Thread(new LoadEndings(strArr));
         ending.start(); // 스레드 생성
 
         try
@@ -260,7 +257,7 @@ public class Ending
                     + "\t\t" + userName + "님을 시험하고 눈여겨본 사장은 " + userName + "님을 스카웃했습니다."; // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
-        Thread ending = new Thread(new LoadEnding(strArr));
+        Thread ending = new Thread(new LoadEndings(strArr));
         ending.start(); // 스레드 생성
 
         try
@@ -338,7 +335,7 @@ public class Ending
                  "\t\t\t" + userName + "님은 더이상 알바생이 아닙니다."; // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
-        Thread ending = new Thread(new LoadEnding(strArr));
+        Thread ending = new Thread(new LoadEndings(strArr));
         ending.start(); // 스레드 생성
 
         try
@@ -416,7 +413,7 @@ public class Ending
         Thread sound = new Thread(new OneTimeSound("ending.mp3"));
         sound.start();
 
-        Thread ending = new Thread(new LoadEnding(strArr));
+        Thread ending = new Thread(new LoadEndings(strArr));
         ending.start(); // 스레드 생성
 
 
@@ -490,7 +487,7 @@ public class Ending
                 "\t\t\t 스파이보다 적성에 잘 맞는 일을 찾았습니다 !"; // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
-        Thread ending = new Thread(new LoadEnding(strArr));
+        Thread ending = new Thread(new LoadEndings(strArr));
         ending.start(); // 스레드 생성
 
         try
@@ -676,7 +673,7 @@ public class Ending
                 for (int i = 0; i < strArr.length; i++)
                 {
                     System.out.print(strArr[i]);
-                    Thread.sleep(300);
+                    Thread.sleep(100);
                 }
 
                 System.out.println();
@@ -711,8 +708,6 @@ public class Ending
                 Thread.sleep(300);
                 System.out.println();
                 Thread.sleep(300);
-
-
 
 
             }catch (Exception e)

@@ -2,13 +2,13 @@ package com.company.thread;
 
 import com.company.data.User;
 
-public class LoadEnding implements Runnable
+public class LoadEndings implements Runnable
 {
     String[] array;
 
-    public LoadEnding(){}
+    public LoadEndings(){}
 
-    public LoadEnding(String[] array)
+    public LoadEndings(String[] array)
     {
         this.array = array;
     }
@@ -18,6 +18,9 @@ public class LoadEnding implements Runnable
     {
         try
         {
+            Thread sound = new Thread(new OneTimeSound("typing.mp3"));
+            sound.start();
+
             System.out.println();
             Thread.sleep(100);
             System.out.println();
@@ -99,6 +102,7 @@ public class LoadEnding implements Runnable
             System.out.println();
             Thread.sleep(100);
 
+            sound.stop();
         }
         catch (InterruptedException e)
         {

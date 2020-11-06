@@ -686,6 +686,37 @@ public class GameRun
                 break;
 
             case SKIP :                        // 3. 주말 지나가기 : 다음날 카페 시작하는 메소드 호출
+
+                try{
+                    Thread sound = new Thread(new OneTimeSound("weekInfo.mp3"));
+                    sound.start();
+
+                    System.out.println();
+                    System.out.println();
+                    System.out.println();
+
+                    Thread.sleep(100);
+                    System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
+                    Thread.sleep(100);
+                    System.out.println(",　　　　　　　　　.　 .　　　　　　　　.");
+                    Thread.sleep(100);
+                    System.out.println("　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
+                    Thread.sleep(100);
+                    System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
+                    Thread.sleep(100);
+                    System.out.println("　.　　　　　　　　              평일이 되었습니다 ㅤㅤㅤㅤㅤㅤ    　 。　　.");
+                    Thread.sleep(100);
+                    System.out.println("　 　　　　　　。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
+                    Thread.sleep(100);
+                    System.out.println(",　　　　　　　　　.　 .　　　　　　　　.");
+                    Thread.sleep(100);
+                    System.out.println("　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
+                    Thread.sleep(100);
+                    System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.");
+                    Thread.sleep(100);
+
+                }catch (Exception e){}
+
                 User.setWorkingDays(User.getWorkingDays() + 1);
                 // 주말이 지나도록 하루를 더한다. 토 → 월로 요일 변경
                 open();

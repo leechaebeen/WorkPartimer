@@ -457,39 +457,31 @@ public class UserAction
                     final int PAPER = 2;    // 보
                     final int SCISSOR = 3;  // 가위
 
-                    try{
-
-                        if(randomNum == select)     // 손님의 선택값과 유저의 선택값이 같으면
-                        {
-                            Thread.sleep(500);
-                            System.out.println("------------------------------------------------------------------------");
-                            System.out.println(" 비겼습니다! 다시 진행해주세요 ");
-                            check = true;       // 반복하도록 check 에 true 값을 담는다.
-                        }
-                        else if(randomNum == ROCK && select == PAPER
-                                || randomNum == PAPER && select == SCISSOR
-                                || randomNum == SCISSOR && select == ROCK)  // 유저가 이기는 경우라면
-                        {
-                            Thread.sleep(500);
-                            System.out.println("------------------------------------------------------------------------");
-                            System.out.println(" 손님에게 이겼습니다 ! ");
-                            result = true;      // 결과에 true 값을 담는다.
-                            check = false;      // 반복문을 빠져나간다.
+                    if(randomNum == select)     // 손님의 선택값과 유저의 선택값이 같으면
+                    {
+                        System.out.println("------------------------------------------------------------------------");
+                        System.out.println(" 비겼습니다! 다시 진행해주세요 ");
+                        check = true;       // 반복하도록 check 에 true 값을 담는다.
+                    }
+                    else if(randomNum == ROCK && select == PAPER
+                            || randomNum == PAPER && select == SCISSOR
+                            || randomNum == SCISSOR && select == ROCK)  // 유저가 이기는 경우라면
+                    {
+                        System.out.println("------------------------------------------------------------------------");
+                        System.out.println(" 손님에게 이겼습니다 ! ");
+                        result = true;      // 결과에 true 값을 담는다.
+                        check = false;      // 반복문을 빠져나간다.
 
 
-                        }
-                        else    // 유저가 지는 경우라면
-                        {
-                            Thread.sleep(500);
-                            System.out.println("------------------------------------------------------------------------");
-                            System.out.println(" 손님에게 졌습니다 ! ");
+                    }
+                    else    // 유저가 지는 경우라면
+                    {
+                        System.out.println("------------------------------------------------------------------------");
+                        System.out.println(" 손님에게 졌습니다 ! ");
 
-                            User.setHp(User.getHp() - 1);   // 유저 체력 1 감소
-                            result = false;                 // 결과에 false 값을 담는다.
-                            check = false;                  // 반복문을 빠져나간다.
-                        }
-                    }catch (Exception e){
-
+                        User.setHp(User.getHp() - 1);   // 유저 체력 1 감소
+                        result = false;                 // 결과에 false 값을 담는다.
+                        check = false;                  // 반복문을 빠져나간다.
                     }
                 }
 

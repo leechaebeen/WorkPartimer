@@ -196,7 +196,7 @@ public class LoadIntro implements Runnable
             Thread.sleep(100);
 
 
-            str = " ※ 주의 ※ 프로그램을 종료하면 공개된 엔딩이 사라집니다. ";
+            str = " ※ 주의 ※ 프로그램을 종료하면 공개된 엔딩이 초기화됩니다. ";
             strArr = str.split("");
 
             for (int i = 0; i < strArr.length; i++)
