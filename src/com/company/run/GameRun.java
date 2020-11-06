@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 // 게임의 메인 흐름을 담은 클래스(최초실행, 평일과 주말)
 public class GameRun
 {
-    Thread sound = new Thread(new LoopSound("startBGM.mp3"));
+    //Thread sound = new Thread(new LoopSound("startBGM.mp3"));
 
     // 최초 실행하는 메소드
     public void initialRun()
@@ -71,7 +71,7 @@ public class GameRun
         // 호출하지 않으면 여전히 체력 == 0 또는 인내력 ==0 이라서 데몬쓰레드 무한반복 일어남
         //  → 이거는 엔딩에서 체력이나 인내력을 0 아닌 값으로 초기화하면 해결 가능. 대신 멈춘다
 
-        boolean check = true;   // 반복 여부를 체크하기 위한 변수
+        boolean check;   // 반복 여부를 체크하기 위한 변수
         String userName;        // 유저이름을 저장할 변수
 
         do {
@@ -249,7 +249,7 @@ public class GameRun
         while(check) // check 는 위에서 입력받은 유저이름이 한글인걸 확인했기 때문에 true 인 상황이다.
         {
             System.out.println("========================================================================");
-            System.out.println(" 1.카페 열기  2.공개된 엔딩 보기  ");
+            System.out.println(" 1.카페 열기  2.공개된 엔딩 보기  3.끝내기  ");
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
             Scanner sc = new Scanner(System.in);
@@ -270,7 +270,7 @@ public class GameRun
                 // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
             }
 
-            if(select < 1 || select > 2 )// 주어진 값 이외의 수를 선택한 경우
+            if(select < 1 || select > 3 )// 주어진 값 이외의 수를 선택한 경우
             {
                 System.out.println("========================================================================");
                 System.out.println(" 올바른 값을 입력해주세요.");
@@ -284,7 +284,8 @@ public class GameRun
 
 
         final int OPEN = 1;             // 1. 카페 열기
-        final int OPEN_ENDINGS = 2;          // 2. 인트로 다시 보기
+        final int OPEN_ENDINGS = 2;     // 2. 인트로 다시 보기
+        final int EXIT = 3;             // 3. 끝내기
 
         GameRun gameRun = new GameRun(); // Cafe 객체 생성
 
@@ -295,14 +296,19 @@ public class GameRun
         {
             switch(select)              // 유저의 선택값에 따라 분기 처리
             {
-                case OPEN:             // 1. 카페 열기를 선택한 경우D
+                case OPEN:              // 1. 카페 열기를 선택한 경우D
                     gameRun.open();     // 게임 시작하는 메소드 호출
                     break;
 
-                case OPEN_ENDINGS:                  // 2. 공개된 엔딩보기를 선택한 경우
+                case OPEN_ENDINGS:      // 2. 공개된 엔딩보기를 선택한 경우
                     Ending ending = new Ending();
                     ending.openEndings();           // 공개된 엔딩 확인 메소드 호출
                     break;
+
+                case EXIT :             // 3. 끝내기를 선택한 경우
+                    System.exit(0); // 프로그램 종료
+                    break;
+
 
             }
         }
