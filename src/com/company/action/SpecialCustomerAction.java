@@ -122,6 +122,9 @@ public class SpecialCustomerAction extends CustomerAction
         Random random = new Random();
         if(random.nextInt(1) == 0) // 랜덤값이 0이면
         {
+            Thread sound = new Thread(new OneTimeSound("coin.mp3"));
+            sound.start();
+
             // 유저에게 1코인 추가
             User.setProperty(User.getProperty() + 1);
             System.out.println();
@@ -173,8 +176,18 @@ public class SpecialCustomerAction extends CustomerAction
             takeout = "";
         }
 
-        System.out.println(" 손님 : " + iceOption + beverage.getName()+".");
-        System.out.println("       " + whippingCream + takeout );
+        String str = " 손님 : " + iceOption + beverage.getName() + ".\n       " + whippingCream + takeout+"\n";
+        String[] strArr = str.split("");
+
+        try
+        {
+            for (int i = 0; i < strArr.length; i++)
+            {
+                System.out.printf(strArr[i]);
+                Thread.sleep(50);
+            }
+        }
+        catch (Exception e){}
 
         User.setHp(User.getHp()-1);             // 체력 1 감소
         User.setFeeling(User.getFeeling()-1);   // 인내력 1 감소
@@ -268,24 +281,46 @@ public class SpecialCustomerAction extends CustomerAction
             takeout = "하...먹고 갈거에요. 그만 물어보세요.";
         }
 
-        System.out.println(" 손님 : " + beverage.getName());
-        System.out.println();
-        System.out.println("         .");
-        System.out.println("         .");
-        System.out.println("         .");
-        System.out.println();
-        System.out.printf(" %s님은 ICE/HOT 옵션을 물어봤습니다.\n", User.getName());
-        System.out.println();
-        System.out.println(" 손님 : " + iceOption);
-        System.out.println();
-        System.out.printf(" %s님은 휘핑크림을 추가하는지 물어봤습니다.\n", User.getName());
-        System.out.println();
-        System.out.println(" 손님 : " + whippingCream);
-        System.out.println();
-        System.out.printf(" %s님은 테이크아웃 여부를 물어봤습니다.\n", User.getName());
-        System.out.println();
-        System.out.println(" 손님 : " + takeout);
-        System.out.println();
+        try{
+
+            System.out.println(" 손님 : " + beverage.getName());
+            Thread.sleep(200);
+            System.out.println();
+            Thread.sleep(200);
+            System.out.println("         .");
+            Thread.sleep(200);
+            System.out.println("         .");
+            Thread.sleep(200);
+            System.out.println("         .");
+            Thread.sleep(200);
+            System.out.println();
+            Thread.sleep(200);
+            System.out.printf(" %s님은 ICE/HOT 옵션을 물어봤습니다.\n", User.getName());
+            Thread.sleep(200);
+            System.out.println();
+            Thread.sleep(200);
+            System.out.println(" 손님 : " + iceOption);
+            Thread.sleep(200);
+            System.out.println();
+            Thread.sleep(200);
+            System.out.printf(" %s님은 휘핑크림을 추가하는지 물어봤습니다.\n", User.getName());
+            Thread.sleep(200);
+            System.out.println();
+            Thread.sleep(200);
+            System.out.println(" 손님 : " + whippingCream);
+            Thread.sleep(200);
+            System.out.println();
+            Thread.sleep(200);
+            System.out.printf(" %s님은 테이크아웃 여부를 물어봤습니다.\n", User.getName());
+            Thread.sleep(200);
+            System.out.println();
+            Thread.sleep(200);
+            System.out.println(" 손님 : " + takeout);
+            Thread.sleep(200);
+            System.out.println();
+            Thread.sleep(200);
+
+        }catch (Exception e){}
 
         User.setHp(User.getHp()-1);             // 체력 1 감소
         User.setFeeling(User.getFeeling()-2);   // 인내력 2 감소
@@ -345,10 +380,25 @@ public class SpecialCustomerAction extends CustomerAction
         String resultStr;           // 사용자가 입력한 값을 담기 위한 변수
         int result = 0 ;            // 사용자가 입력한 값을 형변환해서 담기 위한 변수
 
-        System.out.println(" 손님 : 얼굴에 복이 많으세요. ");
-        System.out.println("              :  ");
-        System.out.println("              :  ");
-        System.out.println();
+        try{
+
+            String str = " 손님 : 얼굴에 복이 많으세요.\n";
+            String[] strArr = str.split("");
+
+            for (int i = 0; i < strArr.length; i++)
+            {
+                System.out.printf(strArr[i]);
+                Thread.sleep(50);
+            }
+
+            System.out.println("              :  ");
+            Thread.sleep(50);
+            System.out.println("              :  ");
+            Thread.sleep(50);
+            System.out.println();
+
+
+        }catch (Exception e){}
 
         while(check)
         {
@@ -418,7 +468,28 @@ public class SpecialCustomerAction extends CustomerAction
         Random rd = new Random();
         int menu = rd.nextInt(menus.length);    // 0부터 메뉴 목록 배열의 길이만큼 랜덤 수를 반환해서 변수 menu에 담는다.
 
-        System.out.printf(" 손님 : 여기 %s 파나요 ? \n", menus[menu]);
+        try{
+
+            String str = " 손님 : 여기 " + menus[menu] + " 파나요 ? \n";
+            String[] strArr = str.split("");
+
+            for (int i = 0; i < strArr.length; i++)
+            {
+                System.out.printf(strArr[i]);
+                Thread.sleep(50);
+            }
+
+            System.out.println("              :  ");
+            Thread.sleep(50);
+            System.out.println("              :  ");
+            Thread.sleep(50);
+            System.out.println();
+
+
+        }catch (Exception e){
+
+        }
+
         System.out.println("------------------------------------------------------------------------");
         System.out.println(" 잘못 찾아온 손님이었다. ");
         System.out.println("------------------------------------------------------------------------");
@@ -434,10 +505,15 @@ public class SpecialCustomerAction extends CustomerAction
         boolean check = true;   // 반복 여부 체크하기 위한 변수
         int result = 0;         // 선택값을 비교하기 위한 변수
 
-        System.out.println(" 손님 :     ＿人人人人人人人人＿ ");
-        System.out.println("           ＞　안녕하십니까!  ＜");
-        System.out.println("           ￣^Y^Y^Y^Y^Y^Y^Y￣ ");
+        try{
+            Thread.sleep(500);
+            System.out.println(" 손님 :     ＿人人人人人人人人＿ ");
+            System.out.println("           ＞　안녕하십니까!  ＜");
+            System.out.println("           ￣^Y^Y^Y^Y^Y^Y^Y￣ ");
 
+        }catch (Exception e){
+
+        }
 
         System.out.println();
         System.out.println("========================================================================");
@@ -523,10 +599,15 @@ public class SpecialCustomerAction extends CustomerAction
 
         }
 
-        System.out.println(" 손님 :     ＿人人人人人人人人＿ ");
-        System.out.println("           ＞  안녕히 계세요! ＜");
-        System.out.println("           ￣^Y^Y^Y^Y^Y^Y^Y￣ ");
-        System.out.println();
+        try{
+
+            Thread.sleep(500);
+            System.out.println(" 손님 :     ＿人人人人人人人人＿ ");
+            System.out.println("           ＞  안녕히 계세요! ＜");
+            System.out.println("           ￣^Y^Y^Y^Y^Y^Y^Y￣ ");
+            System.out.println();
+        }
+        catch (Exception e){}
 
         return false;       
 

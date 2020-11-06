@@ -130,8 +130,18 @@ public class SecretCustomerAction extends SpecialCustomerAction
             takeout = "";
         }
 
-        System.out.println(" 손님 : " + iceOption + beverage.getName()+".");
-        System.out.println("       " + whippingCream + takeout );
+        String str = " 손님 : " + iceOption + beverage.getName() + ".\n       " + whippingCream + takeout+"\n";
+        String[] strArr = str.split("");
+
+        try
+        {
+            for (int i = 0; i < strArr.length; i++)
+            {
+                System.out.printf(strArr[i]);
+                Thread.sleep(50);
+            }
+        }
+        catch (Exception e){}
 
         System.out.println("========================================================================");
         System.out.println(" 손님이 반말로 주문하였습니다. ");
@@ -215,24 +225,47 @@ public class SecretCustomerAction extends SpecialCustomerAction
             takeout = "먹고 갈거에요.";
         }
 
-        System.out.println(" 손님 : " + beverage.getName());
-        System.out.println();
-        System.out.println("         .");
-        System.out.println("         .");
-        System.out.println("         .");
-        System.out.println();
-        System.out.printf(" %s님은 ICE/HOT 옵션을 물어봤습니다.\n", User.getName());
-        System.out.println();
-        System.out.println(" 손님 : " + iceOption);
-        System.out.println();
-        System.out.printf(" %s님은 휘핑크림을 추가하는지 물어봤습니다.\n", User.getName());
-        System.out.println();
-        System.out.println(" 손님 : " + whippingCream);
-        System.out.println();
-        System.out.printf(" %s님은 테이크아웃 여부를 물어봤습니다.\n", User.getName());
-        System.out.println();
-        System.out.println(" 손님 : " + takeout);
-        System.out.println();
+        try{
+
+            System.out.println(" 손님 : " + beverage.getName());
+            Thread.sleep(200);
+            System.out.println();
+            Thread.sleep(200);
+            System.out.println("         .");
+            Thread.sleep(200);
+            System.out.println("         .");
+            Thread.sleep(200);
+            System.out.println("         .");
+            Thread.sleep(200);
+            System.out.println();
+            Thread.sleep(200);
+            System.out.printf(" %s님은 ICE/HOT 옵션을 물어봤습니다.\n", User.getName());
+            Thread.sleep(200);
+            System.out.println();
+            Thread.sleep(200);
+            System.out.println(" 손님 : " + iceOption);
+            Thread.sleep(200);
+            System.out.println();
+            Thread.sleep(200);
+            System.out.printf(" %s님은 휘핑크림을 추가하는지 물어봤습니다.\n", User.getName());
+            Thread.sleep(200);
+            System.out.println();
+            Thread.sleep(200);
+            System.out.println(" 손님 : " + whippingCream);
+            Thread.sleep(200);
+            System.out.println();
+            Thread.sleep(200);
+            System.out.printf(" %s님은 테이크아웃 여부를 물어봤습니다.\n", User.getName());
+            Thread.sleep(200);
+            System.out.println();
+            Thread.sleep(200);
+            System.out.println(" 손님 : " + takeout);
+            Thread.sleep(200);
+            System.out.println();
+            Thread.sleep(200);
+
+        }catch (Exception e){}
+
 
         System.out.println("========================================================================");
         System.out.println(" 손님이 짜증을 내며 주문했습니다. ");
@@ -316,8 +349,19 @@ public class SecretCustomerAction extends SpecialCustomerAction
             takeout = " 먹고 갈거에요.";
         }
 
-        System.out.println(" 손님 : " + iceOption + beverage.getName() + " 주세요.");
-        System.out.println("       " + whippingCream + takeout );
+        String str = " 손님 : " + iceOption + beverage.getName() + " 주세요. \n       " + whippingCream + takeout+"\n";
+        String[] strArr = str.split("");
+
+        try
+        {
+            for (int i = 0; i < strArr.length; i++)
+            {
+                System.out.printf(strArr[i]);
+                Thread.sleep(50);
+            }
+        }
+        catch (Exception e){}
+
 
         if(!checkTakeout) // 매장에서 먹고 간다면
         {

@@ -522,38 +522,15 @@ public class Ending
                 Thread sound = new Thread(new OneTimeSound("typing.mp3"));
                 sound.start();
 
-                System.out.print(" 현");
-                Thread.sleep(300);
-                System.out.print("재");
-                Thread.sleep(300);
-                System.out.print(" ");
-                Thread.sleep(300);
-                System.out.print("공");
-                Thread.sleep(300);
-                System.out.print("개");
-                Thread.sleep(300);
-                System.out.print("된");
-                Thread.sleep(300);
-                System.out.print(" ");
-                Thread.sleep(300);
-                System.out.print("엔");
-                Thread.sleep(300);
-                System.out.print("딩");
-                Thread.sleep(300);
-                System.out.print("이");
-                Thread.sleep(300);
-                System.out.print(" ");
-                Thread.sleep(300);
-                System.out.print("없");
-                Thread.sleep(300);
-                System.out.print("습");
-                Thread.sleep(300);
-                System.out.print("니");
-                Thread.sleep(300);
-                System.out.print("다");
-                Thread.sleep(300);
-                System.out.print(".");
-                Thread.sleep(300);
+
+                String str = " 현재 공개된 엔딩이 없습니다.";
+                String[] strArr = str.split("");
+
+                for (int i = 0; i < strArr.length; i++)
+                {
+                    System.out.print(strArr[i]);
+                    Thread.sleep(300);
+                }
 
                 System.out.println();
                 Thread.sleep(200);
@@ -585,22 +562,6 @@ public class Ending
             final int GET_FIRE_ENDING = 5;  // 해고 엔딩
             final int PARTIMER_ENDING = 6;  // 알바 엔딩
 
-            System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
-            System.out.println("=========================       공개된 엔딩       =========================");
-            System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
-            System.out.println();
-
-            int cnt = 0;                    // 공개되지 않은 엔딩의 수를 세기 위한 변수
-
-            // for(대입받을 변수 정의 : 배열)
-            for (int endingType : endings)  // int[] endings 배열 각 칸의 값을 배열의 길이만큼 반복하며 int형 EndingType 에 담고 반복문 실행
-            {
-                if (endingType == 0) // 비어있는 칸이면
-                {
-                    cnt += 1;      // cnt 변수를 1씩 증가시킨다.
-                }
-            }
-
             // test
             //System.out.println(cnt);
 
@@ -610,10 +571,26 @@ public class Ending
             // System.out.println(endings[i]);
             //}
 
-
             try
             {
                 Thread.sleep(1500);
+
+                System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
+                System.out.println("=========================       공개된 엔딩       =========================");
+                System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
+                System.out.println();
+
+                int cnt = 0;                    // 공개되지 않은 엔딩의 수를 세기 위한 변수
+
+                // for(대입받을 변수 정의 : 배열)
+                for (int endingType : endings)  // int[] endings 배열 각 칸의 값을 배열의 길이만큼 반복하며 int형 EndingType 에 담고 반복문 실행
+                {
+                    if (endingType == 0) // 비어있는 칸이면
+                    {
+                        cnt += 1;      // cnt 변수를 1씩 증가시킨다.
+                    }
+                }
+
 
                 // for(대입받을 변수 정의 : 배열)
                 for (int endingType : endings)
@@ -688,10 +665,55 @@ public class Ending
 
                 }
 
-                Thread.sleep(500);
-                System.out.printf(" 아직 공개되지 않은 엔딩이 %d개 남아있습니다 !\n", cnt);
+                Thread.sleep(1500);
+                Thread sound = new Thread(new OneTimeSound("typing.mp3"));
+                sound.start();
+
+
+                String str = " 아직 공개되지 않은 엔딩이 " + cnt + "개 있습니다.";
+                String[] strArr = str.split("");
+
+                for (int i = 0; i < strArr.length; i++)
+                {
+                    System.out.print(strArr[i]);
+                    Thread.sleep(300);
+                }
+
+                System.out.println();
+                Thread.sleep(200);
+                System.out.println();
+
+                sound.stop();
+
+                Thread.sleep(200);
+                System.out.println();
+                Thread.sleep(200);
                 System.out.println();
                 System.out.println();
+                Thread.sleep(300);
+                System.out.println();
+                Thread.sleep(300);
+                System.out.println();
+                Thread.sleep(300);
+                System.out.println();
+                Thread.sleep(300);
+                System.out.println();
+                Thread.sleep(300);
+                System.out.println();
+                Thread.sleep(300);
+                System.out.println();
+                Thread.sleep(300);
+                System.out.println();
+                Thread.sleep(300);
+                System.out.println();
+                Thread.sleep(300);
+                System.out.println();
+                Thread.sleep(300);
+                System.out.println();
+                Thread.sleep(300);
+
+
+
 
             }catch (Exception e)
             {

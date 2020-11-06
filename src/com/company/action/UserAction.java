@@ -408,12 +408,19 @@ public class UserAction
     // 음료만드는 미니게임3 : 가위바위보
     public boolean makeBeverageRockPaperScissors()
     {
-        System.out.println("------------------------------------------------------------------------");
-        System.out.println("                             음료 만들기 ");
-        System.out.println("------------------------------------------------------------------------");
-        System.out.println(" 손님과 가위바위보를 해서 이기세요. ");
-        System.out.println("------------------------------------------------------------------------");
+        try{
 
+            Thread.sleep(500);
+
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println("                             음료 만들기 ");
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println(" 손님과 가위바위보를 해서 이기세요. ");
+            System.out.println("------------------------------------------------------------------------");
+
+        }catch (Exception e){
+
+        }
         boolean result = true;  // 게임 결과 담는 변수
         boolean check = true;   // 반복여부 체크하는 변수
         String selectStr;       // 사용자의 선택값을 담을 변수
@@ -450,31 +457,39 @@ public class UserAction
                     final int PAPER = 2;    // 보
                     final int SCISSOR = 3;  // 가위
 
-                    if(randomNum == select)     // 손님의 선택값과 유저의 선택값이 같으면
-                    {
-                        System.out.println("------------------------------------------------------------------------");
-                        System.out.println(" 비겼습니다! 다시 진행해주세요 ");
-                        check = true;       // 반복하도록 check 에 true 값을 담는다.
-                    }
-                    else if(randomNum == ROCK && select == PAPER
-                            || randomNum == PAPER && select == SCISSOR
-                            || randomNum == SCISSOR && select == ROCK)  // 유저가 이기는 경우라면
-                    {
-                        System.out.println("------------------------------------------------------------------------");
-                        System.out.println(" 손님에게 이겼습니다 ! ");
-                        result = true;      // 결과에 true 값을 담는다.
-                        check = false;      // 반복문을 빠져나간다.
+                    try{
+
+                        if(randomNum == select)     // 손님의 선택값과 유저의 선택값이 같으면
+                        {
+                            Thread.sleep(500);
+                            System.out.println("------------------------------------------------------------------------");
+                            System.out.println(" 비겼습니다! 다시 진행해주세요 ");
+                            check = true;       // 반복하도록 check 에 true 값을 담는다.
+                        }
+                        else if(randomNum == ROCK && select == PAPER
+                                || randomNum == PAPER && select == SCISSOR
+                                || randomNum == SCISSOR && select == ROCK)  // 유저가 이기는 경우라면
+                        {
+                            Thread.sleep(500);
+                            System.out.println("------------------------------------------------------------------------");
+                            System.out.println(" 손님에게 이겼습니다 ! ");
+                            result = true;      // 결과에 true 값을 담는다.
+                            check = false;      // 반복문을 빠져나간다.
 
 
-                    }
-                    else    // 유저가 지는 경우라면
-                    {
-                        System.out.println("------------------------------------------------------------------------");
-                        System.out.println(" 손님에게 졌습니다 ! ");
+                        }
+                        else    // 유저가 지는 경우라면
+                        {
+                            Thread.sleep(500);
+                            System.out.println("------------------------------------------------------------------------");
+                            System.out.println(" 손님에게 졌습니다 ! ");
 
-                        User.setHp(User.getHp() - 1);   // 유저 체력 1 감소
-                        result = false;                 // 결과에 false 값을 담는다.
-                        check = false;                  // 반복문을 빠져나간다.
+                            User.setHp(User.getHp() - 1);   // 유저 체력 1 감소
+                            result = false;                 // 결과에 false 값을 담는다.
+                            check = false;                  // 반복문을 빠져나간다.
+                        }
+                    }catch (Exception e){
+
                     }
                 }
 
@@ -514,6 +529,7 @@ public class UserAction
             System.out.println("                          ✨ 음료 만들기 성공 ✨  ");
             System.out.println("------------------------------------------------------------------------");
         }
+
 
     }
 
@@ -573,6 +589,7 @@ public class UserAction
             System.out.printf(" %d 코인을 사용했습니다.\n", item.getPrice());
             System.out.printf(" 보유 코인 : %d코인\n", User.getProperty());
 
+
         }
         else
         {
@@ -582,6 +599,7 @@ public class UserAction
             System.out.println("========================================================================");
             System.out.printf(" 보유한 코인으로 %s을(를) 구매할 수 없습니다.\n", item.getName());
             System.out.printf(" 보유 코인      : %d코인\n", User.getProperty());
+
         }
         System.out.println("========================================================================");
 
@@ -644,6 +662,7 @@ public class UserAction
                     System.out.println(" 체력이 4 회복되었습니다.");
                     System.out.printf(" 보유 샌드위치  : %d개 \n", User.getSandwichNum());
                     System.out.printf(" 현재 체력     : %d\n", User.getHp());
+
 
                 } else
                 {
@@ -806,7 +825,7 @@ public class UserAction
 
             case EXIT:  // 이전으로
                 GameRun gameRun = new GameRun();
-                gameRun.selWork();
+                gameRun.selectWork();
                 break;
         }
 

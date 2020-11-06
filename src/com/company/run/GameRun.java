@@ -312,6 +312,7 @@ public class GameRun
     // 카페 오픈 메소드(하루 단위, 평일): 몇주차 며칠인지 보여줌
     public void open()
     {
+
         String[] days = {"월", "화", "수", "목","금","토"};   // 요일 배열. 토요일은 평일과 주말을 구분하기 위해 존재한다.
         String day = days[User.getWorkingDays() % 6];       // 요일 = 일한일수%6
         // 일한 일수는 0에서부터 시작한다. 하루가 지날 때마다 일한일수가 1씩 증가한다.
@@ -325,35 +326,48 @@ public class GameRun
         int week = (User.getWorkingDays() / 6) + 1;
         // 첫 주(월~토)에 연산결과가 0이 되므로 '1주차' 부터 시작하기 위해서 1을 더해준다.
 
-        if(!day.equals("토"))    // 평일이라면
+
+        try
         {
-            User.setWorkingDays(User.getWorkingDays() + 1);  // 지금까지 일한 일수에 하루를 더해준다.
+            if(!day.equals("토"))    // 평일이라면
+            {
+                User.setWorkingDays(User.getWorkingDays() + 1);  // 지금까지 일한 일수에 하루를 더해준다.
 
-            Cafe.setTodayCustomerNum(0);                // 하루 방문자 수 0으로 초기화
+                Cafe.setTodayCustomerNum(0);                // 하루 방문자 수 0으로 초기화
 
-            Cafe.setChairNum(Cafe.getSetChairNum());          // 현재 카페의 의자 수를 세팅된 값으로 초기화
-            Cafe.setCupNum(Cafe.getSetCupNum());              // 현재 유리컵 수를 세팅된 값으로 초기화
-            Cafe.setMugNum(Cafe.getSetMugNum());              // 현재 머그잔 수를 세팅된 값으로 초기화
+                Cafe.setChairNum(Cafe.getSetChairNum());          // 현재 카페의 의자 수를 세팅된 값으로 초기화
+                Cafe.setCupNum(Cafe.getSetCupNum());              // 현재 유리컵 수를 세팅된 값으로 초기화
+                Cafe.setMugNum(Cafe.getSetMugNum());              // 현재 머그잔 수를 세팅된 값으로 초기화
 
-            System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
-            System.out.printf("=========================     %d주차     %s요일    =========================\n", week, day);
-            System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
-            System.out.println();
-            System.out.println("                         ✨ 카페를 열었습니다 ✨ ");
-            System.out.println();
+                System.out.println();
+                System.out.println();
+                System.out.println();
+                Thread.sleep(500);
+                System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
+                System.out.printf("=========================     %d주차     %s요일    =========================\n", week, day);
+                System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");
+                System.out.println();
+                Thread.sleep(500);
+                System.out.println("                         ✨ 카페를 열었습니다 ✨ ");
+                System.out.println();
 
-            work(); // 아르바이트하는 메소드 호출 
+                work(); // 아르바이트하는 메소드 호출
+            }
+            else                // 토요일이라면
+            {
+                Thread.sleep(500);
+                System.out.println();
+                System.out.println("                         ✨ 주말이 되었습니다 ✨ ");
+                System.out.println();
+
+                weekendInfo();  // 해당 주의 아르바이트 결과를 정산하는 메소드 호출
+
+            }
         }
-        else                // 토요일이라면
+        catch (Exception e)
         {
-            System.out.println();
-            System.out.println("                         ✨ 주말이 되었습니다 ✨ ");
-            System.out.println();
-
-            weekendInfo();  // 해당 주의 아르바이트 결과를 정산하는 메소드 호출
-
+            System.out.println(e.toString());
         }
-
 
     }// end start()
 
@@ -365,39 +379,46 @@ public class GameRun
         // 하루에 방문하는 최대 손님수는 숙련도와 동일하므로 다섯까지 존재
         String[] nums = {"첫", "두", "세", "네", "다섯"};
 
-        System.out.println("------------------------------------------------------------------------");
-        System.out.println("                        " + nums[Cafe.getTodayCustomerNum()] + "번째 손님이 등장했습니다.");
-        System.out.println("------------------------------------------------------------------------");
-
-        // 손님 유형 랜덤으로 등장시키기.
-        Random rd = new Random();               // 랜덤클래스 객체 생성
-        int randomNum = rd.nextInt(10)+1; // 1 ~ 10 사이의 랜덤값을 생성해서 변수에 담는다.
-
-        if(randomNum <=7)                       // 랜덤값이 1 ~ 7 인 경우
+        try
         {
-            // 일반 손님이 등장하는 메소드 호출
-            CustomerAction customerAction = new CustomerAction();
-            customerAction.comeCustomer();
-        }
-        else if(randomNum==8||randomNum==9)     // 랜덤값이 8,9인 경우
+            Thread.sleep(1000);
+
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println("                        " + nums[Cafe.getTodayCustomerNum()] + "번째 손님이 등장했습니다.");
+            System.out.println("------------------------------------------------------------------------");
+
+            // 손님 유형 랜덤으로 등장시키기.
+            Random rd = new Random();               // 랜덤클래스 객체 생성
+            int randomNum = rd.nextInt(10) + 1; // 1 ~ 10 사이의 랜덤값을 생성해서 변수에 담는다.
+
+            if (randomNum <= 7)                       // 랜덤값이 1 ~ 7 인 경우
+            {
+                // 일반 손님이 등장하는 메소드 호출
+                CustomerAction customerAction = new CustomerAction();
+                customerAction.comeCustomer();
+            } else if (randomNum == 8 || randomNum == 9)     // 랜덤값이 8,9인 경우
+            {
+                // 특별 손님이 등장하는 메소드 호출
+                SpecialCustomerAction specialCustomerAction = new SpecialCustomerAction();
+                specialCustomerAction.comeSpecialCustomer();
+            } else                                    // 랜덤값이 10인 경우
+            {
+                // 비밀 손님이 등장하는 메소드 호출
+                SecretCustomerAction secretCustomerAction = new SecretCustomerAction();
+                secretCustomerAction.comeSecretCustomer();
+            }
+
+            selectWork();                          // 선택지 고르는 메소드 호출(1. 계속하기 2. 마감하기 3.아이템 사용)
+
+        } catch (Exception e)
         {
-            // 특별 손님이 등장하는 메소드 호출
-            SpecialCustomerAction specialCustomerAction = new SpecialCustomerAction();
-            specialCustomerAction.comeSpecialCustomer();
-        }
-        else                                    // 랜덤값이 10인 경우
-        {
-            // 비밀 손님이 등장하는 메소드 호출
-            SecretCustomerAction secretCustomerAction = new SecretCustomerAction();
-            secretCustomerAction.comeSecretCustomer();
+            e.toString();
         }
 
-        selWork();                          // 선택지 고르는 메소드 호출(1. 계속하기 2. 마감하기 3.아이템 사용)
-
-    }// end business()
+    }// end work()
 
     // 한 주문을 처리한 뒤 등장하는 선택지 메소드
-    public void selWork()
+    public void selectWork()
     {
         boolean check;      // 아르바이트 반복 여부 체크하는 변수
         int result = 0;     // 주어진 값 외의 수를 입력했는지 비교할 때 사용할 변수
@@ -501,41 +522,58 @@ public class GameRun
 
         // 코인 제공 조건 만족하면
         // 조건 : 이번주 성공횟수 > 이번주 실패횟수
-        if(User.getWeekSuccessNum() > User.getWeekFailNum())
-        {
-            // 전재산 = 현재 전재산 + 제공받는 급여코인(숙련도 * 2)
-            User.setProperty(User.getProperty() + User.getSkillLevel() * 2);
 
-            System.out.printf("                        ✨ %d코인을 획득했습니다 ✨\n", User.getSkillLevel() * 2);
+        try{
+
+            if(User.getWeekSuccessNum() > User.getWeekFailNum())
+            {
+                // 전재산 = 현재 전재산 + 제공받는 급여코인(숙련도 * 2)
+                User.setProperty(User.getProperty() + User.getSkillLevel() * 2);
+
+                Thread.sleep(500);
+                System.out.printf("                        ✨ %d코인을 획득했습니다 ✨\n", User.getSkillLevel() * 2);
+
+            }
+            else    // 조건 만족하지 못하면
+            {
+                Thread.sleep(500);
+                System.out.println("                        코인을 획득하지 못했습니다! ");
+
+            }
+            System.out.println();
+
+            // 숙련도 증가 조건 만족하면
+            // 조건 : 숙련도 * 4 <= 누적 음료 제조 성공 횟수
+            if(User.getSkillLevel()*4 <= User.getTotalSuccessNum())
+            {
+                User.setSkillLevel(User.getSkillLevel()+1);     // 숙련도 1 증가
+
+                Thread.sleep(500);
+                System.out.println("                      ✨ 숙련도가 1 증가했습니다 ✨");
+
+            }
+            else    // 조건 만족하지 못하면
+            {
+                Thread.sleep(500);
+                System.out.println("                         숙련도에 변동이 없습니다! ");
+            }
+            System.out.println();
+
+            // 체력, 인내력 설정값으로 초기화
+            User.setHp(User.getSetHp());
+            User.setFeeling(User.getSetFeeling());
+
+            Thread.sleep(500);
+            System.out.println("                    ✨ 체력과 인내력을 회복했습니다 ✨");
+            System.out.println();
+            System.out.println();
+
+            Thread.sleep(500);
+
+
+        }catch (Exception e){
 
         }
-        else    // 조건 만족하지 못하면
-        {
-            System.out.println("                        코인을 획득하지 못했습니다! ");
-
-        }
-        System.out.println();
-
-        // 숙련도 증가 조건 만족하면
-        // 조건 : 숙련도 * 4 <= 누적 음료 제조 성공 횟수
-        if(User.getSkillLevel()*4 <= User.getTotalSuccessNum())
-        {
-            User.setSkillLevel(User.getSkillLevel()+1);     // 숙련도 1 증가
-            System.out.println("                      ✨ 숙련도가 1 증가했습니다 ✨");
-
-        }
-        else    // 조건 만족하지 못하면
-        {
-            System.out.println("                         숙련도에 변동이 없습니다! ");
-        }
-        System.out.println();
-
-        // 체력, 인내력 설정값으로 초기화
-        User.setHp(User.getSetHp());
-        User.setFeeling(User.getSetFeeling());
-        System.out.println("                    ✨ 체력과 인내력을 회복했습니다 ✨");
-        System.out.println();
-        System.out.println();
 
 
         System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
