@@ -4,6 +4,7 @@ import com.company.data.Cafe;
 import com.company.data.Item;
 import com.company.data.User;
 import com.company.run.GameRun;
+import com.company.thread.OneTimeSound;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -286,6 +287,7 @@ public class UserAction
                     if (quizResult == YES)
                     {
                         System.out.println(" 오답입니다. ");
+
                        // User.setTotalFailNum(User.getTotalFailNum() + 1); // 총 음료제조 실패 횟수 1 증가
                        // User.setWeekFailNum(User.getWeekFailNum() + 1);   // 이번주 음료제조 실패 횟수 1 증가
 
@@ -293,6 +295,7 @@ public class UserAction
                         //System.out.println(User.getWeekFailNum() + 1);
 
                         User.setHp(User.getHp() - 1);                     // 유저 체력 1 감소
+
                         return false;                                     // false 반환, 메소드 종료
                     }
                     else
@@ -492,13 +495,15 @@ public class UserAction
     {
         if(!result)     // 음료 실패했을 경우
         {
+            Thread sound = new Thread(new OneTimeSound("fail.mp3"));
+            sound.start();
+
             System.out.println("------------------------------------------------------------------------");
             System.out.println("                            음료 만들기 실패 ! ");
             System.out.println("------------------------------------------------------------------------");
             System.out.printf(" %s님의 체력이 1 소모되었습니다.\n", User.getName());
             System.out.printf(" 현재 %s님의 체력 : %d\n", User.getName(), User.getHp());
             System.out.println("========================================================================");
-
         }
         else
         {

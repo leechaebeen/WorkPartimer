@@ -7,7 +7,7 @@ public class LoadTitle implements Runnable
     {
         try
         {
-            Thread sound = new Thread(new Sound("typing.mp3"));
+            Thread sound = new Thread(new LoopSound("typing.mp3"));
             sound.start();   // 노래 재생 쓰레드 실행
 
             System.out.println();

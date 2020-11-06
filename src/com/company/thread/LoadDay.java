@@ -7,7 +7,7 @@ public class LoadDay implements Runnable
     {
         try
         {
-            Thread sound = new Thread(new Sound("weekInfo.mp3"));
+            Thread sound = new Thread(new OneTimeSound("weekInfo.mp3"));
             sound.start();
 
             System.out.print(" ");
@@ -162,9 +162,9 @@ public class LoadDay implements Runnable
             Thread.sleep(20);
             System.out.print("･ﾟ");
 
-            sound.stop();
-
-
+            //sound.stop();
+            //sound.interrupt();
+            //System.out.println("sound.interrupt() : " + sound.isInterrupted());
         }
         catch (InterruptedException e)
         {

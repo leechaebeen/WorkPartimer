@@ -15,7 +15,7 @@ public class GameRun
     // 최초 실행하는 메소드
     public void initialRun()
     {
-        Thread sound = new Thread(new Sound("startBGM.mp3"));
+        Thread sound = new Thread(new LoopSound("startBGM.mp3"));
         sound.start();   // 노래 재생 쓰레드 실행
 
         // test
@@ -165,7 +165,7 @@ public class GameRun
     // 게임 시작 메소드
     public void start()
     {
-        Thread typingSound = new Thread(new Sound("typing.mp3"));
+        Thread typingSound = new Thread(new LoopSound("typing.mp3"));
         typingSound.start();
 
         System.out.println();

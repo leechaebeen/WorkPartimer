@@ -3,7 +3,7 @@ package com.company.action;
 import com.company.data.Beverage;
 import com.company.data.Cafe;
 import com.company.data.User;
-import com.company.run.Ending;
+
 import java.util.Random;
 
 // 게임에 등장하는 손님의 가장 기본이 되는 기능을 담은 클래스.
