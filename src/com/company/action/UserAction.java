@@ -507,6 +507,9 @@ public class UserAction
         }
         else
         {
+            Thread sound = new Thread(new OneTimeSound("success.mp3"));
+            sound.start();
+
             System.out.println("------------------------------------------------------------------------");
             System.out.println("                          ✨ 음료 만들기 성공 ✨  ");
             System.out.println("------------------------------------------------------------------------");
@@ -563,6 +566,9 @@ public class UserAction
                     break;
             }
 
+            Thread sound = new Thread(new OneTimeSound("item.mp3"));
+            sound.start();
+
             System.out.println("========================================================================");
             System.out.printf(" %d 코인을 사용했습니다.\n", item.getPrice());
             System.out.printf(" 보유 코인 : %d코인\n", User.getProperty());
@@ -570,6 +576,9 @@ public class UserAction
         }
         else
         {
+            Thread sound = new Thread(new OneTimeSound("fail.mp3"));
+            sound.start();
+
             System.out.println("========================================================================");
             System.out.printf(" 보유한 코인으로 %s을(를) 구매할 수 없습니다.\n", item.getName());
             System.out.printf(" 보유 코인      : %d코인\n", User.getProperty());
@@ -601,6 +610,9 @@ public class UserAction
                     User.setCakeNum(User.getCakeNum() - 1);     // 보유한 개수에서 하나 감소
                     User.setHp(User.getHp() + 2 );              // 현재 체력에서 2 회복
 
+                    Thread sound = new Thread(new OneTimeSound("item.mp3"));
+                    sound.start();
+
                     System.out.println("========================================================================");
                     System.out.println(" 케이크를 사용했습니다.");
                     System.out.println(" 체력이 2 회복되었습니다.");
@@ -610,6 +622,9 @@ public class UserAction
                 }
                 else
                 {
+                    Thread sound = new Thread(new OneTimeSound("fail.mp3"));
+                    sound.start();
+
                     System.out.println(" 보유한 케이크가 없습니다.");
                 }
                 System.out.println("========================================================================");
@@ -621,6 +636,9 @@ public class UserAction
                     User.setSandwichNum(User.getSandwichNum() - 1);     // 보유한 개수에서 하나 감소
                     User.setHp(User.getHp() + 4);                       // 현재 체력에서 4 회복
 
+                    Thread sound = new Thread(new OneTimeSound("item.mp3"));
+                    sound.start();
+
                     System.out.println("========================================================================");
                     System.out.println(" 샌드위치를 사용했습니다.");
                     System.out.println(" 체력이 4 회복되었습니다.");
@@ -629,6 +647,9 @@ public class UserAction
 
                 } else
                 {
+                    Thread sound = new Thread(new OneTimeSound("fail.mp3"));
+                    sound.start();
+
                     System.out.println(" 보유한 샌드위치가 없습니다.");
                 }
                 System.out.println("========================================================================");
@@ -640,6 +661,9 @@ public class UserAction
                     User.setChocoNum(User.getChocoNum() - 1);     // 보유한 개수에서 하나 감소
                     User.setFeeling(User.getFeeling() + 2);       // 현재 인내력에서 2 회복
 
+                    Thread sound = new Thread(new OneTimeSound("item.mp3"));
+                    sound.start();
+
                     System.out.println("========================================================================");
                     System.out.println(" 초콜릿을 사용했습니다.");
                     System.out.println(" 인내력이 2 회복되었습니다.");
@@ -648,6 +672,9 @@ public class UserAction
 
                 } else
                 {
+                    Thread sound = new Thread(new OneTimeSound("fail.mp3"));
+                    sound.start();
+
                     System.out.println(" 보유한 초콜릿이 없습니다.");
                 }
                 System.out.println("========================================================================");
@@ -659,6 +686,9 @@ public class UserAction
                     User.setMacaronNum(User.getMacaronNum() - 1);     // 보유한 개수에서 하나 감소
                     User.setFeeling(User.getFeeling() + 4);           // 현재 인내력에서 4 회복
 
+                    Thread sound = new Thread(new OneTimeSound("item.mp3"));
+                    sound.start();
+
                     System.out.println("========================================================================");
                     System.out.println(" 마카롱을 사용했습니다.");
                     System.out.println(" 인내력이 4 회복되었습니다.");
@@ -667,6 +697,9 @@ public class UserAction
 
                 } else
                 {
+                    Thread sound = new Thread(new OneTimeSound("fail.mp3"));
+                    sound.start();
+
                     System.out.println(" 보유한 마카롱이 없습니다.");
                 }
                 System.out.println("========================================================================");

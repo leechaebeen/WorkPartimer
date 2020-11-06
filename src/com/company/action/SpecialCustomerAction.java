@@ -4,6 +4,7 @@ import com.company.data.Beverage;
 import com.company.data.Cafe;
 import com.company.data.User;
 import com.company.run.Ending;
+import com.company.thread.OneTimeSound;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -64,7 +65,6 @@ public class SpecialCustomerAction extends CustomerAction
         }
 
         // 엔딩 주석 처리
-        /*
         Ending ending = new Ending();       // 엔딩 객체 생성
         if(User.getHp()==0)                 // 만약 유저의 체력이 0이 된다면
         {
@@ -75,7 +75,6 @@ public class SpecialCustomerAction extends CustomerAction
             ending.toQuitEnding();          // 퇴사 엔딩 메소드 호출
         }
 
-         */
 
         if(orderResult)     // 주문이 확정된 경우
         {
@@ -99,7 +98,6 @@ public class SpecialCustomerAction extends CustomerAction
         }
 
         // 엔딩 주석 처리
-        /*
         if(User.getHp()==0)                 // 만약 유저의 체력이 0이 된다면
         {
             //test
@@ -115,7 +113,6 @@ public class SpecialCustomerAction extends CustomerAction
         {
             ending.getFireEnding();         // 해고 엔딩 메소드 호출
         }
-        */
 
     }
 
@@ -473,6 +470,9 @@ public class SpecialCustomerAction extends CustomerAction
                 {
                     if (User.getFeeling() != User.getSetFeeling()) // 현재 인내력이 세팅된 인내력(최대 인내력)이 아니라면
                     {
+                        Thread sound = new Thread(new OneTimeSound("present.mp3"));
+                        sound.start();
+
                         User.setFeeling(User.getFeeling() + 1); // 현재 인내력 에서 1 증가
                         System.out.println("========================================================================");
                         System.out.printf(" %s님의 인내력이 1 회복되었습니다.\n", User.getName());
@@ -489,6 +489,9 @@ public class SpecialCustomerAction extends CustomerAction
                 {
                     if (User.getHp() != User.getSetHp()) // 현재 체력이 세팅된 체력(최대 체력)이 아니라면
                     {
+                        Thread sound = new Thread(new OneTimeSound("present.mp3"));
+                        sound.start();
+
                         User.setHp(User.getHp() + 1);    // 현재 체력에서 1 증가
                         System.out.println("========================================================================");
                         System.out.printf(" %s님의 체력이 1 회복되었습니다.\n", User.getName());

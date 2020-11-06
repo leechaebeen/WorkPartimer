@@ -3,6 +3,7 @@ package com.company.run;
 import com.company.action.UserAction;
 import com.company.data.User;
 import com.company.thread.LoadEnding;
+import com.company.thread.OneTimeSound;
 
 import java.util.Scanner;
 
@@ -95,6 +96,9 @@ public class Ending
         Thread ending = new Thread(new LoadEnding(strArr));
         ending.start(); // 스레드 생성
 
+        Thread sound = new Thread(new OneTimeSound("ending.mp3"));
+        sound.start();
+
         try
         {
           ending.join();// 스레드 끝날때까지 기다리기
@@ -175,6 +179,9 @@ public class Ending
 
         Thread ending = new Thread(new LoadEnding(strArr));
         ending.start(); // 스레드 생성
+
+        Thread sound = new Thread(new OneTimeSound("ending.mp3"));
+        sound.start();
 
         try
         {
@@ -402,6 +409,9 @@ public class Ending
 
         Thread ending = new Thread(new LoadEnding(strArr));
         ending.start(); // 스레드 생성
+
+        Thread sound = new Thread(new OneTimeSound("ending.mp3"));
+        sound.start();
 
         try
         {
