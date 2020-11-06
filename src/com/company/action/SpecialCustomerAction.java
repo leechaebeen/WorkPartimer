@@ -63,7 +63,8 @@ public class SpecialCustomerAction extends CustomerAction
 
         }
 
-
+        // 엔딩 주석 처리
+        /*
         Ending ending = new Ending();       // 엔딩 객체 생성
         if(User.getHp()==0)                 // 만약 유저의 체력이 0이 된다면
         {
@@ -73,6 +74,8 @@ public class SpecialCustomerAction extends CustomerAction
         {
             ending.toQuitEnding();          // 퇴사 엔딩 메소드 호출
         }
+
+         */
 
         if(orderResult)     // 주문이 확정된 경우
         {
@@ -95,6 +98,8 @@ public class SpecialCustomerAction extends CustomerAction
             }
         }
 
+        // 엔딩 주석 처리
+        /*
         if(User.getHp()==0)                 // 만약 유저의 체력이 0이 된다면
         {
             //test
@@ -110,6 +115,7 @@ public class SpecialCustomerAction extends CustomerAction
         {
             ending.getFireEnding();         // 해고 엔딩 메소드 호출
         }
+        */
 
     }
 

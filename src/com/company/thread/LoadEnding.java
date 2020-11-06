@@ -2,13 +2,13 @@ package com.company.thread;
 
 import com.company.data.User;
 
-public class Ending implements Runnable
+public class LoadEnding implements Runnable
 {
     String[] array;
 
-    public Ending(){}
+    public LoadEnding(){}
 
-    public Ending(String[] array)
+    public LoadEnding(String[] array)
     {
         this.array = array;
     }
@@ -18,6 +18,22 @@ public class Ending implements Runnable
     {
         try
         {
+            System.out.println();
+            Thread.sleep(100);
+            System.out.println();
+            Thread.sleep(100);
+            System.out.println();
+            Thread.sleep(100);
+            System.out.println();
+            Thread.sleep(100);
+            System.out.println();
+            Thread.sleep(100);
+            System.out.println();
+            Thread.sleep(100);
+            System.out.println();
+            Thread.sleep(100);
+            System.out.println();
+            Thread.sleep(100);
             System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
             Thread.sleep(100);
             System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
@@ -62,9 +78,29 @@ public class Ending implements Runnable
             Thread.sleep(100);
             System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.");
             Thread.sleep(100);
+            System.out.println();
+            Thread.sleep(100);
+            System.out.println();
+            Thread.sleep(100);
+            System.out.println();
+            Thread.sleep(100);
+            System.out.println();
+            Thread.sleep(100);
+            System.out.println();
+            Thread.sleep(100);
+            System.out.println();
+            Thread.sleep(100);
+            System.out.println();
+            Thread.sleep(100);
+            System.out.println();
+            Thread.sleep(100);
+            System.out.println();
+            Thread.sleep(100);
+            System.out.println();
+            Thread.sleep(100);
 
         }
-        catch (Exception e)
+        catch (InterruptedException e)
         {
             System.out.println(e.toString());
         }

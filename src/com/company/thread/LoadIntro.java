@@ -2,7 +2,7 @@ package com.company.thread;
 
 import com.company.data.User;
 
-public class Intro implements Runnable
+public class LoadIntro implements Runnable
 {
     @Override
     public void run()
@@ -50,7 +50,7 @@ public class Intro implements Runnable
             Thread.sleep(100);
             System.out.println("   　  　ﾟ　　　.　 　　　　　　　　.");
             Thread.sleep(100);
-            System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
+            System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　　");
             Thread.sleep(100);
 
             System.out.print("　   　　。　　 　　 ");
@@ -135,7 +135,7 @@ public class Intro implements Runnable
             System.out.println(" ※ 주의 ※ 프로그램을 종료하면 공개된 엔딩이 사라집니다. ");
             Thread.sleep(500);
         }
-        catch (Exception e)
+        catch (InterruptedException e)
         {
             System.out.println(e.toString());
         }

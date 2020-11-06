@@ -1,12 +1,15 @@
 package com.company.thread;
 
-public class Title implements Runnable
+public class LoadTitle implements Runnable
 {
     @Override
     public void run()
     {
         try
         {
+            Thread sound = new Thread(new Sound("typing.mp3"));
+            sound.start();   // 노래 재생 쓰레드 실행
+
             System.out.println();
             System.out.println();
 
@@ -70,10 +73,14 @@ public class Title implements Runnable
             System.out.println();
             System.out.println();
 
+            sound.stop();
 
-        } catch (Exception e)
+            //sound.interrupt(); // 사운드 쓰레드 interrupted 상태를 false 에서 true로 변경.
+            //System.out.println(" sound.isInterrupted() : " + sound.isInterrupted()); // 쓰레드의 interrupted 상태를 반환 , true
+
+        } catch (InterruptedException e)
         {
-            System.out.println(e.toString());
+            return;
         }
     }
 

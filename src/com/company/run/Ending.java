@@ -2,6 +2,7 @@ package com.company.run;
 
 import com.company.action.UserAction;
 import com.company.data.User;
+import com.company.thread.LoadEnding;
 
 import java.util.Scanner;
 
@@ -11,7 +12,7 @@ public class Ending
     // static 이어야하는 이유 :
     // User 클래스의 모은 엔딩 유형을 저장하는 배열이 static 변수라서
     // 배열 초기화할 때 길이를 나타내는 변수도 static 이어야한다.
-    // → private static int[] endings = new int[Ending.getEndingTypeNum()-1];
+    // → private static int[] endings = new int[LoadEnding.getEndingTypeNum()-1];
 
 
     /*
@@ -56,12 +57,13 @@ public class Ending
             }
         }
 
+   /*
         System.out.println();
         System.out.println();
         System.out.println();
         System.out.println();
         System.out.println();
-        System.out.println();
+        System.out.println();*/
         /*
         System.out.println("\t\t\t\t 으 아 아 아 ㅇㅏ");
         System.out.println("\t\t\t\t　　　　　　       ㅇ");
@@ -74,8 +76,8 @@ public class Ending
         System.out.println("\t\t\t\t 　 　　　　　　　　　　　             ඞ");
         */
 
-        System.out.println();
-        System.out.println();
+       /* System.out.println();
+        System.out.println();*/
 
        /* System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
         System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
@@ -90,7 +92,7 @@ public class Ending
         String str = "\t\t\t" + userName + "님은 고된 노동을 견디지 못하고 쓰러졌습니다.";    // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
-        Thread ending = new Thread(new com.company.thread.Ending(strArr));
+        Thread ending = new Thread(new LoadEnding(strArr));
         ending.start(); // 스레드 생성
 
         try
@@ -101,8 +103,13 @@ public class Ending
         {
             System.out.println(e.toString());
         }
+        // test
+        // finalEnding();
+        // → 선택값 입력받고 메인 쓰레드로 돌아가서 순서 꼬임
 
-        finalEnding();
+        // 그냥 이렇게 두면 여전히 체력 == 0 이라서 데몬쓰레드 실행되고 무한반복 일어남
+        //   User.setHp(-1);
+        // 이렇게 하면 멈춤
     }
 
 
@@ -140,17 +147,17 @@ public class Ending
         }
 
 
+       /* System.out.println();
         System.out.println();
         System.out.println();
         System.out.println();
         System.out.println();
         System.out.println();
         System.out.println();
-        System.out.println();
-        System.out.println();
+        System.out.println();*/
         //System.out.println("\t\t\t\t 더러워서 못 해먹겠다... 때려쳐야지. ");
-        System.out.println();
-        System.out.println();
+       /* System.out.println();
+        System.out.println();*/
 
        /* System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
         System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
@@ -166,7 +173,7 @@ public class Ending
         String str = "\t\t" + userName + "님은 스트레스를 견디지 못하고 자발적으로 카페를 떠났습니다.";    // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
-        Thread ending = new Thread(new com.company.thread.Ending(strArr));
+        Thread ending = new Thread(new LoadEnding(strArr));
         ending.start(); // 스레드 생성
 
         try
@@ -178,7 +185,7 @@ public class Ending
             System.out.println(e.toString());
         }
 
-        finalEnding();
+        //finalEnding();
 
     }
     // 3. 숙련도 4 이상, secret 손님 방문 4회 이상 : 이직 엔딩 (호출 완료)
@@ -214,14 +221,14 @@ public class Ending
             }
         }
 
+        /*System.out.println();
         System.out.println();
         System.out.println();
         System.out.println();
         System.out.println();
         System.out.println();
         System.out.println();
-        System.out.println();
-        System.out.println();
+        System.out.println();*/
 
         /*
         System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
@@ -239,7 +246,7 @@ public class Ending
                     + "\t\t" + userName + "님을 시험하고 눈여겨본 사장은 " + userName + "님을 스카웃했습니다."; // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
-        Thread ending = new Thread(new com.company.thread.Ending(strArr));
+        Thread ending = new Thread(new LoadEnding(strArr));
         ending.start(); // 스레드 생성
 
         try
@@ -292,14 +299,14 @@ public class Ending
         }
 
 
+      /*  System.out.println();
         System.out.println();
         System.out.println();
         System.out.println();
         System.out.println();
         System.out.println();
         System.out.println();
-        System.out.println();
-        System.out.println();
+        System.out.println();*/
 
         /*
         System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
@@ -318,7 +325,7 @@ public class Ending
                  "\t\t\t" + userName + "님은 더이상 알바생이 아닙니다."; // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
-        Thread ending = new Thread(new com.company.thread.Ending(strArr));
+        Thread ending = new Thread(new LoadEnding(strArr));
         ending.start(); // 스레드 생성
 
         try
@@ -365,6 +372,7 @@ public class Ending
             }
         }
 
+        /*
         System.out.println();
         System.out.println();
         System.out.println();
@@ -373,7 +381,7 @@ public class Ending
         System.out.println();
         System.out.println();
         System.out.println();
-
+        */
         /*
         System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.");
         System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
@@ -392,7 +400,7 @@ public class Ending
                 "\t\t\t 괜찮습니다. 카페는 많으니까요... 힘내세요!"; // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
-        Thread ending = new Thread(new com.company.thread.Ending(strArr));
+        Thread ending = new Thread(new LoadEnding(strArr));
         ending.start(); // 스레드 생성
 
         try
@@ -464,7 +472,7 @@ public class Ending
                 "\t\t\t 스파이보다 적성에 잘 맞는 일을 찾았습니다 !"; // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
-        Thread ending = new Thread(new com.company.thread.Ending(strArr));
+        Thread ending = new Thread(new LoadEnding(strArr));
         ending.start(); // 스레드 생성
 
         try
@@ -493,16 +501,6 @@ public class Ending
         System.out.println(",　　　　　　　　　.　 .　　　　　　　　.");
         System.out.println("　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
         System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.");*/
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
 
 
         while(check) // check 는 위에서 입력받은 유저이름이 한글인걸 확인했기 때문에 true 인 상황이다.

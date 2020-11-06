@@ -71,6 +71,8 @@ public class SecretCustomerAction extends SpecialCustomerAction
             }
         }
 
+        // 엔딩 주석 처리
+        /*
         Ending ending = new Ending();       // 엔딩 객체 생성
         if (User.getHp() == 0)             // 만약 유저의 체력이 0이 된다면
         {
@@ -83,6 +85,7 @@ public class SecretCustomerAction extends SpecialCustomerAction
         {
             ending.getFireEnding();         // 해고 엔딩 실행
         }
+         */
 
 
     }

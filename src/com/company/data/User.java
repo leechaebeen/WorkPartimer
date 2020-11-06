@@ -11,7 +11,7 @@ public class User
     // 유저의 현재 능력치
     private static int skillLevel = 1;    // 현재 숙련도 : 하루에 등장하는 손님 수와 같다. 조건을 만족하면 주말마다 1씩 증가할 수 있다.
                                           // 조건 : 총 음료제조 성공 횟수 >= 숙련도 *4
-    protected static int hp = 5;          // 현재 체력
+    protected static int hp = 2;          // 현재 체력 // 임의로 2
     private static int feeling = 5;       // 현재 인내력
     // 체력과 인내력은 한 주가 지날 때마다 세팅된 값으로 초기화된다. 첫 주는 초기화되지 않으므로 5로 초기화해준다.
 

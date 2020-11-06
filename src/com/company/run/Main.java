@@ -5,11 +5,8 @@ public class Main
 {
     public static void main(String[] args)
     {
-        Ending ending = new Ending();
-        ending.partimerEnding();
-
-    /*    GameRun gameRun = new GameRun();    // 게임 실행 객체 생성
+        GameRun gameRun = new GameRun();    // 게임 실행 객체 생성
         gameRun.initialRun();               // 프로그램 최초 실행하는 메소드 호출
-    */
+
     }
 }

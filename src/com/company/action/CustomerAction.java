@@ -40,6 +40,9 @@ public class CustomerAction
 
         }
 
+
+        // 엔딩 주석처리
+        /*
         Ending ending = new Ending();                        // 엔딩 객체 생성
         if (User.getHp() == 0)                                  // 만약 유저의 체력이 0이 된다면
         {
@@ -51,6 +54,8 @@ public class CustomerAction
         {
             ending.getFireEnding();                         // 해고 엔딩 실행
         }
+
+         */
 
     }
 
@@ -204,13 +209,16 @@ public class CustomerAction
                 System.out.printf(" %s님의 인내력이 1 감소합니다.\n", User.getName());
                 System.out.printf(" 현재 %s님의 인내력 : %d\n", User.getName(), User.getFeeling());
                 System.out.println("========================================================================");
-
+                
+                // 엔딩 주석처리
+                /*
                 // 유저 상태 체크
                 if(User.getFeeling()==0)            // 인내력이 이 0이 된다면
                 {
                     Ending ending = new Ending();   // 엔딩 객체 생성
                     ending.toQuitEnding();          // 자발적으로 관두는 엔딩 메소드 호출
                 }
+                 */
             }
         }
 

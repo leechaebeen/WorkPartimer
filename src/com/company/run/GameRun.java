@@ -3,9 +3,7 @@ package com.company.run;
 import com.company.action.*;
 import com.company.data.Cafe;
 import com.company.data.User;
-import com.company.thread.Intro;
-import com.company.thread.Title;
-import com.company.thread.loading;
+import com.company.thread.*;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -17,20 +15,75 @@ public class GameRun
     // 최초 실행하는 메소드
     public void initialRun()
     {
-        Thread title = new Thread(new Title());
+        Thread sound = new Thread(new Sound("startBGM.mp3"));
+        sound.start();   // 노래 재생 쓰레드 실행
+
+        // test
+        //sound.interrupt();
+        //System.out.println("sound.isInterrupted() : " + sound.isInterrupted());
+        //-- 여기서 실행하면 소리 멈추고
+        //   "여기 왔니?" 출력
+        
+        Thread title = new Thread(new LoadTitle());
         title.start();  // title 쓰레드 실행
 
         try
         {
             title.join();   // title 쓰레드 모두 끝날때까지 기다리기
         }
-        catch (Exception e)
+        catch (InterruptedException e)
         {
-            e.toString();
         }
 
 
+        /*
+        //player.play(); 라고 주석 처리하면
+        .
+        .
+        노래 재생 중 ...
+        노래 재생 중 ...
+        노래 재생 중 ...
+        노래 재생 중 ...
+        노래 재생 중 ...
+        노래멈춤
+         sound.isInterrupted() : true
+        ========================================================================
+         1.시작하기  2.공개된 엔딩 보기
+        ------------------------------------------------------------------------
+         선택 :
+         */
+
+
+        /*
+        Thread checkEnding = new Thread(new CheckEnding());
+        checkEnding.setDaemon(true);
+        checkEnding.start();    //  자동 엔딩체크 데몬쓰레드 실행(일단 체력 0, 인내력 0인 경우만)
+        */
+        // 엔딩체크 데몬쓰레드 사용하지 않기로 결정
+        // 이유 1
+        // : 데몬쓰레드 또는 각 엔딩메소드에서 finalEnding() 호출하면
+        // 1.끝내기 2.다시 시작하기 해야하는데 선택값 입력받은 뒤
+        // 메인 쓰레드로 돌아가서 의도대로 흐름이 흘러가지 않음.
+
+        // 이유 2
+        // 호출하지 않으면 여전히 체력 == 0 또는 인내력 ==0 이라서 데몬쓰레드 무한반복 일어남
+        //  → 이거는 엔딩에서 체력이나 인내력을 0 아닌 값으로 초기화하면 해결 가능. 대신 멈춘다
+
         boolean check = true;   // 반복 여부를 체크하기 위한 변수
+        String userName;        // 유저이름을 저장할 변수
+
+        do {
+            System.out.print(" 이름을 입력해주세요(한글만 가능) : ");
+            Scanner sc = new Scanner(System.in);
+            userName = sc.nextLine();                                   // 유저이름을 입력받고
+            userName = userName.replaceAll(" ", "");    // 공백을 제거하고
+            check = Pattern.matches("^[가-힣]*$", userName);       // 정규표현식을 이용해서 한글인지 확인한다. 한글인 경우 true 반환
+
+        }while (!check); // 입력받은 이름이 한글이 아니면 반복
+
+        User.setName(userName);         // 입력받은 유저이름 속성에 넣기
+
+
         String selectStr;       // 사용자가 입력한 값을 담을 변수
         int select = 0;         // selectStr 변수를 형변환해서 담을 변수 
 
@@ -40,8 +93,11 @@ public class GameRun
 
         while (check)            // 올바른 선택지를 선택할 때까지 반복한다.
         {
+            //test
+            //Thread.sleep(10000);  // 메인쓰레드가 10초 멈춘다.
+
             System.out.println("========================================================================");
-            System.out.println(" 1.시작하기  2.공개된 엔딩 보기 ");
+            System.out.println(" 1.시작하기  2.공개된 엔딩 보기 3.이름 재설정 ");
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
             selectStr = sc.nextLine();
@@ -54,7 +110,7 @@ public class GameRun
                 select = Integer.parseInt(selectStr);
                 check = false;
 
-                if (select < 1 || select > 2)// 주어진 값 이외의 수를 선택한 경우
+                if (select < 1 || select > 3)// 주어진 값 이외의 수를 선택한 경우
                 {
                     System.out.println("========================================================================");
                     System.out.println(" 올바른 값을 입력해주세요.");
@@ -70,8 +126,15 @@ public class GameRun
 
         }
 
+
+        //???
+        //sound.interrupt(); // 사운드 쓰레드 interrupted 상태를 false 에서 true로 변경.
+        //System.out.println(" sound.isInterrupted() : " + sound.isInterrupted()); // 쓰레드의 interrupted 상태를 반환 , true
+        //sound.stop();
+
         final int START = 1;                // 게임 시작
         final int OPEN_ENDINGS = 2;         // 공개된 엔딩 확인
+        final int RENAME = 3;               // 이름 재설정
 
         while (true)
         {
@@ -83,29 +146,27 @@ public class GameRun
                     break;
 
                 case OPEN_ENDINGS:                  // 2. 공개된 엔딩보기를 선택한 경우
+                    sound.stop();                    //    노래쓰레드 멈추고
                     Ending ending = new Ending();
                     ending.openEndings();           // 공개된 엔딩 확인 메소드 호출
                     break;
+
+                case RENAME:                         // 3. 이름 재설정 선택한 경우
+                    sound.stop();                    //    노래쓰레드 멈추고
+                    initialRun();                    //    초기실행 메소드 호출
+                    break;
             }
         }
+
+
+
     }// end initialRun()
 
     // 게임 시작 메소드
     public void start()
     {
-        String userName;        // 유저이름을 저장할 변수
-        boolean check;          // 조건에 맞게 이름 입력했는지 확인할 변수
-
-        do {
-            System.out.print(" 이름을 입력해주세요(한글만 가능) : ");
-            Scanner sc = new Scanner(System.in);
-            userName = sc.nextLine();                                   // 유저이름을 입력받고
-            userName = userName.replaceAll(" ", "");    // 공백을 제거하고
-            check = Pattern.matches("^[가-힣]*$", userName);       // 정규표현식을 이용해서 한글인지 확인한다. 한글인 경우 true 반환
-
-        }while (!check); // 입력받은 이름이 한글이 아니면 반복
-
-        User.setName(userName);         // 입력받은 유저이름 속성에 넣기
+        Thread typingSound = new Thread(new Sound("typing.mp3"));
+        typingSound.start();
 
         System.out.println();
         System.out.println();
@@ -126,7 +187,7 @@ public class GameRun
         System.out.println();
         System.out.println();
 
-        Thread intro = new Thread(new Intro());
+        Thread intro = new Thread(new LoadIntro());
         intro.start();
 
         try
@@ -178,15 +239,17 @@ public class GameRun
         System.out.println(" ※ 주의 ※ 프로그램을 종료하면 공개된 엔딩이 사라집니다. ");
         */
 
+        typingSound.stop();
 
-        String selectStr;   // 사용자의 선택값을 담을 변수
-        int select = 0;     // selectStr 변수의 값을 int 로 형변환해서 담을 변수
+        String selectStr;       // 사용자의 선택값을 담을 변수
+        int select = 0;         // selectStr 변수의 값을 int 로 형변환해서 담을 변수
+        boolean check = true;   // 반복여부 체크할 변수
 
         // 올바른 선택지를 선택할 때까지 반복
         while(check) // check 는 위에서 입력받은 유저이름이 한글인걸 확인했기 때문에 true 인 상황이다.
         {
             System.out.println("========================================================================");
-            System.out.println(" 1.카페 열기  2.이름 재설정  ");
+            System.out.println(" 1.카페 열기  2.다시보기  ");
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
             Scanner sc = new Scanner(System.in);
@@ -215,22 +278,31 @@ public class GameRun
             }
         }
 
-        final int OPEN = 1;             // 1.카페 열기
-        final int START = 2;            // 2. 이름 재설정
+        //???
+        //sound.interrupt(); // 사운드 쓰레드 interrupted 상태를 false 에서 true로 변경.
+        //System.out.println(" sound.isInterrupted() : " + sound.isInterrupted()); // 쓰레드의 interrupted 상태를 반환 , true , false"??
+
+
+        final int OPEN = 1;             // 1. 카페 열기
+        final int REINTRO = 2;          // 2. 인트로 다시 보기
 
         GameRun gameRun = new GameRun(); // Cafe 객체 생성
+
+        //sound.stop();
+
 
         while(true)
         {
             switch(select)              // 유저의 선택값에 따라 분기 처리
             {
-                case  OPEN:             // 1. 카페 열기를 선택한 경우
+                case OPEN:             // 1. 카페 열기를 선택한 경우D
                     gameRun.open();     // 게임 시작하는 메소드 호출
                     break;
 
-                case START :            // 2. 이름 재설정을 선택한 경우
-                    start();            // 이름 설정 메소드 호출
+                case REINTRO:            // 2. 이름 재설정 선택한 경우
+                     start();           //    인트로 메소드 호출
                     break;
+
             }
         }
 
@@ -387,8 +459,15 @@ public class GameRun
                     System.out.println();
                     System.out.println();
                     //System.out.println(" ☾ ⋆*･ﾟ ⋆*･ﾟ ⋆. ･ﾟ. ⋆ * ･ﾟ. ⋆⋆ *･ﾟ⋆*･ﾟ ⋆ . ･ﾟ .⋆*･ﾟ .⋆ ⋆*･ﾟ ⋆*･ﾟ ⋆･ﾟ⋆ *･ﾟ ⋆･ﾟ");
-                    Thread weekendLoading = new Thread(new loading());
+                    Thread weekendLoading = new Thread(new LoadDay());
                     weekendLoading.start();
+
+                    try{
+                     weekendLoading.join();
+                    }
+                    catch (Exception e){
+
+                    }
 
                     try
                     {
@@ -482,6 +561,9 @@ public class GameRun
         User.setWeekSuccessNum(0);                 // 주 음료제조 성공횟수 0으로 초기화
         User.setWeekFailNum(0);                    // 주 음료제조 실패횟수 0으로 초기화
 
+        // 엔딩 주석처리
+
+
         // 엔딩 호출
         Ending ending = new Ending();                   // 엔딩객체 생성
 
@@ -501,6 +583,7 @@ public class GameRun
         {
             ending.partimerEnding();                        // 알바 엔딩 호출
         }
+
 
         weekend(); // 주말 선택지 메소드 호출(1. 정보 확인  2.상점가기  3.공개된 엔딩 확인  4. 주말 지나가기)
     }
