@@ -36,7 +36,7 @@ public class OneTimeSound implements Runnable
 
     public void run()
     {
-        System.out.println("OneTimeSound run() 시작");
+        //System.out.println("OneTimeSound run() 시작");
         //this.setName("SoundThread");
 
         try

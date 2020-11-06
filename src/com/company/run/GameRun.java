@@ -12,6 +12,8 @@ import java.util.regex.Pattern;
 // 게임의 메인 흐름을 담은 클래스(최초실행, 평일과 주말)
 public class GameRun
 {
+    Thread sound = new Thread(new LoopSound("startBGM.mp3"));
+
     // 최초 실행하는 메소드
     public void initialRun()
     {
@@ -97,7 +99,7 @@ public class GameRun
             //Thread.sleep(10000);  // 메인쓰레드가 10초 멈춘다.
 
             System.out.println("========================================================================");
-            System.out.println(" 1.시작하기  2.공개된 엔딩 보기 3.이름 재설정 ");
+            System.out.println(" 1.시작하기  2.이름 재설정 ");
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
             selectStr = sc.nextLine();
@@ -133,8 +135,7 @@ public class GameRun
         //sound.stop();
 
         final int START = 1;                // 게임 시작
-        final int OPEN_ENDINGS = 2;         // 공개된 엔딩 확인
-        final int RENAME = 3;               // 이름 재설정
+        final int RENAME = 2;               // 이름 재설정
 
         while (true)
         {
@@ -142,16 +143,10 @@ public class GameRun
             {
                 case START:                            // 1. 시작하기를 선택한 경우
                     GameRun gameRun = new GameRun();
-                    gameRun.start();                  // 게임 시작하는 메소드 호출
+                    gameRun.intro();                  // 게임 시작하는 메소드 호출
                     break;
 
-                case OPEN_ENDINGS:                  // 2. 공개된 엔딩보기를 선택한 경우
-                    sound.stop();                    //    노래쓰레드 멈추고
-                    Ending ending = new Ending();
-                    ending.openEndings();           // 공개된 엔딩 확인 메소드 호출
-                    break;
-
-                case RENAME:                         // 3. 이름 재설정 선택한 경우
+                case RENAME:                         // 2. 이름 재설정 선택한 경우
                     sound.stop();                    //    노래쓰레드 멈추고
                     initialRun();                    //    초기실행 메소드 호출
                     break;
@@ -163,7 +158,7 @@ public class GameRun
     }// end initialRun()
 
     // 게임 시작 메소드
-    public void start()
+    public void intro()
     {
         Thread typingSound = new Thread(new LoopSound("typing.mp3"));
         typingSound.start();
@@ -192,9 +187,8 @@ public class GameRun
 
         try
         {
-          intro.join();
-        }
-        catch (Exception e)
+            intro.join();
+        } catch (Exception e)
         {
             System.out.println(e.toString());
         }
@@ -241,6 +235,12 @@ public class GameRun
 
         typingSound.stop();
 
+        introSelect();
+
+    }
+
+    public void introSelect()
+    {
         String selectStr;       // 사용자의 선택값을 담을 변수
         int select = 0;         // selectStr 변수의 값을 int 로 형변환해서 담을 변수
         boolean check = true;   // 반복여부 체크할 변수
@@ -249,7 +249,7 @@ public class GameRun
         while(check) // check 는 위에서 입력받은 유저이름이 한글인걸 확인했기 때문에 true 인 상황이다.
         {
             System.out.println("========================================================================");
-            System.out.println(" 1.카페 열기  2.다시보기  ");
+            System.out.println(" 1.카페 열기  2.공개된 엔딩 보기  ");
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
             Scanner sc = new Scanner(System.in);
@@ -284,7 +284,7 @@ public class GameRun
 
 
         final int OPEN = 1;             // 1. 카페 열기
-        final int REINTRO = 2;          // 2. 인트로 다시 보기
+        final int OPEN_ENDINGS = 2;          // 2. 인트로 다시 보기
 
         GameRun gameRun = new GameRun(); // Cafe 객체 생성
 
@@ -299,8 +299,9 @@ public class GameRun
                     gameRun.open();     // 게임 시작하는 메소드 호출
                     break;
 
-                case REINTRO:            // 2. 이름 재설정 선택한 경우
-                     start();           //    인트로 메소드 호출
+                case OPEN_ENDINGS:                  // 2. 공개된 엔딩보기를 선택한 경우
+                    Ending ending = new Ending();
+                    ending.openEndings();           // 공개된 엔딩 확인 메소드 호출
                     break;
 
             }
@@ -652,5 +653,77 @@ public class GameRun
                 open();
                 break;
         }
+    }
+
+    // 엔딩
+    public void finalEnding()
+    {
+        boolean check =true;    // 반복여부 체크하기 위한 변수
+        String resultStr;
+        int result = 0;
+
+
+        /*System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
+        System.out.println("　 　　　　　　。　　　　　　　　- End - 　　ﾟ　　　.　　　　　　　　　　　　　　.");
+        System.out.println(",　　　　　　　　　.　 .　　　　　　　　.");
+        System.out.println("　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
+        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.");*/
+
+
+        while(check) // check 는 위에서 입력받은 유저이름이 한글인걸 확인했기 때문에 true 인 상황이다.
+        {
+            System.out.println("========================================================================");
+            System.out.println(" 1.끝내기  2.다시 시작하기 ");
+            System.out.println("------------------------------------------------------------------------");
+            System.out.print(" 선택 : ");
+            Scanner sc = new Scanner(System.in);
+            resultStr = sc.nextLine();
+            System.out.println("========================================================================");
+
+            // 입력받은 값이 숫자인지 확인
+            try
+            {
+                // 입력받은 값의 공백을 제거하고
+                // 자료형 변경한 뒤(String → int) int형에 담는다.
+                result = Integer.parseInt(resultStr.replace(" ",""));
+                check = false;
+                // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
+                // int형으로 변경되지 않는다면 NumberFormatException 발생
+            }
+            catch (NumberFormatException e) // NumberFormatException 발생한다면
+            {
+                check = true;   // check 에 true 담아서 다시 반복
+                // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
+            }
+
+            if(result < 1 || result > 2 )// 주어진 값 이외의 수를 선택한 경우
+            {
+                System.out.println("========================================================================");
+                System.out.println(" 올바른 값을 입력해주세요.");
+                check = true;
+            }
+
+        }
+
+
+        final int STOP = 1;     // 프로그램 종료하는 선택지
+        final int RESTART = 2;  // 다시 시작하는 선택지
+        while(true)
+        {
+            switch(result)
+            {
+                case STOP : // 프로그램 종료
+                    System.exit(0);
+                    break;
+
+                case RESTART: // 다시 시작하기
+                    UserAction userAction = new UserAction();   // 유저 기능 객체 생성
+                    userAction.reset();                         // 기존 값 초기화하는 메소드 호출
+                    GameRun gameRun = new GameRun();            // 게임 실행 객체 생성
+                    gameRun.intro();                            // 최초 실행 메소드 호츨
+                    break;
+            }
+        }
+
     }
 }

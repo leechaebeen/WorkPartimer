@@ -93,11 +93,11 @@ public class Ending
         String str = "\t\t\t" + userName + "님은 고된 노동을 견디지 못하고 쓰러졌습니다.";    // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
-        Thread ending = new Thread(new LoadEnding(strArr));
-        ending.start(); // 스레드 생성
-
         Thread sound = new Thread(new OneTimeSound("ending.mp3"));
         sound.start();
+
+        Thread ending = new Thread(new LoadEnding(strArr));
+        ending.start(); // 스레드 생성
 
         try
         {
@@ -107,7 +107,14 @@ public class Ending
         {
             System.out.println(e.toString());
         }
-        // test
+
+        //finalEnding();
+
+        GameRun gameRun = new GameRun();
+        gameRun.finalEnding();
+
+
+        // 데몬쓰레드 test
         // finalEnding();
         // → 선택값 입력받고 메인 쓰레드로 돌아가서 순서 꼬임
 
@@ -177,11 +184,11 @@ public class Ending
         String str = "\t\t" + userName + "님은 스트레스를 견디지 못하고 자발적으로 카페를 떠났습니다.";    // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
-        Thread ending = new Thread(new LoadEnding(strArr));
-        ending.start(); // 스레드 생성
-
         Thread sound = new Thread(new OneTimeSound("ending.mp3"));
         sound.start();
+
+        Thread ending = new Thread(new LoadEnding(strArr));
+        ending.start(); // 스레드 생성
 
         try
         {
@@ -265,8 +272,7 @@ public class Ending
             System.out.println(e.toString());
         }
 
-        finalEnding();
-
+        //finalEnding();
 
     }
 
@@ -343,7 +349,7 @@ public class Ending
         {
             System.out.println(e.toString());
         }
-        finalEnding();
+        //finalEnding();
 
     }
 
@@ -407,11 +413,12 @@ public class Ending
                 "\t\t\t 괜찮습니다. 카페는 많으니까요... 힘내세요!"; // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
+        Thread sound = new Thread(new OneTimeSound("ending.mp3"));
+        sound.start();
+
         Thread ending = new Thread(new LoadEnding(strArr));
         ending.start(); // 스레드 생성
 
-        Thread sound = new Thread(new OneTimeSound("ending.mp3"));
-        sound.start();
 
         try
         {
@@ -421,7 +428,8 @@ public class Ending
         {
             System.out.println(e.toString());
         }
-        finalEnding();
+
+        //finalEnding();
 
     }
 
@@ -493,82 +501,12 @@ public class Ending
         {
             System.out.println(e.toString());
         }
-        finalEnding();
+
+        //finalEnding();
 
 
     }
 
-    // 7. END
-    public void finalEnding()
-    {
-        boolean check =true;    // 반복여부 체크하기 위한 변수
-        String resultStr;
-        int result = 0;
-
-
-        /*System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
-        System.out.println("　 　　　　　　。　　　　　　　　- End - 　　ﾟ　　　.　　　　　　　　　　　　　　.");
-        System.out.println(",　　　　　　　　　.　 .　　　　　　　　.");
-        System.out.println("　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
-        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.");*/
-
-
-        while(check) // check 는 위에서 입력받은 유저이름이 한글인걸 확인했기 때문에 true 인 상황이다.
-        {
-            System.out.println("========================================================================");
-            System.out.println(" 1.끝내기  2.다시 시작하기 ");
-            System.out.println("------------------------------------------------------------------------");
-            System.out.print(" 선택 : ");
-            Scanner sc = new Scanner(System.in);
-            resultStr = sc.nextLine();
-            System.out.println("========================================================================");
-
-            // 입력받은 값이 숫자인지 확인
-            try
-            {
-                // 입력받은 값의 공백을 제거하고
-                // 자료형 변경한 뒤(String → int) int형에 담는다.
-                result = Integer.parseInt(resultStr.replace(" ",""));
-                check = false;
-                // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
-                // int형으로 변경되지 않는다면 NumberFormatException 발생
-            }
-            catch (NumberFormatException e) // NumberFormatException 발생한다면
-            {
-                check = true;   // check 에 true 담아서 다시 반복
-                                // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
-            }
-
-            if(result < 1 || result > 2 )// 주어진 값 이외의 수를 선택한 경우
-            {
-                System.out.println("========================================================================");
-                System.out.println(" 올바른 값을 입력해주세요.");
-                check = true;
-            }
-
-        }
-
-        final int STOP = 1;     // 프로그램 종료하는 선택지
-        final int RESTART = 2;  // 다시 시작하는 선택지
-        while(true)
-        {
-            switch(result)
-            {
-                case STOP : // 프로그램 종료
-                    System.exit(0);
-                    break;
-
-                case RESTART: // 다시 시작하기
-
-                    UserAction userAction = new UserAction();   // 유저 기능 객체 생성 
-                    userAction.reset();                         // 기존 값 초기화하는 메소드 호출 
-                    GameRun gameRun = new GameRun();            // 게임 실행 객체 생성
-                    gameRun.initialRun();                       // 최초 실행 메소드 호츨
-                    break;
-            }
-        }
-
-    }
 
     public void openEndings()
     {
@@ -577,29 +515,66 @@ public class Ending
         if(endings[0]==0)                       // 첫번째 배열 칸이 0 이면 공개된 엔딩이 없다는 뜻이다.
         {
             System.out.println("========================================================================");
-            System.out.println(" 현재 공개된 엔딩이 없습니다.");
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
 
+            try
+            {
+                Thread.sleep(1500);
+                Thread sound = new Thread(new OneTimeSound("typing.mp3"));
+                sound.start();
+
+                System.out.print(" 현");
+                Thread.sleep(300);
+                System.out.print("재");
+                Thread.sleep(300);
+                System.out.print(" ");
+                Thread.sleep(300);
+                System.out.print("공");
+                Thread.sleep(300);
+                System.out.print("개");
+                Thread.sleep(300);
+                System.out.print("된");
+                Thread.sleep(300);
+                System.out.print(" ");
+                Thread.sleep(300);
+                System.out.print("엔");
+                Thread.sleep(300);
+                System.out.print("딩");
+                Thread.sleep(300);
+                System.out.print("이");
+                Thread.sleep(300);
+                System.out.print(" ");
+                Thread.sleep(300);
+                System.out.print("없");
+                Thread.sleep(300);
+                System.out.print("습");
+                Thread.sleep(300);
+                System.out.print("니");
+                Thread.sleep(300);
+                System.out.print("다");
+                Thread.sleep(300);
+                System.out.print(".");
+                Thread.sleep(300);
+
+                System.out.println();
+                Thread.sleep(200);
+                System.out.println();
+
+                sound.stop();
+
+                Thread.sleep(200);
+                System.out.println();
+                Thread.sleep(200);
+                System.out.println();
+
+                Thread.sleep(1500);
+
+            }
+            catch (Exception e){
+
+            }
 
             GameRun gameRun = new GameRun();
-            gameRun.initialRun(); // 이전으로
+            gameRun.introSelect(); // 이전으로
         }
         else    // 공개된 엔딩이 있으면
         {
@@ -636,98 +611,98 @@ public class Ending
             //}
 
 
-            // for(대입받을 변수 정의 : 배열)
-            for (int endingType : endings)
+            try
             {
-                if (endingType == FALL_DOWN_ENDING)
+                Thread.sleep(1500);
+
+                // for(대입받을 변수 정의 : 배열)
+                for (int endingType : endings)
                 {
-                    System.out.printf(" [과로 엔딩] %s님은 고된 노동에 시달리다 쓰러졌습니다. \n", User.getName());
-                    System.out.println("------------------------------------------------------------------------");
-                    System.out.println(" ✨ 과로 엔딩 tip ✨ ");
-                    System.out.println("    체력이 0 이 되면 과로 엔딩의 조건이 달성됩니다. ");
-                    System.out.println("    아이템을 적절히 이용해서 체력을 관리해주세요 ! ");
-                    System.out.println("------------------------------------------------------------------------");
+                    if (endingType == FALL_DOWN_ENDING)
+                    {
+                        Thread.sleep(1000);
+                        System.out.printf(" [과로 엔딩] %s님은 고된 노동에 시달리다 쓰러졌습니다. \n", User.getName());
+                        System.out.println("------------------------------------------------------------------------");
+                        System.out.println(" ✨ 과로 엔딩 tip ✨ ");
+                        System.out.println("    체력이 0 이 되면 과로 엔딩의 조건이 달성됩니다. ");
+                        System.out.println("    아이템을 적절히 이용해서 체력을 관리해주세요 ! ");
+                        System.out.println("------------------------------------------------------------------------");
+                    }
+
+                    if (endingType == QUIT_ENDING)
+                    {
+                        Thread.sleep(1000);
+                        System.out.printf(" [사표 엔딩] %s님은 극심한 스트레스를 견디지 못해 카페를 떠났습니다. \n", User.getName());
+                        System.out.println("------------------------------------------------------------------------");
+                        System.out.println(" ✨ 사표 엔딩 tip ✨ ");
+                        System.out.println("    인내력이 0 이 되면 사표 엔딩의 조건이 달성됩니다. ");
+                        System.out.println("    아이템을 이용해서 인내력을 관리해주세요 ! ");
+                        System.out.println("------------------------------------------------------------------------");
+                    }
+
+                    if (endingType == SCOUT_ENDING)
+                    {
+                        Thread.sleep(1000);
+                        System.out.println(" [이직 엔딩] 종종 방문하던 특이한 손님의 일부는 몰래 방문한 인근 카페 사장이었습니다.");
+                        System.out.printf("             %s님을 시험하고 눈여겨본 사장은 %s님을 스카웃했습니다.\n", User.getName(), User.getName());
+                        System.out.println("------------------------------------------------------------------------");
+                        System.out.println(" ✨ 이직 엔딩 tip ✨ ");
+                        System.out.println("    숙련도와 비밀 손님의 방문 횟수가 일정 기준 이상이면 이직 엔딩의 조건이 달성됩니다. ");
+                        System.out.println("------------------------------------------------------------------------");
+                    }
+
+                    if (endingType == BOSS_ENDING)
+                    {
+                        Thread.sleep(1000);
+                        System.out.printf(" [사장 엔딩] 코인을 아끼며 열심히 일한 %s님은 모은 코인으로 카페를 차렸습니다.\n", User.getName());
+                        System.out.printf("            %s님은 더이상 알바생이 아닙니다.\n", User.getName());
+                        System.out.println("------------------------------------------------------------------------");
+                        System.out.println(" ✨ 사장 엔딩 tip ✨ ");
+                        System.out.println("    보유하고 있는 코인과 %s님의 숙련도, 방문한 손님 수가 일정 기준 이상이면 ");
+                        System.out.println("    사장 엔딩의 조건이 달성됩니다.");
+                        System.out.println("------------------------------------------------------------------------");
+                    }
+
+                    if (endingType == GET_FIRE_ENDING)
+                    {
+                        Thread.sleep(1000);
+                        System.out.printf(" [해고 엔딩] %s님은 음료제조 실수가 잦아 해고되었습니다.\n", User.getName());
+                        System.out.println("            괜찮습니다 카페는 많으니까요... 힘내세요!");
+                        System.out.println("------------------------------------------------------------------------");
+                        System.out.println(" ✨ 해고 엔딩 tip ✨ ");
+                        System.out.println("    음료제조 실패 확률이 높아지면 해고 엔딩의 조건이 달성됩니다.");
+                        System.out.println("------------------------------------------------------------------------");
+                    }
+
+                    if (endingType == PARTIMER_ENDING)
+                    {
+                        Thread.sleep(1000);
+                        System.out.printf(" [알바 엔딩] %s님은 카페 아르바이트를 능숙하게 해내고 있습니다.\n", User.getName());
+                        System.out.println("------------------------------------------------------------------------");
+                        System.out.println(" ✨ 알바 엔딩 tip ✨ ");
+                        System.out.println("    비밀입니다.");
+                        System.out.println("------------------------------------------------------------------------");
+                    }
+
+                    // 엔딩 유형 추가하기... 멋진 카페 엔딩
+
                 }
 
-                if (endingType == QUIT_ENDING)
-                {
-                    System.out.printf(" [사표 엔딩] %s님은 극심한 스트레스를 견디지 못해 카페를 떠났습니다. \n", User.getName());
-                    System.out.println("------------------------------------------------------------------------");
-                    System.out.println(" ✨ 사표 엔딩 tip ✨ ");
-                    System.out.println("    인내력이 0 이 되면 사표 엔딩의 조건이 달성됩니다. ");
-                    System.out.println("    아이템을 이용해서 인내력을 관리해주세요 ! ");
-                    System.out.println("------------------------------------------------------------------------");
-                }
+                Thread.sleep(500);
+                System.out.printf(" 아직 공개되지 않은 엔딩이 %d개 남아있습니다 !\n", cnt);
+                System.out.println();
+                System.out.println();
 
-                if (endingType == SCOUT_ENDING)
-                {
-                    System.out.println(" [이직 엔딩] 종종 방문하던 특이한 손님의 일부는 몰래 방문한 인근 카페 사장이었습니다.");
-                    System.out.printf("             %s님을 시험하고 눈여겨본 사장은 %s님을 스카웃했습니다.\n", User.getName(), User.getName());
-                    System.out.println("------------------------------------------------------------------------");
-                    System.out.println(" ✨ 이직 엔딩 tip ✨ ");
-                    System.out.println("    숙련도와 비밀 손님의 방문 횟수가 일정 기준 이상이면 이직 엔딩의 조건이 달성됩니다. ");
-                    System.out.println("------------------------------------------------------------------------");
-                }
-
-                if (endingType == BOSS_ENDING)
-                {
-                    System.out.printf(" [사장 엔딩] 코인을 아끼며 열심히 일한 %s님은 모은 코인으로 카페를 차렸습니다.\n", User.getName());
-                    System.out.printf("            %s님은 더이상 알바생이 아닙니다.\n", User.getName());
-                    System.out.println("------------------------------------------------------------------------");
-                    System.out.println(" ✨ 사장 엔딩 tip ✨ ");
-                    System.out.println("    보유하고 있는 코인과 %s님의 숙련도, 방문한 손님 수가 일정 기준 이상이면 ");
-                    System.out.println("    사장 엔딩의 조건이 달성됩니다.");
-                    System.out.println("------------------------------------------------------------------------");
-                }
-
-                if (endingType == GET_FIRE_ENDING)
-                {
-                    System.out.printf(" [해고 엔딩] %s님은 음료제조 실수가 잦아 해고되었습니다.\n", User.getName());
-                    System.out.println("            괜찮습니다 카페는 많으니까요... 힘내세요!");
-                    System.out.println("------------------------------------------------------------------------");
-                    System.out.println(" ✨ 해고 엔딩 tip ✨ ");
-                    System.out.println("    음료제조 실패 확률이 높아지면 해고 엔딩의 조건이 달성됩니다.");
-                    System.out.println("------------------------------------------------------------------------");
-                }
-
-                if (endingType == PARTIMER_ENDING)
-                {
-                    System.out.printf(" [알바 엔딩] %s님은 카페 아르바이트를 능숙하게 해내고 있습니다.\n", User.getName());
-                    System.out.println("------------------------------------------------------------------------");
-                    System.out.println(" ✨ 알바 엔딩 tip ✨ ");
-                    System.out.println("    비밀입니다.");
-                    System.out.println("------------------------------------------------------------------------");
-                }
-
-                // 엔딩 유형 추가하기... 멋진 카페 엔딩
-
+            }catch (Exception e)
+            {
+                System.out.println(e.toString());
             }
-
-            System.out.printf(" 아직 공개되지 않은 엔딩이 %d개 남아있습니다 !\n", cnt);
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
 
 
         }
 
         GameRun gameRun = new GameRun();
-        gameRun.initialRun();  // 이전으로
+        gameRun.introSelect(); // 이전으로
 
     }//end openEnding()
 

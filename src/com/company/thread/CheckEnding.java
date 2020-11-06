@@ -24,8 +24,8 @@ public class CheckEnding extends Thread
 
         }
 
-        Ending ending = new Ending();
-        ending.finalEnding();
+        //Ending ending = new Ending();
+        //ending.finalEnding();
     }
 
     public void autoEnding()
