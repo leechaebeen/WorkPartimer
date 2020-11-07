@@ -11,7 +11,7 @@ public class User
     // 유저의 현재 능력치
     private static int skillLevel = 1;    // 현재 숙련도 : 하루에 등장하는 손님 수와 같다. 조건을 만족하면 주말마다 1씩 증가할 수 있다.
                                           // 조건 : 총 음료제조 성공 횟수 >= 숙련도 *4
-    protected static int hp = 2;          // 현재 체력 // 임의로 2
+    protected static int hp = 5;          // 현재 체력
     private static int feeling = 5;       // 현재 인내력
     // 체력과 인내력은 한 주가 지날 때마다 세팅된 값으로 초기화된다. 첫 주는 초기화되지 않으므로 5로 초기화해준다.
 
@@ -42,6 +42,10 @@ public class User
 
     // 엔딩 관련 변수
     private final static int[] endings = new int[Ending.getEndingTypeNum()];  // 공개된 엔딩 유형을 저장하는 배열.
+
+    // 전투 관련 변수
+    private int battleHp = setHp * 2;  // 벌레퇴치 체력 = 설정 체력값 * 2
+
 
     // 클래스 외부에서 속성에 접근할 수 있도록 getter/setter 생성
     public static int getHp()
@@ -208,4 +212,15 @@ public class User
     {
         User.macaronNum = macaronNum;
     }
+
+    public int getBattleHp()
+    {
+        return battleHp;
+    }
+
+    public void setBattleHp(int battleHp)
+    {
+        this.battleHp = battleHp;
+    }
+
 }

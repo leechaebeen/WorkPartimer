@@ -4,6 +4,8 @@ import com.company.data.Beverage;
 import com.company.data.Cafe;
 import com.company.data.User;
 import com.company.run.Ending;
+import com.company.run.GameRun;
+import com.company.thread.ComeBug;
 
 import java.util.Random;
 
@@ -13,6 +15,7 @@ public class CustomerAction
     // 일반손님 등장 메소드
     public void comeCustomer()
     {
+
         Cafe.setTodayCustomerNum(Cafe.getTodayCustomerNum() + 1); // 기존의 하루 방문자 수에 한명 더하기
         Cafe.setTotalCustomerNum(Cafe.getTotalCustomerNum() + 1); // 기존의 총 방문자 수에 한명 더하기
         Cafe.setWeekCustomerNum(Cafe.getWeekCustomerNum() + 1); // 기존의 주 방문자 수에 한명 더하기
@@ -28,6 +31,8 @@ public class CustomerAction
             boolean result = userAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다. 성공 시 true, 실패시 false 반환
             userAction.makeBeverageResult(result);              // 결과에 따른 출력
 
+
+
             // 여기서 실패, 성공횟수 더하기
             if (result)                                          // 음료만들기 성공한경우
             {
@@ -39,12 +44,11 @@ public class CustomerAction
                 User.setWeekFailNum(User.getWeekFailNum() + 1);   // 이번주 음료제조 실패 횟수 1 증가
             }
 
+
         }
 
-
-        // 엔딩 주석처리
         Ending ending = new Ending();                        // 엔딩 객체 생성
-        if (User.getHp() == 0)                                  // 만약 유저의 체력이 0이 된다면
+        if (User.getHp() == 0)                               // 만약 유저의 체력이 0이 된다면
         {
             //test
             //System.out.println(User.getHp());
@@ -54,7 +58,6 @@ public class CustomerAction
         {
             ending.getFireEnding();                         // 해고 엔딩 실행
         }
-
 
 
     }

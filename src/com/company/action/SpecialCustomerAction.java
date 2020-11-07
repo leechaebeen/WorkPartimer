@@ -4,6 +4,8 @@ import com.company.data.Beverage;
 import com.company.data.Cafe;
 import com.company.data.User;
 import com.company.run.Ending;
+import com.company.run.GameRun;
+import com.company.thread.ComeBug;
 import com.company.thread.OneTimeSound;
 
 import java.util.Random;
@@ -75,13 +77,13 @@ public class SpecialCustomerAction extends CustomerAction
             ending.toQuitEnding();          // 퇴사 엔딩 메소드 호출
         }
 
-
         if(orderResult)     // 주문이 확정된 경우
         {
             // 유저가 음료 만들기
             UserAction userAction = new UserAction();           // 유저 액션 객체 생성
             boolean result = userAction.makeBeverage(beverage); // 음료 만들기 수행하고 결과를 반환한다.
             userAction.makeBeverageResult(result);              // 결과에 따른 출력
+
 
             // 여기서 실패, 성공횟수 더하기
             if(result)                                          // 음료만들기 성공한경우
@@ -113,6 +115,7 @@ public class SpecialCustomerAction extends CustomerAction
         {
             ending.getFireEnding();         // 해고 엔딩 메소드 호출
         }
+
 
     }
 
@@ -463,6 +466,7 @@ public class SpecialCustomerAction extends CustomerAction
     // 음료를 주문하지 않는 손님이므로 false 반환
     public boolean orderWrong()
     {
+
         String[] menus = {"냉면", "떡볶이", "치킨", "회", "오므라이스", "커리"} ;  // 잘못찾아온 손님이 찾을 메뉴 목록
 
         Random rd = new Random();

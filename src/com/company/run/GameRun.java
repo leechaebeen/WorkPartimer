@@ -25,7 +25,7 @@ public class GameRun
         //System.out.println("sound.isInterrupted() : " + sound.isInterrupted());
         //-- 여기서 실행하면 소리 멈추고
         //   "여기 왔니?" 출력
-        
+
         Thread title = new Thread(new LoadTitle());
         title.start();  // title 쓰레드 실행
 
@@ -36,7 +36,6 @@ public class GameRun
         catch (InterruptedException e)
         {
         }
-
 
         /*
         //player.play(); 라고 주석 처리하면
@@ -239,6 +238,7 @@ public class GameRun
 
     }
 
+    // 인트로 출력 후 선택지 제공하는 메소드
     public void introSelect()
     {
         String selectStr;       // 사용자의 선택값을 담을 변수
@@ -332,7 +332,6 @@ public class GameRun
         int week = (User.getWorkingDays() / 6) + 1;
         // 첫 주(월~토)에 연산결과가 0이 되므로 '1주차' 부터 시작하기 위해서 1을 더해준다.
 
-
         try
         {
             if(!day.equals("토"))    // 평일이라면
@@ -357,7 +356,17 @@ public class GameRun
                 System.out.println("                         ✨ 카페를 열었습니다 ✨ ");
                 System.out.println();
 
+
                 work(); // 아르바이트하는 메소드 호출
+
+                // 쓰레드로 대체test -- 가능
+                //Thread work = new Thread(new ComeCustomer());
+                //work.start();
+                //work.join();
+
+
+                selectWork();   // 선택지
+
             }
             else                // 토요일이라면
             {
@@ -378,10 +387,11 @@ public class GameRun
     }// end start()
 
 
+    // 쓰레드로 대체
     // 아르바이트하는 메소드
     public void work()
     {
-        // 손님수 표현하기 위한 배열, 최대 4주차에서 게임이 끝나기 때문에 최대 숙련도는 5이다. 
+        // 손님수 표현하기 위한 배열, 최대 4주차에서 게임이 끝나기 때문에 최대 숙련도는 5이다.
         // 하루에 방문하는 최대 손님수는 숙련도와 동일하므로 다섯까지 존재
         String[] nums = {"첫", "두", "세", "네", "다섯"};
 
@@ -397,21 +407,35 @@ public class GameRun
             Random rd = new Random();               // 랜덤클래스 객체 생성
             int randomNum = rd.nextInt(10) + 1; // 1 ~ 10 사이의 랜덤값을 생성해서 변수에 담는다.
 
-            if (randomNum <= 7)                       // 랜덤값이 1 ~ 7 인 경우
+            if (randomNum <= 6)                       // 랜덤값이 1 ~ 6 인 경우
             {
                 // 일반 손님이 등장하는 메소드 호출
                 CustomerAction customerAction = new CustomerAction();
                 customerAction.comeCustomer();
-            } else if (randomNum == 8 || randomNum == 9)     // 랜덤값이 8,9인 경우
+
+
+            } else if (randomNum == 7 || randomNum == 8|| randomNum ==9 )     // 랜덤값이 7,8,9인 경우
             {
                 // 특별 손님이 등장하는 메소드 호출
                 SpecialCustomerAction specialCustomerAction = new SpecialCustomerAction();
                 specialCustomerAction.comeSpecialCustomer();
-            } else                                    // 랜덤값이 10인 경우
+
+
+            } else if (randomNum == 10)                                   // 랜덤값이 10인 경우
             {
                 // 비밀 손님이 등장하는 메소드 호출
                 SecretCustomerAction secretCustomerAction = new SecretCustomerAction();
                 secretCustomerAction.comeSecretCustomer();
+            }
+
+            // 랜덤으로 불청객 등장시키기
+            randomNum = rd.nextInt(10)+1;   // 1~10 사이의 랜덤수
+
+            if(randomNum <=10)   // 1 ~3인 경우 // 임의로 10
+            {
+                Thread comeBug = new Thread(new ComeBug());
+                comeBug.start();
+                comeBug.join();
             }
 
             selectWork();                          // 선택지 고르는 메소드 호출(1. 계속하기 2. 마감하기 3.아이템 사용)
@@ -480,7 +504,16 @@ public class GameRun
             switch(result)  // 위에서 선택한 값에 따라서 해당하는 메소드를 호출한다
             {
                 case KEEP :                 // 계속 아르바이트한다.
-                    work();
+
+                    // 쓰레드로 대체 test
+                   // work();
+                    Thread work = new Thread(new ComeCustomer());
+                    work.start();
+                    try{
+                      work.join();
+                    }catch (Exception e){
+
+                    }
                     break;
 
                 case STOP:                  // 다음날로 시간이 흐른다.
@@ -521,6 +554,7 @@ public class GameRun
     // 주말 정산 메소드
     public void weekendInfo()
     {
+
         int week = (User.getWorkingDays() /6) + 1;
         // 토요일이 될 때 주차를 계산하면(일한 일수/요일배열 길이) 한 주 적게 나오기 때문에 1을 더해준다.
         // 첫번째 토요일 : 5/6 == 0
@@ -736,7 +770,6 @@ public class GameRun
         boolean check =true;    // 반복여부 체크하기 위한 변수
         String resultStr;
         int result = 0;
-
 
         /*System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
         System.out.println("　 　　　　　　。　　　　　　　　- End - 　　ﾟ　　　.　　　　　　　　　　　　　　.");

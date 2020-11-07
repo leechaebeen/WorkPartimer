@@ -857,6 +857,7 @@ public class UserAction
 
         // 비밀손님 누적 값 리셋
         SecretCustomerAction.setSecretCustomerCnt(0);
+
     }
 
 }// end class

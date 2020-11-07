@@ -196,7 +196,9 @@ public class Ending
             System.out.println(e.toString());
         }
 
-        //finalEnding();
+        GameRun gameRun = new GameRun();
+        gameRun.finalEnding();
+
 
     }
     // 3. 숙련도 4 이상, secret 손님 방문 4회 이상 : 이직 엔딩 (호출 완료)
@@ -269,7 +271,8 @@ public class Ending
             System.out.println(e.toString());
         }
 
-        //finalEnding();
+        GameRun gameRun = new GameRun();
+        gameRun.finalEnding();
 
     }
 
@@ -346,11 +349,13 @@ public class Ending
         {
             System.out.println(e.toString());
         }
-        //finalEnding();
+
+        GameRun gameRun = new GameRun();
+        gameRun.finalEnding();
 
     }
 
-    // 5. 해고 엔딩 :  총 음료 제조 횟수/ 숙련도 < 이번 주 실패 횟수(호출 완료)
+    // 5. 해고 엔딩 :  총 음료 제조 횟수/ 숙련도 < 이번 주 실패 횟수 또는 불청객에게 졌는데 코인도, 숙련도도 없는 경우(호출 완료)
     public void getFireEnding()
     {
         // 엔딩 저장
@@ -406,7 +411,7 @@ public class Ending
 
 
         String userName = User.getName();   // 유저 이름 담기
-        String str =  "\t\t\t" + userName + "님은 음료 제조 실수가 잦아 해고되었습니다.\n" +
+        String str =  "\t\t\t " + userName + "님은 해고되었습니다.\n" +
                 "\t\t\t 괜찮습니다. 카페는 많으니까요... 힘내세요!"; // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
@@ -426,7 +431,8 @@ public class Ending
             System.out.println(e.toString());
         }
 
-        //finalEnding();
+        GameRun gameRun = new GameRun();
+        gameRun.finalEnding();
 
     }
 
@@ -499,7 +505,8 @@ public class Ending
             System.out.println(e.toString());
         }
 
-        //finalEnding();
+        GameRun gameRun = new GameRun();
+        gameRun.finalEnding();
 
 
     }
@@ -570,7 +577,7 @@ public class Ending
 
             try
             {
-                Thread.sleep(1500);
+                Thread.sleep(1000);
 
                 System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
                 System.out.println("=========================       공개된 엔딩       =========================");
@@ -640,11 +647,12 @@ public class Ending
                     if (endingType == GET_FIRE_ENDING)
                     {
                         Thread.sleep(1000);
-                        System.out.printf(" [해고 엔딩] %s님은 음료제조 실수가 잦아 해고되었습니다.\n", User.getName());
+                        System.out.printf(" [해고 엔딩] %s님은 해고되었습니다.\n", User.getName());
                         System.out.println("            괜찮습니다 카페는 많으니까요... 힘내세요!");
                         System.out.println("------------------------------------------------------------------------");
                         System.out.println(" ✨ 해고 엔딩 tip ✨ ");
-                        System.out.println("    음료제조 실패 확률이 높아지면 해고 엔딩의 조건이 달성됩니다.");
+                        System.out.println("    음료제조 실패 확률이 높아지거나 불청객을 퇴치하지 못하면");
+                        System.out.println("    해고 엔딩의 조건이 달성됩니다.");
                         System.out.println("------------------------------------------------------------------------");
                     }
 

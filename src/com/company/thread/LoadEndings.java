@@ -1,6 +1,6 @@
 package com.company.thread;
 
-import com.company.data.User;
+import com.company.data.Cafe;
 
 public class LoadEndings implements Runnable
 {

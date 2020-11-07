@@ -17,6 +17,7 @@ public class Cafe
     private static int setMugNum = 1;          // 설정되어 있는 머그잔 수
     private static int setChairNum = 1;        // 설정되어 있는 의자 수
 
+
     // 외부에서 속성에 접근할 수 있도록 getter/setter 생성
     public static int getCupNum()
     {
@@ -107,4 +108,5 @@ public class Cafe
     {
         Cafe.weekCustomerNum = weekCustomerNum;
     }
+
 }
