@@ -44,7 +44,7 @@ public class User
     private final static int[] endings = new int[Ending.getEndingTypeNum()];  // 공개된 엔딩 유형을 저장하는 배열.
 
     // 전투 관련 변수
-    private int battleHp = setHp * 2;  // 벌레퇴치 체력 = 설정 체력값 * 2
+    private int battleHp = setHp;  // 벌레퇴치 체력 = 설정 체력값
 
 
     // 클래스 외부에서 속성에 접근할 수 있도록 getter/setter 생성

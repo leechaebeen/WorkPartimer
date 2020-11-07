@@ -56,21 +56,20 @@ public class ComeBug implements Runnable
 
         switch (randomNum)
         {
-
             case MOSQUITO:  // 모기 생성
-                bug = new Bug("모기",3, 1);
+                bug = new Bug("모기",2, 1);
                 break;
 
             case FLY:       // 파리 생성
-                bug = new Bug("파리",5, 1);
+                bug = new Bug("파리",3, 1);
                 break;
 
             case COCKROACH: // 바퀴 생성
-                bug = new Bug("바퀴벌레", 6, 2);
+                bug = new Bug("바퀴벌레", 4, 2);
                 break;
 
             case RAT:       // 쥐 생성
-                bug = new Bug("쥐",6, 3);
+                bug = new Bug("쥐",5, 2);
                 break;
         }
 
