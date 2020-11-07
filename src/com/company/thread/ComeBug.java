@@ -1,7 +1,6 @@
 package com.company.thread;
 
 import com.company.data.Bug;
-import com.company.data.Cafe;
 import com.company.data.User;
 import com.company.run.Ending;
 
@@ -10,8 +9,6 @@ import java.util.Scanner;
 
 public class ComeBug implements Runnable
 {
-    private static boolean isMonitoring = false;
-
     @Override
     public void run()
     {
@@ -57,19 +54,19 @@ public class ComeBug implements Runnable
         switch (randomNum)
         {
             case MOSQUITO:  // 모기 생성
-                bug = new Bug("모기",2, 1);
+                bug = new Bug("모기",3, 1);
                 break;
 
             case FLY:       // 파리 생성
-                bug = new Bug("파리",3, 1);
+                bug = new Bug("파리",4, 1);
                 break;
 
             case COCKROACH: // 바퀴 생성
-                bug = new Bug("바퀴벌레", 4, 2);
+                bug = new Bug("바퀴벌레", 5, 2);
                 break;
 
             case RAT:       // 쥐 생성
-                bug = new Bug("쥐",5, 2);
+                bug = new Bug("쥐",6, 2);
                 break;
         }
 
@@ -109,6 +106,14 @@ public class ComeBug implements Runnable
             // 유저 정보 출력
             userInfo(user);
 
+            // 모니터링 데몬쓰레드 실행 test -- ㄴㄴ
+            Monitoring monitoring = new Monitoring(bug, user);
+           // monitoring.setDaemon(true);
+            //monitoring.start();
+
+
+            //monitoring.start(); // 4test 동작 x
+
             // 자동 전투 실행
             while (true)
             {
@@ -118,7 +123,31 @@ public class ComeBug implements Runnable
 
                 attackUser.join();    // 불청객이 유저 공격하는거 끝날때까지 기다리기
 
+                // 3test - 모니터링 스레드에서 if문 조건 확인 : java.lang.IllegalThreadStateException
+                //monitoring.start();
+                //monitoring.join();
+
+                //4test : 동작 x
+                //monitoring.join();
+
+
+                // 2.test 동작 확인 .. 갑자기 된다고..? .. 데몬쓰레드 아니어도 되잖아
+                /*
                 if (user.getBattleHp() < bug.getDamage() && user.getBattleHp() > 0) // 유저의 퇴치체력이 불청객의 공격력보다 작고 0보다 클때
+                {
+                    monitoring.start();
+                    monitoring.join();
+
+                    if (bug.getHp() <= 0) // 벌레가 죽으면 반복 멈추기
+                    {
+                        break;
+                    }
+                }
+                */
+
+
+                // 1.메소드 사용 -- 작동
+               /* if (user.getBattleHp() < bug.getDamage() && user.getBattleHp() > 0) // 유저의 퇴치체력이 불청객의 공격력보다 작고 0보다 클때
                 {
                     monitoring(bug, user);
 
@@ -126,7 +155,10 @@ public class ComeBug implements Runnable
                     {
                         break;
                     }
-                } else if (user.getBattleHp() <= 0) // 유저가 죽으면 반복 멈추기
+                } else */
+
+
+                if (user.getBattleHp() <= 0) // 유저가 죽으면 반복 멈추기
                 {
                     break;
                 }
@@ -143,12 +175,14 @@ public class ComeBug implements Runnable
 
             }
 
+            monitoring.finish();
+
             // 누가 이겼는지 판별
             if (bug.getHp() <= 0) // 벌레가 졌으면
             {
                 Thread.sleep(500);
                 System.out.println("------------------------------------------------------------------------");
-                System.out.printf("                           %s를 퇴치했습니다 ! \n", bug.getName());
+                System.out.printf("                         %s를 퇴치했습니다 ! \n", bug.getName());
                 System.out.println("------------------------------------------------------------------------");
 
             } else if (user.getBattleHp() <= 0)    // 유저가 졌으면

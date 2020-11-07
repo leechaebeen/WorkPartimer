@@ -1,6 +1,7 @@
 package com.company.text;
 
 import com.company.thread.OneTimeSound;
+import com.company.thread.SoundThread;
 
 public class LoadDay implements Runnable
 {
@@ -9,7 +10,7 @@ public class LoadDay implements Runnable
     {
         try
         {
-            Thread sound = new Thread(new OneTimeSound("weekInfo.mp3"));
+            SoundThread sound = new SoundThread("weekInfo.mp3",false);
             sound.start();
 
             System.out.print(" ");

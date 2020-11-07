@@ -5,9 +5,9 @@ import com.company.data.Cafe;
 import com.company.data.User;
 import com.company.etc.ComeCustomer;
 import com.company.text.LoadDay;
+import com.company.text.LoadIntro;
 import com.company.text.LoadTitle;
 import com.company.thread.*;
-import com.company.thread.LoadIntro;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -21,8 +21,11 @@ public class GameRun
     // 최초 실행하는 메소드
     public void initialRun()
     {
-        Thread sound = new Thread(new LoopSound("startBGM.mp3"));
-        sound.start();   // 노래 재생 쓰레드 실행
+
+        SoundThread sound = new SoundThread("startBGM.mp3", true);
+        sound.start();
+        //Thread sound = new Thread(new LoopSound("startBGM.mp3"));
+        //sound.start();   // 노래 재생 쓰레드 실행
 
         // test
         //sound.interrupt();
@@ -47,6 +50,7 @@ public class GameRun
 
         LoadTitle title = new LoadTitle();
         title.run();
+
 
 
         /*
@@ -158,7 +162,7 @@ public class GameRun
                     break;
 
                 case RENAME:                         // 2. 이름 재설정 선택한 경우
-                    sound.stop();                    //    노래쓰레드 멈추고
+                    sound.finish();                  //    노래쓰레드 멈추고
                     initialRun();                    //    초기실행 메소드 호출
                     break;
             }
@@ -171,7 +175,7 @@ public class GameRun
     // 게임 시작 메소드
     public void intro()
     {
-        Thread typingSound = new Thread(new LoopSound("typing.mp3"));
+        SoundThread typingSound = new SoundThread("typing.mp3", true);
         typingSound.start();
 
         System.out.println();
@@ -196,49 +200,7 @@ public class GameRun
         LoadIntro intro= new LoadIntro();
         intro.run();
 
-
-        /*
-        System.out.printf(" %s님은 우주선에 탑승한 스파이입니다.\n",User.getName());
-        System.out.println();
-        System.out.println(" 하지만 스파이로서 미션을 수행하던 중 정체를 들켰습니다 ! ");
-        System.out.println();
-        System.out.println(" 팀원들의 치열한 토론 끝에 . . . ");
-
-        System.out.println();
-        System.out.println();
-
-        System.out.println("。　　　　　　　　　　　　　　　　　ﾟ　　　.　　　　　　　　　　　　　　.     ");
-        System.out.println("　　　　　　　　　.　 .　　　　　　　　.");
-        System.out.println(" 　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。    ");
-        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.　");
-        System.out.println("　.　　　　　　　　　　　　　　                   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ 　 。　　.");
-        System.out.println("　 　　　　　　。　　　 。      　三 ඞ;;   　  　ﾟ　　　.　 　　　　　　　　.");
-        System.out.println(". 　。　　　        　    　。　　　　      •　 　        　　　     　　");
-        System.out.printf("\t\t。\t\t\t %s님은 결국 추방당했습니다 . . .     .          。\n", User.getName());
-        System.out.println(",　　　　　　　　　.　 .　　　　　　　　.");
-        System.out.println("　　　　　。　　　　　　　　　　　　　　　　　　　ﾟ　　　　　　　　　。");
-        System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.");
-        System.out.println();
-        System.out.println();
-
-
-        System.out.println();
-        System.out.println();
-        System.out.printf(" 이곳저곳을 떠돌던 %s님은 우여곡절 끝에 지구에 도착했습니다.\n", User.getName());
-        System.out.println();
-        System.out.printf(" 지구에서 살아남기 위해 %s님은 오늘부터 카페 아르바이트를 시작합니다.\n", User.getName());
-        System.out.println();
-        System.out.println(" 아르바이트를 진행하면서 다양한 엔딩을 모을 수 있습니다.");
-        System.out.println();
-        System.out.println(" 행운을 빕니다 . . . ! ");
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println(" ※ 주의 ※ 프로그램을 종료하면 공개된 엔딩이 사라집니다. ");
-        */
-
-        typingSound.stop();
-
+        typingSound.finish();
         introSelect();
 
     }

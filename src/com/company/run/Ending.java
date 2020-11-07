@@ -1,8 +1,8 @@
 package com.company.run;
 import com.company.data.User;
 import com.company.text.LoadEndings;
-import com.company.thread.LoadIntro;
 import com.company.thread.OneTimeSound;
+import com.company.thread.SoundThread;
 
 public class Ending
 {
@@ -469,7 +469,7 @@ public class Ending
             try
             {
                 Thread.sleep(1500);
-                Thread sound = new Thread(new OneTimeSound("typing.mp3"));
+                SoundThread sound= new SoundThread("typing.mp3", true);
                 sound.start();
 
 
@@ -486,7 +486,7 @@ public class Ending
                 Thread.sleep(200);
                 System.out.println();
 
-                sound.stop();
+                sound.finish();
 
                 Thread.sleep(200);
                 System.out.println();
@@ -617,11 +617,11 @@ public class Ending
                 }
 
                 Thread.sleep(1500);
-                Thread sound = new Thread(new OneTimeSound("typing.mp3"));
+                SoundThread sound = new SoundThread("typing.mp3",true);
                 sound.start();
 
 
-                String str = " 아직 공개되지 않은 엔딩이 " + cnt + "개 있습니다.";
+                String str = " 아직 공개되지 않은 엔딩이 " + cnt + "개 남았습니다.";
                 String[] strArr = str.split("");
 
                 for (int i = 0; i < strArr.length; i++)
@@ -634,7 +634,7 @@ public class Ending
                 Thread.sleep(200);
                 System.out.println();
 
-                sound.stop();
+                sound.finish();
 
                 Thread.sleep(200);
                 System.out.println();

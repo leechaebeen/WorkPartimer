@@ -1,7 +1,6 @@
 package com.company.text;
 
-import com.company.data.Cafe;
-import com.company.thread.OneTimeSound;
+import com.company.thread.SoundThread;
 
 public class LoadEndings implements Runnable
 {
@@ -19,7 +18,7 @@ public class LoadEndings implements Runnable
     {
         try
         {
-            Thread sound = new Thread(new OneTimeSound("typing.mp3"));
+            SoundThread sound = new SoundThread("typing.mp3",true);
             sound.start();
 
             System.out.println();
@@ -103,7 +102,7 @@ public class LoadEndings implements Runnable
             System.out.println();
             Thread.sleep(100);
 
-            sound.stop();
+            sound.finish();
         }
         catch (InterruptedException e)
         {

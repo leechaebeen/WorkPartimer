@@ -1,4 +1,4 @@
-package com.company.thread;
+package com.company.text;
 
 import com.company.data.User;
 
