@@ -308,8 +308,6 @@ public class GameRun
                 case EXIT :             // 3. 끝내기를 선택한 경우
                     System.exit(0); // 프로그램 종료
                     break;
-
-
             }
         }
 
