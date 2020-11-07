@@ -35,8 +35,8 @@ public class AttackBug extends ComeBug implements Runnable
 
             bugInfo(bug);
 
-        }catch (Exception e){
-
+        }catch (InterruptedException e){
+            return;
         }
     }
 }

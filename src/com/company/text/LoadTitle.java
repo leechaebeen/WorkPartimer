@@ -1,8 +1,9 @@
-package com.company.thread;
+package com.company.text;
 
-public class LoadTitle implements Runnable
+import com.company.thread.LoopSound;
+
+public class LoadTitle
 {
-    @Override
     public void run()
     {
         try

@@ -1,4 +1,4 @@
-package com.company.thread;
+package com.company.etc;
 
 import com.company.action.CustomerAction;
 import com.company.action.SecretCustomerAction;

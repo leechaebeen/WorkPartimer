@@ -1,4 +1,4 @@
-package com.company.thread;
+package com.company.etc;
 
 import com.company.action.SecretCustomerAction;
 import com.company.data.Cafe;
@@ -14,7 +14,7 @@ public class CheckEnding extends Thread
         {
             try
             {
-                Thread.sleep(100);    // 1초마다 자동으로
+                Thread.sleep(1000);    // 1초마다 자동으로
                 autoEnding();               // 엔딩 체크
             }
             catch (InterruptedException e)

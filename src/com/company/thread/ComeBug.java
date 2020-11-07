@@ -96,45 +96,37 @@ public class ComeBug implements Runnable
 
         try
         {
-
             Thread.sleep(500);
             System.out.println("------------------------------------------------------------------------");
             System.out.println("                        자동 전투를 시작합니다   ");
             System.out.println("------------------------------------------------------------------------");
 
-        } catch (Exception e)
-        {
-        }
+            // 벌레 정보 출력
+            bugInfo(bug);
 
-        // 벌레 정보 출력
-        bugInfo(bug);
+            // 유저 객체 생성
+            User user = new User();
+            // 유저 정보 출력
+            userInfo(user);
 
-        // 유저 객체 생성
-        User user = new User();
-        // 유저 정보 출력
-        userInfo(user);
-
-        // 자동 전투 실행
-        while (true)
-        {
-
-            // 벌레가 유저를 공격하는 쓰레드 호출
-            Thread attackUser = new Thread(new AttackUser(bug, user));
-            attackUser.start();
-
-            try
+            // 자동 전투 실행
+            while (true)
             {
+                // 벌레가 유저를 공격하는 쓰레드 호출
+                Thread attackUser = new Thread(new AttackUser(bug, user));
+                attackUser.start();
+
                 attackUser.join();    // 불청객이 유저 공격하는거 끝날때까지 기다리기
 
-                if (user.getBattleHp() < bug.getDamage()&& user.getBattleHp()>0) // 유저의 퇴치체력이 불청객의 공격력보다 작고 0보다 클때
+                if (user.getBattleHp() < bug.getDamage() && user.getBattleHp() > 0) // 유저의 퇴치체력이 불청객의 공격력보다 작고 0보다 클때
                 {
                     monitoring(bug, user);
+
                     if (bug.getHp() <= 0) // 벌레가 죽으면 반복 멈추기
                     {
                         break;
                     }
-                }
-                else if (user.getBattleHp() <= 0) // 유저가 죽으면 반복 멈추기
+                } else if (user.getBattleHp() <= 0) // 유저가 죽으면 반복 멈추기
                 {
                     break;
                 }
@@ -149,28 +141,17 @@ public class ComeBug implements Runnable
                     break;
                 }
 
-            } catch (Exception e)
-            {
             }
-        }
 
-        // 누가 이겼는지 판별
-        if (bug.getHp() <= 0) // 벌레가 졌으면
-        {
-            try
+            // 누가 이겼는지 판별
+            if (bug.getHp() <= 0) // 벌레가 졌으면
             {
                 Thread.sleep(500);
                 System.out.println("------------------------------------------------------------------------");
                 System.out.printf("                           %s를 퇴치했습니다 ! \n", bug.getName());
                 System.out.println("------------------------------------------------------------------------");
 
-            } catch (Exception e)
-            {
-            }
-
-        } else if (user.getBattleHp() <= 0)    // 유저가 졌으면
-        {
-            try
+            } else if (user.getBattleHp() <= 0)    // 유저가 졌으면
             {
                 Thread.sleep(500);
                 System.out.println("------------------------------------------------------------------------");
@@ -216,15 +197,13 @@ public class ComeBug implements Runnable
                     }
 
                 }
-
-
-            } catch (Exception e)
-            {
             }
+        } catch (InterruptedException e)
+        {
+            return;
         }
-
-
     }
+
 
     // 벌레 정보 출력
     public void bugInfo(Bug bug)
@@ -327,6 +306,8 @@ public class ComeBug implements Runnable
                     if (randomNum == 1)// 랜덤값이 1이면 손님이 퇴치 성공
                     {
                         bug.setHp(0);
+                        System.out.println("------------------------------------------------------------------------");
+                        System.out.println("                        손님이 흔쾌히 도와줬습니다 !    ");
 
 
                     } else if (randomNum == 2) // 랜덤값이 2이면 퇴치 실패

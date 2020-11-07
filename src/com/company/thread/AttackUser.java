@@ -37,8 +37,8 @@ public class AttackUser extends ComeBug implements Runnable
             userInfo(user);
 
 
-        }catch (Exception e){
-
+        }catch (InterruptedException e){
+            return;
         }
     }
 

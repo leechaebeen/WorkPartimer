@@ -1,4 +1,6 @@
-package com.company.thread;
+package com.company.text;
+
+import com.company.thread.OneTimeSound;
 
 public class LoadDay implements Runnable
 {

@@ -3,6 +3,10 @@ package com.company.run;
 import com.company.action.*;
 import com.company.data.Cafe;
 import com.company.data.User;
+import com.company.etc.ComeCustomer;
+import com.company.text.LoadDay;
+import com.company.text.LoadIntro;
+import com.company.text.LoadTitle;
 import com.company.thread.*;
 
 import java.util.Random;
@@ -26,7 +30,10 @@ public class GameRun
         //-- 여기서 실행하면 소리 멈추고
         //   "여기 왔니?" 출력
 
+        //test
+        /*
         Thread title = new Thread(new LoadTitle());
+
         title.start();  // title 쓰레드 실행
 
         try
@@ -36,6 +43,11 @@ public class GameRun
         catch (InterruptedException e)
         {
         }
+        */
+
+        LoadTitle title = new LoadTitle();
+        title.run();
+
 
         /*
         //player.play(); 라고 주석 처리하면

@@ -1,6 +1,7 @@
-package com.company.thread;
+package com.company.text;
 
 import com.company.data.Cafe;
+import com.company.thread.OneTimeSound;
 
 public class LoadEndings implements Runnable
 {
