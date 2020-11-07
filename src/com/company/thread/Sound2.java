@@ -1,4 +1,4 @@
-package com.company.etc;
+package com.company.thread;
 
 import javax.sound.sampled.*;
 import java.io.File;

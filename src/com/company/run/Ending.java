@@ -1,7 +1,7 @@
 package com.company.run;
-
 import com.company.data.User;
-import com.company.thread.LoadEndings;
+import com.company.text.LoadEndings;
+import com.company.thread.LoadIntro;
 import com.company.thread.OneTimeSound;
 
 public class Ending
@@ -93,17 +93,9 @@ public class Ending
         Thread sound = new Thread(new OneTimeSound("ending.mp3"));
         sound.start();
 
-        Thread ending = new Thread(new LoadEndings(strArr));
-        ending.start(); // 스레드 생성
+        LoadEndings ending = new LoadEndings(strArr);
+        ending.run(); // 엔딩 출력
 
-        try
-        {
-          ending.join();// 스레드 끝날때까지 기다리기
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.toString());
-        }
 
         //finalEnding();
 
@@ -184,17 +176,8 @@ public class Ending
         Thread sound = new Thread(new OneTimeSound("ending.mp3"));
         sound.start();
 
-        Thread ending = new Thread(new LoadEndings(strArr));
-        ending.start(); // 스레드 생성
-
-        try
-        {
-            ending.join();// 스레드 끝날때까지 기다리기
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.toString());
-        }
+        LoadEndings ending = new LoadEndings(strArr);
+        ending.run(); // 엔딩 출력
 
         GameRun gameRun = new GameRun();
         gameRun.finalEnding();
@@ -259,17 +242,8 @@ public class Ending
                     + "\t\t" + userName + "님을 시험하고 눈여겨본 사장은 " + userName + "님을 스카웃했습니다."; // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
-        Thread ending = new Thread(new LoadEndings(strArr));
-        ending.start(); // 스레드 생성
-
-        try
-        {
-            ending.join();// 스레드 끝날때까지 기다리기
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.toString());
-        }
+        LoadEndings ending = new LoadEndings(strArr);
+        ending.run(); // 엔딩 출력
 
         GameRun gameRun = new GameRun();
         gameRun.finalEnding();
@@ -338,17 +312,8 @@ public class Ending
                  "\t\t\t" + userName + "님은 더이상 알바생이 아닙니다."; // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
-        Thread ending = new Thread(new LoadEndings(strArr));
-        ending.start(); // 스레드 생성
-
-        try
-        {
-            ending.join();// 스레드 끝날때까지 기다리기
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.toString());
-        }
+        LoadEndings ending = new LoadEndings(strArr);
+        ending.run(); // 엔딩 출력
 
         GameRun gameRun = new GameRun();
         gameRun.finalEnding();
@@ -418,18 +383,8 @@ public class Ending
         Thread sound = new Thread(new OneTimeSound("ending.mp3"));
         sound.start();
 
-        Thread ending = new Thread(new LoadEndings(strArr));
-        ending.start(); // 스레드 생성
-
-
-        try
-        {
-            ending.join();// 스레드 끝날때까지 기다리기
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.toString());
-        }
+        LoadEndings ending = new LoadEndings(strArr);
+        ending.run(); // 엔딩 출력
 
         GameRun gameRun = new GameRun();
         gameRun.finalEnding();
@@ -493,17 +448,8 @@ public class Ending
                 "\t\t\t 스파이보다 적성에 잘 맞는 일을 찾았습니다 !"; // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
-        Thread ending = new Thread(new LoadEndings(strArr));
-        ending.start(); // 스레드 생성
-
-        try
-        {
-            ending.join();// 스레드 끝날때까지 기다리기
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.toString());
-        }
+        LoadEndings ending = new LoadEndings(strArr);
+        ending.run(); // 엔딩 출력
 
         GameRun gameRun = new GameRun();
         gameRun.finalEnding();

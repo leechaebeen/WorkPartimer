@@ -5,9 +5,9 @@ import com.company.data.Cafe;
 import com.company.data.User;
 import com.company.etc.ComeCustomer;
 import com.company.text.LoadDay;
-import com.company.text.LoadIntro;
 import com.company.text.LoadTitle;
 import com.company.thread.*;
+import com.company.thread.LoadIntro;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -193,16 +193,9 @@ public class GameRun
         System.out.println();
         System.out.println();
 
-        Thread intro = new Thread(new LoadIntro());
-        intro.start();
+        LoadIntro intro= new LoadIntro();
+        intro.run();
 
-        try
-        {
-            intro.join();
-        } catch (Exception e)
-        {
-            System.out.println(e.toString());
-        }
 
         /*
         System.out.printf(" %s님은 우주선에 탑승한 스파이입니다.\n",User.getName());
