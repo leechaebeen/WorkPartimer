@@ -16,19 +16,21 @@ public class Monitoring extends Thread
     public Monitoring(Bug bug, User user)
     {
         this.bug = bug;
+        this.user = user;
     }
 
     @Override
-    public void run()
+    public synchronized void run()
     {
         try{
-           Thread.sleep(500);   // 0.5초마다 // 0.1초 되는거 확인
+           Thread.sleep(500);   // 0.5초마다
 
             //2. test -- 동작 확인 (Battle 에서 if문 사용한 경우)
             monitoring(bug);
 
+            notifyAll();
+
         }catch (InterruptedException e){
-            System.out.println(e.toString());
             return;
         }
 

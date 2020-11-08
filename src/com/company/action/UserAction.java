@@ -5,6 +5,7 @@ import com.company.data.Item;
 import com.company.data.User;
 import com.company.run.GameRun;
 import com.company.thread.SoundThread;
+import com.company.thread.Time;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -58,7 +59,7 @@ public class UserAction
         System.out.println("------------------------------------------------------------------------");
         System.out.println("                             음료 만들기 ");
         System.out.println("------------------------------------------------------------------------");
-        System.out.println(" 하단에 제시된 문자를 동일하게 타이핑해주세요. ");
+        System.out.println(" 제한시간 10초 안에 하단에 제시된 문자를 동일하게 타이핑해주세요. ");
         System.out.println();
 
         // 랜덤 문자열 생성
@@ -87,6 +88,12 @@ public class UserAction
             }
         }
 
+        // 시간 측정 시작
+        long beforeTime = System.currentTimeMillis();
+
+        Time time = new Time();
+        time.start();
+
         System.out.println(" " + stringBuffer);       // 생성된 랜덤 문자열 출력
 
         System.out.print(" 입력 : ");       // 사용자에게서 문자열 입력받기
@@ -106,12 +113,24 @@ public class UserAction
         String 클래스의 equals() 는 메모리주소가 달라도 값이 같으면 true 반환
         */
 
-        // 제시한 문자열과 입력받은 문자열이 일치하는지 비교
-        if (sbStr.equals(inputStr))                                   // 일치하면
+        long afterTime = System.currentTimeMillis();
+        long secDiffTime = (afterTime - beforeTime)/1000;
+
+        //System.out.println(secDiffTime);
+        // 제시한 문자열과 입력받은 문자열이 일치하고 10초 안에 입력받았는지 체크
+        if (sbStr.equals(inputStr) && secDiffTime <=10)               // 일치하고 10초 안에 입력받았으면
         {
             result = true;                                            // result 에 true 를 담고(true 반환)
+            time.finish();
             //User.setTotalSuccessNum(User.getTotalSuccessNum() + 1);   // 음료제조 총 성공횟수 1 증가
             //User.setWeekSuccessNum(User.getWeekSuccessNum() + 1);     // 이번주 음료제조 성공횟수 1 증가
+        }
+        else if(secDiffTime > 10)
+        {
+           // System.out.println("10초 경과!");
+            User.setHp(User.getHp() - 1 );
+            time.finish();
+
         }
         else                                                          // 일치하지 않으면
         {
@@ -119,6 +138,8 @@ public class UserAction
             //User.setWeekFailNum(User.getWeekFailNum() + 1);           // 이번주 음료제조 실패 횟수 1 증가
 
             User.setHp(User.getHp() - 1 );                            // 유저 체력 1 감소 , false 반환
+            time.finish();
+
         }
 
         return result;

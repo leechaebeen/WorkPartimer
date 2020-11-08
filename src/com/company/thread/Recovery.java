@@ -16,6 +16,9 @@ public class Recovery extends Thread
                 {
                     System.out.println();
                 }
+                SoundThread sound = new SoundThread("weekInfo.mp3",false);
+                sound.start();
+
                 System.out.printf(" %s님은 휴식을 취하고 있습니다...\n", User.getName());
                 System.out.println();
 
@@ -59,8 +62,8 @@ public class Recovery extends Thread
 
                 if(User.getHp()==User.getSetHp()&& User.getFeeling() == User.getSetFeeling())
                 {
-                    SoundThread sound = new SoundThread("success.mp3", false);
-                    sound.start();
+                    SoundThread fullSound = new SoundThread("success.mp3", false);
+                    fullSound.start();
 
                     System.out.println(" 체력과 인내력이 모두 회복되었습니다 ! ");
 
