@@ -1,4 +1,4 @@
-package com.company.thread;
+package com.company.etc;
 
 import javazoom.jl.player.Player;
 import java.io.BufferedInputStream;

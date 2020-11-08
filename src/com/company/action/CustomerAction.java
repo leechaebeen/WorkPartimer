@@ -4,8 +4,6 @@ import com.company.data.Beverage;
 import com.company.data.Cafe;
 import com.company.data.User;
 import com.company.run.Ending;
-import com.company.run.GameRun;
-import com.company.thread.ComeBug;
 
 import java.util.Random;
 

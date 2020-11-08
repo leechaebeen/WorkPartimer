@@ -9,10 +9,6 @@ public class Main
     {
 
         GameRun gameRun = new GameRun();    // 게임 실행 객체 생성
-        // test
-        User.setHp(3);
-        User.setFeeling(2);
-        gameRun.weekend();
         gameRun.initialRun();               // 프로그램 최초 실행하는 메소드 호출
 
     }

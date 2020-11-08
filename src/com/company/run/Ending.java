@@ -1,7 +1,7 @@
 package com.company.run;
 import com.company.data.User;
 import com.company.text.LoadEndings;
-import com.company.thread.OneTimeSound;
+import com.company.etc.OneTimeSound;
 import com.company.thread.SoundThread;
 
 public class Ending

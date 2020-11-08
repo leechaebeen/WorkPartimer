@@ -4,6 +4,7 @@ import com.company.action.*;
 import com.company.data.Cafe;
 import com.company.data.User;
 import com.company.etc.ComeCustomer;
+import com.company.etc.OneTimeSound;
 import com.company.text.LoadDay;
 import com.company.text.LoadIntro;
 import com.company.text.LoadTitle;
@@ -398,10 +399,8 @@ public class GameRun
 
             if(randomNum <=3)   // 1 ~3인 경우
             {
-                Thread comeBug = new Thread(new ComeBug());
-                comeBug.start();
-                comeBug.join();
-                comeBug.interrupt();
+                Battle battle = new Battle();
+                battle.comeBug();
             }
 
             selectWork();                          // 선택지 고르는 메소드 호출(1. 계속하기 2. 마감하기 3.아이템 사용)

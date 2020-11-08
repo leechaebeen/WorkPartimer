@@ -1,16 +1,19 @@
-package com.company.thread;
+package com.company.run;
 
 import com.company.data.Bug;
 import com.company.data.User;
 import com.company.run.Ending;
+import com.company.thread.AttackBug;
+import com.company.thread.AttackUser;
+import com.company.thread.Monitoring;
+import com.company.thread.SoundThread;
 
 import java.util.Random;
 import java.util.Scanner;
 
-public class ComeBug implements Runnable
+public class Battle
 {
-    @Override
-    public void run()
+    public void comeBug()
     {
         Bug bug = createBug();  // 불청객 등장
 

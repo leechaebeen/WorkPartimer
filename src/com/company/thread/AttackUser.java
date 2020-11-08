@@ -1,9 +1,10 @@
 package com.company.thread;
 import com.company.data.Bug;
 import com.company.data.User;
+import com.company.run.Battle;
 
 
-public class AttackUser extends ComeBug implements Runnable
+public class AttackUser extends Battle implements Runnable
 {
     Bug bug;
     User user;

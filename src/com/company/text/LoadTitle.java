@@ -1,6 +1,6 @@
 package com.company.text;
 
-import com.company.thread.LoopSound;
+import com.company.etc.LoopSound;
 
 public class LoadTitle
 {
