@@ -12,7 +12,6 @@ public class ComeBug implements Runnable
     @Override
     public void run()
     {
-
         Bug bug = createBug();  // 불청객 등장
 
         comeBug(bug);           // 불청객 등장 나타내는 출력 메소드 호출
@@ -35,7 +34,6 @@ public class ComeBug implements Runnable
         }
 
     }
-
 
 
     // 벌레 객체 만드는 메소드
@@ -88,7 +86,7 @@ public class ComeBug implements Runnable
     }
 
     // 자동 전투
-    public void autoBattle(Bug bug)
+    public synchronized void autoBattle(Bug bug)
     {
 
         try
@@ -106,13 +104,6 @@ public class ComeBug implements Runnable
             // 유저 정보 출력
             userInfo(user);
 
-            // 모니터링 데몬쓰레드 실행 test -- ㄴㄴ
-            Monitoring monitoring = new Monitoring(bug, user);
-           // monitoring.setDaemon(true);
-            //monitoring.start();
-
-
-            //monitoring.start(); // 4test 동작 x
 
             // 자동 전투 실행
             while (true)
@@ -120,46 +111,33 @@ public class ComeBug implements Runnable
                 // 벌레가 유저를 공격하는 쓰레드 호출
                 Thread attackUser = new Thread(new AttackUser(bug, user));
                 attackUser.start();
-
                 attackUser.join();    // 불청객이 유저 공격하는거 끝날때까지 기다리기
 
-                // 3test - 모니터링 스레드에서 if문 조건 확인 : java.lang.IllegalThreadStateException
-                //monitoring.start();
-                //monitoring.join();
+                //모니터링 쓰레드 생성
+                Monitoring monitoring = new Monitoring(bug, user);
 
-                //4test : 동작 x
-                //monitoring.join();
-
-
-                // 2.test 동작 확인 .. 갑자기 된다고..? .. 데몬쓰레드 아니어도 되잖아
-                /*
-                if (user.getBattleHp() < bug.getDamage() && user.getBattleHp() > 0) // 유저의 퇴치체력이 불청객의 공격력보다 작고 0보다 클때
+                // 유저의 퇴치체력이 불청객의 공격력보다 작고 0보다 클때
+                if (user.getBattleHp() < bug.getDamage() && user.getBattleHp() > 0)
                 {
-                    monitoring.start();
-                    monitoring.join();
+                    monitoring.start(); // 쓰레드 실행
+                    monitoring.join();  // 쓰레드 기다리기
 
                     if (bug.getHp() <= 0) // 벌레가 죽으면 반복 멈추기
                     {
+                        attackUser.interrupt();
+
                         break;
                     }
                 }
-                */
-
-
-                // 1.메소드 사용 -- 작동
-               /* if (user.getBattleHp() < bug.getDamage() && user.getBattleHp() > 0) // 유저의 퇴치체력이 불청객의 공격력보다 작고 0보다 클때
+                else
                 {
-                    monitoring(bug, user);
-
-                    if (bug.getHp() <= 0) // 벌레가 죽으면 반복 멈추기
-                    {
-                        break;
-                    }
-                } else */
+                    monitoring.finish();
+                }
 
 
                 if (user.getBattleHp() <= 0) // 유저가 죽으면 반복 멈추기
                 {
+                    attackUser.interrupt();
                     break;
                 }
 
@@ -170,35 +148,40 @@ public class ComeBug implements Runnable
 
                 if (bug.getHp() <= 0) // 벌레가 죽으면 반복 멈추기
                 {
+                    attackUser.interrupt();
+                    attackBug.interrupt();
                     break;
                 }
 
             }
 
-            monitoring.finish();
-
             // 누가 이겼는지 판별
             if (bug.getHp() <= 0) // 벌레가 졌으면
             {
                 Thread.sleep(500);
+                SoundThread sound = new SoundThread("coin.mp3", false);
+                sound.start();
+                User.setProperty(User.getProperty()+1);     // 코인 1 주기
+                System.out.println("========================================================================");
+                System.out.printf("                  %s를 퇴치했습니다. 1코인을 획득했습니다! \" \n", bug.getName());
+                System.out.println();
+                System.out.printf(" 현재 보유한 코인 : %d\n", User.getProperty());
                 System.out.println("------------------------------------------------------------------------");
-                System.out.printf("                         %s를 퇴치했습니다 ! \n", bug.getName());
-                System.out.println("------------------------------------------------------------------------");
+                sound.finish();
 
             } else if (user.getBattleHp() <= 0)    // 유저가 졌으면
             {
                 Thread.sleep(500);
-                System.out.println("------------------------------------------------------------------------");
+                System.out.println("========================================================================");
                 System.out.printf("                        %s를 퇴치하지 못했습니다 ! \n", bug.getName());
                 Thread.sleep(300);
-                System.out.println();
                 System.out.println("                  퇴치 업체를 불러야 합니다. 1코인이 필요합니다.");
 
                 if (User.getProperty() >= 1) // 1코인이 있다면
                 {
                     Thread.sleep(500);
                     User.setProperty(User.getProperty() - 1);   // 1코인 소모
-                    System.out.println("------------------------------------------------------------------------");
+                    System.out.println("========================================================================");
                     System.out.println("                       1코인을 사용했습니다.");
                     System.out.println("------------------------------------------------------------------------");
                     System.out.printf(" 현재 보유한 코인 : %d\n", User.getProperty());
@@ -206,7 +189,7 @@ public class ComeBug implements Runnable
                 } else    // 1코인이 없다면
                 {
                     Thread.sleep(500);
-                    System.out.println("------------------------------------------------------------------------");
+                    System.out.println("========================================================================");
                     System.out.println("                        코인이 부족합니다.");
 
                     if (User.getSkillLevel() >= 2) // 숙련도가 2 이상이라면
@@ -222,7 +205,6 @@ public class ComeBug implements Runnable
                     } else // 숙련도도 없다면..
                     {
                         Thread.sleep(500);
-                        System.out.println("------------------------------------------------------------------------");
                         System.out.println("                        숙련도가 낮습니다.");
                         System.out.println("------------------------------------------------------------------------");
 

@@ -16,7 +16,6 @@ public class Monitoring extends Thread
     public Monitoring(Bug bug, User user)
     {
         this.bug = bug;
-        this.user = user;
     }
 
     @Override
@@ -26,13 +25,7 @@ public class Monitoring extends Thread
            Thread.sleep(500);   // 0.5초마다 // 0.1초 되는거 확인
 
             //2. test -- 동작 확인 (ComeBug 에서 if문 사용한 경우)
-            //monitoring(bug, user);
-
-            //
-            if(user.getBattleHp() < bug.getDamage() && user.getBattleHp() > 0) // 유저의 퇴치체력이 불청객의 공격력보다 작고 0보다 클때)
-            {
-                monitoring(bug, user);
-            }
+            monitoring(bug);
 
         }catch (InterruptedException e){
             System.out.println(e.toString());
@@ -46,7 +39,7 @@ public class Monitoring extends Thread
         this.interrupt();
     }
 
-    public synchronized void monitoring(Bug bug, User user)
+    public synchronized void monitoring(Bug bug)
     {
         System.out.println("------------------------------------------------------------------------");
         System.out.printf("                         %s님이 곧 쓰러집니다 !\n", User.getName());
@@ -98,6 +91,8 @@ public class Monitoring extends Thread
                 User.setSkillLevel(User.getSkillLevel() + 1);   // 퇴치력이자 숙련도 + 1
                 System.out.println("------------------------------------------------------------------------");
                 System.out.println("                       퇴치력(숙련도)을 1 높였습니다 !    ");
+                System.out.println("------------------------------------------------------------------------");
+                System.out.printf(" 현재 퇴치력(숙련도) : %d\n", User.getSkillLevel());
                 break;
 
             case 2: // 손님에게 도움 요청

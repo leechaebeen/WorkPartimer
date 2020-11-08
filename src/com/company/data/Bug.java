@@ -44,4 +44,5 @@ public class Bug
     {
         this.damage = damage;
     }
+
 }

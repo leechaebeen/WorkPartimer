@@ -225,7 +225,7 @@ public class ItemAction
                 // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
             }
 
-            if (result < 1 || result > 6)// 주어진 값 이외의 수를 선택한 경우
+            if (result < 1 || result > 5)// 주어진 값 이외의 수를 선택한 경우
             {
                 System.out.println("========================================================================");
                 System.out.println(" 올바른 값을 입력해주세요.");

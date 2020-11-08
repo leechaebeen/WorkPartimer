@@ -396,11 +396,12 @@ public class GameRun
             // 랜덤으로 불청객 등장시키기
             randomNum = rd.nextInt(10)+1;   // 1~10 사이의 랜덤수
 
-            if(randomNum <=10)   // 1 ~3인 경우 // 임의로 10
+            if(randomNum <=3)   // 1 ~3인 경우
             {
                 Thread comeBug = new Thread(new ComeBug());
                 comeBug.start();
                 comeBug.join();
+                comeBug.interrupt();
             }
 
             selectWork();                          // 선택지 고르는 메소드 호출(1. 계속하기 2. 마감하기 3.아이템 사용)
@@ -564,15 +565,6 @@ public class GameRun
             }
             System.out.println();
 
-            // 체력, 인내력 설정값으로 초기화
-            User.setHp(User.getSetHp());
-            User.setFeeling(User.getSetFeeling());
-
-            Thread.sleep(500);
-            System.out.println("                    ✨ 체력과 인내력을 회복했습니다 ✨");
-            System.out.println();
-            System.out.println();
-
             Thread.sleep(500);
 
 
@@ -629,7 +621,7 @@ public class GameRun
         }
 
 
-        weekend(); // 주말 선택지 메소드 호출(1. 정보 확인  2.상점가기  3.공개된 엔딩 확인  4. 주말 지나가기)
+        weekend(); // 주말 선택지 메소드 호출(1. 정보 확인  2.상점가기  3.회복하기  4. 주말 지나가기)
     }
 
     // 주말 선택지  메소드(정보 확인 가능, 상점 이용 가능, 아이템 사용 가능)
@@ -641,12 +633,13 @@ public class GameRun
 
         final int INFO = 1;     //1. 정보 확인 - 1.내 정보 확인 2.카페 정보 확인 3.이전 화면
         final int SHOP = 2;     //2. 상점가기 - 1.영구 아이템  2.소모 아이템  3.이전 화면
-        final int SKIP = 3;     //4. 주말 지나가기
+        final int RECOVERY = 3; //3. 회복하기 - 10초뒤 체력, 인내력  회복
+        final int SKIP = 4;     //4. 주말 지나가기
 
         while(check)
         {
             System.out.println("========================================================================");
-            System.out.println(" 1. 정보 확인  2.상점가기  3.주말 지나가기");
+            System.out.println(" 1. 정보 확인  2.상점가기  3.회복하기 4.주말 지나가기");
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
             Scanner sc = new Scanner(System.in);
@@ -667,7 +660,7 @@ public class GameRun
                 // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
             }
 
-            if(result < 1 || result > 3 )// 주어진 값 이외의 수를 선택한 경우
+            if(result < 1 || result > 4 )// 주어진 값 이외의 수를 선택한 경우
             {
                 System.out.println("========================================================================");
                 System.out.println(" 올바른 값을 입력해주세요.");
@@ -690,7 +683,28 @@ public class GameRun
                 itemAction.selectItemType();       // 2. 상점 가기 메소드 호출
                 break;
 
-            case SKIP :                        // 3. 주말 지나가기 : 다음날 카페 시작하는 메소드 호출
+            case RECOVERY:  // 3.회복하기 (3초마다 체력, 인내력 1씩 회복)
+                Recovery recovery = new Recovery();
+
+                if (User.getHp() == User.getSetHp() && User.getFeeling() == User.getSetFeeling())
+                {
+                    System.out.println(" 체력과 인내력을 회복하지 않아도 됩니다 ! ");
+                    recovery.interrupt();
+                } else
+                {
+                    try
+                    {
+                        recovery.start();
+                        recovery.join();
+
+                    } catch (Exception e){
+                        System.out.println(e.toString());
+                    }
+                }
+
+                weekend();
+
+            case SKIP :                        // 4. 주말 지나가기 : 다음날 카페 시작하는 메소드 호출
 
                 try{
                     Thread sound = new Thread(new OneTimeSound("weekInfo.mp3"));

@@ -20,7 +20,8 @@ public class AttackBug extends ComeBug implements Runnable
         // 유저가 벌레를 공격한다.
         try{
 
-            Thread.sleep(500);
+
+            Thread.sleep(1000);
 
             System.out.println("------------------------------------------------------------------------");
             System.out.printf("                      %s님이 %s를 공격했습니다!\n",User.getName(), bug.getName());
@@ -31,9 +32,10 @@ public class AttackBug extends ComeBug implements Runnable
 
             Thread.sleep(500);
             System.out.println();
-            System.out.printf(" >>> %s에게 %d 데미지를 입혔습니다 <<<\n", bug.getName() , User.getSkillLevel());
+            System.out.printf(" >>> %s가 %d 데미지를 입었습니다 <<<\n", bug.getName() , User.getSkillLevel());
 
             bugInfo(bug);
+
 
         }catch (InterruptedException e){
             return;
