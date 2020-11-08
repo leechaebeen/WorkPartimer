@@ -353,7 +353,6 @@ public class GameRun
     }// end start()
 
 
-    // 쓰레드로 대체
     // 아르바이트하는 메소드
     public void work()
     {
@@ -393,7 +392,7 @@ public class GameRun
                 SecretCustomerAction secretCustomerAction = new SecretCustomerAction();
                 secretCustomerAction.comeSecretCustomer();
             }
-/*
+
 
             // 랜덤으로 불청객 등장시키기
             randomNum = rd.nextInt(10)+1;   // 1~10 사이의 랜덤수
@@ -403,7 +402,7 @@ public class GameRun
                 Battle battle = new Battle();
                 battle.comeBug();
             }
-*/
+
 
             //selectWork();                          // 선택지 고르는 메소드 호출(1. 계속하기 2. 마감하기 3.아이템 사용)
 

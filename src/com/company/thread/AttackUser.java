@@ -33,10 +33,6 @@ public class AttackUser extends Thread
     public synchronized void attackUser()
     {
         // 벌레가 유저를 공격한다.
-        try{
-
-            while(!isInterrupted())
-            {
                 System.out.printf(
                         "------------------------------------------------------------------------\n" +
                                 "                       %s가 %s님을 공격했습니다!\n" +
@@ -46,31 +42,9 @@ public class AttackUser extends Thread
 
                 user.setBattleHp(user.getBattleHp() - bug.getDamage());
 
-                System.out.println("벌레가 공격, 벌레 체력 : " + bug.getHp() + " 유저 체력 : " + user.getBattleHp() );
-
-                Monitoring monitoring = new Monitoring(bug, user);
-
-                if (user.getBattleHp() < bug.getDamage() && user.getBattleHp() > 0)
-                {
-                    monitoring.start(); // 쓰레드 실행
-                    monitoring.join();  // 쓰레드 기다리기
-
-                    if (bug.getHp() <= 0|| user.getBattleHp()<=0) // 벌레가 죽거나 유저가 죽으면 반복 멈추기
-                    {
-                        finish();
-
-                        break;
-                    }
-                }
-                else
-                {
-                    monitoring.finish();
-                }
-
-                Thread.sleep(5000);
-
-            }
-
+                //System.out.println("벌레가 공격, 벌레 체력 : " + bug.getHp() + " 유저 체력 : " + user.getBattleHp() );
+                Battle battle = new Battle();
+                battle.userInfo(user);
 
             /*
             System.out.println("------------------------------------------------------------------------");
@@ -88,9 +62,6 @@ public class AttackUser extends Thread
             userInfo(user);
             */
 
-        }catch (InterruptedException e){
-            return;
-        }
     }
 
 

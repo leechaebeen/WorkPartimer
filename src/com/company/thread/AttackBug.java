@@ -9,6 +9,7 @@ public class AttackBug extends Thread
     private Bug bug;
     private User user;
     private boolean check = false;
+    private Battle battle;
 
     public AttackBug(){};
 
@@ -17,6 +18,9 @@ public class AttackBug extends Thread
         this.bug = bug;
         this.user = user;
     }
+
+
+
 
     @Override
     public void run()
@@ -33,35 +37,16 @@ public class AttackBug extends Thread
     public synchronized void attackBug()
     {
         // 유저가 벌레를 공격한다.
-        try{
+        try
+        {
 
-            while(!isInterrupted())
-            {
+            System.out.printf("------------------------------------------------------------------------\n" + "                       %s님이 %s를 공격했습니다!\n" + "------------------------------------------------------------------------\n\n" + " >>> %s가 %d 데미지를 입었습니다 <<<\n\n", User.getName(), bug.getName(), bug.getName(), User.getSkillLevel());
 
-                System.out.printf(
-                        "------------------------------------------------------------------------\n" +
-                                "                       %s님이 %s를 공격했습니다!\n" +
-                                "------------------------------------------------------------------------\n\n" +
-                                " >>> %s가 %d 데미지를 입었습니다 <<<\n\n"
-                        , User.getName(),bug.getName(), bug.getName() , User.getSkillLevel());
+            bug.setHp(bug.getHp() - User.getSkillLevel());
 
-                bug.setHp(bug.getHp() - User.getSkillLevel());
-
-                System.out.println("유저가 공격, 벌레 체력 : " + bug.getHp() + " 유저 체력 : " + user.getBattleHp() );
-
-
-                if (user.getBattleHp() <= bug.getDamage() && user.getBattleHp() > 0)
-                {
-                    wait();
-
-                } else if (bug.getHp() <= 0 || user.getBattleHp() <= 0) // 벌레가 죽거나 유저가 죽으면 반복 멈추기
-                {
-                    finish();
-                }
-
-                Thread.sleep(4000);
-            }
-
+            //System.out.println("유저가 공격, 벌레 체력 : " + bug.getHp() + " 유저 체력 : " + user.getBattleHp());
+            Battle battle = new Battle();
+            battle.bugInfo(bug);
 
             //while(check)
             //{
@@ -79,7 +64,7 @@ public class AttackBug extends Thread
                 System.out.println();
                 System.out.printf(" >>> %s가 %d 데미지를 입었습니다 <<<\n", bug.getName() , User.getSkillLevel());
 
-                //Battle battle = new Battle();
+                //BattleThread battle = new BattleThread();
                 //battle.bugInfo(bug);
 
                 if(bug.getHp()<=0)
@@ -89,11 +74,8 @@ public class AttackBug extends Thread
 
              */
             //}
+        }catch (Exception e){
 
-
-
-        }catch (InterruptedException e){
-            return;
         }
     }
 

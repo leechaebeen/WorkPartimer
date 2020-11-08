@@ -2,10 +2,7 @@ package com.company.run;
 
 import com.company.data.Bug;
 import com.company.data.User;
-import com.company.thread.AttackBug;
-import com.company.thread.AttackUser;
-import com.company.thread.Monitoring;
-import com.company.thread.SoundThread;
+import com.company.thread.*;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -111,9 +108,6 @@ public class Battle
             // 유저 정보 출력
             userInfo(user);
 
-            //모니터링 쓰레드 생성
-            Monitoring monitoring = new Monitoring(bug, user);
-
             // 자동 전투 실행
             while (true)
             {
@@ -121,51 +115,38 @@ public class Battle
                 Thread.sleep(1000);
                 AttackUser attackUser = new AttackUser(bug, user);
                 attackUser.start();
+                attackUser.join();
 
-                // 유저가 벌레를 공격하는 쓰레드 호출
-                Thread.sleep(1000);
-                AttackBug attackBug = new AttackBug(bug, user);
-                attackBug.start();
 
                 //모니터링 쓰레드 생성
-                //Monitoring monitoring = new Monitoring(bug, user);
+                Monitoring monitoring = new Monitoring(bug, user);
 
                 // 유저의 퇴치체력이 불청객의 공격력보다 작고 0보다 클때
-               /* if (user.getBattleHp() < bug.getDamage() && user.getBattleHp() > 0)
+                if (user.getBattleHp() < bug.getDamage() && user.getBattleHp() > 0)
                 {
                     monitoring.start(); // 쓰레드 실행
                     monitoring.join();  // 쓰레드 기다리기
 
-
-
                     if (bug.getHp() <= 0|| user.getBattleHp()<=0) // 벌레가 죽거나 유저가 죽으면 반복 멈추기
                     {
-                        attackUser.finish();
-                        attackBug.finish();
-
                         break;
                     }
                 }
                 else
                 {
                     monitoring.finish();
-                }*/
+                }
+
+               // 유저가 벌레를 공격하는 쓰레드 호출
+                AttackBug attackBug = new AttackBug(bug, user);
+                attackBug.start();
+                //attackBug.join(); // 유저가 불청객 공격하는거 기다리기
+                Thread.sleep(1000);
 
                 if (bug.getHp() <= 0|| user.getBattleHp()<=0) // 벌레가 죽거나 유저가 죽으면 반복 멈추기
                 {
-                    attackUser.finish();
-                    attackBug.finish();
-
                     break;
                 }
-
-
-               /* // 유저가 벌레를 공격하는 쓰레드 호출
-                Thread attackBug = new Thread(new AttackBug(bug));
-                //attackBug.setDaemon(true);
-                attackBug.start();
-                attackBug.join(); // 유저가 불청객 공격하는거 기다리기
-                */
 
             }
 
@@ -233,7 +214,7 @@ public class Battle
             return;
         }
 
-
+        return;
     }
 
 
@@ -277,6 +258,7 @@ public class Battle
         }
     }
 
+    /*
     public synchronized void monitoring(Bug bug, User user)
     {
             System.out.println("------------------------------------------------------------------------");
@@ -350,7 +332,91 @@ public class Battle
 
                     break;
             }
+    }*/
+
+//----------------------------------------------------------------------------------------------------------------------
+/*public synchronized void attackBug()
+{
+    // 유저가 벌레를 공격한다.
+    try
+    {
+
+        System.out.printf("------------------------------------------------------------------------\n" + "                       %s님이 %s를 공격했습니다!\n" + "------------------------------------------------------------------------\n\n" + " >>> %s가 %d 데미지를 입었습니다 <<<\n\n", User.getName(), bug.getName(), bug.getName(), User.getSkillLevel());
+
+        bug.setHp(bug.getHp() - User.getSkillLevel());
+
+        System.out.println("유저가 공격, 벌레 체력 : " + bug.getHp() + " 유저 체력 : " + user.getBattleHp());
+
+
+        //while(check)
+        //{
+            *//*
+                Thread.sleep(1000);
+
+                System.out.println("------------------------------------------------------------------------");
+                System.out.printf("                      %s님이 %s를 공격했습니다!\n",User.getName(), bug.getName());
+                System.out.println("------------------------------------------------------------------------");
+
+                // 불청객의 체력에서 유저가 입힌 데미지(숙련도)를 뺀다.
+                bug.setHp(bug.getHp() - User.getSkillLevel());
+
+                Thread.sleep(500);
+                System.out.println();
+                System.out.printf(" >>> %s가 %d 데미지를 입었습니다 <<<\n", bug.getName() , User.getSkillLevel());
+
+                //BattleThread battle = new BattleThread();
+                //battle.bugInfo(bug);
+
+                if(bug.getHp()<=0)
+                {
+                    check = false;
+                }
+
+             *//*
+        //}
+    }catch (Exception e){
+
+    }
     }
 
+    public synchronized void attackUser()
+    {
+        // 벌레가 유저를 공격한다.
+        try{
+
+            System.out.printf(
+                    "------------------------------------------------------------------------\n" +
+                            "                       %s가 %s님을 공격했습니다!\n" +
+                            "------------------------------------------------------------------------\n\n" +
+                            "                                     >>> %s님이 %d 데미지를 입었습니다 <<<\n\n"
+                    ,bug.getName(), User.getName(), User.getName() , bug.getDamage());
+
+            user.setBattleHp(user.getBattleHp() - bug.getDamage());
+
+            System.out.println("벌레가 공격, 벌레 체력 : " + bug.getHp() + " 유저 체력 : " + user.getBattleHp() );
+
+
+            Thread.sleep(5000);
+
+            *//*
+            System.out.println("------------------------------------------------------------------------");
+            System.out.printf("                       %s가 %s님을 공격했습니다!\n",bug.getName(), User.getName());
+            System.out.println("------------------------------------------------------------------------");
+
+            System.out.println("                                   ------------------------------------");
+
+            Thread.sleep(500);
+            System.out.println();
+            System.out.printf("                                       >>> %s님이 %d 데미지를 입었습니다 <<<\n", User.getName() , bug.getDamage());
+
+            // 유저의 배틀체력에서 불청객이 입힌 데미지를 뺀다.
+            user.setBattleHp(user.getBattleHp() - bug.getDamage());
+            userInfo(user);
+            *//*
+
+        }catch (InterruptedException e){
+            return;
+        }
+    }*/
 
 }
