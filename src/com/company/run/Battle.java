@@ -57,19 +57,19 @@ public class Battle
         switch (randomNum)
         {
             case MOSQUITO:  // 모기 생성
-                bug = new Bug("모기",3, 1, 3000);
+                bug = new Bug("모기",User.getSetHp()-2, User.getSkillLevel());
                 break;
 
             case FLY:       // 파리 생성
-                bug = new Bug("파리",4, 1, 3000);
+                bug = new Bug("파리",User.getSetHp()-1, User.getSkillLevel());
                 break;
 
             case COCKROACH: // 바퀴 생성
-                bug = new Bug("바퀴벌레", 5, 2, 3000);
+                bug = new Bug("바퀴벌레", User.getSetHp(), User.getSkillLevel()+1);
                 break;
 
             case RAT:       // 쥐 생성
-                bug = new Bug("쥐",6, 2, 3000);
+                bug = new Bug("쥐",User.getSetHp()+1, User.getSkillLevel()+1);
                 break;
         }
 

@@ -5,16 +5,14 @@ public class Bug
     private String name;    // 벌레의 이름
     private int hp;         // 벌레의 체력
     private int damage;     // 벌레의 공격력
-    private int term;       // 벌레의 공격 텀
 
     public Bug(){}
 
-    public Bug(String name, int hp, int damage, int term)
+    public Bug(String name, int hp, int damage)
     {
         this.name = name;
         this.hp = hp;
         this.damage = damage;
-        this.term = term;
     }
 
     public String getName()
@@ -47,13 +45,4 @@ public class Bug
         this.damage = damage;
     }
 
-    public int getTerm()
-    {
-        return term;
-    }
-
-    public void setTerm(int term)
-    {
-        this.term = term;
-    }
 }
