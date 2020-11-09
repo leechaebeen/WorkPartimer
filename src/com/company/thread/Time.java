@@ -9,6 +9,7 @@ public class Time extends Thread
         timeCheck();
     }
 
+    // 10초 경과하면 안내문구 출력하는 메소드
     public void timeCheck()
     {
         for(int i= 10; i > 0; i--)

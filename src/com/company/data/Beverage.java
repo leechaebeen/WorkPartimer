@@ -13,8 +13,6 @@ public class Beverage
     // 생성자는 객체가 생성될 때 호출된다. 객체가 생성될 때는 new라는 키워드로 객체가 만들어질 때이다.
     // 클래스의 멤버 변수를 적절한 기본값 또는 사용자 제공값으로 초기화한다.
 
-    // 매개변수가 없는 기본 생성자 : 사용자 정의 생성자가 있으면 컴파일러가 자동으로 생성되지 않는다.
-    public Beverage(){}
 
     // 매개변수 있는 생성자 : 사용자 정의 생성자
     public Beverage(int iceOption, boolean isMilk, int whippingCream, int makeLevel, String name)

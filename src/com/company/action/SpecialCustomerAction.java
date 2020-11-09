@@ -4,7 +4,7 @@ import com.company.data.Beverage;
 import com.company.data.Cafe;
 import com.company.data.User;
 import com.company.run.Ending;
-import com.company.etc.OneTimeSound;
+import com.company.thread.SoundThread;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -123,7 +123,7 @@ public class SpecialCustomerAction extends CustomerAction
         Random random = new Random();
         if(random.nextInt(1) == 0) // 랜덤값이 0이면
         {
-            Thread sound = new Thread(new OneTimeSound("coin.mp3"));
+            SoundThread sound = new SoundThread("coin.mp3", false);
             sound.start();
 
             // 유저에게 1코인 추가
@@ -134,6 +134,8 @@ public class SpecialCustomerAction extends CustomerAction
             System.out.printf(" 현재 보유 코인 : %d\n", User.getProperty());
             System.out.println("------------------------------------------------------------------------");
             System.out.println();
+
+            sound.finish();
         }
     }
 
@@ -548,12 +550,14 @@ public class SpecialCustomerAction extends CustomerAction
                 {
                     if (User.getFeeling() != User.getSetFeeling()) // 현재 인내력이 세팅된 인내력(최대 인내력)이 아니라면
                     {
-                        Thread sound = new Thread(new OneTimeSound("present.mp3"));
+                        SoundThread sound = new SoundThread("present.mp3", false);
                         sound.start();
 
                         User.setFeeling(User.getFeeling() + 1); // 현재 인내력 에서 1 증가
                         System.out.println("========================================================================");
                         System.out.printf(" %s님의 인내력이 1 회복되었습니다.\n", User.getName());
+
+                        sound.finish();
                     }
                     else
                     {
@@ -567,12 +571,14 @@ public class SpecialCustomerAction extends CustomerAction
                 {
                     if (User.getHp() != User.getSetHp()) // 현재 체력이 세팅된 체력(최대 체력)이 아니라면
                     {
-                        Thread sound = new Thread(new OneTimeSound("present.mp3"));
+                        SoundThread sound = new SoundThread("present.mp3", false);
                         sound.start();
 
                         User.setHp(User.getHp() + 1);    // 현재 체력에서 1 증가
                         System.out.println("========================================================================");
                         System.out.printf(" %s님의 체력이 1 회복되었습니다.\n", User.getName());
+
+                        sound.finish();
                     }
                     else
                     {

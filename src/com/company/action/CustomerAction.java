@@ -64,7 +64,7 @@ public class CustomerAction
     public boolean checkTakeout()
     {
         Random rd = new Random();               // 랜덤 객체 생성
-        int takeout = rd.nextInt(1);      // 0, 1의 랜덤값을 변수 takeout 에 저장.
+        int takeout = rd.nextInt(2);      // 0, 1의 랜덤값을 변수 takeout 에 저장.
 
         //테이크 아웃 여부 확인
         if(takeout == 1)                         // 랜덤값이 1이면
@@ -177,13 +177,16 @@ public class CustomerAction
 
         try
         {
-            for (int i = 0; i < strArr.length; i++)
+            for (String s : strArr)
             {
-                System.out.printf(strArr[i]);
+                System.out.print(s);
                 Thread.sleep(50);
             }
 
-        } catch (Exception e){}
+        } catch (Exception e)
+        {
+            System.out.println(e.toString());
+        }
 
         if (!checkTakeout)              // 테이크아웃 안한다면
         {

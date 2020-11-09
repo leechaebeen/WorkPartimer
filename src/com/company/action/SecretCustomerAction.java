@@ -144,7 +144,10 @@ public class SecretCustomerAction extends SpecialCustomerAction
                 Thread.sleep(50);
             }
         }
-        catch (Exception e){}
+        catch (Exception e)
+        {
+            System.out.println(e.toString());
+        }
 
         System.out.println("========================================================================");
         System.out.println(" 손님이 반말로 주문하였습니다. ");
@@ -267,7 +270,10 @@ public class SecretCustomerAction extends SpecialCustomerAction
             System.out.println();
             Thread.sleep(200);
 
-        }catch (Exception e){}
+        }catch (Exception e)
+        {
+            System.out.println(e.toString());
+        }
 
 
         System.out.println("========================================================================");

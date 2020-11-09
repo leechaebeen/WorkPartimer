@@ -20,15 +20,7 @@ public class Monitoring extends Thread
     @Override
     public synchronized void run()
     {
-        try{
-           Thread.sleep(500);   // 0.5초마다
-
-            monitoring(bug);
-
-        }catch (InterruptedException e){
-            return;
-        }
-
+        monitoring(bug);
     }
 
     public void finish()
@@ -113,7 +105,7 @@ public class Monitoring extends Thread
                     System.out.println("                        손님이 흔쾌히 도와줬습니다 !    ");
 
 
-                } else if (randomNum == 2) // 랜덤값이 2이면 퇴치 실패
+                } else  // 랜덤값이 2이면 퇴치 실패
                 {
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println("                       아무일도 일어나지 않았습니다 !    ");

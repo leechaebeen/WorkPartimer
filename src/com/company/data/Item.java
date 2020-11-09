@@ -7,9 +7,6 @@ public class Item
     private int price;      // 아이템 가격
     private int type;       // 아이템 유형 구분 (1: 영구아이템, 2:소비아이템)
 
-    // 기본생성자
-    public Item(){}
-
     // 사용자 정의 생성자
     public Item(String name, int price, int type)
     {

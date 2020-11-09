@@ -3,10 +3,6 @@ package com.company.run;
 import com.company.action.*;
 import com.company.data.Cafe;
 import com.company.data.User;
-import com.company.etc.OneTimeSound;
-import com.company.text.LoadAfterDay;
-import com.company.text.LoadIntro;
-import com.company.text.LoadTitle;
 import com.company.thread.*;
 
 import java.util.Random;
@@ -146,11 +142,6 @@ public class GameRun
 
         }
 
-
-        //???
-        //sound.interrupt(); // 사운드 쓰레드 interrupted 상태를 false 에서 true로 변경.
-        //System.out.println(" sound.isInterrupted() : " + sound.isInterrupted()); // 쓰레드의 interrupted 상태를 반환 , true
-        //sound.stop();
 
         final int START = 1;                // 게임 시작
         final int RENAME = 2;               // 이름 재설정
@@ -387,7 +378,7 @@ public class GameRun
                 SpecialCustomerAction specialCustomerAction = new SpecialCustomerAction();
                 specialCustomerAction.comeSpecialCustomer();
 
-            } else if (randomNum == 10)                                   // 랜덤값이 10인 경우
+            } else
             {
                 // 비밀 손님이 등장하는 메소드 호출
                 SecretCustomerAction secretCustomerAction = new SecretCustomerAction();
@@ -410,7 +401,7 @@ public class GameRun
 
         } catch (Exception e)
         {
-            e.toString();
+           System.out.println(e.toString());
         }
 
     }// end work()
@@ -552,7 +543,7 @@ public class GameRun
 
 
         }catch (Exception e){
-
+            System.out.println(e.toString());
         }
 
 
@@ -586,7 +577,7 @@ public class GameRun
         // 엔딩 호출
         Ending ending = new Ending();                   // 엔딩객체 생성
 
-        if(week >= 3 )  // 3주차 이상이고
+        if(week >= 3)  // 3주차 이상이고
         {
             if(Cafe.getTotalCustomerNum() >= 30 && User.getProperty() >= 10)// 총 방문자 수가 30명 이상이고 코인 10개 이상일 때
             {
@@ -598,7 +589,8 @@ public class GameRun
                 ending.scoutEnding();                        // 이직 엔딩 호출
             }
         }
-        else if(week == 4)                                  // 4주차가 되고 앞선 조건에 부합하지 않으면
+
+        if(week == 4)                                  // 4주차이고 앞선 조건에 부합하지 않으면
         {
             ending.partimerEnding();                        // 알바 엔딩 호출
         }
@@ -690,7 +682,7 @@ public class GameRun
             case SKIP :                        // 4. 주말 지나가기 : 다음날 카페 시작하는 메소드 호출
 
                 try{
-                    Thread sound = new Thread(new OneTimeSound("weekInfo.mp3"));
+                    SoundThread sound = new SoundThread("weekInfo.mp3",false);
                     sound.start();
 
                     System.out.println();
@@ -717,7 +709,12 @@ public class GameRun
                     System.out.println("　　.　　　　　　　　.　　　　　.　　　　　　　　　　。　　.");
                     Thread.sleep(100);
 
-                }catch (Exception e){}
+                    sound.finish();
+
+                }catch (Exception e)
+                {
+                    System.out.println(e.toString());
+                }
 
                 User.setWorkingDays(User.getWorkingDays() + 1);
                 // 주말이 지나도록 하루를 더한다. 토 → 월로 요일 변경

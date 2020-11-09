@@ -13,14 +13,27 @@ import java.util.Scanner;
 public class BattleAction
 {
     private Bug bug;        // 불청객 객체 선언
-    private User user;      // 유저 객체 선언
 
     // 불청객 등장 시키는 메소드
     public void comeBug()
     {
         bug = createBug();  // 불청객 등장
 
-        comeBug(bug);           // 불청객 등장 나타내는 출력 메소드 호출
+        SoundThread sound = new SoundThread("comeBug.mp3",false);
+        sound.start();
+        System.out.println();
+
+        try{
+
+            Thread.sleep(1000);
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println("                      ! ! !   불청객 등장  ! ! !                          ");
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println("                          " + bug.getName() + "가 등장했습니다 !");
+
+        }catch (Exception e){
+            System.out.println(e.toString());
+        }
 
         Random rd = new Random();
         int randomNum = rd.nextInt(2) + 1;//  1 ~ 2 사이의 랜덤값 생성
@@ -68,7 +81,6 @@ public class BattleAction
             Thread.sleep(1000);
             System.out.println(" 시작 1초 전");
             Thread.sleep(1000);
-            System.out.println(" ↓ 화살표 아래에 숫자가 나타납니다");
 
         }
         catch (Exception e){
@@ -77,17 +89,17 @@ public class BattleAction
 
 
         String[] numArray = new String[bug.getHp()];  // 불청객의 hp 만큼의 칸을 가진 숫자 배열
-        String nums = "";
+        StringBuilder nums = new StringBuilder();
 
         for (int i = 0; i < numArray.length; i++)
         {
             Random rd = new Random();
             int randomNum = rd.nextInt(9)+1;    // 1 ~ 9 사이의 랜덤값을 생성해서
-             nums += Integer.toString(randomNum);
+             nums.append(randomNum);
         }
 
         int cnt = 0;
-        numArray = nums.split("");
+        numArray = nums.toString().split("");
 
 
         while(cnt<numArray.length)
@@ -120,7 +132,7 @@ public class BattleAction
         // test
         //System.out.println("nums : "+ nums );
 
-        result = input.replace(" ", "").equals(nums);
+        result = input.replace(" ", "").equals(nums.toString());
 
         battleResult(result);
 
@@ -162,28 +174,6 @@ public class BattleAction
 
     }// end createBug()
 
-
-    // 벌레 등장 출력 메소드
-    public void comeBug(Bug bug)
-    {
-        SoundThread sound = new SoundThread("comeBug.mp3",false);
-        sound.start();
-        System.out.println();
-
-        try{
-
-            Thread.sleep(1000);
-            System.out.println("------------------------------------------------------------------------");
-            System.out.println("                      ! ! !   불청객 등장  ! ! !                          ");
-            System.out.println("------------------------------------------------------------------------");
-            System.out.println("                          " + bug.getName() + "가 등장했습니다 !");
-
-        }catch (Exception e){
-            System.out.println(e.toString());
-        }
-
-    }
-
     // 자동 전투
     public void autoBattle(Bug bug)
     {
@@ -200,7 +190,7 @@ public class BattleAction
             bugInfo(bug);
 
             // 유저 객체 생성
-            user = new User();
+            User user = new User();
             // 유저 정보 출력
             userInfo(user);
 
@@ -217,7 +207,6 @@ public class BattleAction
                 // 유저의 퇴치체력이 불청객의 공격력보다 작고 0보다 클때
                 if (user.getBattleHp() < bug.getDamage() && user.getBattleHp() > 0)
                 {
-                    //monitoring(bug, user);
                     Monitoring monitoring = new Monitoring(bug,user);
                     monitoring.start();
                     monitoring.join();
@@ -225,12 +214,11 @@ public class BattleAction
 
                 if (bug.getHp() <= 0|| user.getBattleHp()<=0) // 벌레가 죽거나 유저가 죽으면 반복 멈추기
                 {
-                    //attackUser.interrupt();
                     break;
                 }
                // 유저가 벌레를 공격하는 쓰레드 호출
                 Thread.sleep(1000);
-                AttackBug attackBug = new AttackBug(bug, user);
+                AttackBug attackBug = new AttackBug(bug);
                 attackBug.start();
                 attackBug.join(); // 유저가 불청객 공격하는거 기다리기
 

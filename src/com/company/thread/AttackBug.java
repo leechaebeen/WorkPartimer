@@ -9,14 +9,10 @@ import java.util.Random;
 public class AttackBug extends Thread
 {
     private Bug bug;
-    private User user;
 
-    public AttackBug(){};
-
-    public AttackBug(Bug bug, User user)
+    public AttackBug(Bug bug)
     {
         this.bug = bug;
-        this.user = user;
     }
 
 
@@ -26,15 +22,15 @@ public class AttackBug extends Thread
         attackBug();
     }
 
+    // 유저가 벌레를 공격한다.
     public void attackBug()
     {
-        // 유저가 벌레를 공격한다.
         try
         {
             Random rd = new Random();
             int randomNum = rd.nextInt(10)+1;
 
-            int damage = 0;
+            int damage;
 
             SoundThread sound = new SoundThread("attack.mp3",false);
             sound.start();
@@ -58,42 +54,22 @@ public class AttackBug extends Thread
 
             }
 
-
             bug.setHp(bug.getHp() - damage);
 
+            // test
             //System.out.println("유저가 공격, 벌레 체력 : " + bug.getHp() + " 유저 체력 : " + user.getBattleHp());
             BattleAction battleAction = new BattleAction();
             battleAction.bugInfo(bug);
 
-            //while(check)
-            //{
-            /*
-                Thread.sleep(1000);
 
-                System.out.println("------------------------------------------------------------------------");
-                System.out.printf("                      %s님이 %s를 공격했습니다!\n",User.getName(), bug.getName());
-                System.out.println("------------------------------------------------------------------------");
-
-                // 불청객의 체력에서 유저가 입힌 데미지(숙련도)를 뺀다.
-                bug.setHp(bug.getHp() - User.getSkillLevel());
-
-                Thread.sleep(500);
-                System.out.println();
-                System.out.printf(" >>> %s가 %d 데미지를 입었습니다 <<<\n", bug.getName() , User.getSkillLevel());
-
-                //BattleThread battleAction = new BattleThread();
-                //battleAction.bugInfo(bug);
-
-                if(bug.getHp()<=0)
-                {
-                    check = false;
-                }
-
-             */
-            //}
         }catch (Exception e){
-
+            System.out.println(e.toString());
         }
+    }
+
+    public void finish()
+    {
+        this.interrupt();
     }
 
 }

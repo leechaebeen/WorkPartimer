@@ -445,7 +445,7 @@ public class UserAction
             System.out.println("------------------------------------------------------------------------");
 
         }catch (Exception e){
-
+            System.out.println(e.toString());
         }
         boolean result = true;  // 게임 결과 담는 변수
         boolean check = true;   // 반복여부 체크하는 변수
