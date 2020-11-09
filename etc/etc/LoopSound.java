@@ -38,7 +38,7 @@ public class LoopSound implements Runnable
     public void run()
     {
         //System.out.println("LoopSound run() 시작");
-        //this.setName("SoundThread");
+        //this.setName("Sound");
 
         try
         {

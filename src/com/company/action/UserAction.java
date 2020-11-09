@@ -4,7 +4,7 @@ import com.company.data.Cafe;
 import com.company.data.Item;
 import com.company.data.User;
 import com.company.run.GameRun;
-import com.company.thread.SoundThread;
+import com.company.thread.Sound;
 import com.company.thread.Time;
 
 import java.util.Random;
@@ -92,9 +92,6 @@ public class UserAction
         // 시간 측정 시작
         long beforeTime = System.currentTimeMillis();
 
-        SoundThread sound = new SoundThread("clock.mp3",false);
-        sound.start();
-
         Time time = new Time();
         time.start();
 
@@ -125,7 +122,7 @@ public class UserAction
         if (sbStr.equals(inputStr) && secDiffTime <=10)               // 일치하고 10초 안에 입력받았으면
         {
             result = true;                                            // result 에 true 를 담고(true 반환)
-            sound.finish();
+            //sound.finish();
             //User.setTotalSuccessNum(User.getTotalSuccessNum() + 1);   // 음료제조 총 성공횟수 1 증가
             //User.setWeekSuccessNum(User.getWeekSuccessNum() + 1);     // 이번주 음료제조 성공횟수 1 증가
         }
@@ -133,7 +130,7 @@ public class UserAction
         {
            // System.out.println("10초 경과!");
             User.setHp(User.getHp() - 1 );
-            sound.finish();
+            //sound.finish();
 
         }
         else                                                          // 일치하지 않으면
@@ -142,7 +139,7 @@ public class UserAction
             //User.setWeekFailNum(User.getWeekFailNum() + 1);           // 이번주 음료제조 실패 횟수 1 증가
 
             User.setHp(User.getHp() - 1 );                            // 유저 체력 1 감소 , false 반환
-            sound.finish();
+            //sound.finish();
 
         }
 
@@ -528,7 +525,7 @@ public class UserAction
     {
         if(!result)     // 음료 실패했을 경우
         {
-            SoundThread sound = new SoundThread("fail.mp3", false);
+            Sound sound = new Sound("fail.mp3", false);
             sound.start();
 
             System.out.println("------------------------------------------------------------------------");
@@ -540,7 +537,7 @@ public class UserAction
         }
         else
         {
-            SoundThread sound = new SoundThread("success.mp3", false);
+            Sound sound = new Sound("success.mp3", false);
             sound.start();
 
             System.out.println("------------------------------------------------------------------------");
@@ -602,7 +599,7 @@ public class UserAction
                     break;
             }
 
-            SoundThread sound = new SoundThread("item.mp3", false);
+            Sound sound = new Sound("item.mp3", false);
             sound.start();
 
             System.out.println("========================================================================");
@@ -613,7 +610,7 @@ public class UserAction
         }
         else
         {
-            SoundThread sound = new SoundThread("fail.mp3", false);
+            Sound sound = new Sound("fail.mp3", false);
             sound.start();
 
             System.out.println("========================================================================");
@@ -648,7 +645,7 @@ public class UserAction
                     User.setCakeNum(User.getCakeNum() - 1);     // 보유한 개수에서 하나 감소
                     User.setHp(User.getHp() + 2 );              // 현재 체력에서 2 회복
 
-                    SoundThread sound = new SoundThread("item.mp3", false);
+                    Sound sound = new Sound("item.mp3", false);
                     sound.start();
 
                     System.out.println("========================================================================");
@@ -660,7 +657,7 @@ public class UserAction
                 }
                 else
                 {
-                    SoundThread sound = new SoundThread("fail.mp3", false);
+                    Sound sound = new Sound("fail.mp3", false);
                     sound.start();
 
                     System.out.println(" 보유한 케이크가 없습니다.");
@@ -674,7 +671,7 @@ public class UserAction
                     User.setSandwichNum(User.getSandwichNum() - 1);     // 보유한 개수에서 하나 감소
                     User.setHp(User.getHp() + 4);                       // 현재 체력에서 4 회복
 
-                    SoundThread sound = new SoundThread("item.mp3", false);
+                    Sound sound = new Sound("item.mp3", false);
                     sound.start();
 
                     System.out.println("========================================================================");
@@ -686,7 +683,7 @@ public class UserAction
 
                 } else
                 {
-                    SoundThread sound = new SoundThread("fail.mp3",false);
+                    Sound sound = new Sound("fail.mp3",false);
                     sound.start();
 
                     System.out.println(" 보유한 샌드위치가 없습니다.");
@@ -700,7 +697,7 @@ public class UserAction
                     User.setChocoNum(User.getChocoNum() - 1);     // 보유한 개수에서 하나 감소
                     User.setFeeling(User.getFeeling() + 2);       // 현재 인내력에서 2 회복
 
-                    SoundThread sound = new SoundThread("item.mp3",false);
+                    Sound sound = new Sound("item.mp3",false);
                     sound.start();
 
                     System.out.println("========================================================================");
@@ -711,7 +708,7 @@ public class UserAction
 
                 } else
                 {
-                    SoundThread sound = new SoundThread("fail.mp3",false);
+                    Sound sound = new Sound("fail.mp3",false);
                     sound.start();
 
                     System.out.println(" 보유한 초콜릿이 없습니다.");
@@ -725,7 +722,7 @@ public class UserAction
                     User.setMacaronNum(User.getMacaronNum() - 1);     // 보유한 개수에서 하나 감소
                     User.setFeeling(User.getFeeling() + 4);           // 현재 인내력에서 4 회복
 
-                    SoundThread sound = new SoundThread("item.mp3",false);
+                    Sound sound = new Sound("item.mp3",false);
                     sound.start();
 
                     System.out.println("========================================================================");
@@ -736,7 +733,7 @@ public class UserAction
 
                 } else
                 {
-                    SoundThread sound = new SoundThread("fail.mp3",false);
+                    Sound sound = new Sound("fail.mp3",false);
                     sound.start();
 
                     System.out.println(" 보유한 마카롱이 없습니다.");

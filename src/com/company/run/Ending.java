@@ -1,7 +1,7 @@
 package com.company.run;
 import com.company.action.PrintAction;
 import com.company.data.User;
-import com.company.thread.SoundThread;
+import com.company.thread.Sound;
 
 public class Ending
 {
@@ -89,7 +89,7 @@ public class Ending
         String str = "\t\t\t" + userName + "님은 고된 노동을 견디지 못하고 쓰러졌습니다.";    // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
-        SoundThread sound = new SoundThread("ending.mp3",false);
+        Sound sound = new Sound("ending.mp3",false);
         sound.start();
 
         // 엔딩 출력
@@ -172,7 +172,7 @@ public class Ending
         String str = "\t\t" + userName + "님은 스트레스를 견디지 못하고 자발적으로 카페를 떠났습니다.";    // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
-        SoundThread sound = new SoundThread("ending.mp3",false);
+        Sound sound = new Sound("ending.mp3",false);
         sound.start();
 
         // 엔딩 출력
@@ -384,7 +384,7 @@ public class Ending
                 "\t\t\t 괜찮습니다. 카페는 많으니까요... 힘내세요!"; // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
-        SoundThread sound = new SoundThread("ending.mp3",false);
+        Sound sound = new Sound("ending.mp3",false);
         sound.start();
 
         // 엔딩 출력
@@ -477,7 +477,7 @@ public class Ending
             try
             {
                 Thread.sleep(1500);
-                SoundThread sound= new SoundThread("typing.mp3", true);
+                Sound sound= new Sound("typing.mp3", true);
                 sound.start();
 
 
@@ -625,7 +625,7 @@ public class Ending
                 }
 
                 Thread.sleep(1500);
-                SoundThread sound = new SoundThread("typing.mp3",true);
+                Sound sound = new Sound("typing.mp3",true);
                 sound.start();
 
 

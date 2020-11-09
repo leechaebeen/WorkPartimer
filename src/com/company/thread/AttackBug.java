@@ -32,7 +32,7 @@ public class AttackBug extends Thread
 
             int damage;
 
-            SoundThread sound = new SoundThread("attack.mp3",false);
+            Sound sound = new Sound("attack.mp3",false);
             sound.start();
 
             if(randomNum<=7) // 1~7까지의 경우

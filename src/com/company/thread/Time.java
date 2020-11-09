@@ -12,6 +12,10 @@ public class Time extends Thread
     // 10초 경과하면 안내문구 출력하는 메소드
     public void timeCheck()
     {
+
+        Sound sound = new Sound("clock.mp3",false);
+        sound.start();
+
         for(int i= 10; i > 0; i--)
         {
             try{
@@ -25,7 +29,7 @@ public class Time extends Thread
 
         System.out.println();
         System.out.printf("\n※※※ 10초 경과 ※※※\nenter 키를 눌러주세요 !\n");
-
+        sound.finish();
     }
 
     public void finish()

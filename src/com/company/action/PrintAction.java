@@ -1,7 +1,7 @@
 package com.company.action;
 
 import com.company.data.User;
-import com.company.thread.SoundThread;
+import com.company.thread.Sound;
 
 public class PrintAction
 {
@@ -10,7 +10,7 @@ public class PrintAction
     {
         try
         {
-            SoundThread sound = new SoundThread("weekInfo.mp3",false);
+            Sound sound = new Sound("weekInfo.mp3",false);
             sound.start();
 
             System.out.print(" ");
@@ -178,7 +178,7 @@ public class PrintAction
     {
         try
         {
-            SoundThread sound = new SoundThread("typing.mp3",true);
+            Sound sound = new Sound("typing.mp3",true);
             sound.start();
 
             System.out.println();
@@ -290,7 +290,7 @@ public class PrintAction
                 Thread.sleep(100);
             }
 
-            SoundThread typingSound = new SoundThread("typing.mp3", true);
+            Sound typingSound = new Sound("typing.mp3", true);
             typingSound.start();
 
             String str = " " + User.getName() + "님은 우주선에 숨어든 스파이입니다. ";
@@ -496,7 +496,7 @@ public class PrintAction
     {
         try
         {
-            SoundThread sound = new SoundThread("typing.mp3", true);
+            Sound sound = new Sound("typing.mp3", true);
             sound.start();   // 노래 재생 쓰레드 실행
 
             System.out.println();

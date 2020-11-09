@@ -18,7 +18,7 @@ public class GameRun
     public void initialRun()
     {
 
-        SoundThread sound = new SoundThread("startBGM.mp3", true);
+        Sound sound = new Sound("startBGM.mp3", true);
         sound.start();
         //Thread sound = new Thread(new LoopSound("startBGM.mp3"));
         //sound.start();   // 노래 재생 쓰레드 실행
@@ -682,7 +682,7 @@ public class GameRun
             case SKIP :                        // 4. 주말 지나가기 : 다음날 카페 시작하는 메소드 호출
 
                 try{
-                    SoundThread sound = new SoundThread("weekInfo.mp3",false);
+                    Sound sound = new Sound("weekInfo.mp3",false);
                     sound.start();
 
                     System.out.println();

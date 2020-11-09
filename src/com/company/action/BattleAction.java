@@ -19,7 +19,8 @@ public class BattleAction
     {
         bug = createBug();  // 불청객 등장
 
-        SoundThread sound = new SoundThread("comeBug.mp3",false);
+        // 효과음 재생
+        Sound sound = new Sound("comeBug.mp3",false);
         sound.start();
         System.out.println();
 
@@ -31,7 +32,9 @@ public class BattleAction
             System.out.println("------------------------------------------------------------------------");
             System.out.println("                          " + bug.getName() + "가 등장했습니다 !");
 
+            // 효과음 종료
             sound.finish();
+
         }catch (Exception e){
             System.out.println(e.toString());
         }
@@ -55,7 +58,6 @@ public class BattleAction
 
         }
 
-        // test
         GameRun gameRun = new GameRun();
         gameRun.selectWork();                          // 선택지 고르는 메소드 호출(1. 계속하기 2. 마감하기 3.아이템 사용)
 
@@ -65,6 +67,7 @@ public class BattleAction
     public void rememberGame(Bug bug)
     {
         boolean result;  // 게임 결과 담을 변수
+
         try{
 
             Thread.sleep(1000);
@@ -112,7 +115,7 @@ public class BattleAction
                     System.out.println();
                 }
 
-                System.out.print(numArray[cnt]);    //
+                System.out.print(numArray[cnt] + " ");    //
                 Thread.sleep(1000);
 
             }catch (Exception e){
@@ -126,6 +129,8 @@ public class BattleAction
         {
             System.out.println();
         }
+
+        System.out.println();
         System.out.print("\n 입력 : ");
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
@@ -261,7 +266,7 @@ public class BattleAction
             if (result) // 벌레가 졌으면
             {
                 Thread.sleep(500);
-                SoundThread sound = new SoundThread("coin.mp3", false);
+                Sound sound = new Sound("coin.mp3", false);
                 sound.start();
                 User.setProperty(User.getProperty()+1);     // 코인 1 주기
                 System.out.println("========================================================================");
