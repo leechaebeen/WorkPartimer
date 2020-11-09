@@ -1,12 +1,11 @@
 package com.company.action;
 
 import com.company.data.User;
-import com.company.etc.LoopSound;
 import com.company.thread.SoundThread;
 
 public class PrintAction
 {
-
+    // 다음날로 지나가는 텍스트 출력
     public void printAfterDay()
     {
         try
@@ -174,6 +173,7 @@ public class PrintAction
 
     }
 
+    // 엔딩 출력
     public void printEnding(String[] array)
     {
         try
@@ -271,6 +271,7 @@ public class PrintAction
 
     }
 
+    // 인트로 출력
     public void printIntro()
     {
         try
@@ -490,6 +491,7 @@ public class PrintAction
         }
     }
 
+    // 타이틀 출력
     public void printTitle()
     {
         try
