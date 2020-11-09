@@ -2,10 +2,9 @@ package com.company.text;
 
 import com.company.thread.SoundThread;
 
-public class LoadAfterDay implements Runnable
+public class LoadAfterDay
 {
-    @Override
-    public void run()
+    public void print()
     {
         try
         {
@@ -164,13 +163,11 @@ public class LoadAfterDay implements Runnable
             Thread.sleep(20);
             System.out.print("･ﾟ");
 
-            //sound.stop();
-            //sound.interrupt();
-            //System.out.println("sound.interrupt() : " + sound.isInterrupted());
+            sound.finish();
         }
         catch (InterruptedException e)
         {
-
+            System.out.println(e.toString());
         }
 
     }

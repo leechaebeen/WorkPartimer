@@ -1,8 +1,8 @@
 package com.company.thread;
 
+import com.company.action.BattleAction;
 import com.company.data.Bug;
 import com.company.data.User;
-import com.company.run.Battle;
 
 import java.util.Random;
 
@@ -62,8 +62,8 @@ public class AttackBug extends Thread
             bug.setHp(bug.getHp() - damage);
 
             //System.out.println("유저가 공격, 벌레 체력 : " + bug.getHp() + " 유저 체력 : " + user.getBattleHp());
-            Battle battle = new Battle();
-            battle.bugInfo(bug);
+            BattleAction battleAction = new BattleAction();
+            battleAction.bugInfo(bug);
 
             //while(check)
             //{
@@ -81,8 +81,8 @@ public class AttackBug extends Thread
                 System.out.println();
                 System.out.printf(" >>> %s가 %d 데미지를 입었습니다 <<<\n", bug.getName() , User.getSkillLevel());
 
-                //BattleThread battle = new BattleThread();
-                //battle.bugInfo(bug);
+                //BattleThread battleAction = new BattleThread();
+                //battleAction.bugInfo(bug);
 
                 if(bug.getHp()<=0)
                 {

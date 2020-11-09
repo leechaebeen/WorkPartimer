@@ -4,7 +4,7 @@ import com.company.etc.LoopSound;
 
 public class LoadTitle
 {
-    public void run()
+    public void print()
     {
         try
         {
@@ -61,7 +61,7 @@ public class LoadTitle
 
         } catch (InterruptedException e)
         {
-            return;
+            System.out.println(e.toString());
         }
     }
 

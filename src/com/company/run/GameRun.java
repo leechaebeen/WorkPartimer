@@ -3,7 +3,6 @@ package com.company.run;
 import com.company.action.*;
 import com.company.data.Cafe;
 import com.company.data.User;
-import com.company.etc.ComeCustomer;
 import com.company.etc.OneTimeSound;
 import com.company.text.LoadAfterDay;
 import com.company.text.LoadIntro;
@@ -49,8 +48,11 @@ public class GameRun
         }
         */
 
-        LoadTitle title = new LoadTitle();
-        title.run();
+        //LoadTitle title = new LoadTitle();
+        //title.print();
+        // 타이틀 출력
+        PrintAction printAction = new PrintAction();
+        printAction.printTitle();
 
 
 
@@ -196,8 +198,12 @@ public class GameRun
         System.out.println();
         System.out.println();
 
-        LoadIntro intro= new LoadIntro();
-        intro.run();
+        /*LoadIntro intro= new LoadIntro();
+        intro.print();*/
+
+        // 인트로 출력
+        PrintAction printAction = new PrintAction();
+        printAction.printIntro();
 
         introSelect();
     }
@@ -394,8 +400,8 @@ public class GameRun
 
             if(randomNum <= 2)   // 1 ~2인 경우
             {
-                Battle battle = new Battle();
-                battle.comeBug();
+                BattleAction battleAction = new BattleAction();
+                battleAction.comeBug();
             }
 
             //test
@@ -474,23 +480,12 @@ public class GameRun
                     System.out.println();
                     System.out.println();
                     //System.out.println(" ☾ ⋆*･ﾟ ⋆*･ﾟ ⋆. ･ﾟ. ⋆ * ･ﾟ. ⋆⋆ *･ﾟ⋆*･ﾟ ⋆ . ･ﾟ .⋆*･ﾟ .⋆ ⋆*･ﾟ ⋆*･ﾟ ⋆･ﾟ⋆ *･ﾟ ⋆･ﾟ");
-                    Thread weekendLoading = new Thread(new LoadAfterDay());
-                    weekendLoading.start();
 
-                    try{
-                     weekendLoading.join();
-                    }
-                    catch (Exception e){
+                    PrintAction printAction = new PrintAction();
+                    printAction.printAfterDay();
 
-                    }
-
-                    try
-                    {
-                        weekendLoading.join();
-                    }catch (Exception e)
-                    {
-                        System.out.println(e.toString());
-                    }
+                    //LoadAfterDay loadAfterDay = new LoadAfterDay();
+                    //loadAfterDay.print();
 
                     System.out.println();
                     System.out.println();

@@ -2,7 +2,7 @@ package com.company.text;
 
 import com.company.thread.SoundThread;
 
-public class LoadEndings implements Runnable
+public class LoadEndings
 {
     String[] array;
 
@@ -13,8 +13,7 @@ public class LoadEndings implements Runnable
         this.array = array;
     }
 
-    @Override
-    public void run()
+    public void print()
     {
         try
         {

@@ -3,10 +3,9 @@ package com.company.text;
 import com.company.data.User;
 import com.company.thread.SoundThread;
 
-public class LoadIntro implements Runnable
+public class LoadIntro
 {
-    @Override
-    public void run()
+    public void print()
     {
         try
         {

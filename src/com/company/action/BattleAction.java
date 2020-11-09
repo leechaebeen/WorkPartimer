@@ -1,18 +1,21 @@
-package com.company.run;
+package com.company.action;
 
 import com.company.data.Bug;
 import com.company.data.User;
+import com.company.run.Ending;
+import com.company.run.GameRun;
 import com.company.thread.Monitoring;
 import com.company.thread.*;
 
 import java.util.Random;
 import java.util.Scanner;
 
-public class Battle
+public class BattleAction
 {
-    volatile Bug bug;
-    volatile User user;
+    private Bug bug;        // 불청객 객체 선언
+    private User user;      // 유저 객체 선언
 
+    // 불청객 등장 시키는 메소드
     public void comeBug()
     {
         bug = createBug();  // 불청객 등장
@@ -34,7 +37,7 @@ public class Battle
                 break;
 
             case miniGame:
-                miniGame(bug);      // 미니게임 메소드 호출
+                rememberGame(bug);      // 미니게임 메소드 호출
 
         }
 
@@ -44,10 +47,9 @@ public class Battle
 
     }
 
-    //
-    public void miniGame(Bug bug)
+    // 불청객 퇴치하는 미니게임
+    public void rememberGame(Bug bug)
     {
-
         boolean result;  // 게임 결과 담을 변수
         try{
 
@@ -174,8 +176,7 @@ public class Battle
             System.out.println("------------------------------------------------------------------------");
             System.out.println("                      ! ! !   불청객 등장  ! ! !                          ");
             System.out.println("------------------------------------------------------------------------");
-            System.out.println("                 " + bug.getName() + "가 등장했습니다 !");
-            System.out.println(" ");
+            System.out.println("                          " + bug.getName() + "가 등장했습니다 !");
 
         }catch (Exception e){
             System.out.println(e.toString());

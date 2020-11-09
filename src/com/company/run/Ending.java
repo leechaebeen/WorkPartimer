@@ -1,4 +1,5 @@
 package com.company.run;
+import com.company.action.PrintAction;
 import com.company.data.User;
 import com.company.text.LoadEndings;
 import com.company.etc.OneTimeSound;
@@ -93,11 +94,9 @@ public class Ending
         Thread sound = new Thread(new OneTimeSound("ending.mp3"));
         sound.start();
 
-        LoadEndings ending = new LoadEndings(strArr);
-        ending.run(); // 엔딩 출력
-
-
-        //finalEnding();
+        // 엔딩 출력
+        PrintAction printAction = new PrintAction();
+        printAction.printEnding(strArr);
 
         GameRun gameRun = new GameRun();
         gameRun.finalEnding();
@@ -176,8 +175,9 @@ public class Ending
         Thread sound = new Thread(new OneTimeSound("ending.mp3"));
         sound.start();
 
-        LoadEndings ending = new LoadEndings(strArr);
-        ending.run(); // 엔딩 출력
+        // 엔딩 출력
+        PrintAction printAction = new PrintAction();
+        printAction.printEnding(strArr);
 
         GameRun gameRun = new GameRun();
         gameRun.finalEnding();
@@ -242,8 +242,9 @@ public class Ending
                     + "\t\t" + userName + "님을 눈여겨본 사장은 " + userName + "님을 스카웃했습니다."; // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
-        LoadEndings ending = new LoadEndings(strArr);
-        ending.run(); // 엔딩 출력
+        // 엔딩 출력
+        PrintAction printAction = new PrintAction();
+        printAction.printEnding(strArr);
 
         GameRun gameRun = new GameRun();
         gameRun.finalEnding();
@@ -312,8 +313,9 @@ public class Ending
                  "\t\t\t" + userName + "님은 더이상 알바생이 아닙니다."; // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
-        LoadEndings ending = new LoadEndings(strArr);
-        ending.run(); // 엔딩 출력
+        // 엔딩 출력
+        PrintAction printAction = new PrintAction();
+        printAction.printEnding(strArr);
 
         GameRun gameRun = new GameRun();
         gameRun.finalEnding();
@@ -383,8 +385,9 @@ public class Ending
         Thread sound = new Thread(new OneTimeSound("ending.mp3"));
         sound.start();
 
-        LoadEndings ending = new LoadEndings(strArr);
-        ending.run(); // 엔딩 출력
+        // 엔딩 출력
+        PrintAction printAction = new PrintAction();
+        printAction.printEnding(strArr);
 
         GameRun gameRun = new GameRun();
         gameRun.finalEnding();
@@ -448,8 +451,9 @@ public class Ending
                 "\t\t\t 스파이보다 적성에 잘 맞는 일을 찾았습니다 !"; // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
-        LoadEndings ending = new LoadEndings(strArr);
-        ending.run(); // 엔딩 출력
+        // 엔딩 출력
+        PrintAction printAction = new PrintAction();
+        printAction.printEnding(strArr);
 
         GameRun gameRun = new GameRun();
         gameRun.finalEnding();
@@ -476,9 +480,9 @@ public class Ending
                 String str = " 현재 공개된 엔딩이 없습니다.";
                 String[] strArr = str.split("");
 
-                for (int i = 0; i < strArr.length; i++)
+                for (String string : strArr)
                 {
-                    System.out.print(strArr[i]);
+                    System.out.print(string);
                     Thread.sleep(300);
                 }
 
@@ -497,7 +501,7 @@ public class Ending
 
             }
             catch (Exception e){
-
+                System.out.println(e.toString());
             }
 
             GameRun gameRun = new GameRun();
@@ -624,9 +628,9 @@ public class Ending
                 String str = " 아직 공개되지 않은 엔딩이 " + cnt + "개 남았습니다.";
                 String[] strArr = str.split("");
 
-                for (int i = 0; i < strArr.length; i++)
+                for (String string : strArr)
                 {
-                    System.out.print(strArr[i]);
+                    System.out.print(string);
                     Thread.sleep(100);
                 }
 

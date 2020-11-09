@@ -1,7 +1,7 @@
 package com.company.thread;
+import com.company.action.BattleAction;
 import com.company.data.Bug;
 import com.company.data.User;
-import com.company.run.Battle;
 
 
 public class AttackUser extends Thread
@@ -36,8 +36,8 @@ public class AttackUser extends Thread
                 user.setBattleHp(user.getBattleHp() - bug.getDamage());
 
                 //System.out.println("벌레가 공격, 벌레 체력 : " + bug.getHp() + " 유저 체력 : " + user.getBattleHp() );
-                Battle battle = new Battle();
-                battle.userInfo(user);
+                BattleAction battleAction = new BattleAction();
+                battleAction.userInfo(user);
 
             /*
             System.out.println("------------------------------------------------------------------------");

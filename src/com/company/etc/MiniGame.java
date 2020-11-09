@@ -1,7 +1,6 @@
 package com.company.etc;
 
 import com.company.data.Bug;
-import com.company.run.Battle;
 
 import java.util.Random;
 import java.util.Scanner;
