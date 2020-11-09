@@ -39,6 +39,11 @@ public class AttackUser extends Thread
 
     }
 
+    public void finish()
+    {
+        this.interrupt();
+    }
+
 
 
 }
