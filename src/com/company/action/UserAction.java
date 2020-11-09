@@ -92,6 +92,9 @@ public class UserAction
         // 시간 측정 시작
         long beforeTime = System.currentTimeMillis();
 
+        SoundThread sound = new SoundThread("clock.mp3",false);
+        sound.start();
+
         Time time = new Time();
         time.start();
 
@@ -122,7 +125,7 @@ public class UserAction
         if (sbStr.equals(inputStr) && secDiffTime <=10)               // 일치하고 10초 안에 입력받았으면
         {
             result = true;                                            // result 에 true 를 담고(true 반환)
-            //time.finish();
+            sound.finish();
             //User.setTotalSuccessNum(User.getTotalSuccessNum() + 1);   // 음료제조 총 성공횟수 1 증가
             //User.setWeekSuccessNum(User.getWeekSuccessNum() + 1);     // 이번주 음료제조 성공횟수 1 증가
         }
@@ -130,7 +133,7 @@ public class UserAction
         {
            // System.out.println("10초 경과!");
             User.setHp(User.getHp() - 1 );
-            //time.finish();
+            sound.finish();
 
         }
         else                                                          // 일치하지 않으면
@@ -139,7 +142,7 @@ public class UserAction
             //User.setWeekFailNum(User.getWeekFailNum() + 1);           // 이번주 음료제조 실패 횟수 1 증가
 
             User.setHp(User.getHp() - 1 );                            // 유저 체력 1 감소 , false 반환
-            //time.finish();
+            sound.finish();
 
         }
 

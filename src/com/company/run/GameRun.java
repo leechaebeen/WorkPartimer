@@ -591,14 +591,14 @@ public class GameRun
         // 엔딩 호출
         Ending ending = new Ending();                   // 엔딩객체 생성
 
-        if(week >= 3 && User.getSkillLevel() >= 4)      // 3주차 이상이고, 숙련도가 4이상이고
+        if(week >= 3 )  // 3주차 이상이고
         {
             if(Cafe.getTotalCustomerNum() >= 30 && User.getProperty() >= 10)// 총 방문자 수가 30명 이상이고 코인 10개 이상일 때
             {
                 ending.bossEnding();                    // 사장 엔딩 호출
             }
 
-            else if(SecretCustomerAction.getSecretCustomerCnt() >= 4) // 비밀 손님 방문 횟수가 4 이상이면
+            else if(SecretCustomerAction.getSecretCustomerCnt() >= 6) // 비밀 손님 방문 횟수가 6회 이상이면
             {
                 ending.scoutEnding();                        // 이직 엔딩 호출
             }

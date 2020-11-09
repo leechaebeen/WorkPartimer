@@ -48,7 +48,7 @@ public class Battle
     public void miniGame(Bug bug)
     {
 
-        boolean result = true;  // 게임 결과 담을 변수
+        boolean result;  // 게임 결과 담을 변수
         try{
 
             Thread.sleep(1000);
@@ -66,10 +66,11 @@ public class Battle
             Thread.sleep(1000);
             System.out.println(" 시작 1초 전");
             Thread.sleep(1000);
+            System.out.println(" ↓ 화살표 아래에 숫자가 나타납니다");
 
         }
         catch (Exception e){
-
+            System.out.println(e.toString());
         }
 
 
@@ -100,6 +101,7 @@ public class Battle
                 Thread.sleep(1000);
 
             }catch (Exception e){
+                System.out.println(e.toString());
             }
 
             cnt++;
@@ -116,14 +118,7 @@ public class Battle
         // test
         //System.out.println("nums : "+ nums );
 
-        if(input.replace(" ","").equals(nums))
-        {
-            result = true;
-        }
-        else
-        {
-            result = false;
-        }
+        result = input.replace(" ", "").equals(nums);
 
         battleResult(result);
 
@@ -179,7 +174,7 @@ public class Battle
             System.out.println("------------------------------------------------------------------------");
             System.out.println("                      ! ! !   불청객 등장  ! ! !                          ");
             System.out.println("------------------------------------------------------------------------");
-            System.out.printf("                    " + bug.getName() + "가 등장했습니다 ! \n");
+            System.out.println("                 " + bug.getName() + "가 등장했습니다 !");
             System.out.println(" ");
 
         }catch (Exception e){
@@ -191,7 +186,7 @@ public class Battle
     // 자동 전투
     public void autoBattle(Bug bug)
     {
-        boolean result=true; //전투 결과 담을 변수
+        boolean result; //전투 결과 담을 변수
 
         try
         {
@@ -260,10 +255,9 @@ public class Battle
 
         } catch (InterruptedException e)
         {
-            return;
+            System.out.println(e.toString());
         }
 
-        return;
     }
 
 
@@ -333,7 +327,7 @@ public class Battle
 
         }
         catch (Exception e){
-
+            System.out.println(e.toString());
         }
 
     }
@@ -353,7 +347,7 @@ public class Battle
 
         }
         catch (Exception e){
-
+            System.out.println(e.toString());
         }
 
     }
@@ -365,7 +359,7 @@ public class Battle
         try{
 
             Thread.sleep(500);
-            System.out.println("");
+            System.out.println();
             System.out.println("                                      ==================================");
             System.out.printf("                                                    %s님\n", User.getName());
             System.out.println("                                      ==================================");
@@ -374,11 +368,11 @@ public class Battle
             System.out.println("                                      ==================================");
 
         }catch (Exception e){
-
+            System.out.println(e.toString());
         }
     }
 
-
+    /*
     public void monitoring(Bug bug, User user)
     {
             System.out.println("------------------------------------------------------------------------");
@@ -394,7 +388,7 @@ public class Battle
             while (check)            // 올바른 선택지를 선택할 때까지 반복한다.
             {
                 System.out.println("========================================================================");
-                System.out.println(" 1.박카스 구매[퇴치력(숙련도) + 1 / 1코인]    2.손님에게 도움 요청 ");
+                System.out.println(" 1.박카스 구매[퇴치력(숙련도) + 1 / - 1코인]    2.손님에게 도움 요청 ");
                 System.out.println("------------------------------------------------------------------------");
                 System.out.print(" 선택 : ");
 
@@ -464,7 +458,7 @@ public class Battle
 
                     break;
             }
-    }
+    }*/
 
 //----------------------------------------------------------------------------------------------------------------------
 /*public synchronized void attackBug()

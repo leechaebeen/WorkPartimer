@@ -93,6 +93,7 @@ public class Monitoring extends Thread
                 if(User.getProperty()>=1)// 코인이 있으면
                 {
                     User.setSkillLevel(User.getSkillLevel() + 1);   // 퇴치력이자 숙련도 + 1
+                    User.setProperty(User.getProperty() -1 );       // 코인 -1
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println("                       퇴치력(숙련도)을 1 높였습니다 !    ");
                     System.out.println("------------------------------------------------------------------------");
