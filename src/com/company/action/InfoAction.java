@@ -96,9 +96,12 @@ public class InfoAction
         System.out.println();
         System.out.println("------------------------------------------------------------------------");
         System.out.println();
-        System.out.printf(" %s님의 체력   : %d\n", User.getName(), User.getSetHp());
-        System.out.printf(" %s님의 인내력 : %d\n", User.getName(), User.getSetFeeling());
-        System.out.printf(" %s님의 숙련도 : %d\n ", User.getName(), User.getSkillLevel());
+        System.out.printf(" %s님의 최대 체력   : %d\n", User.getName(), User.getSetHp());
+        System.out.printf(" %s님의 최대 인내력 : %d\n", User.getName(), User.getSetFeeling());
+        System.out.println("------------------------------------------------------------------------");
+        System.out.printf(" %s님의 현재 체력   : %d\n", User.getName(), User.getHp());
+        System.out.printf(" %s님의 현재 인내력 : %d\n", User.getName(), User.getFeeling());
+        System.out.printf(" %s님의 숙련도     : %d\n ", User.getName(), User.getSkillLevel());
         System.out.println();
 
         InfoAction infoAction = new InfoAction();
