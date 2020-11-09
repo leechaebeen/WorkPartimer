@@ -2,6 +2,7 @@ package com.company.run;
 
 import com.company.data.Bug;
 import com.company.data.User;
+import com.company.etc.Monitoring;
 import com.company.thread.*;
 
 import java.util.Random;
@@ -81,9 +82,11 @@ public class Battle
     // 벌레 등장 출력 메소드
     public void comeBug(Bug bug)
     {
+        SoundThread sound = new SoundThread("comeBug.mp3",false);
+        sound.start();
         System.out.println();
         System.out.println("------------------------------------------------------------------------");
-        System.out.println(" ! ! ! ! ! ! ! ! ! ! ! ! !   불청객 등장  ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ");
+        System.out.println("                      ! ! !   불청객 등장  ! ! !                          ");
         System.out.println("------------------------------------------------------------------------");
         System.out.printf(" " + bug.getName() + "가 등장했습니다 ! \n");
         System.out.println(" ");
@@ -116,32 +119,31 @@ public class Battle
                 AttackUser attackUser = new AttackUser(bug, user);
                 attackUser.start();
                 attackUser.join();
-
-
-                //모니터링 쓰레드 생성
-                Monitoring monitoring = new Monitoring(bug, user);
+                //attackUser.yield();
 
                 // 유저의 퇴치체력이 불청객의 공격력보다 작고 0보다 클때
                 if (user.getBattleHp() < bug.getDamage() && user.getBattleHp() > 0)
                 {
-                    monitoring.start(); // 쓰레드 실행
-                    monitoring.join();  // 쓰레드 기다리기
+                    //monitoring(bug, user);
+                    Monitoring monitoring = new Monitoring(bug,user);
+                    monitoring.start();
+                    monitoring.join();
+
 
                     if (bug.getHp() <= 0|| user.getBattleHp()<=0) // 벌레가 죽거나 유저가 죽으면 반복 멈추기
                     {
+                        attackUser.interrupt();
+                        monitoring.interrupt();
                         break;
                     }
                 }
-                else
-                {
-                    monitoring.finish();
-                }
 
                // 유저가 벌레를 공격하는 쓰레드 호출
+                Thread.sleep(1000);
                 AttackBug attackBug = new AttackBug(bug, user);
                 attackBug.start();
-                //attackBug.join(); // 유저가 불청객 공격하는거 기다리기
-                Thread.sleep(1000);
+                attackBug.join(); // 유저가 불청객 공격하는거 기다리기
+                //attackBug.yield();
 
                 if (bug.getHp() <= 0|| user.getBattleHp()<=0) // 벌레가 죽거나 유저가 죽으면 반복 멈추기
                 {
@@ -219,7 +221,7 @@ public class Battle
 
 
     // 벌레 정보 출력
-    public synchronized void bugInfo(Bug bug)
+    public void bugInfo(Bug bug)
     {
         try{
             Thread.sleep(500);
@@ -240,7 +242,7 @@ public class Battle
 
 
     // 유저 정보 출력
-    public synchronized void userInfo(User user)
+    public void userInfo(User user)
     {
         try{
 
@@ -258,8 +260,8 @@ public class Battle
         }
     }
 
-    /*
-    public synchronized void monitoring(Bug bug, User user)
+
+    public void monitoring(Bug bug, User user)
     {
             System.out.println("------------------------------------------------------------------------");
             System.out.printf("                         %s님이 곧 쓰러집니다 !\n", User.getName());
@@ -332,7 +334,7 @@ public class Battle
 
                     break;
             }
-    }*/
+    }
 
 //----------------------------------------------------------------------------------------------------------------------
 /*public synchronized void attackBug()

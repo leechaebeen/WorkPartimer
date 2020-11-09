@@ -10,8 +10,6 @@ public class AttackBug extends Thread
 {
     private Bug bug;
     private User user;
-    private boolean check = false;
-    private Battle battle;
 
     public AttackBug(){};
 
@@ -22,21 +20,13 @@ public class AttackBug extends Thread
     }
 
 
-
-
     @Override
     public void run()
     {
         attackBug();
     }
 
-    public void finish()
-    {
-        check = false;
-        this.interrupt();
-    }
-
-    public synchronized void attackBug()
+    public void attackBug()
     {
         // 유저가 벌레를 공격한다.
         try
@@ -46,19 +36,27 @@ public class AttackBug extends Thread
 
             int damage = 0;
 
+            SoundThread sound = new SoundThread("attack.mp3",false);
+            sound.start();
+
             if(randomNum<=7) // 1~7까지의 경우
             {
                 damage = User.getSkillLevel();      // 유저의 숙련도 만큼 데미지를 입힌다
+                System.out.printf("------------------------------------------------------------------------\n"
+                        + "                       %s님이 %s를 공격했습니다!\n"
+                        + "------------------------------------------------------------------------\n\n"
+                        + " >>> %s가 %d 데미지를 입었습니다 <<<\n", User.getName(), bug.getName(), bug.getName(), damage);
+
             }
             else
             {
                 damage = User.getSkillLevel()*2;    // 유저의 숙련도의 두배만큼 데미지를 입힌다.
-            }
+                System.out.printf("------------------------------------------------------------------------\n"
+                        + "                    %s님이 %s를 강하게 공격했습니다!\n"
+                        + "------------------------------------------------------------------------\n\n"
+                        + " >>> %s가 %d 데미지를 입었습니다 <<<\n", User.getName(), bug.getName(), bug.getName(), damage);
 
-            System.out.printf("------------------------------------------------------------------------\n"
-                    + "                       %s님이 %s를 공격했습니다!\n"
-                    + "------------------------------------------------------------------------\n\n"
-                    + " >>> %s가 %d 데미지를 입었습니다 <<<\n\n", User.getName(), bug.getName(), bug.getName(), damage);
+            }
 
 
             bug.setHp(bug.getHp() - damage);

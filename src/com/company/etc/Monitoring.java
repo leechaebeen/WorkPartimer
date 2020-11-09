@@ -1,4 +1,4 @@
-package com.company.thread;
+package com.company.etc;
 
 import com.company.data.Bug;
 import com.company.data.User;

@@ -8,7 +8,6 @@ public class AttackUser extends Thread
 {
     private Bug bug;
     private User user;
-    private boolean check = true;
 
     public AttackUser(){};
 
@@ -19,25 +18,19 @@ public class AttackUser extends Thread
     }
 
     @Override
-    public synchronized void run()
+    public void run()
     {
         attackUser();
     }
 
-    public void finish()
-    {
-        check = false;
-        this.interrupt();
-    }
-
-    public synchronized void attackUser()
+    public void attackUser()
     {
         // 벌레가 유저를 공격한다.
                 System.out.printf(
                         "------------------------------------------------------------------------\n" +
                                 "                       %s가 %s님을 공격했습니다!\n" +
                                 "------------------------------------------------------------------------\n\n" +
-                                "                                     >>> %s님이 %d 데미지를 입었습니다 <<<\n\n"
+                                "                                     >>> %s님이 %d 데미지를 입었습니다 <<<\n"
                         ,bug.getName(), User.getName(), User.getName() , bug.getDamage());
 
                 user.setBattleHp(user.getBattleHp() - bug.getDamage());
