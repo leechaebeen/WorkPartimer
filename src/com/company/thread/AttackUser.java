@@ -34,16 +34,10 @@ public class AttackUser extends Thread
         user.setBattleHp(user.getBattleHp() - bug.getDamage());
 
         //System.out.println("벌레가 공격, 벌레 체력 : " + bug.getHp() + " 유저 체력 : " + user.getBattleHp() );
+
+        // 유저 정보 출력
         BattleAction battleAction = new BattleAction();
         battleAction.userInfo(user);
 
     }
-
-    public void finish()
-    {
-        this.interrupt();
-    }
-
-
-
 }

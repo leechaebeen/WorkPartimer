@@ -18,16 +18,13 @@ public class Monitoring extends Thread
     }
 
     @Override
-    public synchronized void run()
+    public void run()
     {
         monitoring(bug);
     }
 
-    public void finish()
-    {
-        this.interrupt();
-    }
 
+    // 자동 전투중 유저가 질 상황에 처하면 선택지 제공
     public synchronized void monitoring(Bug bug)
     {
         System.out.println("------------------------------------------------------------------------");

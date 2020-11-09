@@ -70,9 +70,4 @@ public class AttackBug extends Thread
         }
     }
 
-    public void finish()
-    {
-        this.interrupt();
-    }
-
 }

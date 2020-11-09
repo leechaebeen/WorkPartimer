@@ -8,6 +8,11 @@ public class Recovery extends Thread
     @Override
     public void run()
     {
+        recovery();
+    }
+
+    public void recovery()
+    {
         while(true)
         {
             try{
@@ -51,8 +56,6 @@ public class Recovery extends Thread
                     System.out.println();
                     System.out.println();
                 }
-
-
 
                 Thread.sleep(500);
                 System.out.println("========================================================================");
