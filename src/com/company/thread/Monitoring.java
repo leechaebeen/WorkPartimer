@@ -1,4 +1,4 @@
-package com.company.etc;
+package com.company.thread;
 
 import com.company.data.Bug;
 import com.company.data.User;
@@ -56,7 +56,7 @@ public class Monitoring extends Thread
         while (check)            // 올바른 선택지를 선택할 때까지 반복한다.
         {
             System.out.println("========================================================================");
-            System.out.println(" 1.박카스 구매[퇴치력(숙련도) + 1 / 1코인]    2.손님에게 도움 요청 ");
+            System.out.println(" 1.박카스 구매[퇴치력(숙련도) + 1 / - 1코인]    2.손님에게 도움 요청 ");
             System.out.println("------------------------------------------------------------------------");
             System.out.print(" 선택 : ");
 
@@ -90,11 +90,20 @@ public class Monitoring extends Thread
         switch (select)
         {
             case 1:  // 박카스 구매
-                User.setSkillLevel(User.getSkillLevel() + 1);   // 퇴치력이자 숙련도 + 1
-                System.out.println("------------------------------------------------------------------------");
-                System.out.println("                       퇴치력(숙련도)을 1 높였습니다 !    ");
-                System.out.println("------------------------------------------------------------------------");
-                System.out.printf(" 현재 퇴치력(숙련도) : %d\n", User.getSkillLevel());
+                if(User.getProperty()>=1)// 코인이 있으면
+                {
+                    User.setSkillLevel(User.getSkillLevel() + 1);   // 퇴치력이자 숙련도 + 1
+                    System.out.println("------------------------------------------------------------------------");
+                    System.out.println("                       퇴치력(숙련도)을 1 높였습니다 !    ");
+                    System.out.println("------------------------------------------------------------------------");
+                    System.out.printf(" 현재 보유한 코인    : %d\n", User.getProperty());
+                    System.out.printf(" 현재 퇴치력(숙련도) : %d\n", User.getSkillLevel());
+                }
+                else
+                {
+                    System.out.println("------------------------------------------------------------------------");
+                    System.out.println("                           코인이 부족합니다 !    ");
+                }
                 break;
 
             case 2: // 손님에게 도움 요청

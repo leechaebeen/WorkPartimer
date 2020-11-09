@@ -5,7 +5,7 @@ import com.company.data.Cafe;
 import com.company.data.User;
 import com.company.etc.ComeCustomer;
 import com.company.etc.OneTimeSound;
-import com.company.text.LoadDay;
+import com.company.text.LoadAfterDay;
 import com.company.text.LoadIntro;
 import com.company.text.LoadTitle;
 import com.company.thread.*;
@@ -176,8 +176,6 @@ public class GameRun
     // 게임 시작 메소드
     public void intro()
     {
-        SoundThread typingSound = new SoundThread("typing.mp3", true);
-        typingSound.start();
 
         System.out.println();
         System.out.println();
@@ -201,9 +199,7 @@ public class GameRun
         LoadIntro intro= new LoadIntro();
         intro.run();
 
-        typingSound.finish();
         introSelect();
-
     }
 
     // 인트로 출력 후 선택지 제공하는 메소드
@@ -385,7 +381,6 @@ public class GameRun
                 SpecialCustomerAction specialCustomerAction = new SpecialCustomerAction();
                 specialCustomerAction.comeSpecialCustomer();
 
-
             } else if (randomNum == 10)                                   // 랜덤값이 10인 경우
             {
                 // 비밀 손님이 등장하는 메소드 호출
@@ -397,14 +392,15 @@ public class GameRun
             // 랜덤으로 불청객 등장시키기
             randomNum = rd.nextInt(10)+1;   // 1~10 사이의 랜덤수
 
-            if(randomNum <= 3)   // 1 ~3인 경우
+            if(randomNum <= 2)   // 1 ~2인 경우
             {
                 Battle battle = new Battle();
                 battle.comeBug();
             }
 
+            //test
 
-            //selectWork();                          // 선택지 고르는 메소드 호출(1. 계속하기 2. 마감하기 3.아이템 사용)
+            selectWork();                          // 선택지 고르는 메소드 호출(1. 계속하기 2. 마감하기 3.아이템 사용)
 
         } catch (Exception e)
         {
@@ -471,22 +467,14 @@ public class GameRun
             {
                 case KEEP :                 // 계속 아르바이트한다.
 
-                    // 쓰레드로 대체 test
-                   // work();
-                    Thread work = new Thread(new ComeCustomer());
-                    work.start();
-                    try{
-                      work.join();
-                    }catch (Exception e){
-
-                    }
+                    work();
                     break;
 
                 case STOP:                  // 다음날로 시간이 흐른다.
                     System.out.println();
                     System.out.println();
                     //System.out.println(" ☾ ⋆*･ﾟ ⋆*･ﾟ ⋆. ･ﾟ. ⋆ * ･ﾟ. ⋆⋆ *･ﾟ⋆*･ﾟ ⋆ . ･ﾟ .⋆*･ﾟ .⋆ ⋆*･ﾟ ⋆*･ﾟ ⋆･ﾟ⋆ *･ﾟ ⋆･ﾟ");
-                    Thread weekendLoading = new Thread(new LoadDay());
+                    Thread weekendLoading = new Thread(new LoadAfterDay());
                     weekendLoading.start();
 
                     try{

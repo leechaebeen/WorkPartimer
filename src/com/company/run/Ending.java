@@ -238,8 +238,8 @@ public class Ending
         System.out.println();*/
 
         String userName = User.getName();   // 유저 이름 담기
-        String str = "\t\t종종 등장한 특이한 손님은 인근 카페 사장이었습니다... \n"
-                    + "\t\t" + userName + "님을 시험하고 눈여겨본 사장은 " + userName + "님을 스카웃했습니다."; // 문자열 만들기
+        String str = "\t\t\t종종 등장한 특이한 손님은 인근 카페 사장이었습니다... \n"
+                    + "\t\t" + userName + "님을 눈여겨본 사장은 " + userName + "님을 스카웃했습니다."; // 문자열 만들기
         String[] strArr = str.split("");// 한 문자씩 배열에 담기
 
         LoadEndings ending = new LoadEndings(strArr);

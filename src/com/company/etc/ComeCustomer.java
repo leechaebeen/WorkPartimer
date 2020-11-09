@@ -50,10 +50,7 @@ public class ComeCustomer implements Runnable
                 secretCustomerAction.comeSecretCustomer();
 
             }
-            else        // 랜덤값이 10인 경우
-            {
-                // 불청객 등장
-            }
+
 
         } catch (Exception e)
         {

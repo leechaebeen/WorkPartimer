@@ -2,7 +2,7 @@ package com.company.run;
 
 import com.company.data.Bug;
 import com.company.data.User;
-import com.company.etc.Monitoring;
+import com.company.thread.Monitoring;
 import com.company.thread.*;
 
 import java.util.Random;
@@ -30,17 +30,104 @@ public class Battle
         {
             case AutoBattle:        // 자동전투 메소드 호출
                 autoBattle(bug);
+
                 break;
 
             case miniGame:
-                autoBattle(bug); // 나중에 바꾸기
+                miniGame(bug);      // 미니게임 메소드 호출
+
         }
 
+        // test
         GameRun gameRun = new GameRun();
         gameRun.selectWork();                          // 선택지 고르는 메소드 호출(1. 계속하기 2. 마감하기 3.아이템 사용)
 
     }
 
+    //
+    public void miniGame(Bug bug)
+    {
+
+        boolean result = true;  // 게임 결과 담을 변수
+        try{
+
+            Thread.sleep(1000);
+            System.out.println();
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println("                             불청객 퇴치하기 ");
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println(" 제시되는 숫자를 기억하고 동일하게 타이핑해주세요. ");
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println();
+
+            System.out.println(" 시작 3초 전 ");
+            Thread.sleep(1000);
+            System.out.println(" 시작 2초 전 ");
+            Thread.sleep(1000);
+            System.out.println(" 시작 1초 전");
+            Thread.sleep(1000);
+
+        }
+        catch (Exception e){
+
+        }
+
+
+        String[] numArray = new String[bug.getHp()];  // 불청객의 hp 만큼의 칸을 가진 숫자 배열
+        String nums = "";
+
+        for (int i = 0; i < numArray.length; i++)
+        {
+            Random rd = new Random();
+            int randomNum = rd.nextInt(9)+1;    // 1 ~ 9 사이의 랜덤값을 생성해서
+             nums += Integer.toString(randomNum);
+        }
+
+        int cnt = 0;
+        numArray = nums.split("");
+
+
+        while(cnt<numArray.length)
+        {
+            try{
+
+                for (int i = 0; i < 50; i++) // 공백 출력
+                {
+                    System.out.println();
+                }
+
+                System.out.print(numArray[cnt]);    //
+                Thread.sleep(1000);
+
+            }catch (Exception e){
+            }
+
+            cnt++;
+        }
+
+        for (int i = 0; i < 50; i++)
+        {
+            System.out.println();
+        }
+        System.out.print("\n 입력 : ");
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+
+        // test
+        //System.out.println("nums : "+ nums );
+
+        if(input.replace(" ","").equals(nums))
+        {
+            result = true;
+        }
+        else
+        {
+            result = false;
+        }
+
+        battleResult(result);
+
+    }
 
     // 벌레 객체 만드는 메소드
     public Bug createBug()
@@ -85,17 +172,27 @@ public class Battle
         SoundThread sound = new SoundThread("comeBug.mp3",false);
         sound.start();
         System.out.println();
-        System.out.println("------------------------------------------------------------------------");
-        System.out.println("                      ! ! !   불청객 등장  ! ! !                          ");
-        System.out.println("------------------------------------------------------------------------");
-        System.out.printf(" " + bug.getName() + "가 등장했습니다 ! \n");
-        System.out.println(" ");
+
+        try{
+
+            Thread.sleep(1000);
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println("                      ! ! !   불청객 등장  ! ! !                          ");
+            System.out.println("------------------------------------------------------------------------");
+            System.out.printf("                    " + bug.getName() + "가 등장했습니다 ! \n");
+            System.out.println(" ");
+
+        }catch (Exception e){
+            System.out.println(e.toString());
+        }
 
     }
 
     // 자동 전투
     public void autoBattle(Bug bug)
     {
+        boolean result=true; //전투 결과 담을 변수
+
         try
         {
             Thread.sleep(500);
@@ -119,7 +216,7 @@ public class Battle
                 AttackUser attackUser = new AttackUser(bug, user);
                 attackUser.start();
                 attackUser.join();
-                //attackUser.yield();
+
 
                 // 유저의 퇴치체력이 불청객의 공격력보다 작고 0보다 클때
                 if (user.getBattleHp() < bug.getDamage() && user.getBattleHp() > 0)
@@ -128,22 +225,19 @@ public class Battle
                     Monitoring monitoring = new Monitoring(bug,user);
                     monitoring.start();
                     monitoring.join();
-
-
-                    if (bug.getHp() <= 0|| user.getBattleHp()<=0) // 벌레가 죽거나 유저가 죽으면 반복 멈추기
-                    {
-                        attackUser.interrupt();
-                        monitoring.interrupt();
-                        break;
-                    }
                 }
 
+                if (bug.getHp() <= 0|| user.getBattleHp()<=0) // 벌레가 죽거나 유저가 죽으면 반복 멈추기
+                {
+                    //attackUser.interrupt();
+                    break;
+                }
                // 유저가 벌레를 공격하는 쓰레드 호출
                 Thread.sleep(1000);
                 AttackBug attackBug = new AttackBug(bug, user);
                 attackBug.start();
                 attackBug.join(); // 유저가 불청객 공격하는거 기다리기
-                //attackBug.yield();
+
 
                 if (bug.getHp() <= 0|| user.getBattleHp()<=0) // 벌레가 죽거나 유저가 죽으면 반복 멈추기
                 {
@@ -152,8 +246,33 @@ public class Battle
 
             }
 
-            // 누가 이겼는지 판별
+            // 전투 결과 반환
             if (bug.getHp() <= 0) // 벌레가 졌으면
+            {
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
+
+            battleResult(result);
+
+        } catch (InterruptedException e)
+        {
+            return;
+        }
+
+        return;
+    }
+
+
+    // 전투 결과
+    public void battleResult(boolean result)
+    {
+        try{
+            // 누가 이겼는지 판별
+            if (result) // 벌레가 졌으면
             {
                 Thread.sleep(500);
                 SoundThread sound = new SoundThread("coin.mp3", false);
@@ -164,9 +283,9 @@ public class Battle
                 System.out.println();
                 System.out.printf(" 현재 보유한 코인 : %d\n", User.getProperty());
                 System.out.println("------------------------------------------------------------------------");
-                sound.finish();
+                // sound.finish()
 
-            } else if (user.getBattleHp() <= 0)    // 유저가 졌으면
+            } else     // 유저가 졌으면
             {
                 Thread.sleep(500);
                 System.out.println("========================================================================");
@@ -211,14 +330,13 @@ public class Battle
 
                 }
             }
-        } catch (InterruptedException e)
-        {
-            return;
+
+        }
+        catch (Exception e){
+
         }
 
-        return;
     }
-
 
     // 벌레 정보 출력
     public void bugInfo(Bug bug)
@@ -276,7 +394,7 @@ public class Battle
             while (check)            // 올바른 선택지를 선택할 때까지 반복한다.
             {
                 System.out.println("========================================================================");
-                System.out.println(" 1. 박카스 구매( 퇴치 체력 + 5 / 1코인)   2.손님에게 도움 요청 ");
+                System.out.println(" 1.박카스 구매[퇴치력(숙련도) + 1 / 1코인]    2.손님에게 도움 요청 ");
                 System.out.println("------------------------------------------------------------------------");
                 System.out.print(" 선택 : ");
 
@@ -310,9 +428,21 @@ public class Battle
             switch (select)
             {
                 case 1:  // 박카스 구매
-                    user.setBattleHp(user.getBattleHp() + 5); // 퇴치체력 5 회복
-                    System.out.println("------------------------------------------------------------------------");
-                    System.out.println("                       퇴치 체력을 5 회복합니다 !    ");
+
+                    if(User.getProperty()>=1)// 코인이 있으면
+                    {
+                        User.setSkillLevel(User.getSkillLevel() + 1);   // 숙련도 + 1
+                        User.setProperty(User.getProperty() - 1);       // 코인 - 1
+                        System.out.println("------------------------------------------------------------------------");
+                        System.out.println("                       퇴치력(숙련도)을 1 높였습니다 !    ");
+                        System.out.println("------------------------------------------------------------------------");
+                        System.out.printf(" 현재 퇴치력(숙련도) : %d\n", User.getSkillLevel());
+                    }
+                    else
+                    {
+                        System.out.println("------------------------------------------------------------------------");
+                        System.out.println("                           코인이 부족합니다 !    ");
+                    }
                     break;
 
                 case 2: // 손님에게 도움 요청

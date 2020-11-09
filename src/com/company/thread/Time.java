@@ -16,17 +16,19 @@ public class Time extends Thread
             try{
                 Thread.sleep(1000); // 1초
                 //System.out.println(i);
-            }catch (Exception e){}
+            }catch (InterruptedException e)
+            {
+                return;
+            }
         }
 
-        System.out.printf("\n※※※ 10초 경과 ※※※ enter 키를 눌러주세요 !");
-        finish();
+        System.out.println();
+        System.out.printf("\n※※※ 10초 경과 ※※※\nenter 키를 눌러주세요 !\n");
 
     }
 
     public void finish()
     {
         this.interrupt();
-        return;
     }
 }

@@ -25,6 +25,7 @@ public class Recovery extends Thread
                 for (int i = 0; i < 30; i++)    // 3초동안 출력
                 {
                     System.out.print("▀");
+                    //System.out.print("■");
                     Thread.sleep(100);
                 }
 

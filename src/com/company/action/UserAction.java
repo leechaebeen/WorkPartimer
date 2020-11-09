@@ -28,6 +28,7 @@ public class UserAction
         UserAction userAction = new UserAction();        // 유저 액션 객체 생성
         switch (makeBeverageType)                        // 랜덤값 결과에 따라
         {
+            // 임의 테스트
             case TYPING_GAME:
                 result = userAction.makeBeverageTyping(beverage);   // 타이핑 게임 메소드 호출
                 break;
@@ -121,7 +122,7 @@ public class UserAction
         if (sbStr.equals(inputStr) && secDiffTime <=10)               // 일치하고 10초 안에 입력받았으면
         {
             result = true;                                            // result 에 true 를 담고(true 반환)
-            time.finish();
+            //time.finish();
             //User.setTotalSuccessNum(User.getTotalSuccessNum() + 1);   // 음료제조 총 성공횟수 1 증가
             //User.setWeekSuccessNum(User.getWeekSuccessNum() + 1);     // 이번주 음료제조 성공횟수 1 증가
         }
@@ -129,7 +130,7 @@ public class UserAction
         {
            // System.out.println("10초 경과!");
             User.setHp(User.getHp() - 1 );
-            time.finish();
+            //time.finish();
 
         }
         else                                                          // 일치하지 않으면
@@ -138,10 +139,11 @@ public class UserAction
             //User.setWeekFailNum(User.getWeekFailNum() + 1);           // 이번주 음료제조 실패 횟수 1 증가
 
             User.setHp(User.getHp() - 1 );                            // 유저 체력 1 감소 , false 반환
-            time.finish();
+            //time.finish();
 
         }
 
+        time.finish();
         return result;
     }
 
@@ -577,9 +579,11 @@ public class UserAction
                     break;
 
                 case "체력":  User.setSetHp(User.getSetHp() + 2);        // 체력 추가
+                             User.setHp(User.getSetHp());               // 현재 체력을 구매한 체력 설정값으로 초기화
                     break;
 
                 case "인내력": User.setSetFeeling(User.getSetFeeling() + 2 );  // 인내력 추가
+                              User.setFeeling(User.getSetFeeling());          // 현재 인내력을 구매한 인내력 설정값으로 초기화
                     break;
 
                 case "케이크" : User.setCakeNum(User.getCakeNum() + 1);        // 케이크 추가

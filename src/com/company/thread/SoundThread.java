@@ -3,7 +3,6 @@ package com.company.thread;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-
 import javazoom.jl.player.Player;
 
 public class SoundThread extends Thread {

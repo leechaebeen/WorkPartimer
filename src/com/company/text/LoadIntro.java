@@ -1,6 +1,7 @@
 package com.company.text;
 
 import com.company.data.User;
+import com.company.thread.SoundThread;
 
 public class LoadIntro implements Runnable
 {
@@ -9,16 +10,22 @@ public class LoadIntro implements Runnable
     {
         try
         {
-            System.out.println();
-            Thread.sleep(100);
-            System.out.println();
-            Thread.sleep(100);
-            System.out.println();
-            Thread.sleep(100);
-            System.out.println();
-            Thread.sleep(100);
+            for (int i = 0; i <3; i++)
+            {
+                System.out.println();
+                Thread.sleep(100);
+                System.out.println();
+                Thread.sleep(100);
+                System.out.println();
+                Thread.sleep(100);
+                System.out.println();
+                Thread.sleep(100);
+                System.out.println();
+                Thread.sleep(100);
+            }
 
-
+            SoundThread typingSound = new SoundThread("typing.mp3", true);
+            typingSound.start();
 
             String str = " " +User.getName() + "님은 우주선에 숨어든 스파이입니다. ";
             String[] strArr = str.split("");
@@ -199,6 +206,7 @@ public class LoadIntro implements Runnable
             str = " ※ 주의 ※ 프로그램을 종료하면 공개된 엔딩이 초기화됩니다. ";
             strArr = str.split("");
 
+
             for (int i = 0; i < strArr.length; i++)
             {
                 System.out.print(strArr[i]);
@@ -206,6 +214,10 @@ public class LoadIntro implements Runnable
             }
             System.out.println("");
             Thread.sleep(100);
+
+            typingSound.finish();
+
+
         }
         catch (InterruptedException e)
         {

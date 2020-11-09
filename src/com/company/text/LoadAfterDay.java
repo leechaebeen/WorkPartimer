@@ -2,7 +2,7 @@ package com.company.text;
 
 import com.company.thread.SoundThread;
 
-public class LoadDay implements Runnable
+public class LoadAfterDay implements Runnable
 {
     @Override
     public void run()
