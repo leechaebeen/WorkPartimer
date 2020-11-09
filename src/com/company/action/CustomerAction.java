@@ -172,14 +172,15 @@ public class CustomerAction
             takeout = " 먹고 갈거에요.";
         }
 
+        // 손님 대사 종합
         String str = " 손님 : " + iceOption + beverage.getName() + " 주세요. \n       " + whippingCream + takeout+"\n";
         String[] strArr = str.split("");
 
         try
         {
-            for (String s : strArr)
+            for (String string : strArr)  // 종합한 손님 대사를 한 글자씩 지연 효과를 넣어서 출력한다.
             {
-                System.out.print(s);
+                System.out.print(string);
                 Thread.sleep(50);
             }
 
@@ -218,7 +219,6 @@ public class CustomerAction
                 System.out.printf(" 현재 %s님의 인내력 : %d\n", User.getName(), User.getFeeling());
                 System.out.println("========================================================================");
 
-                // 엔딩 주석처리
 
                 // 유저 상태 체크
                 if (User.getFeeling() == 0)            // 인내력이 이 0이 된다면
@@ -228,10 +228,10 @@ public class CustomerAction
                 }
 
             }
-
-
         }
+
         return true;
-    }
+
+    }// end orderToPartimer()
 
 }

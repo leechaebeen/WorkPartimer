@@ -54,10 +54,13 @@ public class AttackBug extends Thread
 
             }
 
+            // 불청객의 체력에서 받은 데미지만큼 제외하기
             bug.setHp(bug.getHp() - damage);
 
             // test
             //System.out.println("유저가 공격, 벌레 체력 : " + bug.getHp() + " 유저 체력 : " + user.getBattleHp());
+
+            // 불청객 정보 출력
             BattleAction battleAction = new BattleAction();
             battleAction.bugInfo(bug);
 

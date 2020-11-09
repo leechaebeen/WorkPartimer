@@ -97,11 +97,8 @@ public class SpecialCustomerAction extends CustomerAction
             }
         }
 
-        // 엔딩 주석 처리
         if(User.getHp()==0)                 // 만약 유저의 체력이 0이 된다면
         {
-            //test
-            //System.out.println(User.getHp());
             ending.fallDownEnding();        //  과로 엔딩 메소드 호출
         }
         else if(User.getFeeling() == 0)     // 만약 유저의 인내력이 0이 된다면
@@ -121,8 +118,9 @@ public class SpecialCustomerAction extends CustomerAction
     public void giveTips(int tip)
     {
         Random random = new Random();
-        if(random.nextInt(1) == 0) // 랜덤값이 0이면
+        if(random.nextInt(2) == 0) // 랜덤값이 0이면
         {
+            // 효과음 재생
             Sound sound = new Sound("coin.mp3", false);
             sound.start();
 
@@ -179,18 +177,23 @@ public class SpecialCustomerAction extends CustomerAction
             takeout = "";
         }
 
+        // 손님 대사 종합
         String str = " 손님 : " + iceOption + beverage.getName() + ".\n       " + whippingCream + takeout+"\n";
         String[] strArr = str.split("");
 
         try
         {
+            // 종합한 손님 대사를 한 글자씩 지연 효과를 줘서 출력
             for (int i = 0; i < strArr.length; i++)
             {
                 System.out.printf(strArr[i]);
                 Thread.sleep(50);
             }
         }
-        catch (Exception e){}
+        catch (Exception e)
+        {
+            System.out.println(e.toString());
+        }
 
         User.setHp(User.getHp()-1);             // 체력 1 감소
         User.setFeeling(User.getFeeling()-1);   // 인내력 1 감소
@@ -385,9 +388,11 @@ public class SpecialCustomerAction extends CustomerAction
 
         try{
 
+            // 손님 대사를 한 글자씩 잘라서 배열에 담는다.
             String str = " 손님 : 얼굴에 복이 많으세요.\n";
             String[] strArr = str.split("");
 
+            // 한 글자씩 지연 효과를 줘서 출력
             for (int i = 0; i < strArr.length; i++)
             {
                 System.out.printf(strArr[i]);
@@ -474,9 +479,11 @@ public class SpecialCustomerAction extends CustomerAction
 
         try{
 
+            // 손님 대사를 한 글자 씩 잘라서 배열에 담는다.
             String str = " 손님 : 여기 " + menus[menu] + " 파나요 ? \n";
             String[] strArr = str.split("");
 
+            // 종합한 손님 대사를 한 글자씩 지연 효과를 줘서 출력
             for (int i = 0; i < strArr.length; i++)
             {
                 System.out.printf(strArr[i]);

@@ -2,7 +2,6 @@ package com.company.data;
 
 public class Item
 {
-    // 변수
     private String name;    // 아이템 이름
     private int price;      // 아이템 가격
     private int type;       // 아이템 유형 구분 (1: 영구아이템, 2:소비아이템)

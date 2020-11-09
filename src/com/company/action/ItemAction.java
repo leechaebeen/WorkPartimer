@@ -21,10 +21,6 @@ public class ItemAction
         String resultStr;       // 사용자의 선택값을 담을 변수(1. 정보 확인  2.상점가기 3.모은 엔딩 확인)
         int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
 
-        final int PERMANENT_ITEM = 1;
-        final int CONSUMABLE_ITEM = 2;
-        final int EXIT = 3;
-
         while(check)
         {
             System.out.println("========================================================================");
@@ -58,6 +54,11 @@ public class ItemAction
 
         }
 
+        final int PERMANENT_ITEM = 1;       // 1. 영구 아이템 구입
+        final int CONSUMABLE_ITEM = 2;      // 2. 소모 아이템 구입
+        final int EXIT = 3;                 // 3. 이전으로
+
+        // 사용자의 선택값에 따라 메소드 호출
         switch(result)
         {
             case  PERMANENT_ITEM: buyPermanentItem();   //  영구 아이템 구입
@@ -67,8 +68,8 @@ public class ItemAction
                 break;
 
             case EXIT:
-                GameRun gameRun = new GameRun();
-                gameRun.weekend();   // 상점 초기화면 호출
+                GameRun gameRun = new GameRun();        // 상점 초기화면 호출
+                gameRun.weekend();
                 break;
         }
 
@@ -80,13 +81,6 @@ public class ItemAction
         boolean check = true;   // 반복여부 체크하는 변수
         String resultStr;       // 사용자의 선택값을 담을 변수
         int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
-
-        final int CHAIR = 1;    // 의자 구매
-        final int CUP   = 2;    // 유리잔 구매
-        final int MUG   = 3;    // 머그잔 구매
-        final int HP    = 4;    // 체력 늘리기
-        final int FEELING = 5;  // 인내력 늘리기
-        final int EXIT = 6;
 
         while(check)
         {
@@ -125,6 +119,14 @@ public class ItemAction
                 check = false;
                 // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                 // int형으로 변경되지 않는다면 NumberFormatException 발생
+
+                if(result < 1 || result > 6 )// 주어진 값 이외의 수를 선택한 경우
+                {
+                    System.out.println("========================================================================");
+                    System.out.println(" 올바른 값을 입력해주세요.");
+                    check = true;
+                }
+
             }
             catch (NumberFormatException e) // NumberFormatException 발생한다면
             {
@@ -132,17 +134,19 @@ public class ItemAction
                 // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
             }
 
-            if(result < 1 || result > 6 )// 주어진 값 이외의 수를 선택한 경우
-            {
-                System.out.println("========================================================================");
-                System.out.println(" 올바른 값을 입력해주세요.");
-                check = true;
-            }
         }
 
         UserAction userAction = new UserAction();   // 유저 관련 기능 객체 생성
 
-        switch(result)                              // 사용자의 선택 값에 따라서
+        final int CHAIR = 1;    // 의자 구매
+        final int CUP   = 2;    // 유리잔 구매
+        final int MUG   = 3;    // 머그잔 구매
+        final int HP    = 4;    // 체력 늘리기
+        final int FEELING = 5;  // 인내력 늘리기
+        final int EXIT = 6;     // 이전으로
+
+        // 사용자의 선택 값에 따라서 아이템 객체를 생성 후 메소드 호출
+        switch(result)
         {
             case CHAIR:
                 Item chair = new Item("의자",2,1);
@@ -219,17 +223,18 @@ public class ItemAction
                 check = false;
                 // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                 // int형으로 변경되지 않는다면 NumberFormatException 발생
+
+                if (result < 1 || result > 5)// 주어진 값 이외의 수를 선택한 경우
+                {
+                    System.out.println("========================================================================");
+                    System.out.println(" 올바른 값을 입력해주세요.");
+                    check = true;
+                }
+
             } catch (NumberFormatException e) // NumberFormatException 발생한다면
             {
                 check = true;   // check 에 true 담아서 다시 반복
                 // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
-            }
-
-            if (result < 1 || result > 5)// 주어진 값 이외의 수를 선택한 경우
-            {
-                System.out.println("========================================================================");
-                System.out.println(" 올바른 값을 입력해주세요.");
-                check = true;
             }
         }
 
@@ -240,7 +245,9 @@ public class ItemAction
         final int EXIT = 5;     // 이전으로
 
         UserAction userAction = new UserAction();   // 유저 기능 객체 생성
-        switch (result)                             // 사용자의 선택값에 따라
+
+        // 사용자의 선택값에 따라 아이템 객체 생성 후 메소드 호출
+        switch (result)
         {
             case CAKE:
                 Item cake = new Item("케이크",3,2);

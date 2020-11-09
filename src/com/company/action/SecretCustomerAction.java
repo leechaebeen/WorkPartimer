@@ -133,11 +133,13 @@ public class SecretCustomerAction extends SpecialCustomerAction
             takeout = "";
         }
 
+        // 손님 대사 종합
         String str = " 손님 : " + iceOption + beverage.getName() + ".\n       " + whippingCream + takeout+"\n";
         String[] strArr = str.split("");
 
         try
         {
+            // 종합한 손님 대사를 한 글자씩 지연 효과를 줘서 출력
             for (int i = 0; i < strArr.length; i++)
             {
                 System.out.printf(strArr[i]);
@@ -358,11 +360,13 @@ public class SecretCustomerAction extends SpecialCustomerAction
             takeout = " 먹고 갈거에요.";
         }
 
+        // 손님 대사 종합
         String str = " 손님 : " + iceOption + beverage.getName() + " 주세요. \n       " + whippingCream + takeout+"\n";
         String[] strArr = str.split("");
 
         try
         {
+            // 종합한 손님 대사를 한 글자씩 지연 효과를 줘서 출력
             for (int i = 0; i < strArr.length; i++)
             {
                 System.out.printf(strArr[i]);

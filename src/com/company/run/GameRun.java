@@ -12,78 +12,16 @@ import java.util.regex.Pattern;
 // 게임의 메인 흐름을 담은 클래스(최초실행, 평일과 주말)
 public class GameRun
 {
-    //Thread sound = new Thread(new LoopSound("startBGM.mp3"));
-
     // 최초 실행하는 메소드
     public void initialRun()
     {
-
+        // BGM 재생
         Sound sound = new Sound("startBGM.mp3", true);
         sound.start();
-        //Thread sound = new Thread(new LoopSound("startBGM.mp3"));
-        //sound.start();   // 노래 재생 쓰레드 실행
 
-        // test
-        //sound.interrupt();
-        //System.out.println("sound.isInterrupted() : " + sound.isInterrupted());
-        //-- 여기서 실행하면 소리 멈추고
-        //   "여기 왔니?" 출력
-
-        //test
-        /*
-        Thread title = new Thread(new LoadTitle());
-
-        title.start();  // title 쓰레드 실행
-
-        try
-        {
-            title.join();   // title 쓰레드 모두 끝날때까지 기다리기
-        }
-        catch (InterruptedException e)
-        {
-        }
-        */
-
-        //LoadTitle title = new LoadTitle();
-        //title.print();
         // 타이틀 출력
         PrintAction printAction = new PrintAction();
         printAction.printTitle();
-
-
-
-        /*
-        //player.play(); 라고 주석 처리하면
-        .
-        .
-        노래 재생 중 ...
-        노래 재생 중 ...
-        노래 재생 중 ...
-        노래 재생 중 ...
-        노래 재생 중 ...
-        노래멈춤
-         sound.isInterrupted() : true
-        ========================================================================
-         1.시작하기  2.공개된 엔딩 보기
-        ------------------------------------------------------------------------
-         선택 :
-         */
-
-
-        /*
-        Thread checkEnding = new Thread(new CheckEnding());
-        checkEnding.setDaemon(true);
-        checkEnding.start();    //  자동 엔딩체크 데몬쓰레드 실행(일단 체력 0, 인내력 0인 경우만)
-        */
-        // 엔딩체크 데몬쓰레드 사용하지 않기로 결정
-        // 이유 1
-        // : 데몬쓰레드 또는 각 엔딩메소드에서 finalEnding() 호출하면
-        // 1.끝내기 2.다시 시작하기 해야하는데 선택값 입력받은 뒤
-        // 메인 쓰레드로 돌아가서 의도대로 흐름이 흘러가지 않음.
-
-        // 이유 2
-        // 호출하지 않으면 여전히 체력 == 0 또는 인내력 ==0 이라서 데몬쓰레드 무한반복 일어남
-        //  → 이거는 엔딩에서 체력이나 인내력을 0 아닌 값으로 초기화하면 해결 가능. 대신 멈춘다
 
         boolean check;   // 반복 여부를 체크하기 위한 변수
         String userName;        // 유저이름을 저장할 변수
@@ -126,7 +64,7 @@ public class GameRun
                 select = Integer.parseInt(selectStr);
                 check = false;
 
-                if (select < 1 || select > 3)// 주어진 값 이외의 수를 선택한 경우
+                if (select < 1 || select > 2)// 주어진 값 이외의 수를 선택한 경우
                 {
                     System.out.println("========================================================================");
                     System.out.println(" 올바른 값을 입력해주세요.");
@@ -162,8 +100,6 @@ public class GameRun
             }
         }
 
-
-
     }// end initialRun()
 
     // 게임 시작 메소드
@@ -189,8 +125,6 @@ public class GameRun
         System.out.println();
         System.out.println();
 
-        /*LoadIntro intro= new LoadIntro();
-        intro.print();*/
 
         // 인트로 출력
         PrintAction printAction = new PrintAction();
@@ -239,19 +173,12 @@ public class GameRun
             }
         }
 
-        //???
-        //sound.interrupt(); // 사운드 쓰레드 interrupted 상태를 false 에서 true로 변경.
-        //System.out.println(" sound.isInterrupted() : " + sound.isInterrupted()); // 쓰레드의 interrupted 상태를 반환 , true , false"??
-
 
         final int OPEN = 1;             // 1. 카페 열기
         final int OPEN_ENDINGS = 2;     // 2. 인트로 다시 보기
         final int EXIT = 3;             // 3. 끝내기
 
         GameRun gameRun = new GameRun(); // Cafe 객체 생성
-
-        //sound.stop();
-
 
         while(true)
         {
@@ -318,12 +245,7 @@ public class GameRun
 
                 work(); // 아르바이트하는 메소드 호출
 
-                // 쓰레드로 대체test -- 가능
-                //Thread work = new Thread(new ComeCustomer());
-                //work.start();
-                //work.join();
-
-
+                // test
                 selectWork();   // 선택지
 
             }
@@ -394,8 +316,6 @@ public class GameRun
                 BattleAction battleAction = new BattleAction();
                 battleAction.comeBug();
             }
-
-            //test
 
             selectWork();                          // 선택지 고르는 메소드 호출(1. 계속하기 2. 마감하기 3.아이템 사용)
 
@@ -658,7 +578,7 @@ public class GameRun
                 itemAction.selectItemType();       // 2. 상점 가기 메소드 호출
                 break;
 
-            case RECOVERY:  // 3.회복하기 (3초마다 체력, 인내력 1씩 회복)
+            case RECOVERY:                          // 3.회복하기 (3초마다 체력, 인내력 1씩 회복)
                 Recovery recovery = new Recovery();
 
                 if (User.getHp() == User.getSetHp() && User.getFeeling() == User.getSetFeeling())
@@ -677,7 +597,7 @@ public class GameRun
                     }
                 }
 
-                weekend();
+                weekend();                      // 이전으로
 
             case SKIP :                        // 4. 주말 지나가기 : 다음날 카페 시작하는 메소드 호출
 
@@ -718,7 +638,9 @@ public class GameRun
 
                 User.setWorkingDays(User.getWorkingDays() + 1);
                 // 주말이 지나도록 하루를 더한다. 토 → 월로 요일 변경
-                open();
+
+                open(); // 카페 열기
+
                 break;
         }
     }

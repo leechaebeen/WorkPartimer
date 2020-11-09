@@ -15,10 +15,6 @@ public class InfoAction
         String resultStr;       // 사용자의 선택값을 담을 변수(1. 정보 확인  2.상점가기 3.모은 엔딩 확인)
         int result = 0;         // resultStr를 int 로 변환해 사용자의 선택값을 담을 변수
 
-        final int MY_INFO = 1;
-        final int CAFE_INFO = 2;
-        final int EXIT = 3;
-
         while(check)
         {
             System.out.println("========================================================================");
@@ -36,24 +32,28 @@ public class InfoAction
                 check = false;
                 // int 형으로 변경되면 check 에 false 담아서 반복문 빠져나간다.
                 // int형으로 변경되지 않는다면 NumberFormatException 발생
+
+                if(result < 1 || result > 3 )// 주어진 값 이외의 수를 선택한 경우
+                {
+                    System.out.println("========================================================================");
+                    System.out.println(" 올바른 값을 입력해주세요.");
+                    check = true;
+                }
+
             }
             catch (NumberFormatException e) // NumberFormatException 발생한다면
             {
                 check = true;   // check 에 true 담아서 다시 반복
-                // result = 0; 으로 초기화된 상태이므로  하단 if문 내부까지 실행하고 반복된다.
             }
-
-            if(result < 1 || result > 3 )// 주어진 값 이외의 수를 선택한 경우
-            {
-                System.out.println("========================================================================");
-                System.out.println(" 올바른 값을 입력해주세요.");
-                check = true;
-            }
-
         }
 
         InfoAction infoAction = new InfoAction();   // 정보 기능 객체 생성
 
+        final int MY_INFO = 1;  // 유저 정보
+        final int CAFE_INFO = 2;// 카페 정보
+        final int EXIT = 3;     // 이전으로
+
+        // 사용자의 선택값에 따라 메소드 호출
         switch(result)
         {
             case  MY_INFO: infoAction.myInfo();     // 내 정보 확인
@@ -72,7 +72,16 @@ public class InfoAction
 
     public void myInfo()// 내 정보 확인
     {
-        int week = (User.getWorkingDays() / 7) + 1;               // 주차 = 일한날짜/7 + 1
+        int week = (User.getWorkingDays() / 6) + 1;               // 주차 = 일한날짜/6 + 1
+        // 일한 일수는 0에서부터 시작한다. 하루가 지날 때마다 일한일수가 1씩 증가한다.
+        // 0%6 == 0 월
+        // 1%6 == 1 화
+        // 2%6 == 2 수
+        // 3%6 == 3 목
+        // 4%6 == 4 금
+        // 5%6 == 5 토
+        // 첫 주(월~토)에 연산결과가 0이 되므로 '1주차' 부터 시작하기 위해서 1을 더해준다.
+
         System.out.println("                         ╔═══━━━─────────━━━═══╗                         ");
         System.out.printf("==========================     %d주차   정보      =========================\n", week);
         System.out.println("                         ╚═══━━━─────────━━━═══╝                         ");

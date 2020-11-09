@@ -66,7 +66,7 @@ public class BattleAction
     // 불청객 퇴치하는 미니게임
     public void rememberGame(Bug bug)
     {
-        boolean result;  // 게임 결과 담을 변수
+        boolean result = false;  // 게임 결과 담을 변수
 
         try{
 
@@ -91,22 +91,22 @@ public class BattleAction
             System.out.println(e.toString());
         }
 
+        String[] numArray = new String[bug.getHp()];  // 불청객의 hp 만큼의 칸을 가진 숫자 배열 선언
+        StringBuilder nums = new StringBuilder();     // 랜덤숫자로 만든 문자열을 담을 변수
 
-        String[] numArray = new String[bug.getHp()];  // 불청객의 hp 만큼의 칸을 가진 숫자 배열
-        StringBuilder nums = new StringBuilder();
-
-        for (int i = 0; i < numArray.length; i++)
+        for (int i = 0; i < numArray.length; i++)    // 불청객의 hp 만큼 반복해서
         {
             Random rd = new Random();
-            int randomNum = rd.nextInt(9)+1;    // 1 ~ 9 사이의 랜덤값을 생성해서
-             nums.append(randomNum);
+            int randomNum = rd.nextInt(9)+1;    // 1 ~ 9 사이의 랜덤값을 생성하고
+             nums.append(randomNum);                  // 문자열로 만든다. 예) 17423
         }
 
-        int cnt = 0;
-        numArray = nums.toString().split("");
+        numArray = nums.toString().split("");   // 문자열을 한자리씩 잘라서 배열에 담는다.
+                                                      // 예) {"1","7","4","2","3"}
 
+        int cnt = 0;                                  // 반복 횟수를 체크하기 위한 변수
 
-        while(cnt<numArray.length)
+        while(cnt < numArray.length) // 문자열의 자릿수만큼 반복한다.
         {
             try{
 
@@ -115,7 +115,7 @@ public class BattleAction
                     System.out.println();
                 }
 
-                System.out.print(numArray[cnt] + " ");    //
+                System.out.print(numArray[cnt] + " ");  // 1초마다 문자열의 한 자리 씩 출력.
                 Thread.sleep(1000);
 
             }catch (Exception e){
@@ -125,26 +125,31 @@ public class BattleAction
             cnt++;
         }
 
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 50; i++)    // 공백 출력
         {
             System.out.println();
         }
 
         System.out.println();
-        System.out.print("\n 입력 : ");
+        System.out.print("\n 입력 : ");       // 사용자에게서 값을 입력받는다.
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
         // test
         //System.out.println("nums : "+ nums );
 
-        result = input.replace(" ", "").equals(nums.toString());
+        // 입력받은 값과 출력한 값이 같다면
+        if(input.replace(" ", "").equals(nums.toString()))
+        {
+            result = true;  // 결과에 true를 담는다.
+        }
 
+        // 전투결과 출력 메소드 호출
         battleResult(result);
 
     }
 
-    // 벌레 객체 만드는 메소드
+    // 불청객  객체 만드는 메소드
     public Bug createBug()
     {
         Random rd = new Random();
@@ -157,7 +162,7 @@ public class BattleAction
 
         Bug bug = new Bug();
 
-        switch (randomNum)
+        switch (randomNum)      // 랜덤 값에 따라 불청객 객체를 만든다.
         {
             case MOSQUITO:  // 모기 생성
                 bug = new Bug("모기",User.getSetHp()-2, User.getSkillLevel());
@@ -192,13 +197,11 @@ public class BattleAction
             System.out.println("                        자동 전투를 시작합니다   ");
             System.out.println("------------------------------------------------------------------------");
 
-            // 벌레 정보 출력
-            bugInfo(bug);
+            bugInfo(bug);           // 벌레 정보 출력
 
-            // 유저 객체 생성
-            User user = new User();
-            // 유저 정보 출력
-            userInfo(user);
+            User user = new User(); // 유저 객체 생성
+
+            userInfo(user);         // 유저 정보 출력
 
             // 자동 전투 실행
             while (true)
@@ -207,48 +210,50 @@ public class BattleAction
                 Thread.sleep(1000);
                 AttackUser attackUser = new AttackUser(bug, user);
                 attackUser.start();
-                attackUser.join();
+                attackUser.join();      // 쓰레드 진행 기다리기
 
 
                 // 유저의 퇴치체력이 불청객의 공격력보다 작고 0보다 클때
                 if (user.getBattleHp() < bug.getDamage() && user.getBattleHp() > 0)
                 {
+                    // 모니터링 쓰레드 호출
                     Monitoring monitoring = new Monitoring(bug,user);
                     monitoring.start();
-                    monitoring.join();
+                    monitoring.join();  // 쓰레드 진행 기다리기
+
                 }
 
                 if (bug.getHp() <= 0|| user.getBattleHp()<=0) // 벌레가 죽거나 유저가 죽으면 반복 멈추기
                 {
                     break;
                 }
+
                // 유저가 벌레를 공격하는 쓰레드 호출
                 Thread.sleep(1000);
                 AttackBug attackBug = new AttackBug(bug);
                 attackBug.start();
-                attackBug.join(); // 유저가 불청객 공격하는거 기다리기
+                attackBug.join(); // 쓰레드 진행 기다리기
 
 
                 if (bug.getHp() <= 0|| user.getBattleHp()<=0) // 벌레가 죽거나 유저가 죽으면 반복 멈추기
                 {
-                    attackBug.finish();
-                    attackUser.finish();
                     break;
                 }
 
             }
 
+
             // 전투 결과 반환
-            if (bug.getHp() <= 0) // 벌레가 졌으면
+            if (bug.getHp() <= 0)   // 벌레가 졌으면
             {
-                result = true;
+                result = true;      // 결과에 true 담고
             }
-            else
+            else                    // 유저가 졌으면
             {
-                result = false;
+                result = false;     // 결과에 false 담아서
             }
 
-            battleResult(result);
+            battleResult(result);   // 전투 결과 출력
 
         } catch (InterruptedException e)
         {
@@ -262,12 +267,13 @@ public class BattleAction
     public void battleResult(boolean result)
     {
         try{
-            // 누가 이겼는지 판별
-            if (result) // 벌레가 졌으면
+            if (result) //  벌레가 졌으면
             {
                 Thread.sleep(500);
-                Sound sound = new Sound("coin.mp3", false);
+
+                Sound sound = new Sound("coin.mp3", false); // 효과음 재생
                 sound.start();
+
                 User.setProperty(User.getProperty()+1);     // 코인 1 주기
                 System.out.println("========================================================================");
                 System.out.printf("                  %s를 퇴치했습니다. 1코인을 획득했습니다!  \n", bug.getName());
@@ -305,14 +311,14 @@ public class BattleAction
 
                         Thread.sleep(300);
                         System.out.println();
-                        System.out.println("                        숙련도가 내려갑니다.");
+                        System.out.println("                           숙련도가 내려갑니다.");
                         System.out.println("------------------------------------------------------------------------");
                         System.out.printf(" 현재 숙련도 : %d\n", User.getSkillLevel());
 
                     } else // 숙련도도 없다면..
                     {
                         Thread.sleep(500);
-                        System.out.println("                        숙련도가 낮습니다.");
+                        System.out.println("                           숙련도가 낮습니다.");
                         System.out.println("------------------------------------------------------------------------");
 
                         Ending ending = new Ending();

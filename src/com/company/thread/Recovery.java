@@ -12,6 +12,7 @@ public class Recovery extends Thread
         {
             try{
 
+                // 공백 출력
                 for (int i = 0; i < 60; i++)
                 {
                     System.out.println();
@@ -25,7 +26,6 @@ public class Recovery extends Thread
                 for (int i = 0; i < 30; i++)    // 3초동안 출력
                 {
                     System.out.print("▀");
-                    //System.out.print("■");
                     Thread.sleep(100);
                 }
 
