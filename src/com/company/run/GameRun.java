@@ -395,9 +395,6 @@ public class GameRun
                     PrintAction printAction = new PrintAction();
                     printAction.printAfterDay();
 
-                    //LoadAfterDay loadAfterDay = new LoadAfterDay();
-                    //loadAfterDay.print();
-
                     System.out.println();
                     System.out.println();
                     open();                // 하루 시작하는 메소드 호출
@@ -584,7 +581,8 @@ public class GameRun
                 if (User.getHp() == User.getSetHp() && User.getFeeling() == User.getSetFeeling())
                 {
                     System.out.println(" 체력과 인내력을 회복하지 않아도 됩니다 ! ");
-                    recovery.interrupt();
+                    //recovery.interrupt();
+                    recovery.finish();
                 } else
                 {
                     try

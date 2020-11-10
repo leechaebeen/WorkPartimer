@@ -5,6 +5,8 @@ import com.company.run.GameRun;
 
 public class Recovery extends Thread
 {
+    boolean isLoop = true;
+
     @Override
     public void run()
     {
@@ -13,7 +15,7 @@ public class Recovery extends Thread
 
     public void recovery()
     {
-        while(true)
+        while(isLoop)
         {
             try{
 
@@ -79,6 +81,12 @@ public class Recovery extends Thread
                 return;
             }
         }
+    }
+
+    public void finish()
+    {
+        isLoop = false;
+        this.interrupt();
     }
 
 }

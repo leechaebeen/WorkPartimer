@@ -55,6 +55,7 @@ public class BattleAction
 
             case miniGame:
                 rememberGame(bug);      // 미니게임 메소드 호출
+                break;
 
         }
 
@@ -242,7 +243,6 @@ public class BattleAction
 
             }
 
-
             // 전투 결과 반환
             if (bug.getHp() <= 0)   // 벌레가 졌으면
             {
@@ -280,7 +280,6 @@ public class BattleAction
                 System.out.println();
                 System.out.printf(" 현재 보유한 코인 : %d\n", User.getProperty());
                 System.out.println("------------------------------------------------------------------------");
-                sound.finish();
 
             } else     // 유저가 졌으면
             {

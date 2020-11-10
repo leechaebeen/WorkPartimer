@@ -43,6 +43,7 @@ public class Sound extends Thread
         this.interrupt();   // 쓰레드 정지
     }
 
+    // 음악 재생하는 쓰레드
     @Override
     public void run()
     {
