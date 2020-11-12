@@ -29,7 +29,7 @@ public class AttackUser extends Thread
         {
             try{
                 // 2초마다 공격
-                Thread.sleep(3500);
+                Thread.sleep(3000);
 
                 // 벌레 체력이 0보다 작거나 유저 체력이 0보다 작으면 멈추기
                 if(bug.getHp()<=0||user.getBattleHp()<=0)

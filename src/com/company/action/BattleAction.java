@@ -296,11 +296,12 @@ public class BattleAction
             attackBug.join();
             attackUser.join();
 
+            /*
             if(bug.getHp()>0&&user.getBattleHp()>0&&user.getBattleHp()<=bug.getDamage())
             {
                 monitoring.start();
                 monitoring.join();
-            }
+            }*/
 
 
         // 전투 결과 반환

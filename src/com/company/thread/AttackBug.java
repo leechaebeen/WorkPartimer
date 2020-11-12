@@ -33,6 +33,16 @@ public class AttackBug extends Thread
         {
             try
             {
+
+                /*if(user.getBattleHp()<=0||bug.getHp()<=0)
+                {
+                    //return;
+                    this.stop();
+                    //this.interrupt();
+                }*/
+
+                Thread.sleep(2000); // 이 이후에 멈출지 체크해야한다.
+
                 if(user.getBattleHp()<=0||bug.getHp()<=0)
                 {
                     //return;
@@ -40,7 +50,6 @@ public class AttackBug extends Thread
                     //this.interrupt();
                 }
 
-                Thread.sleep(1500);
                 Random rd = new Random();
                 int randomNum = rd.nextInt(10)+1;
 
@@ -49,14 +58,6 @@ public class AttackBug extends Thread
 
                 if(randomNum<=7) // 1~7까지의 경우
                 {
-
-                    if(user.getBattleHp()<=0||bug.getHp()<=0)
-                    {
-                        //return;
-                        this.stop();
-                        //this.interrupt();
-                    }
-
                     damage = User.getSkillLevel();      // 유저의 숙련도 만큼 데미지를 입힌다
 
                     // 불청객의 체력에서 받은 데미지만큼 제외하기
@@ -80,13 +81,6 @@ public class AttackBug extends Thread
                 }
                 else
                 {
-                    if(user.getBattleHp()<=0||bug.getHp()<=0)
-                    {
-                        //return;
-                        this.stop();
-                        //this.interrupt();
-                    }
-
                     damage = User.getSkillLevel()*2;    // 유저의 숙련도의 두배만큼 데미지를 입힌다.
 
                     // 불청객의 체력에서 받은 데미지만큼 제외하기
