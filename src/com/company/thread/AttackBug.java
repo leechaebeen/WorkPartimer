@@ -9,10 +9,12 @@ import java.util.Random;
 public class AttackBug extends Thread
 {
     private Bug bug;
+    private User user;
 
-    public AttackBug(Bug bug)
+    public AttackBug(Bug bug, User user)
     {
         this.bug = bug;
+        this.user = user;
     }
 
 
@@ -22,6 +24,108 @@ public class AttackBug extends Thread
         attackBug();
     }
 
+
+
+    // 유저가 벌레를 공격한다.
+    public synchronized void attackBug()
+    {
+        while(true)
+        {
+            try
+            {
+                if(user.getBattleHp()<=0||bug.getHp()<=0)
+                {
+                    //return;
+                    this.stop();
+                    //this.interrupt();
+                }
+
+                Thread.sleep(1500);
+                Random rd = new Random();
+                int randomNum = rd.nextInt(10)+1;
+
+                int damage;
+
+
+                if(randomNum<=7) // 1~7까지의 경우
+                {
+
+                    if(user.getBattleHp()<=0||bug.getHp()<=0)
+                    {
+                        //return;
+                        this.stop();
+                        //this.interrupt();
+                    }
+
+                    damage = User.getSkillLevel();      // 유저의 숙련도 만큼 데미지를 입힌다
+
+                    // 불청객의 체력에서 받은 데미지만큼 제외하기
+                    bug.setHp(bug.getHp() - damage);
+
+                    Sound sound = new Sound("attack.mp3",false);
+                    sound.start();
+
+                    System.out.printf("------------------------------------------------------------------------\n"
+                            + "                       %s님이 %s를 공격했습니다!\n"
+                            + "------------------------------------------------------------------------\n\n"
+                            + " >>> %s가 %d 데미지를 입었습니다 <<<\n"
+                            + "==================================\n"
+                            + "              %s\n"
+                            + "==================================\n"
+                            + "          체력    : %d\n"
+                            + "          공격력  : %d\n"
+                            + "==================================\n"
+                            , User.getName(), bug.getName(), bug.getName(), damage,bug.getName(), bug.getHp(),bug.getDamage());
+
+                }
+                else
+                {
+                    if(user.getBattleHp()<=0||bug.getHp()<=0)
+                    {
+                        //return;
+                        this.stop();
+                        //this.interrupt();
+                    }
+
+                    damage = User.getSkillLevel()*2;    // 유저의 숙련도의 두배만큼 데미지를 입힌다.
+
+                    // 불청객의 체력에서 받은 데미지만큼 제외하기
+                    bug.setHp(bug.getHp() - damage);
+
+                    Sound sound = new Sound("attack.mp3",false);
+                    sound.start();
+
+                    System.out.printf("------------------------------------------------------------------------\n"
+                            + "                    %s님이 %s를 강하게 공격했습니다!\n"
+                            + "------------------------------------------------------------------------\n\n"
+                            + " >>> %s가 %d 데미지를 입었습니다 <<<\n"
+                            + "==================================\n"
+                            + "              %s\n"
+                            + "==================================\n"
+                            + "          체력    : %d\n"
+                            + "          공격력  : %d\n"
+                            + "==================================\n"
+                            , User.getName(), bug.getName(), bug.getName(), damage, bug.getName(), bug.getHp(),bug.getDamage());
+                }
+
+                if(bug.getHp()<=0||user.getBattleHp()<=0)
+                {
+                    //return;
+                    this.stop();
+                    //this.interrupt();
+                }
+
+
+            }
+            catch (InterruptedException e){
+                return;
+            }
+
+        }
+
+    }
+
+    /*
     // 유저가 벌레를 공격한다.
     public void attackBug()
     {
@@ -68,6 +172,6 @@ public class AttackBug extends Thread
         }catch (Exception e){
             System.out.println(e.toString());
         }
-    }
+    }*/
 
 }

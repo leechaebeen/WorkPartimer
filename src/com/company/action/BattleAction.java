@@ -6,6 +6,7 @@ import com.company.run.Ending;
 import com.company.run.GameRun;
 import com.company.thread.Monitoring;
 import com.company.thread.*;
+import com.sun.org.apache.bcel.internal.util.ModularRuntimeImage;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -54,7 +55,8 @@ public class BattleAction
                 break;
 
             case miniGame:
-                rememberGame(bug);      // 미니게임 메소드 호출
+                //rememberGame(bug);      // 미니게임 메소드 호출
+                autoBattle(bug);
                 break;
 
         }
@@ -186,7 +188,7 @@ public class BattleAction
 
     }// end createBug()
 
-    // 자동 전투
+    /*// 자동 전투
     public void autoBattle(Bug bug)
     {
         boolean result; //전투 결과 담을 변수
@@ -259,6 +261,67 @@ public class BattleAction
         {
             System.out.println(e.toString());
         }
+
+    }*/
+
+
+    public void autoBattle(Bug bug)
+    {
+        boolean result; //전투 결과 담을 변수
+
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("                        자동 전투를 시작합니다   ");
+        System.out.println("------------------------------------------------------------------------");
+
+        bugInfo(bug);           // 벌레 정보 출력
+
+        User user = new User(); // 유저 객체 생성
+
+        userInfo(user);         // 유저 정보 출력
+
+        // 자동 전투 실행
+        // 서로 공격하는 쓰레드
+        AttackUser attackUser = new AttackUser(bug, user);
+        AttackBug attackBug = new AttackBug(bug,user);
+        // 모니터링 쓰레드
+        Monitoring monitoring = new Monitoring(bug,user);
+
+        try{
+
+            // 자동전투 쓰레드 시작
+            attackUser.start();
+            attackBug.start();
+
+            // 자동전투 기다려주기.. 없으면 메인쓰레드 진행되어서 전투기다리지 않고 바로 결과 출력한다
+            attackBug.join();
+            attackUser.join();
+
+            if(bug.getHp()>0&&user.getBattleHp()>0&&user.getBattleHp()<=bug.getDamage())
+            {
+                monitoring.start();
+                monitoring.join();
+            }
+
+
+        // 전투 결과 반환
+        if (bug.getHp() <= 0)   // 벌레가 졌으면
+        {
+            result = true;      // 결과에 true 담고
+        }
+        else                    // 유저가 졌으면
+        {
+            result = false;     // 결과에 false 담아서
+        }
+
+        battleResult(result);   // 전투 결과 출력
+
+        }catch (InterruptedException e){
+
+            attackBug.stop();
+            attackUser.stop();
+            monitoring.interrupt();
+        }
+
 
     }
 
