@@ -21,23 +21,22 @@ public class AttackUser extends Thread
         attackUser();
     }
 
-    public synchronized void attackUser()
+    public void attackUser()
     {
 
         // 벌레가 유저를 공격한다.
         while(true)
         {
             try{
-                // 2초마다 공격
+                // 3초마다 공격
                 Thread.sleep(3000);
 
                 // 벌레 체력이 0보다 작거나 유저 체력이 0보다 작으면 멈추기
                 if(bug.getHp()<=0||user.getBattleHp()<=0)
                 {
-                    //return;
-                    this.stop();
-                    //this.interrupt();
-                    System.out.println("bugHp : " + bug.getHp());
+                    return;
+                    //this.stop();
+
                 }
 
                 // 유저 체력 줄이기
@@ -60,9 +59,9 @@ public class AttackUser extends Thread
                 // 벌레 체력이 0보다 작거나, 유저 체력이 0보다 작으면 멈추기
                 if(bug.getHp()<=0||user.getBattleHp()<=0)
                 {
-                    //return;
-                    this.stop();
-                    //this.interrupt();
+                    return;
+                    //this.stop();
+
                 }
 
             }

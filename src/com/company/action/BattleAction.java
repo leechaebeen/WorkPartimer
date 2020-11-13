@@ -284,7 +284,7 @@ public class BattleAction
         AttackUser attackUser = new AttackUser(bug, user);
         AttackBug attackBug = new AttackBug(bug,user);
         // 모니터링 쓰레드
-        Monitoring monitoring = new Monitoring(bug,user);
+        //Monitoring monitoring = new Monitoring(bug,user);
 
         try{
 
@@ -301,8 +301,12 @@ public class BattleAction
             {
                 monitoring.start();
                 monitoring.join();
-            }*/
+            }
+            */
 
+        // 전투끝나면 쓰레드 멈추고
+        //attackBug.interrupt();
+        //attackUser.interrupt();
 
         // 전투 결과 반환
         if (bug.getHp() <= 0)   // 벌레가 졌으면
@@ -320,7 +324,6 @@ public class BattleAction
 
             attackBug.stop();
             attackUser.stop();
-            monitoring.interrupt();
         }
 
 

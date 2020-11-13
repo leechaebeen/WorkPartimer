@@ -27,27 +27,19 @@ public class AttackBug extends Thread
 
 
     // 유저가 벌레를 공격한다.
-    public synchronized void attackBug()
+    public void attackBug()
     {
         while(true)
         {
             try
             {
-
-                /*if(user.getBattleHp()<=0||bug.getHp()<=0)
-                {
-                    //return;
-                    this.stop();
-                    //this.interrupt();
-                }*/
-
                 Thread.sleep(2000); // 이 이후에 멈출지 체크해야한다.
 
                 if(user.getBattleHp()<=0||bug.getHp()<=0)
                 {
-                    //return;
-                    this.stop();
-                    //this.interrupt();
+                    return;
+                   // this.stop();
+
                 }
 
                 Random rd = new Random();
@@ -104,9 +96,9 @@ public class AttackBug extends Thread
 
                 if(bug.getHp()<=0||user.getBattleHp()<=0)
                 {
-                    //return;
-                    this.stop();
-                    //this.interrupt();
+                    return;
+                    //this.stop();
+
                 }
 
 
